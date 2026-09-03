@@ -1,10 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { login, logout } from './api';
+import { LoginPayload } from './types';
 
 export function useLogin() {
   return useMutation({
-    mutationFn: (credentials: Parameters<typeof login>[0]) => login(credentials),
+    mutationFn: (credentials: LoginPayload) => login(credentials),
     onSuccess: () => {
       toast.success('Logged in successfully');
     },
