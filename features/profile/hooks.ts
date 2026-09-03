@@ -1,12 +1,12 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { getProfile, updateProfile } from './api';
-import { UpdateProfilePayload } from './types';
+import { ProfileResponse, UpdateProfilePayload } from './types';
 
 export function useProfile() {
-    return useQuery({
+    return useQuery<ProfileResponse>({
         queryKey: ['profile'],
-        queryFn: getProfile,
+        queryFn: async () => await getProfile(),
     });
 }
 
