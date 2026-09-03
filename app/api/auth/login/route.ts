@@ -27,7 +27,7 @@ export async function POST(request: Request) {
             return NextResponse.json(data, { status: response.status !== 200 ? response.status : 401 });
         }
 
-        const token = data?.data?.token;
+        const token = data?.data?.token?.original?.access_token;
         if (!token) {
             return NextResponse.json({ message: "No token received" }, { status: 401 });
         }
@@ -49,7 +49,7 @@ export async function POST(request: Request) {
         // -----------------------------------------------------------------
 
 
-        cookieStore.set("user_data", JSON.stringify(data?.data), {
+        cookieStore.set("user_data", JSON.stringify(data?.data?.admin || {}), {
             httpOnly: true,
             sameSite: "lax",
             path: "/",

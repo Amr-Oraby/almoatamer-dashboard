@@ -5,11 +5,12 @@ function handleUnauthorized(url: string) {
     if (url.includes("/api/auth/login") || url.includes("/api/auth/logout")) return;
 
     // Prevent infinite redirect loop: if we're already on the login page, don't redirect again
-    if (typeof window !== "undefined" && window.location.pathname.includes("/auth")) return;
+    if (typeof window !== "undefined" && window.location.pathname.includes("/login")) return;
 
     isRedirectingToLogin = true;
 
     if (typeof document !== "undefined") {
+        document.cookie = "access_token=; Max-Age=0; Path=/";
         document.cookie = "user_type=; Max-Age=0; Path=/";
         document.cookie = "user_data=; Max-Age=0; Path=/";
     }
@@ -21,7 +22,7 @@ function handleUnauthorized(url: string) {
     const locale = typeof document !== "undefined" ? document.documentElement.lang || "en" : "en";
     // Hard redirect is intentional: a full reload resets in-memory React Query state on session expiry.
     // eslint-disable-next-line @next/next/no-location-assign-relative-destination
-    window.location.href = `/${locale}/auth?error=session_expired`;
+    window.location.href = `/${locale}/login?error=session_expired`;
 }
 
 export async function apiClient<T>(url: string, options?: RequestInit): Promise<T> {
