@@ -1,0 +1,18 @@
+{
+  "Dashboard": {
+    "title": "Home",
+    "home": "Dashboard Home",
+    "users": "Users",
+    "super_admin": "SUPER_ADMIN",
+    "admin_email": "admin@info.com",
+    "rights": "All rights reserved by",
+    "brand_name": "Golden Beauty House",
+    "copyright_year": "2026"
+  },
+  "Auth": {
+    "login": "Log in",
+    "email": "Email Address",
+    "password": "Password",
+    "submit": "Sign in"
+  }
+}
