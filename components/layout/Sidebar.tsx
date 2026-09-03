@@ -1,9 +1,8 @@
 "use client";
 
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Home, Users, X } from 'lucide-react';
+import { Link, usePathname } from '@/i18n/routing';
+import { Home, Users, X, Calendar } from 'lucide-react';
 import Image from 'next/image';
 import { useSidebar } from '@/components/layout/SidebarContext';
 
@@ -14,7 +13,7 @@ export function Sidebar() {
 
   const navItems = [
     { href: '/', icon: Home, label: t('home') },
-    { href: '/users', icon: Users, label: t('users') },
+    { href: '/umrahs/show-all', icon: Calendar, label: t('umrahs') },
   ];
 
   return (
@@ -54,16 +53,10 @@ export function Sidebar() {
         <nav className="flex-1 py-4">
           <ul className="space-y-2 px-4">
             {navItems.map((item) => {
-              // Check if active based on path ignoring locale
-              const isActive =
-                pathname === item.href ||
-                pathname.startsWith(`/en${item.href === '/' ? '' : item.href}`) ||
-                pathname.startsWith(`/ar${item.href === '/' ? '' : item.href}`);
-
               // A more exact check for root path to avoid / matching everything
               const isExactlyActive = item.href === '/'
-                ? (pathname === '/en' || pathname === '/ar' || pathname === '/')
-                : pathname.includes(item.href);
+                ? pathname === '/'
+                : pathname.startsWith(item.href);
 
               return (
                 <li key={item.href}>

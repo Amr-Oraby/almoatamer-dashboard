@@ -36,5 +36,36 @@
     "email": "البريد الإلكتروني",
     "password": "كلمة المرور",
     "submit": "دخول"
+  },
+  "Common": {
+    "no_results": "لا يوجد نتائج.",
+    "previous": "السابق",
+    "next": "التالي"
+  },
+  "Umrahs": {
+    "name": "الاسم",
+    "phone": "رقم الهاتف",
+    "price_type": "السعر (نوع العمرة)",
+    "status": "الحالة",
+    "completed": "مكتمل",
+    "pending": "معلق",
+    "block": "الحظر",
+    "no_name": "بدون اسم",
+    "not_found": "لا يوجد",
+    "add_umrah": "اضافة عمرة",
+    "user_type": "نوع المستخدم",
+    "vip": "VIP",
+    "economy": "اقتصادية",
+    "actions": "الإجراءات",
+    "details": "التفاصيل",
+    "umrah_details": "تفاصيل العمرة",
+    "client_info": "معلومات العميل",
+    "financials": "الماليات",
+    "umrah_steps": "خطوات العمرة",
+    "tax": "الضريبة",
+    "discount": "الخصم",
+    "total": "الإجمالي",
+    "completed_step": "مكتمل",
+    "pending_step": "قيد الانتظار"
   }
 }

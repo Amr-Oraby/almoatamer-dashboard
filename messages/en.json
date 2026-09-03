@@ -36,5 +36,36 @@
     "email": "Email Address",
     "password": "Password",
     "submit": "Sign in"
+  },
+  "Common": {
+    "no_results": "No results.",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "Umrahs": {
+    "name": "Name",
+    "phone": "Phone Number",
+    "price_type": "Price (Umrah Type)",
+    "status": "Status",
+    "completed": "Completed",
+    "pending": "Pending",
+    "block": "Block",
+    "no_name": "No Name",
+    "not_found": "Not Found",
+    "add_umrah": "Add Umrah",
+    "user_type": "User Type",
+    "vip": "VIP",
+    "economy": "Economy",
+    "actions": "Actions",
+    "details": "Details",
+    "umrah_details": "Umrah Details",
+    "client_info": "Client Information",
+    "financials": "Financials",
+    "umrah_steps": "Umrah Steps",
+    "tax": "Tax",
+    "discount": "Discount",
+    "total": "Total",
+    "completed_step": "Completed",
+    "pending_step": "Pending"
   }
 }

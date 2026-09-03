@@ -1,9 +1,8 @@
 "use client";
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { Bell, Moon, Sun, User, Menu } from 'lucide-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link, usePathname } from '@/i18n/routing';
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { useSidebar } from '@/components/layout/SidebarContext';
@@ -29,9 +28,8 @@ export function Topbar() {
     document.documentElement.classList.toggle('dark');
   };
 
-  const currentLocale = pathname.startsWith('/ar') ? 'ar' : 'en';
+  const currentLocale = useLocale();
   const targetLocale = currentLocale === 'en' ? 'ar' : 'en';
-  const switchLocalePath = `/${targetLocale}`;
 
   return (
     <header className="h-20 bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between px-6 shrink-0">
@@ -75,7 +73,7 @@ export function Topbar() {
             {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
 
-          <Link href={switchLocalePath} className="text-primary font-bold flex items-center gap-1 hover:opacity-80 transition-colors">
+          <Link href={pathname as any} locale={targetLocale} className="text-primary font-bold flex items-center gap-1 hover:opacity-80 transition-colors">
             <span>{currentLocale === 'en' ? 'AR' : 'EN'}</span>
             <span className="text-xs uppercase">文A</span>
           </Link>
