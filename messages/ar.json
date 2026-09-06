@@ -154,5 +154,20 @@
     "accepted": "مقبول",
     "not_accepted": "غير مقبول",
     "nationality": "الجنسية"
+  },
+  "News": {
+    "not_found": "الخبر غير موجود",
+    "no_title": "بدون عنوان",
+    "news_details": "تفاصيل الخبر",
+    "description": "الوصف",
+    "short_desc": "وصف قصير",
+    "seo_info": "معلومات تحسين محركات البحث",
+    "slug": "الرابط",
+    "keywords": "الكلمات المفتاحية",
+    "canonical": "الرابط الأساسي",
+    "alt_text": "النص البديل",
+    "status": "الحالة",
+    "active": "نشط",
+    "inactive": "غير نشط"
   }
 }

@@ -154,5 +154,20 @@
     "accepted": "Accepted",
     "not_accepted": "Not Accepted",
     "nationality": "Nationality"
+  },
+  "News": {
+    "not_found": "News not found",
+    "no_title": "No title",
+    "news_details": "News Details",
+    "description": "Description",
+    "short_desc": "Short Description",
+    "seo_info": "SEO Information",
+    "slug": "Slug",
+    "keywords": "Keywords",
+    "canonical": "Canonical URL",
+    "alt_text": "Alt Text",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive"
   }
 }
