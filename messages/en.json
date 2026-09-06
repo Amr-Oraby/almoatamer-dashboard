@@ -269,5 +269,23 @@
     "pending_amount": "Pending Balance",
     "user_info": "User Information",
     "no_user": "No user"
+  },
+  "Countries": {
+    "not_found": "Country not found",
+    "country_details": "Country Details",
+    "country_id": "Country ID",
+    "short_name": "Short Name",
+    "phone_length": "Phone Length",
+    "phone_code": "Phone Code",
+    "translations": "Translations",
+    "language": "Language",
+    "name": "Name",
+    "nationality": "Nationality",
+    "ar": "Arabic",
+    "en": "English",
+    "fa": "Persian",
+    "ms": "Malay",
+    "tr": "Turkish",
+    "iid": "Indonesian"
   }
 }
