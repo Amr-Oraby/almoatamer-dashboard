@@ -43,8 +43,4 @@ export interface RolesResponse {
     message: string;
 }
 
-export interface SingleRoleResponse {
-    data: RoleItem;
-    status: string;
-    message: string;
-}
+export type SingleRoleResponse = RoleItem;

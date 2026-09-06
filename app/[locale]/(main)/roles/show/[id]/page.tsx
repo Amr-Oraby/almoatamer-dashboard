@@ -21,7 +21,7 @@ export default function RoleDetailsPage() {
     )
   }
 
-  if (isError || !response?.data) {
+  if (isError || !response) {
     return (
       <div className="flex h-[300px] w-full items-center justify-center">
         <p className="text-lg font-medium text-zinc-500">{t("not_found")}</p>
@@ -29,7 +29,7 @@ export default function RoleDetailsPage() {
     )
   }
 
-  const role = response.data
+  const role = response
 
   const translations = [
     { lang: "ar", label: t("ar"), data: role.ar },
