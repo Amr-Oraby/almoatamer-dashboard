@@ -323,5 +323,23 @@
     "contact_info": "Contact Information",
     "created_at": "Created At",
     "updated_at": "Updated At"
+  },
+  "Terms": {
+    "not_found": "Terms not found",
+    "term_details": "Term Details",
+    "term_id": "Term ID",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "translations": "Translations",
+    "language": "Language",
+    "title": "Title",
+    "desc": "Description",
+    "ar": "Arabic",
+    "en": "English",
+    "fa": "Persian",
+    "ms": "Malay",
+    "tr": "Turkish",
+    "iid": "Indonesian"
   }
 }

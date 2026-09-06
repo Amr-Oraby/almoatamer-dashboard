@@ -6,5 +6,5 @@ export async function getTerms(page: number = 1): Promise<TermsResponse> {
 }
 
 export async function getTerm(id: string): Promise<SingleTermResponse> {
-    return apiClient<SingleTermResponse>(`/api/terms/${id}`);
+    return apiClient<SingleTermResponse>(`/api/term/${id}`);
 }
