@@ -169,5 +169,20 @@
     "status": "الحالة",
     "active": "نشط",
     "inactive": "غير نشط"
+  },
+  "Blogs": {
+    "not_found": "المقال غير موجود",
+    "no_title": "بدون عنوان",
+    "blog_details": "تفاصيل المقال",
+    "description": "الوصف",
+    "short_desc": "وصف قصير",
+    "seo_info": "معلومات تحسين محركات البحث",
+    "slug": "الرابط",
+    "keywords": "الكلمات المفتاحية",
+    "canonical": "الرابط الأساسي",
+    "alt_text": "النص البديل",
+    "status": "الحالة",
+    "active": "نشط",
+    "inactive": "غير نشط"
   }
 }

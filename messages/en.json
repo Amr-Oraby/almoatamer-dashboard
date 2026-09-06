@@ -169,5 +169,20 @@
     "status": "Status",
     "active": "Active",
     "inactive": "Inactive"
+  },
+  "Blogs": {
+    "not_found": "Blog not found",
+    "no_title": "No title",
+    "blog_details": "Blog Details",
+    "description": "Description",
+    "short_desc": "Short Description",
+    "seo_info": "SEO Information",
+    "slug": "Slug",
+    "keywords": "Keywords",
+    "canonical": "Canonical URL",
+    "alt_text": "Alt Text",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive"
   }
 }
