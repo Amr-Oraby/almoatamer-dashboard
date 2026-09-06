@@ -306,8 +306,22 @@
     "iid": "الإندونيسية",
     "permissions": "الصلاحيات",
     "no_permissions": "لا توجد صلاحيات",
+
     "permission_title": "عنوان الصلاحية",
     "permission_name": "اسم الصلاحية",
     "front_name": "الاسم في الواجهة"
+  },
+  "Admins": {
+    "not_found": "المشرف غير موجود",
+    "admin_details": "تفاصيل المشرف",
+    "admin_id": "رقم المشرف",
+    "status": "الحالة",
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "role": "الدور",
+    "no_role": "لا يوجد دور",
+    "contact_info": "معلومات التواصل",
+    "created_at": "تاريخ الإنشاء",
+    "updated_at": "تاريخ التحديث"
   }
 }

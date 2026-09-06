@@ -306,8 +306,22 @@
     "iid": "Indonesian",
     "permissions": "Permissions",
     "no_permissions": "No permissions",
+
     "permission_title": "Permission Title",
     "permission_name": "Permission Name",
     "front_name": "Front Name"
+  },
+  "Admins": {
+    "not_found": "Admin not found",
+    "admin_details": "Admin Details",
+    "admin_id": "Admin ID",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "role": "Role",
+    "no_role": "No role",
+    "contact_info": "Contact Information",
+    "created_at": "Created At",
+    "updated_at": "Updated At"
   }
 }
