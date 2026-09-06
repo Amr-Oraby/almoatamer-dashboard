@@ -66,8 +66,8 @@ export function Sidebar() {
   ];
 
   const discountsItems = [
-    { href: '/discounts', icon: Tag, label: t('discounts_page') },
     { href: '/discounts/coupons', icon: Ticket, label: t('coupons_page') },
+    { href: '/discounts/coupon-codes', icon: Tag, label: t('coupon_codes_page') },
   ];
 
   const additionalItems = [
@@ -82,7 +82,7 @@ export function Sidebar() {
     { href: '/referral-links', icon: Share2, label: t('referral_links_page') },
     { href: '/transactions', icon: ArrowRightLeft, label: t('transactions_page') },
     { href: '/withdrawal-requests', icon: HandCoins, label: t('withdrawal_requests_page') },
-    { href: '/wallet', icon: Wallet, label: t('wallet_page') },
+    { href: '/wallets', icon: Wallet, label: t('wallet_page') },
     { href: '/report-reason', icon: Flag, label: t('report_reason_page') },
     { href: '/notifications', icon: Bell, label: t('notifications_page') },
     { href: '/languages', icon: Languages, label: t('languages_page') },
