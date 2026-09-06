@@ -1,13 +1,10 @@
 import { apiClient } from "@/lib/api/client";
-import { NewsResponse } from "@/app/types/NewsType";
+import { NewsResponse, SingleNewsResponse } from "./types";
 
-export const newsApi = {
-  getNews: (page: number = 1) => {
+export async function getNewsList(page: number = 1): Promise<NewsResponse> {
     return apiClient<NewsResponse>(`/api/news?page=${page}`);
-  },
-  deleteNews: (id: number) => {
-    return apiClient<any>(`/api/news/${id}`, {
-      method: "DELETE",
-    });
-  }
-};
+}
+
+export async function getNewsItem(id: string): Promise<SingleNewsResponse> {
+    return apiClient<SingleNewsResponse>(`/api/news/${id}`);
+}
