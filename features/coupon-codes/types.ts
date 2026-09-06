@@ -43,8 +43,3 @@ export interface CouponCodesResponse {
     message: string;
 }
 
-export interface SingleCouponCodeGroupResponse {
-    data: CouponCodeGroup;
-    status: string;
-    message: string;
-}

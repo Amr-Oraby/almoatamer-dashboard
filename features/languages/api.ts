@@ -6,5 +6,5 @@ export async function getLanguages(page: number = 1): Promise<LanguagesResponse>
 }
 
 export async function getLanguage(id: string): Promise<SingleLanguageResponse> {
-    return apiClient<SingleLanguageResponse>(`/api/languages/${id}`);
+    return apiClient<SingleLanguageResponse>(`/api/language/${id}`);
 }
