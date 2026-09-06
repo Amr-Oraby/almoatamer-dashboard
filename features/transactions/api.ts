@@ -1,12 +1,10 @@
 import { apiClient } from "@/lib/api/client";
-import { TransactionsResponse, TransactionItem } from "@/app/types/TransactionType";
+import { TransactionsResponse, SingleTransactionResponse } from "./types";
 
 export async function getTransactions(page: number = 1): Promise<TransactionsResponse> {
-  // Use server route proxy for transactions
-  const url = `/api/all-transactions?page=${page}`;
-  return apiClient<TransactionsResponse>(url);
+    return apiClient<TransactionsResponse>(`/api/all-transactions?page=${page}`);
 }
 
-export async function getTransaction(id: string) {
-  return apiClient<{ data: TransactionItem; status: string; message: string }>(`/api/transaction/${id}`);
+export async function getTransaction(id: string): Promise<SingleTransactionResponse> {
+    return apiClient<SingleTransactionResponse>(`/api/all-transactions/${id}`);
 }
