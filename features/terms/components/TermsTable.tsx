@@ -35,7 +35,7 @@ export function TermsTable() {
     {
       id: "term_ar",
       header: () => <div className="text-right">العنوان (عربي)</div>,
-      size: 250,
+      size: 500,
       cell: ({ row }) => (
         <div className="flex items-start gap-2">
           <FileText className="w-4 h-4 text-primary mt-1 shrink-0" />
@@ -54,7 +54,7 @@ export function TermsTable() {
     {
       id: "term_en",
       header: () => <div className="text-left" dir="ltr">Title (English)</div>,
-      size: 250,
+      size: 500,
       cell: ({ row }) => (
         <div className="flex items-start gap-2" dir="ltr">
           <FileText className="w-4 h-4 text-primary mt-1 shrink-0" />
