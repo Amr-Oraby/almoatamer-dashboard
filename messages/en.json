@@ -260,5 +260,14 @@
     "created_at": "Request Date",
     "can_modify": "Can Modify",
     "action": "Action Taken"
+  },
+  "Wallets": {
+    "not_found": "Wallet not found",
+    "wallet_details": "Wallet Details",
+    "wallet_id": "Wallet ID",
+    "amount": "Available Balance",
+    "pending_amount": "Pending Balance",
+    "user_info": "User Information",
+    "no_user": "No user"
   }
 }
