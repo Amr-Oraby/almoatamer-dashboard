@@ -13,12 +13,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { MoreVertical, ChevronDown } from "lucide-react"
-
+import { MoreVertical } from "lucide-react"
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
 
-// Fake Switch to match the UI visual exactly
+import { useThankingWords } from "@/features/thanking-words/hooks"
+import { ThankingWord } from "@/features/thanking-words/types"
+import Image from "next/image"
+
 const FakeSwitch = ({ checked, onChange }: { checked: boolean, onChange: () => void }) => (
   <button
     onClick={onChange}
@@ -34,18 +36,16 @@ const FakeSwitch = ({ checked, onChange }: { checked: boolean, onChange: () => v
   </button>
 )
 
-import { useUmrahs } from "@/features/umrahs/hooks"
-import { Umrah } from "@/features/umrahs/types"
-import Image from "next/image"
-
-export function UmrahsTable() {
+export function ThankingWordsTable() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const page = Number(searchParams.get("page")) || 1
-  const { data, isLoading } = useUmrahs(page)
+  const { data, isLoading } = useThankingWords(page)
+  
+  // Using "Umrahs" namespace for generic keys that we know exist, and hardcoding missing ones gracefully
   const t = useTranslations("Umrahs")
 
-  const columns = useMemo<ColumnDef<Umrah>[]>(() => [
+  const columns = useMemo<ColumnDef<ThankingWord>[]>(() => [
     {
       id: "index",
       header: "#",
@@ -56,13 +56,13 @@ export function UmrahsTable() {
       },
     },
     {
-      id: "client_name",
+      id: "name",
       header: t("name"),
       size: 250,
       cell: ({ row }) => {
-        const client = row.original.client
-        const name = client?.name || t("no_name")
-        const image = client?.image
+        const person = row.original
+        const name = person.name || "بدون اسم"
+        const image = person.image
 
         return (
           <div className="flex items-center gap-3">
@@ -75,55 +75,37 @@ export function UmrahsTable() {
             </div>
             <div className="flex flex-col">
               <span className="font-bold text-zinc-900 dark:text-zinc-100">{name}</span>
-              <span className="text-xs text-zinc-500">{row.original.name || t("not_found")}</span>
             </div>
           </div>
         )
       },
     },
     {
-      id: "phone",
-      header: () => <div className="text-center">{t("phone")}</div>,
-      size: 140,
-      cell: ({ row }) => {
-        const phone = row.original.phone || row.original.client?.phone
-        const code = row.original.phone_code || row.original.client?.phone_code
-        return (
-          <div className="text-center text-zinc-900 font-bold dark:text-zinc-100" dir="ltr">
-            {phone ? `+${code} ${phone}` : "-"}
-          </div>
-        )
-      }
+      id: "text",
+      header: () => <div className="text-center">النص</div>,
+      size: 300,
+      cell: ({ row }) => (
+        <div className="text-center text-sm text-zinc-600 dark:text-zinc-400 truncate max-w-[300px]" title={row.original.text}>
+          {row.original.text}
+        </div>
+      )
     },
     {
-      accessorKey: "price",
-      header: () => <div className="text-center">{t("price_type")}</div>,
+      id: "date",
+      header: () => <div className="text-center">التاريخ</div>,
       size: 150,
-      cell: ({ row }) => <div className="text-center font-bold text-zinc-900 dark:text-zinc-100">{row.original.total_price} SAR</div>,
-    },
-    {
-      accessorKey: "umrah_status",
-      header: () => <div className="text-center">{t("status")}</div>,
-      size: 150,
-      cell: ({ row }) => {
-        const status = row.original.umrah_status
-        return (
-          <div className={`text-center font-bold ${status === 'done' ? 'text-green-600 dark:text-green-400' :
-            status === 'pending' ? 'text-yellow-600 dark:text-yellow-400' :
-              'text-blue-600 dark:text-blue-400'
-            }`}>
-            {status === 'done' ? t("completed") :
-              status === 'pending' ? t("pending") : status}
-          </div>
-        )
-      },
+      cell: ({ row }) => (
+        <div className="text-center font-bold text-zinc-900 dark:text-zinc-100">
+          {row.original.date}
+        </div>
+      )
     },
     {
       id: "isBlocked",
       header: () => <div className="text-center">{t("block")}</div>,
       size: 140,
       cell: function Cell({ row }) {
-        const [isBlocked, setIsBlocked] = useState(!row.original.client?.is_active)
+        const [isBlocked, setIsBlocked] = useState(!row.original.is_active)
         return (
           <div className="flex items-center justify-center">
             <FakeSwitch checked={isBlocked} onChange={() => setIsBlocked(!isBlocked)} />
@@ -144,7 +126,7 @@ export function UmrahsTable() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-40 rounded-xl">
                 <DropdownMenuItem
-                  onClick={() => router.push(`/umrahs/show/${row.original.id}`)}
+                  onClick={() => router.push(`/ui-management/thanking-word/show/${row.original.id}`)}
                   className="cursor-pointer font-bold text-zinc-700 dark:text-zinc-300 justify-end"
                 >
                   {t("details")}
@@ -155,7 +137,7 @@ export function UmrahsTable() {
         )
       },
     },
-  ], [t])
+  ], [t, router, page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />
