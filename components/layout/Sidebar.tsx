@@ -67,7 +67,7 @@ export function Sidebar() {
 
   const discountsItems = [
     { href: '/discounts/coupons', icon: Ticket, label: t('coupons_page') },
-    { href: '/discounts/coupon-codes', icon: Tag, label: t('coupon_codes_page') },
+    { href: '/discounts/coupon-codes', icon: Tag, label: t('coupon-codes_page') },
   ];
 
   const additionalItems = [
