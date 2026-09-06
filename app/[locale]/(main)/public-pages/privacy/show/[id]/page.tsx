@@ -104,12 +104,16 @@ export default function PrivacyDetailsPage() {
                             <AlignLeft className="w-3 h-3" />
                             {t("desc")}
                         </span>
-                        <div 
-                          className="text-sm text-zinc-700 dark:text-zinc-300 bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-100 dark:border-zinc-800 prose prose-sm dark:prose-invert max-w-none flex-1 overflow-auto max-h-[200px]"
-                          dangerouslySetInnerHTML={item.data?.desc ? { __html: item.data.desc } : undefined}
-                        >
-                          {!item.data?.desc && <span className="text-zinc-400 font-normal">-</span>}
-                        </div>
+                        {item.data?.desc ? (
+                          <div 
+                            className="text-sm text-zinc-700 dark:text-zinc-300 bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-100 dark:border-zinc-800 prose prose-sm dark:prose-invert max-w-none flex-1 overflow-auto max-h-[200px]"
+                            dangerouslySetInnerHTML={{ __html: item.data.desc }}
+                          />
+                        ) : (
+                          <div className="text-sm text-zinc-700 dark:text-zinc-300 bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-100 dark:border-zinc-800 flex-1 overflow-auto max-h-[200px]">
+                            <span className="text-zinc-400 font-normal">-</span>
+                          </div>
+                        )}
                     </div>
                 </CardContent>
             </Card>
