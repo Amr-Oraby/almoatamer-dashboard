@@ -40,7 +40,7 @@ export interface AboutResponse {
 }
 
 export interface SingleAboutResponse {
-    data: AboutItem;
+    data: AboutItem | AboutItem[];
     status: string;
     message: string;
 }

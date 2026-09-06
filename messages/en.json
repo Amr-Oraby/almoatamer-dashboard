@@ -359,5 +359,24 @@
     "ms": "Malay",
     "tr": "Turkish",
     "iid": "Indonesian"
+  },
+  "About": {
+    "not_found": "Information not found",
+    "about_details": "About Us Details",
+    "about_id": "ID",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "translations": "Translations",
+    "language": "Language",
+    "title": "Title",
+    "desc": "Description",
+    "slug": "Slug",
+    "ar": "Arabic",
+    "en": "English",
+    "fa": "Persian",
+    "ms": "Malay",
+    "tr": "Turkish",
+    "iid": "Indonesian"
   }
 }

@@ -6,5 +6,5 @@ export async function getAbouts(page: number = 1): Promise<AboutResponse> {
 }
 
 export async function getAbout(id: string): Promise<SingleAboutResponse> {
-    return apiClient<SingleAboutResponse>(`/api/about/${id}`);
+    return apiClient<SingleAboutResponse>(`/api/about/3`);
 }
