@@ -58,5 +58,29 @@ When implementing a new page that contains a data table (e.g., `show-all` pages)
    - Import and render the Table component inside the target page (e.g., `app/[locale]/(main)/[feature]/show-all/page.tsx`).
    - Remove any old placeholder text.
    - **IMPORTANT**: ALWAYS remove the `<EndpointBadge>` component and its import from the page once the table is finished.
-5. **Commit and Push**:
+6. **Commit and Push**:
    - Once the table is fully integrated and tested, commit the changes using `git add .` and `git commit -m "feat: Add [feature] table"` and push the changes to the repository.
+
+## Show Page Implementation Process
+
+When implementing a "show details" page for a specific entity (e.g., `app/[locale]/(main)/[feature]/show/[id]/page.tsx`), follow this exact process to ensure consistency, prevent translation errors, and maintain a premium responsive UI.
+
+1. **Verify Requirements & Data**:
+   - Determine if the entity requires a dedicated show page (e.g., if there is a lot of content or if the `id` is provided in the URL for detailed viewing).
+   - Ensure the required types and endpoint for fetching a single item (e.g., `useClient(id)`) exist in the `features/[feature-name]/` structure (`types.ts`, `api.ts`, `hooks.ts`).
+2. **Translation Setup (CRITICAL)**:
+   - **ALWAYS** check and add translation keys to BOTH `messages/ar.json` and `messages/en.json` before building the UI.
+   - Missing translations in either file will cause a `MISSING_MESSAGE` runtime error and crash the page.
+3. **Build the Show Page UI (`page.tsx`)**:
+   - Retrieve the `id` from the URL using `useParams()` and pass it to your data fetching hook (e.g., `useClient(id)`).
+   - Create a polished, responsive layout mirroring existing show pages (like the `umrahs` show page).
+   - **Aesthetics & Layout**: Use `Card`, `CardContent`, and `Badge` components from `components/ui/`.
+   - Use `lucide-react` icons (e.g., `Phone`, `Mail`, `User`) to make the interface visually appealing.
+   - Ensure fonts are readable and sized appropriately (e.g., `text-lg`, `text-2xl` for headers, `text-base` for details) and use generous spacing/padding.
+   - Use a compact header with the entity's avatar/icon, name, ID, and a status badge.
+   - Use responsive grids (`grid-cols-1 md:grid-cols-2`) for displaying partitioned details (like Personal Info vs Location).
+4. **Error Handling & Loading States**:
+   - Handle `isLoading` with a centered spinner (`Loader2` from `lucide-react`).
+   - Handle `isError` or missing data with a clean "Not Found" message using translations.
+5. **Commit and Push**:
+   - Once the page is tested for layout responsiveness, data mapping, and translations (in both `ar` and `en`), commit the changes using `git add .` and `git commit -m "feat: Add [feature] show page with details"` and push to the repository.
