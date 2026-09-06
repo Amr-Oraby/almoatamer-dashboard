@@ -111,5 +111,20 @@
     "total": "الإجمالي",
     "completed_step": "مكتمل",
     "pending_step": "قيد الانتظار"
+  },
+  "Clients": {
+    "not_found": "العميل غير موجود",
+    "no_name": "بدون اسم",
+    "client_details": "تفاصيل العميل",
+    "personal_info": "المعلومات الشخصية",
+    "location": "الموقع واللغة",
+    "status": "الحالة",
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "client_umrahs": "رحلات عمرة العميل",
+    "no_umrahs": "لا يوجد رحلات عمرة",
+    "completed": "مكتمل",
+    "pending": "معلق",
+    "nationality": "الجنسية"
   }
 }
