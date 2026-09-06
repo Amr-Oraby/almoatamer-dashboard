@@ -6,5 +6,5 @@ export async function getTransactions(page: number = 1): Promise<TransactionsRes
 }
 
 export async function getTransaction(id: string): Promise<SingleTransactionResponse> {
-    return apiClient<SingleTransactionResponse>(`/api/all-transaction/${id}`);
+    return apiClient<SingleTransactionResponse>(`/api/transaction/${id}`);
 }

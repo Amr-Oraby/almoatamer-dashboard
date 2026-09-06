@@ -246,5 +246,19 @@
     "title": "العنوان",
     "no_user": "لا يوجد مستخدم",
     "no_moatmer": "لا يوجد معتمر"
+  },
+  "WithdrawalRequests": {
+    "not_found": "طلب السحب غير موجود",
+    "request_details": "تفاصيل الطلب",
+    "amount": "المبلغ",
+    "status": "الحالة",
+    "bank_info": "المعلومات البنكية",
+    "bank_name": "اسم البنك",
+    "account_number": "رقم الحساب",
+    "user_info": "معلومات المستخدم",
+    "no_user": "لا يوجد مستخدم",
+    "created_at": "تاريخ الطلب",
+    "can_modify": "قابل للتعديل",
+    "action": "الإجراء المتخذ"
   }
 }

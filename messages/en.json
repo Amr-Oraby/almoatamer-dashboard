@@ -246,5 +246,19 @@
     "title": "Title",
     "no_user": "No user",
     "no_moatmer": "No moatamer"
+  },
+  "WithdrawalRequests": {
+    "not_found": "Withdrawal request not found",
+    "request_details": "Request Details",
+    "amount": "Amount",
+    "status": "Status",
+    "bank_info": "Bank Information",
+    "bank_name": "Bank Name",
+    "account_number": "Account Number",
+    "user_info": "User Information",
+    "no_user": "No user",
+    "created_at": "Request Date",
+    "can_modify": "Can Modify",
+    "action": "Action Taken"
   }
 }
