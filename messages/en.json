@@ -184,5 +184,20 @@
     "status": "Status",
     "active": "Active",
     "inactive": "Inactive"
+  },
+  "Coupons": {
+    "not_found": "Coupon not found",
+    "no_code": "No code",
+    "coupon_details": "Coupon Details",
+    "usage_info": "Usage Information",
+    "type": "Type",
+    "discount_amount": "Discount Amount",
+    "start_date": "Start Date",
+    "expiry_date": "Expiry Date",
+    "usage_limit": "Usage Limit",
+    "times_used": "Times Used",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive"
   }
 }

@@ -184,5 +184,20 @@
     "status": "الحالة",
     "active": "نشط",
     "inactive": "غير نشط"
+  },
+  "Coupons": {
+    "not_found": "الكوبون غير موجود",
+    "no_code": "بدون كود",
+    "coupon_details": "تفاصيل الكوبون",
+    "usage_info": "معلومات الاستخدام",
+    "type": "النوع",
+    "discount_amount": "قيمة الخصم",
+    "start_date": "تاريخ البدء",
+    "expiry_date": "تاريخ الانتهاء",
+    "usage_limit": "الحد الأقصى للاستخدام",
+    "times_used": "مرات الاستخدام",
+    "status": "الحالة",
+    "active": "نشط",
+    "inactive": "غير نشط"
   }
 }
