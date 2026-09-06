@@ -1,7 +1,10 @@
 import { apiClient } from "@/lib/api/client";
-import { ClientMessagesResponse } from "@/app/types/ClientMessageType";
+import { ClientMessagesResponse, SingleClientMessageResponse } from "./types";
 
 export async function getClientMessages(page: number = 1): Promise<ClientMessagesResponse> {
-  const url = `/api/client-messages?page=${page}`;
-  return apiClient<ClientMessagesResponse>(url);
+    return apiClient<ClientMessagesResponse>(`/api/client-messages?page=${page}`);
+}
+
+export async function getClientMessage(id: string): Promise<SingleClientMessageResponse> {
+    return apiClient<SingleClientMessageResponse>(`/api/client-messages/${id}`);
 }
