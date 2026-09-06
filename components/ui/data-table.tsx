@@ -70,7 +70,8 @@ export function DataTable<TData, TValue>({
                   return (
                     <TableHead 
                       key={header.id}
-                      className="text-zinc-500 font-semibold whitespace-nowrap px-6 py-4 h-auto"
+                      className="text-zinc-500 font-semibold whitespace-nowrap h-auto pb-4"
+                      style={{ width: header.column.getSize() !== 150 ? header.column.getSize() : undefined }}
                     >
                       {header.isPlaceholder
                         ? null
@@ -85,6 +86,8 @@ export function DataTable<TData, TValue>({
             ))}
           </TableHeader>
           <TableBody className="[&_tr:last-child]:border-0">
+            {/* Spacer row to create gap between header and data rows */}
+            <tr><td colSpan={columns.length} className="h-4 p-0 border-0"></td></tr>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
@@ -95,7 +98,8 @@ export function DataTable<TData, TValue>({
                   {row.getVisibleCells().map((cell) => (
                     <TableCell 
                       key={cell.id}
-                      className="py-4 px-6 border-0"
+                      className="border-0"
+                      style={{ width: cell.column.getSize() !== 150 ? cell.column.getSize() : undefined }}
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>

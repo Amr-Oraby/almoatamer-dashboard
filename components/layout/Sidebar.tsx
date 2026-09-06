@@ -72,7 +72,7 @@ export function Sidebar() {
 
   const additionalItems = [
     { href: '/clients', icon: Users, label: t('clients_page') },
-    { href: '/umrahs', icon: Plane, label: t('umrahs_page') },
+    { href: '/umrahs/show-all', icon: Plane, label: t('umrahs_page') },
     { href: '/almoatamers', icon: UserCheck, label: t('almoatamers_page') },
     { href: '/news', icon: Newspaper, label: t('news_page') },
     { href: '/blogs', icon: BookOpen, label: t('blogs_page') },
@@ -187,11 +187,10 @@ export function Sidebar() {
                 onOpenChange={setIsUiManagementOpen}
                 className="w-full"
               >
-                <CollapsibleTrigger className={`flex items-center justify-between w-full px-4 py-3 rounded-md transition-colors ${
-                  pathname.includes('/ui-management') 
-                    ? 'text-primary font-bold bg-primary/5' 
+                <CollapsibleTrigger className={`flex items-center justify-between w-full px-4 py-3 rounded-md transition-colors ${pathname.includes('/ui-management')
+                    ? 'text-primary font-bold bg-primary/5'
                     : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900'
-                }`}>
+                  }`}>
                   <div className="flex items-center gap-3">
                     <LayoutTemplate className="w-5 h-5" />
                     <span>{t('ui_management')}</span>
@@ -249,11 +248,10 @@ export function Sidebar() {
                 onOpenChange={setIsDiscountsOpen}
                 className="w-full"
               >
-                <CollapsibleTrigger className={`flex items-center justify-between w-full px-4 py-3 rounded-md transition-colors ${
-                  pathname.includes('/discounts') 
-                    ? 'text-primary font-bold bg-primary/5' 
+                <CollapsibleTrigger className={`flex items-center justify-between w-full px-4 py-3 rounded-md transition-colors ${pathname.includes('/discounts')
+                    ? 'text-primary font-bold bg-primary/5'
                     : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900'
-                }`}>
+                  }`}>
                   <div className="flex items-center gap-3">
                     <Tag className="w-5 h-5" />
                     <span>{t('discounts_menu')}</span>
@@ -311,11 +309,10 @@ export function Sidebar() {
                 onOpenChange={setIsPlacesOpen}
                 className="w-full"
               >
-                <CollapsibleTrigger className={`flex items-center justify-between w-full px-4 py-3 rounded-md transition-colors ${
-                  pathname.includes('/places') 
-                    ? 'text-primary font-bold bg-primary/5' 
+                <CollapsibleTrigger className={`flex items-center justify-between w-full px-4 py-3 rounded-md transition-colors ${pathname.includes('/places')
+                    ? 'text-primary font-bold bg-primary/5'
                     : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900'
-                }`}>
+                  }`}>
                   <div className="flex items-center gap-3">
                     <Map className="w-5 h-5" />
                     <span>{t('places_menu')}</span>
@@ -351,11 +348,10 @@ export function Sidebar() {
                 onOpenChange={setIsRolesOpen}
                 className="w-full"
               >
-                <CollapsibleTrigger className={`flex items-center justify-between w-full px-4 py-3 rounded-md transition-colors ${
-                  pathname.includes('/roles') 
-                    ? 'text-primary font-bold bg-primary/5' 
+                <CollapsibleTrigger className={`flex items-center justify-between w-full px-4 py-3 rounded-md transition-colors ${pathname.includes('/roles')
+                    ? 'text-primary font-bold bg-primary/5'
                     : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900'
-                }`}>
+                  }`}>
                   <div className="flex items-center gap-3">
                     <Shield className="w-5 h-5" />
                     <span>{t('roles_menu')}</span>
@@ -413,11 +409,10 @@ export function Sidebar() {
                 onOpenChange={setIsContactOpen}
                 className="w-full"
               >
-                <CollapsibleTrigger className={`flex items-center justify-between w-full px-4 py-3 rounded-md transition-colors ${
-                  pathname.includes('/contact') 
-                    ? 'text-primary font-bold bg-primary/5' 
+                <CollapsibleTrigger className={`flex items-center justify-between w-full px-4 py-3 rounded-md transition-colors ${pathname.includes('/contact')
+                    ? 'text-primary font-bold bg-primary/5'
                     : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900'
-                }`}>
+                  }`}>
                   <div className="flex items-center gap-3">
                     <Headset className="w-5 h-5" />
                     <span>{t('contact_menu')}</span>
@@ -453,11 +448,10 @@ export function Sidebar() {
                 onOpenChange={setIsPublicPagesOpen}
                 className="w-full"
               >
-                <CollapsibleTrigger className={`flex items-center justify-between w-full px-4 py-3 rounded-md transition-colors ${
-                  pathname.includes('/public-pages') 
-                    ? 'text-primary font-bold bg-primary/5' 
+                <CollapsibleTrigger className={`flex items-center justify-between w-full px-4 py-3 rounded-md transition-colors ${pathname.includes('/public-pages')
+                    ? 'text-primary font-bold bg-primary/5'
                     : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900'
-                }`}>
+                  }`}>
                   <div className="flex items-center gap-3">
                     <Files className="w-5 h-5" />
                     <span>{t('public_pages_menu')}</span>
@@ -493,11 +487,10 @@ export function Sidebar() {
                 onOpenChange={setIsSettingsOpen}
                 className="w-full"
               >
-                <CollapsibleTrigger className={`flex items-center justify-between w-full px-4 py-3 rounded-md transition-colors ${
-                  pathname.includes('/settings') 
-                    ? 'text-primary font-bold bg-primary/5' 
+                <CollapsibleTrigger className={`flex items-center justify-between w-full px-4 py-3 rounded-md transition-colors ${pathname.includes('/settings')
+                    ? 'text-primary font-bold bg-primary/5'
                     : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900'
-                }`}>
+                  }`}>
                   <div className="flex items-center gap-3">
                     <Settings className="w-5 h-5" />
                     <span>{t('settings_menu')}</span>

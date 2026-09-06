@@ -1,5 +1,5 @@
+import { UmrahsTable } from '@/features/umrahs/components/UmrahsTable';
 import { getTranslations } from 'next-intl/server';
-import { UmrahsTable } from './UmrahsTable';
 
 export default async function ShowAllUmrahsPage() {
   const t = await getTranslations('Dashboard');
