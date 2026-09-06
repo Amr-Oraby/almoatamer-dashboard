@@ -21,8 +21,8 @@ export default function PrivacyDetailsPage() {
     )
   }
 
-  // Handle both { data: PolicyItem } or direct PolicyItem
-  const policy = response?.data || response
+  // The API returns { data: PolicyItem }
+  const policy = response?.data
 
   if (isError || !policy) {
     return (

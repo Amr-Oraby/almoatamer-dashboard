@@ -21,8 +21,8 @@ export default function TermDetailsPage() {
     )
   }
 
-  // Handle both { data: TermItem } or direct TermItem
-  const term = response?.data || response
+  // The API returns { data: TermItem }
+  const term = response?.data
 
   if (isError || !term) {
     return (
