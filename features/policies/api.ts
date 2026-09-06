@@ -6,5 +6,5 @@ export async function getPolicies(page: number = 1): Promise<PoliciesResponse> {
 }
 
 export async function getPolicy(id: string): Promise<SinglePolicyResponse> {
-    return apiClient<SinglePolicyResponse>(`/api/policy/${id}`);
+    return apiClient<SinglePolicyResponse>(`/api/policies/1`);
 }
