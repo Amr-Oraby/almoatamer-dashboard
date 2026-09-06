@@ -6,5 +6,5 @@ export async function getClientMessages(page: number = 1): Promise<ClientMessage
 }
 
 export async function getClientMessage(id: string): Promise<SingleClientMessageResponse> {
-    return apiClient<SingleClientMessageResponse>(`/api/client-messages/${id}`);
+    return apiClient<SingleClientMessageResponse>(`/api/client-message/${id}`);
 }

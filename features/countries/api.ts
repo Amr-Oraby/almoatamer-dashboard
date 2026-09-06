@@ -6,5 +6,5 @@ export async function getCountries(page: number = 1): Promise<CountriesResponse>
 }
 
 export async function getCountry(id: string): Promise<SingleCountryResponse> {
-    return apiClient<SingleCountryResponse>(`/api/countries/${id}`);
+    return apiClient<SingleCountryResponse>(`/api/country/${id}`);
 }

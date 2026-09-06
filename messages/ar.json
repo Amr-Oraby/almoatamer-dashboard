@@ -199,5 +199,20 @@
     "status": "الحالة",
     "active": "نشط",
     "inactive": "غير نشط"
+  },
+  "CouponCodes": {
+    "not_found": "مجموعة الأكواد غير موجودة",
+    "sender_info": "معلومات المرسل",
+    "codes_list": "قائمة الأكواد",
+    "no_name": "بدون اسم",
+    "code": "الكود",
+    "discount_amount": "قيمة الخصم",
+    "used_by": "مستخدم بواسطة",
+    "used_at": "تاريخ الاستخدام",
+    "status": "الحالة",
+    "used": "مستخدم",
+    "not_used": "غير مستخدم",
+    "active": "نشط",
+    "inactive": "غير نشط"
   }
 }

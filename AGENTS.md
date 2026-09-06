@@ -68,6 +68,7 @@ When implementing a "show details" page for a specific entity (e.g., `app/[local
 1. **Verify Requirements & Data**:
    - Determine if the entity requires a dedicated show page (e.g., if there is a lot of content or if the `id` is provided in the URL for detailed viewing).
    - Ensure the required types and endpoint for fetching a single item (e.g., `useClient(id)`) exist in the `features/[feature-name]/` structure (`types.ts`, `api.ts`, `hooks.ts`).
+   - **CRITICAL**: Always verify the correct single-item API endpoint path from the backend (e.g., check if it uses a singular or plural noun like `/api/coupon/{id}` vs `/api/coupons/{id}`). Do not guess the endpoint.
    - **CRITICAL**: NEVER guess the type properties or assume they match other similar entities (e.g., don't assume `country.nationality_name` exists just because another feature has it). Always strictly check `types.ts` for the exact shape. If you are unsure or fields are missing, STOP and ask the user for clarification before proceeding.
 2. **Translation Setup (CRITICAL)**:
    - **ALWAYS** check and add translation keys to BOTH `messages/ar.json` and `messages/en.json` before building the UI.

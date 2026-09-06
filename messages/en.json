@@ -199,5 +199,20 @@
     "status": "Status",
     "active": "Active",
     "inactive": "Inactive"
+  },
+  "CouponCodes": {
+    "not_found": "Coupon codes group not found",
+    "sender_info": "Sender Information",
+    "codes_list": "Codes List",
+    "no_name": "No name",
+    "code": "Code",
+    "discount_amount": "Discount Amount",
+    "used_by": "Used By",
+    "used_at": "Used At",
+    "status": "Status",
+    "used": "Used",
+    "not_used": "Not Used",
+    "active": "Active",
+    "inactive": "Inactive"
   }
 }

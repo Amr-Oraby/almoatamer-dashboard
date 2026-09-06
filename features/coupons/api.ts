@@ -6,5 +6,5 @@ export async function getCoupons(page: number = 1): Promise<CouponsResponse> {
 }
 
 export async function getCoupon(id: string): Promise<SingleCouponResponse> {
-    return apiClient<SingleCouponResponse>(`/api/coupons/${id}`);
+    return apiClient<SingleCouponResponse>(`/api/coupon/${id}`);
 }
