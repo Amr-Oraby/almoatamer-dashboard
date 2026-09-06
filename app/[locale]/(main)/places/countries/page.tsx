@@ -1,19 +1,18 @@
 import { useTranslations } from 'next-intl';
-import { EndpointBadge } from '@/components/ui/endpoint-badge';
+import { CountriesTable } from '@/features/countries/components/CountriesTable';
 
 export default function CountriesPage() {
   const t = useTranslations('Dashboard');
   
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">{t('countries_page')}</h1>
-      <EndpointBadge>countries</EndpointBadge>
-      <p className="text-zinc-600 dark:text-zinc-400">
-        This is the countries management page.
-      </p>
-      <p className="text-sm font-medium text-blue-600 mt-2">
-        Table
-      </p>
+    <div className="flex flex-col gap-6 p-6">
+      <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-2xl font-bold">{t('countries_page')}</h1>
+        </div>
+      </div>
+
+      <CountriesTable />
     </div>
   );
 }
