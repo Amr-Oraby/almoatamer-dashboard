@@ -57,3 +57,5 @@ When implementing a new page that contains a data table (e.g., `show-all` pages)
    - Import and render the Table component inside the target page (e.g., `app/[locale]/(main)/[feature]/show-all/page.tsx`).
    - Remove any old placeholder text.
    - **IMPORTANT**: ALWAYS remove the `<EndpointBadge>` component and its import from the page once the table is finished.
+5. **Commit and Push**:
+   - Once the table is fully integrated and tested, commit the changes using `git add .` and `git commit -m "feat: Add [feature] table"` and push the changes to the repository.
