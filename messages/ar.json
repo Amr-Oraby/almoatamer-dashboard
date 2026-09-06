@@ -214,5 +214,17 @@
     "not_used": "غير مستخدم",
     "active": "نشط",
     "inactive": "غير نشط"
+  },
+  "ReferralLinks": {
+    "not_found": "رابط الإحالة غير موجود",
+    "details": "تفاصيل الإحالة",
+    "marketer": "المسوق",
+    "city": "المدينة",
+    "type": "النوع",
+    "value": "القيمة",
+    "total": "الإجمالي",
+    "link": "الرابط",
+    "identifier": "المعرف",
+    "no_marketer": "لا يوجد مسوق"
   }
 }

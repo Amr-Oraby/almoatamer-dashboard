@@ -214,5 +214,17 @@
     "not_used": "Not Used",
     "active": "Active",
     "inactive": "Inactive"
+  },
+  "ReferralLinks": {
+    "not_found": "Referral link not found",
+    "details": "Referral Details",
+    "marketer": "Marketer",
+    "city": "City",
+    "type": "Type",
+    "value": "Value",
+    "total": "Total",
+    "link": "Link",
+    "identifier": "Identifier",
+    "no_marketer": "No marketer"
   }
 }
