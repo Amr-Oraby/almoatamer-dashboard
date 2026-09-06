@@ -1,8 +1,10 @@
 import { apiClient } from "@/lib/api/client";
-import { SeoResponse } from "@/app/types/SeoType";
+import { SeoResponse, SingleSeoResponse } from "./types";
 
-export const seoApi = {
-  getSeoData: (page: number = 1) => {
+export async function getSeos(page: number = 1): Promise<SeoResponse> {
     return apiClient<SeoResponse>(`/api/seo?page=${page}`);
-  }
-};
+}
+
+export async function getSeo(id: string): Promise<SingleSeoResponse> {
+    return apiClient<SingleSeoResponse>(`/api/seo/${id}`);
+}

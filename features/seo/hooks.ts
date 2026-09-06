@@ -1,9 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import { seoApi } from "./api";
+import { getSeos, getSeo } from "./api";
 
-export function useSeo(page: number = 1) {
-  return useQuery({
-    queryKey: ["seo", page],
-    queryFn: () => seoApi.getSeoData(page),
-  });
+export function useSeos(page: number = 1) {
+    return useQuery({
+        queryKey: ["seo", page],
+        queryFn: () => getSeos(page),
+    });
+}
+
+export function useSeo(id: string) {
+    return useQuery({
+        queryKey: ["seo", id],
+        queryFn: () => getSeo(id),
+        enabled: !!id,
+    });
 }
