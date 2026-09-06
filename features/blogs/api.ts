@@ -1,14 +1,10 @@
 import { apiClient } from "@/lib/api/client";
-import { BlogResponse, SingleBlogResponse } from "@/app/types/BlogType";
+import { BlogsResponse, SingleBlogResponse } from "./types";
 
-export const blogApi = {
-  getBlogs: (page: number = 1) => {
-    return apiClient<BlogResponse>(`/api/blogs?page=${page}`);
-  },
-  getBlog: (id: number) => {
-    return apiClient<SingleBlogResponse>(`/api/blog/${id}`);
-  },
-  deleteBlog: (id: number) => {
-    return apiClient<any>(`/api/blog/${id}`, { method: "DELETE" });
-  }
-};
+export async function getBlogsList(page: number = 1): Promise<BlogsResponse> {
+    return apiClient<BlogsResponse>(`/api/blogs?page=${page}`);
+}
+
+export async function getBlogItem(id: string): Promise<SingleBlogResponse> {
+    return apiClient<SingleBlogResponse>(`/api/blogs/${id}`);
+}
