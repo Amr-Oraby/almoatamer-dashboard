@@ -1,14 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCouponCodes } from "./api";
-import { CouponCodesResponse } from "@/app/types/CouponCodeType";
+import { getCouponCodes, getCouponCodeGroup } from "./api";
 
-interface UseCouponCodesOptions {
-  page?: number;
+export function useCouponCodes(page: number = 1) {
+    return useQuery({
+        queryKey: ["coupon-codes", page],
+        queryFn: () => getCouponCodes(page),
+    });
 }
 
-export function useCouponCodes({ page = 1 }: UseCouponCodesOptions = {}) {
-  return useQuery<CouponCodesResponse>({
-    queryKey: ["coupon-codes", { page }],
-    queryFn: () => getCouponCodes(page),
-  });
+export function useCouponCodeGroup(id: string) {
+    return useQuery({
+        queryKey: ["coupon-code-group", id],
+        queryFn: () => getCouponCodeGroup(id),
+        enabled: !!id,
+    });
 }
