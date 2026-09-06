@@ -6,5 +6,5 @@ export async function getRoles(page: number = 1): Promise<RolesResponse> {
 }
 
 export async function getRole(id: string): Promise<SingleRoleResponse> {
-    return apiClient<SingleRoleResponse>(`/api/roles/${id}`);
+    return apiClient<SingleRoleResponse>(`/api/role/${id}`);
 }

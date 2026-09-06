@@ -287,5 +287,27 @@
     "ms": "Malay",
     "tr": "Turkish",
     "iid": "Indonesian"
+  },
+  "Roles": {
+    "not_found": "Role not found",
+    "role_details": "Role Details",
+    "role_id": "Role ID",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "translations": "Translations",
+    "language": "Language",
+    "name": "Name",
+    "ar": "Arabic",
+    "en": "English",
+    "fa": "Persian",
+    "ms": "Malay",
+    "tr": "Turkish",
+    "iid": "Indonesian",
+    "permissions": "Permissions",
+    "no_permissions": "No permissions",
+    "permission_title": "Permission Title",
+    "permission_name": "Permission Name",
+    "front_name": "Front Name"
   }
 }
