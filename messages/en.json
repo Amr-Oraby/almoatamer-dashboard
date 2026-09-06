@@ -111,5 +111,20 @@
     "total": "Total",
     "completed_step": "Completed",
     "pending_step": "Pending"
+  },
+  "Clients": {
+    "not_found": "Client not found",
+    "no_name": "No name",
+    "client_details": "Client Details",
+    "personal_info": "Personal Information",
+    "location": "Location and Language",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "client_umrahs": "Client Umrahs",
+    "no_umrahs": "No Umrah trips",
+    "completed": "Completed",
+    "pending": "Pending",
+    "nationality": "Nationality"
   }
 }
