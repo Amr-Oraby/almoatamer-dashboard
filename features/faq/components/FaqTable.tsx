@@ -98,7 +98,7 @@ export function FaqTable() {
       />
 
       <Dialog open={!!selectedFaq} onOpenChange={(open) => !open && setSelectedFaq(null)}>
-        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+        <DialogContent className="w-[95vw] sm:max-w-5xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-xl font-black text-zinc-900 dark:text-zinc-100 flex items-center gap-2 mb-4">
               <HelpCircle className="w-6 h-6 text-primary" />

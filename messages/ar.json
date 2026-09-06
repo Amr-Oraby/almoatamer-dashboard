@@ -7,7 +7,7 @@
     "super_admin": "مشرف_عام",
     "admin_email": "admin@info.com",
     "rights": "جميع الحقوق محفوظة لـ",
-    "brand_name": "البيت الذهبي للجمال",
+    "brand_name": "المعتمر",
     "copyright_year": "2026",
     "moatmers_number": "عدد المعتمرين",
     "most_demanded_moatmers": "عدد المعتمرين الاكثر طلبا",
@@ -306,7 +306,6 @@
     "iid": "الإندونيسية",
     "permissions": "الصلاحيات",
     "no_permissions": "لا توجد صلاحيات",
-
     "permission_title": "عنوان الصلاحية",
     "permission_name": "اسم الصلاحية",
     "front_name": "الاسم في الواجهة"
@@ -342,7 +341,6 @@
     "tr": "التركية",
     "iid": "الإندونيسية"
   },
-
   "Privacy": {
     "not_found": "السياسة غير موجودة",
     "privacy_details": "تفاصيل سياسة الخصوصية",

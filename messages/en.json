@@ -7,7 +7,7 @@
     "super_admin": "SUPER_ADMIN",
     "admin_email": "admin@info.com",
     "rights": "All rights reserved by",
-    "brand_name": "Golden Beauty House",
+    "brand_name": "Almoatamer",
     "copyright_year": "2026",
     "moatmers_number": "Number of Moatmers",
     "most_demanded_moatmers": "Most Demanded Moatmers",
@@ -306,7 +306,6 @@
     "iid": "Indonesian",
     "permissions": "Permissions",
     "no_permissions": "No permissions",
-
     "permission_title": "Permission Title",
     "permission_name": "Permission Name",
     "front_name": "Front Name"
