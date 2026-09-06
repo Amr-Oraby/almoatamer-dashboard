@@ -1,14 +1,10 @@
 import { apiClient } from "@/lib/api/client";
-import { AboutResponse } from "@/app/types/AboutType";
+import { AboutResponse, SingleAboutResponse } from "./types";
 
-export const aboutApi = {
-  getAboutData: (page: number = 1) => {
+export async function getAbouts(page: number = 1): Promise<AboutResponse> {
     return apiClient<AboutResponse>(`/api/about?page=${page}`);
-  },
-  updateAbout: (formData: FormData) => {
-    return apiClient<any>("/api/update-about", {
-      method: "POST",
-      body: formData,
-    });
-  }
-};
+}
+
+export async function getAbout(id: string): Promise<SingleAboutResponse> {
+    return apiClient<SingleAboutResponse>(`/api/about/${id}`);
+}
