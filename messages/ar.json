@@ -136,5 +136,23 @@
     "active": "نشط",
     "inactive": "غير نشط",
     "date": "التاريخ"
+  },
+  "Almoatamers": {
+    "not_found": "المعتمر غير موجود",
+    "no_name": "بدون اسم",
+    "personal_info": "المعلومات الشخصية",
+    "location": "الموقع واللغة",
+    "financials": "الماليات",
+    "wallet_balance": "رصيد المحفظة",
+    "pending_balance": "الرصيد المعلق",
+    "rate": "التقييم",
+    "status": "الحالة",
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "available": "متاح",
+    "unavailable": "غير متاح",
+    "accepted": "مقبول",
+    "not_accepted": "غير مقبول",
+    "nationality": "الجنسية"
   }
 }

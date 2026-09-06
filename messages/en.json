@@ -136,5 +136,23 @@
     "active": "Active",
     "inactive": "Inactive",
     "date": "Date"
+  },
+  "Almoatamers": {
+    "not_found": "Moatamer not found",
+    "no_name": "No name",
+    "personal_info": "Personal Information",
+    "location": "Location and Language",
+    "financials": "Financials",
+    "wallet_balance": "Wallet Balance",
+    "pending_balance": "Pending Balance",
+    "rate": "Rating",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "available": "Available",
+    "unavailable": "Unavailable",
+    "accepted": "Accepted",
+    "not_accepted": "Not Accepted",
+    "nationality": "Nationality"
   }
 }
