@@ -18,7 +18,7 @@ export function TermsTable() {
   const searchParams = useSearchParams()
   const page = Number(searchParams.get("page")) || 1
   const { data, isLoading } = useTerms(page)
-  
+
   // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
   const t = useTranslations("Umrahs")
 
@@ -35,16 +35,16 @@ export function TermsTable() {
     {
       id: "term_ar",
       header: () => <div className="text-right">العنوان (عربي)</div>,
-      size: 500,
+      size: 250,
       cell: ({ row }) => (
-        <div className="flex items-start gap-2">
+        <div className="flex items-start gap-2 w-[250px] md:w-[350px]">
           <FileText className="w-4 h-4 text-primary mt-1 shrink-0" />
-          <div className="flex flex-col">
-            <span className="font-bold text-zinc-900 dark:text-zinc-100 line-clamp-2" title={row.original.ar?.title || ""}>
+          <div className="flex flex-col w-full overflow-hidden">
+            <span className="font-bold text-zinc-900 dark:text-zinc-100 line-clamp-1" title={row.original.ar?.title || ""}>
               {row.original.ar?.title || "-"}
             </span>
-            <div 
-              className="text-sm text-zinc-500 line-clamp-1 mt-1 prose prose-sm prose-zinc" 
+            <div
+              className="text-xs text-zinc-500 line-clamp-1 mt-1 break-words [&>*]:m-0 [&>*]:inline"
               dangerouslySetInnerHTML={{ __html: row.original.ar?.desc || "-" }}
             />
           </div>
@@ -54,16 +54,16 @@ export function TermsTable() {
     {
       id: "term_en",
       header: () => <div className="text-left" dir="ltr">Title (English)</div>,
-      size: 500,
+      size: 250,
       cell: ({ row }) => (
-        <div className="flex items-start gap-2" dir="ltr">
+        <div className="flex items-start gap-2 w-[250px] md:w-[350px]" dir="ltr">
           <FileText className="w-4 h-4 text-primary mt-1 shrink-0" />
-          <div className="flex flex-col">
-            <span className="font-bold text-zinc-900 dark:text-zinc-100 line-clamp-2" title={row.original.en?.title || ""}>
+          <div className="flex flex-col w-full overflow-hidden">
+            <span className="font-bold text-zinc-900 dark:text-zinc-100 line-clamp-1" title={row.original.en?.title || ""}>
               {row.original.en?.title || "-"}
             </span>
-            <div 
-              className="text-sm text-zinc-500 line-clamp-1 mt-1 prose prose-sm prose-zinc" 
+            <div
+              className="text-xs text-zinc-500 line-clamp-1 mt-1 break-words [&>*]:m-0 [&>*]:inline"
               dangerouslySetInnerHTML={{ __html: row.original.en?.desc || "-" }}
             />
           </div>
