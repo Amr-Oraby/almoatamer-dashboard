@@ -4,9 +4,6 @@ import { useMemo } from "react"
 import { ColumnDef } from "@tanstack/react-table"
 import { DataTable } from "@/components/ui/data-table"
 import { TableSkeleton } from "@/components/ui/table-skeleton"
-import { useTranslations } from "next-intl"
-import { useRouter } from "@/i18n/routing"
-import { TableActionMenu } from "@/components/ui/table-action-menu"
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
 
@@ -17,12 +14,8 @@ import { Badge } from "@/components/ui/badge"
 
 export function WithdrawalRequestsTable() {
   const searchParams = useSearchParams()
-  const router = useRouter()
   const page = Number(searchParams.get("page")) || 1
   const { data, isLoading } = useWithdrawalRequests(page)
-  
-  // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
-  const t = useTranslations("Umrahs")
 
   const columns = useMemo<ColumnDef<WithdrawalRequestItem>[]>(() => [
     {
@@ -128,19 +121,7 @@ export function WithdrawalRequestsTable() {
         </div>
       )
     },
-    {
-      id: "actions",
-      header: () => <div className="text-center">{t("actions")}</div>,
-      size: 80,
-      cell: ({ row }) => {
-        return (
-          <div className="flex items-center justify-center">
-            <TableActionMenu items={[{ text: t("details"), href: `/withdrawal-requests/show/${row.original.id}` }]} />
-          </div>
-        )
-      },
-    },
-  ], [t, router, page, data?.meta?.per_page])
+  ], [page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />

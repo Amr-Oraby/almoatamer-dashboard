@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getWithdrawalRequests, getWithdrawalRequest } from "./api";
+import { getWithdrawalRequests } from "./api";
 
 export function useWithdrawalRequests(page: number = 1) {
     return useQuery({
@@ -8,10 +8,4 @@ export function useWithdrawalRequests(page: number = 1) {
     });
 }
 
-export function useWithdrawalRequest(id: string) {
-    return useQuery({
-        queryKey: ["withdrawal-request", id],
-        queryFn: () => getWithdrawalRequest(id),
-        enabled: !!id,
-    });
-}
+

@@ -6,5 +6,5 @@ export async function getWallets(page: number = 1): Promise<WalletsResponse> {
 }
 
 export async function getWallet(id: string): Promise<SingleWalletResponse> {
-    return apiClient<SingleWalletResponse>(`/api/wallets/${id}`);
+    return apiClient<SingleWalletResponse>(`/api/wallet/${id}`);
 }

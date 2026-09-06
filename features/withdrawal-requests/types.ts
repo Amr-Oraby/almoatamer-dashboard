@@ -43,8 +43,3 @@ export interface WithdrawalRequestsResponse {
     message: string;
 }
 
-export interface SingleWithdrawalRequestResponse {
-    data: WithdrawalRequestItem;
-    status: string;
-    message: string;
-}
