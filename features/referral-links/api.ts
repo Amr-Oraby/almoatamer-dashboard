@@ -6,5 +6,5 @@ export async function getReferralLinks(page: number = 1): Promise<ReferralLinksR
 }
 
 export async function getReferralLink(id: string): Promise<SingleReferralLinkResponse> {
-    return apiClient<SingleReferralLinkResponse>(`/api/referral-links/${id}`);
+    return apiClient<SingleReferralLinkResponse>(`/api/referral-link/${id}`);
 }

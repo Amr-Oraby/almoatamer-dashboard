@@ -226,5 +226,25 @@
     "link": "Link",
     "identifier": "Identifier",
     "no_marketer": "No marketer"
+  },
+  "Transactions": {
+    "not_found": "Transaction not found",
+    "transaction_details": "Transaction Details",
+    "transaction_id": "Transaction ID",
+    "umrah_id": "Umrah ID",
+    "user": "User",
+    "moatmer": "Moatamer",
+    "financials": "Financials",
+    "price": "Base Price",
+    "vat": "VAT",
+    "discount": "Discount",
+    "total": "Total",
+    "bank_info": "Bank Information",
+    "bank_name": "Bank Name",
+    "account_number": "Account Number",
+    "date": "Date",
+    "title": "Title",
+    "no_user": "No user",
+    "no_moatmer": "No moatamer"
   }
 }

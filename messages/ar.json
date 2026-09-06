@@ -226,5 +226,25 @@
     "link": "الرابط",
     "identifier": "المعرف",
     "no_marketer": "لا يوجد مسوق"
+  },
+  "Transactions": {
+    "not_found": "المعاملة غير موجودة",
+    "transaction_details": "تفاصيل المعاملة",
+    "transaction_id": "رقم المعاملة",
+    "umrah_id": "رقم العمرة",
+    "user": "المستخدم",
+    "moatmer": "المعتمر",
+    "financials": "الماليات",
+    "price": "السعر الأساسي",
+    "vat": "ضريبة القيمة المضافة",
+    "discount": "الخصم",
+    "total": "الإجمالي",
+    "bank_info": "المعلومات البنكية",
+    "bank_name": "اسم البنك",
+    "account_number": "رقم الحساب",
+    "date": "التاريخ",
+    "title": "العنوان",
+    "no_user": "لا يوجد مستخدم",
+    "no_moatmer": "لا يوجد معتمر"
   }
 }
