@@ -126,5 +126,15 @@
     "completed": "Completed",
     "pending": "Pending",
     "nationality": "Nationality"
+  },
+  "ThankingWords": {
+    "not_found": "Thanking word not found",
+    "no_name": "No name",
+    "word_details": "Word Details",
+    "text": "Text",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "date": "Date"
   }
 }

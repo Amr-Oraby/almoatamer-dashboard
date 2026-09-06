@@ -126,5 +126,15 @@
     "completed": "مكتمل",
     "pending": "معلق",
     "nationality": "الجنسية"
+  },
+  "ThankingWords": {
+    "not_found": "كلمة الشكر غير موجودة",
+    "no_name": "بدون اسم",
+    "word_details": "تفاصيل الكلمة",
+    "text": "نص الكلمة",
+    "status": "الحالة",
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "date": "التاريخ"
   }
 }
