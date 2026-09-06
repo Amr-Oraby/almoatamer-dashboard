@@ -90,7 +90,6 @@ export function Sidebar() {
 
   const placesItems = [
     { href: '/places/countries', icon: Globe, label: t('countries_page') },
-    { href: '/places/cities', icon: MapPin, label: t('cities_page') },
   ];
 
   const rolesItems = [
