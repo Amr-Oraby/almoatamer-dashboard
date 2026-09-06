@@ -44,8 +44,9 @@ Each feature located at `features/[feature-name]/` MUST follow this exact struct
 When implementing a new page that contains a data table (e.g., `show-all` pages), follow these exact steps from start to finish. Always use the simplest, most straightforward, and most readable code possible.
 
 1. **Bring the Data (Types & API)**:
-   - Read and understand the exact JSON response shapes from the backend.
-   - Define strict TypeScript interfaces in `features/[feature-name]/types.ts`.
+   - **CRITICAL**: BEFORE writing any code, ALWAYS fetch the exact JSON response shape from the backend. You can do this by testing the endpoint in Postman, or by running a PowerShell script to authenticate (e.g. `/api/v1/admin/login` to get a Bearer token) and calling the endpoint directly.
+   - NEVER guess the response shape. If the data is missing, unexpected, or throws an error, stop and ask for clarification.
+   - Once verified, define strict TypeScript interfaces in `features/[feature-name]/types.ts`.
    - Update `features/[feature-name]/api.ts` to use these types instead of `any`.
 2. **Create the Hooks (`hooks.ts`)**:
    - Create `@tanstack/react-query` hooks (e.g., `useClients`) to fetch the data, passing any necessary parameters like `page`.
