@@ -11,7 +11,8 @@ import { useRouter } from "@/i18n/routing"
 
 export interface ActionMenuItem {
   text: string;
-  href: string;
+  href?: string;
+  onClick?: () => void;
 }
 
 interface TableActionMenuProps {
@@ -32,7 +33,10 @@ export function TableActionMenu({ items }: TableActionMenuProps) {
         {items.map((item, index) => (
           <DropdownMenuItem
             key={index}
-            onClick={() => router.push(item.href)}
+            onClick={() => {
+              if (item.onClick) item.onClick();
+              if (item.href) router.push(item.href);
+            }}
             className="cursor-pointer font-bold text-zinc-700 dark:text-zinc-300 justify-end"
           >
             {item.text}
