@@ -7,13 +7,8 @@ import { TableSkeleton } from "@/components/ui/table-skeleton"
 import { cn } from "@/lib/utils"
 import { useTranslations } from "next-intl"
 import { useRouter } from "@/i18n/routing"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { MoreVertical, ChevronDown } from "lucide-react"
+import { TableActionMenu } from "@/components/ui/table-action-menu"
+import {  ChevronDown } from "lucide-react"
 
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
@@ -138,19 +133,7 @@ export function UmrahsTable() {
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
-            <DropdownMenu>
-              <DropdownMenuTrigger className="p-2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 outline-none">
-                <MoreVertical className="w-5 h-5" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-40 rounded-xl">
-                <DropdownMenuItem
-                  onClick={() => router.push(`/umrahs/show/${row.original.id}`)}
-                  className="cursor-pointer font-bold text-zinc-700 dark:text-zinc-300 justify-end"
-                >
-                  {t("details")}
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <TableActionMenu items={[{ text: t("details"), href: `/umrahs/show/${row.original.id}` }]} />
           </div>
         )
       },
