@@ -106,12 +106,6 @@ export default function MoatmrDetailsPage() {
                   </span>
                 </div>
               )}
-              {moatamer.country && (
-                <div className="flex items-center gap-3 text-base text-zinc-600 dark:text-zinc-400">
-                  <span className="text-xs font-bold text-zinc-400 uppercase">{t("nationality")} :</span>
-                  <span className="font-medium">{moatamer.country.nationality_name || "-"}</span>
-                </div>
-              )}
               <div className="flex items-center gap-3 text-base text-zinc-600 dark:text-zinc-400">
                 <Globe2 className="w-5 h-5 text-zinc-400" />
                 <span className="uppercase font-medium">{moatamer.locale || "-"}</span>
