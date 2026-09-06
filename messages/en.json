@@ -341,5 +341,23 @@
     "ms": "Malay",
     "tr": "Turkish",
     "iid": "Indonesian"
+  },
+  "Privacy": {
+    "not_found": "Policy not found",
+    "privacy_details": "Privacy Policy Details",
+    "privacy_id": "Policy ID",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "translations": "Translations",
+    "language": "Language",
+    "title": "Title",
+    "desc": "Description",
+    "ar": "Arabic",
+    "en": "English",
+    "fa": "Persian",
+    "ms": "Malay",
+    "tr": "Turkish",
+    "iid": "Indonesian"
   }
 }
