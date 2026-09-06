@@ -6,5 +6,5 @@ export async function getBlogsList(page: number = 1): Promise<BlogsResponse> {
 }
 
 export async function getBlogItem(id: string): Promise<SingleBlogResponse> {
-    return apiClient<SingleBlogResponse>(`/api/blogs/${id}`);
+    return apiClient<SingleBlogResponse>(`/api/blog/${id}`);
 }
