@@ -102,12 +102,7 @@ export function MoatmrsTable() {
       cell: ({ row }) => {
         const country = row.original.country
         return (
-          <div className="flex items-center justify-center gap-2">
-            {country?.flag && (
-              <div className="w-6 h-6 rounded-full overflow-hidden relative border border-zinc-200 dark:border-zinc-700">
-                <Image src={country.flag} alt={country.name} fill className="object-cover" unoptimized />
-              </div>
-            )}
+          <div className="flex items-center justify-center">
             <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
               {country?.name || "-"}
             </span>
