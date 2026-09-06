@@ -5,8 +5,6 @@ import { ColumnDef } from "@tanstack/react-table"
 import { DataTable } from "@/components/ui/data-table"
 import { TableSkeleton } from "@/components/ui/table-skeleton"
 import { useTranslations } from "next-intl"
-import { useRouter } from "@/i18n/routing"
-import { TableActionMenu } from "@/components/ui/table-action-menu"
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
 
@@ -15,7 +13,6 @@ import { CouponCodeGroup } from "@/features/coupon-codes/types"
 
 export function CouponCodesTable() {
   const searchParams = useSearchParams()
-  const router = useRouter()
   const page = Number(searchParams.get("page")) || 1
   const { data, isLoading } = useCouponCodes(page)
   
@@ -68,19 +65,7 @@ export function CouponCodesTable() {
         )
       }
     },
-    {
-      id: "actions",
-      header: () => <div className="text-center">{t("actions")}</div>,
-      size: 80,
-      cell: ({ row }) => {
-        return (
-          <div className="flex items-center justify-center">
-            <TableActionMenu items={[{ text: t("details"), href: `/discounts/coupon-codes/show/${row.original.sender.id}` }]} />
-          </div>
-        )
-      },
-    },
-  ], [t, router, page, data?.meta?.per_page])
+  ], [t, page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />
