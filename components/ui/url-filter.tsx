@@ -41,7 +41,7 @@ export function UrlFilter({ filterKey, options, placeholder, isLoading }: UrlFil
         value={value}
         onChange={handleChange}
         disabled={isLoading}
-        className="h-10 px-4 py-2 pr-10 text-sm font-medium rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-primary/50 cursor-pointer appearance-none shadow-sm transition-all hover:border-zinc-300 dark:hover:border-zinc-700 min-w-[140px] disabled:opacity-50 disabled:cursor-not-allowed"
+        className="h-10 px-4 py-2 pr-10 rtl:pr-4 rtl:pl-10 text-sm font-medium rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-primary/50 cursor-pointer appearance-none shadow-sm transition-all hover:border-zinc-300 dark:hover:border-zinc-700 min-w-[120px] max-w-[180px] truncate disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <option value="">{placeholder || "All"}</option>
         {options.map((option) => (

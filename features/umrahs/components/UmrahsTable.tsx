@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 import { useTranslations } from "next-intl"
 import { useRouter } from "@/i18n/routing"
 import { TableActionMenu } from "@/components/ui/table-action-menu"
-import {  ChevronDown } from "lucide-react"
+import { ChevronDown } from "lucide-react"
 
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { UrlFilter } from "@/components/ui/url-filter"
@@ -53,10 +53,10 @@ export function UmrahsTable() {
     provider_id: searchParams.get("provider_id"),
   }
   const { data, isLoading } = useUmrahs(page, filters)
-  
+
   const { data: clientsData, isLoading: isLoadingClients } = useClientsWithoutPagination()
   const { data: moatmrsData, isLoading: isLoadingMoatmrs } = useMoatmrsWithoutPagination()
-  
+
   const clientOptions = clientsData?.data?.map((c: any) => ({ label: c.name, value: c.id.toString() })) || []
   const providerOptions = moatmrsData?.data?.map((m: any) => ({ label: m.name, value: m.id.toString() })) || []
 
@@ -175,7 +175,7 @@ export function UmrahsTable() {
         columns={columns}
         data={data?.data || []}
         topContent={
-          <div className="flex flex-wrap items-center gap-3 w-full bg-white dark:bg-zinc-900/50 p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
+          <div className="flex flex-wrap items-center gap-3 w-full bg-white dark:bg-zinc-900/50 p-4 rounded-2xl ">
             <UrlFilter
               filterKey="client_id"
               placeholder={t("client")}
@@ -206,12 +206,12 @@ export function UmrahsTable() {
                 { label: t("canceled"), value: "canceled" }
               ]}
             />
-            
+
             <UrlDateFilter filterKey="umrah_date_from" label={t("umrah_date_from")} />
             <UrlDateFilter filterKey="umrah_date_to" label={t("umrah_date_to")} />
             <UrlDateFilter filterKey="order_date_from" label={t("order_date_from")} />
             <UrlDateFilter filterKey="order_date_to" label={t("order_date_to")} />
-            
+
             <ClearFiltersButton label={tCommon("clear_filters")} />
           </div>
         }
