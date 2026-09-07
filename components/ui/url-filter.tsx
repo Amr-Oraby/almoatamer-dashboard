@@ -25,8 +25,8 @@ export function UrlFilter({ filterKey, options, placeholder, isLoading }: UrlFil
   const pathname = usePathname()
   const searchParams = useSearchParams()
   
-  // Use undefined so Shadcn natively applies placeholder styling
-  const value = searchParams.get(filterKey) || undefined
+  // Use null so Shadcn natively applies placeholder styling while remaining a controlled component
+  const value = searchParams.get(filterKey) || null
 
   const handleChange = (newValue: string | null) => {
     const params = new URLSearchParams(searchParams.toString())
