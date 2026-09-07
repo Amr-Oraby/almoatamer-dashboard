@@ -117,14 +117,16 @@ export function UmrahsTable() {
       },
     },
     {
-      id: "isBlocked",
-      header: () => <div className="text-center">{t("block")}</div>,
+      id: "is_paid",
+      header: () => <div className="text-center">{t("payment_status")}</div>,
       size: 140,
-      cell: function Cell({ row }) {
-        const [isBlocked, setIsBlocked] = useState(!row.original.client?.is_active)
+      cell: ({ row }) => {
+        const isPaid = row.original.is_paid
         return (
           <div className="flex items-center justify-center">
-            <FakeSwitch checked={isBlocked} onChange={() => setIsBlocked(!isBlocked)} />
+            <div className={`font-bold ${isPaid ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+              {isPaid ? t("paid") : t("unpaid")}
+            </div>
           </div>
         )
       },
