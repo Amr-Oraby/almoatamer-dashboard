@@ -10,6 +10,8 @@ import { useRouter } from "@/i18n/routing"
 import { TableActionMenu } from "@/components/ui/table-action-menu"
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
+import { UrlSearchFilter } from "@/components/ui/url-search-filter"
+import { ClearFiltersButton } from "@/components/ui/clear-filters-button"
 
 import {
   AlertDialog,
@@ -44,12 +46,16 @@ export function NewsTable() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const page = Number(searchParams.get("page")) || 1
-  const { data, isLoading } = useNewsList(page)
+  const filters = {
+    keyword: searchParams.get("keyword"),
+  }
+  const { data, isLoading } = useNewsList(page, filters)
   const { mutate: deleteNews, isPending: isDeleting } = useDeleteNews()
   const [deleteId, setDeleteId] = useState<string | null>(null)
   
   // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
   const t = useTranslations("Umrahs")
+  const tCommon = useTranslations("Common")
 
   const columns = useMemo<ColumnDef<NewsItem>[]>(() => [
     {
@@ -135,6 +141,16 @@ export function NewsTable() {
       <DataTable
         columns={columns}
         data={data?.data || []}
+        topContent={
+          <div className="flex flex-wrap items-center gap-3 w-full bg-white dark:bg-zinc-900/50 p-4 rounded-2xl mb-4">
+            <UrlSearchFilter 
+              filterKey="keyword" 
+              placeholder={tCommon("search_placeholder")}
+              buttonText={tCommon("apply")}
+            />
+            <ClearFiltersButton label={tCommon("clear_filters")} />
+          </div>
+        }
         bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
       />
 

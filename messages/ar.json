@@ -85,7 +85,10 @@
     "no_results": "لا يوجد نتائج.",
     "previous": "السابق",
     "next": "التالي",
-    "clear_filters": "مسح الفلاتر"
+    "clear_filters": "مسح الفلاتر",
+    "search": "بحث",
+    "apply": "تطبيق",
+    "search_placeholder": "بحث..."
   },
   "Umrahs": {
     "name": "الاسم",

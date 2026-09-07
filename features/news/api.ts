@@ -1,8 +1,19 @@
 import { apiClient } from "@/lib/api/client";
 import { NewsResponse, SingleNewsResponse } from "./types";
 
-export async function getNewsList(page: number = 1): Promise<NewsResponse> {
-    return apiClient<NewsResponse>(`/api/news?page=${page}`);
+export async function getNewsList(page: number = 1, filters?: Record<string, string | null>): Promise<NewsResponse> {
+    const params = new URLSearchParams()
+    params.append('page', page.toString())
+    
+    if (filters) {
+        Object.entries(filters).forEach(([key, value]) => {
+            if (value !== null && value !== undefined && value !== '') {
+                params.append(key, value)
+            }
+        })
+    }
+    
+    return apiClient<NewsResponse>(`/api/news?${params.toString()}`);
 }
 
 export async function getNewsItem(id: string): Promise<SingleNewsResponse> {

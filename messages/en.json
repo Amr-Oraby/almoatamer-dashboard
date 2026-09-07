@@ -85,7 +85,10 @@
     "no_results": "No results.",
     "previous": "Previous",
     "next": "Next",
-    "clear_filters": "Clear Filters"
+    "clear_filters": "Clear Filters",
+    "search": "Search",
+    "apply": "Apply",
+    "search_placeholder": "Search..."
   },
   "Umrahs": {
     "name": "Name",
