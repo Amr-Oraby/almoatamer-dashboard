@@ -8,3 +8,7 @@ export async function getBlogsList(page: number = 1): Promise<BlogsResponse> {
 export async function getBlogItem(id: string): Promise<SingleBlogResponse> {
     return apiClient<SingleBlogResponse>(`/api/blog/${id}`);
 }
+
+export async function deleteBlog(id: string): Promise<any> {
+    return apiClient<any>(`/api/blog/${id}`, { method: 'DELETE' });
+}
