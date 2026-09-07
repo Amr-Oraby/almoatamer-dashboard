@@ -77,7 +77,8 @@
     "UI_Management": "إدارة واجهة المستخدم",
     "statistics_ui_title": "إدارة واجهة الإحصائيات",
     "statistics_ui_subtitle": "قم بتحديث وتعديل الإحصائيات والعدادات الرئيسية للموقع بسهولة.",
-    "admin_contacts_description": "قم بتحديث بيانات التواصل الخاصة بك وروابط مواقع التواصل الاجتماعي."
+    "admin_contacts_description": "قم بتحديث بيانات التواصل الخاصة بك وروابط مواقع التواصل الاجتماعي.",
+    "settings_description": "إدارة الإعدادات العامة وتسعير التطبيق والضرائب."
   },
   "Auth": {
     "login": "تسجيل الدخول",
@@ -430,5 +431,34 @@
     "update": "تحديث البيانات",
     "success_update_message": "تم التعديل بنجاح",
     "error_update_message": "حدث خطأ أثناء التعديل"
+  },
+  "Settings": {
+    "title": "إعدادات التطبيق",
+    "description": "إدارة الإعدادات العامة للتطبيق، الأسعار، والضرائب.",
+    "client_min_price": "الحد الأدنى لسعر العميل",
+    "client_max_price": "الحد الأعلى لسعر العميل",
+    "moatmer_min_price": "الحد الأدنى لسعر المعتمر",
+    "moatmer_max_price": "الحد الأعلى لسعر المعتمر",
+    "recommended_price_by_app": "السعر الموصى به من التطبيق",
+    "application_tax": "ضريبة التطبيق (%)",
+    "VAT": "ضريبة القيمة المضافة (%)",
+    "facebook": "فيسبوك",
+    "instagram": "إنستغرام",
+    "twitter": "تويتر (X)",
+    "update": "تحديث الإعدادات",
+    "success_update_message": "تم التحديث بنجاح",
+    "error_update_message": "حدث خطأ أثناء التحديث",
+    "delete_title": "هل أنت متأكد؟",
+    "delete_description": "هذا الإجراء لا يمكن التراجع عنه. سيتم حذف هذا الإعداد نهائياً.",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "success_delete_message": "تم الحذف بنجاح",
+    "error_delete_message": "حدث خطأ أثناء الحذف",
+    "create_setting": "إنشاء إعداد جديد",
+    "setting_key": "مفتاح الإعداد (Key)",
+    "setting_value": "قيمة الإعداد (Value)",
+    "add_setting": "إضافة الإعداد",
+    "create_description": "أضف إعداداً جديداً مخصصاً للتطبيق.",
+    "existing_settings": "الإعدادات الحالية"
   }
 }

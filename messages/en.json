@@ -77,7 +77,8 @@
     "UI_Management": "UI Management",
     "statistics_ui_title": "Statistics UI Management",
     "statistics_ui_subtitle": "Update your website's main statistics and counters easily.",
-    "admin_contacts_description": "Update your contact details and social media links."
+    "admin_contacts_description": "Update your contact details and social media links.",
+    "settings_description": "Manage application settings, pricing limits, and taxes."
   },
   "Auth": {
     "login": "Log in",
@@ -430,5 +431,34 @@
     "update": "Update Contacts",
     "success_update_message": "Updated successfully",
     "error_update_message": "An error occurred during update"
+  },
+  "Settings": {
+    "title": "Application Settings",
+    "description": "Manage general app settings, pricing, and taxes.",
+    "client_min_price": "Client Min Price",
+    "client_max_price": "Client Max Price",
+    "moatmer_min_price": "Moatmer Min Price",
+    "moatmer_max_price": "Moatmer Max Price",
+    "recommended_price_by_app": "Recommended Price by App",
+    "application_tax": "Application Tax (%)",
+    "VAT": "VAT (%)",
+    "facebook": "Facebook",
+    "instagram": "Instagram",
+    "twitter": "Twitter (X)",
+    "update": "Update Settings",
+    "success_update_message": "Updated successfully",
+    "error_update_message": "An error occurred during update",
+    "delete_title": "Are you sure?",
+    "delete_description": "This action cannot be undone. This will permanently delete this setting.",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "success_delete_message": "Deleted successfully",
+    "error_delete_message": "An error occurred during deletion",
+    "create_setting": "Create New Setting",
+    "setting_key": "Setting Key",
+    "setting_value": "Setting Value",
+    "add_setting": "Add Setting",
+    "create_description": "Add a new custom setting to the application.",
+    "existing_settings": "Existing Settings"
   }
 }

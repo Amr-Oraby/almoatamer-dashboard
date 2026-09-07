@@ -48,5 +48,9 @@ export async function apiClient<T>(url: string, options?: RequestInit): Promise<
         throw new Error(error.message || `Request failed with status ${response.status}`);
     }
 
-    return response.json();
+    const text = await response.text();
+    if (!text) {
+        return {} as T;
+    }
+    return JSON.parse(text);
 }

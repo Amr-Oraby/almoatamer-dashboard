@@ -7,21 +7,13 @@ import { TableSkeleton } from "@/components/ui/table-skeleton"
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
 import { TableActionMenu } from "@/components/ui/table-action-menu"
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog"
+
 
 import { useNotifications, useDeleteNotification } from "@/features/notifications/hooks"
 import { NotificationItem } from "@/features/notifications/types"
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
+import { DeleteDialog } from "@/components/ui/delete-dialog";
 
 export function NotificationsTable() {
   const searchParams = useSearchParams()
@@ -146,33 +138,18 @@ export function NotificationsTable() {
         bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
       />
 
-      <AlertDialog open={!!deleteId} onOpenChange={(open) => !open && setDeleteId(null)}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>هل أنت متأكد من الحذف؟</AlertDialogTitle>
-            <AlertDialogDescription>
-              لا يمكن التراجع عن هذا الإجراء. سيتم حذف الإشعار نهائياً.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel disabled={isDeleting}>إلغاء</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={(e) => {
-                e.preventDefault()
-                if (deleteId) {
-                  deleteNotification(deleteId, {
-                    onSuccess: () => setDeleteId(null),
-                  })
-                }
-              }}
-              disabled={isDeleting}
-              className="bg-red-500 hover:bg-red-600 text-white focus:ring-red-500"
-            >
-              {isDeleting ? "جاري الحذف..." : "تأكيد الحذف"}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <DeleteDialog
+        isOpen={!!deleteId}
+        onClose={() => setDeleteId(null)}
+        onConfirm={() => {
+          if (deleteId) {
+            deleteNotification(deleteId, {
+              onSuccess: () => setDeleteId(null),
+            });
+          }
+        }}
+        isDeleting={isDeleting}
+      />
     </div>
   )
 }

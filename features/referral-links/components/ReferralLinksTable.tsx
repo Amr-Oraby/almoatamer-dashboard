@@ -11,19 +11,11 @@ import {  Copy, ExternalLink } from "lucide-react"
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
 import { toast } from "sonner"
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog"
+
 
 import { useReferralLinks, useDeleteReferralLink } from "@/features/referral-links/hooks"
 import { ReferralLink } from "@/features/referral-links/types"
+import { DeleteDialog } from "@/components/ui/delete-dialog";
 
 export function ReferralLinksTable() {
   const searchParams = useSearchParams()
@@ -151,33 +143,18 @@ export function ReferralLinksTable() {
         bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
       />
 
-      <AlertDialog open={!!deleteId} onOpenChange={(open) => !open && setDeleteId(null)}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>هل أنت متأكد من الحذف؟</AlertDialogTitle>
-            <AlertDialogDescription>
-              لا يمكن التراجع عن هذا الإجراء. سيتم حذف الرابط نهائياً.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel disabled={isDeleting}>إلغاء</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={(e) => {
-                e.preventDefault()
-                if (deleteId) {
-                  deleteReferralLink(deleteId, {
-                    onSuccess: () => setDeleteId(null),
-                  })
-                }
-              }}
-              disabled={isDeleting}
-              className="bg-red-500 hover:bg-red-600 text-white focus:ring-red-500"
-            >
-              {isDeleting ? "جاري الحذف..." : "تأكيد الحذف"}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <DeleteDialog
+        isOpen={!!deleteId}
+        onClose={() => setDeleteId(null)}
+        onConfirm={() => {
+          if (deleteId) {
+            deleteReferralLink(deleteId, {
+              onSuccess: () => setDeleteId(null),
+            });
+          }
+        }}
+        isDeleting={isDeleting}
+      />
     </div>
   )
 }

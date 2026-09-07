@@ -1,14 +1,19 @@
 import { apiClient } from "@/lib/api/client";
-import { SettingsResponse } from "@/app/types/SettingType";
+import { SettingsResponse, SettingUpdateResponse, SettingUpdateRequest } from "./types";
 
-export const settingsApi = {
-  getSettings: () => {
+export async function getSettings(): Promise<SettingsResponse> {
     return apiClient<SettingsResponse>("/api/settings");
-  },
-  updateSettings: (payload: Record<string, any>) => {
-    return apiClient<{ status: string; message: string }>("/api/settings", {
-      method: "POST",
-      body: JSON.stringify(payload),
+}
+
+export async function updateSetting(data: Record<string, string | number>): Promise<SettingUpdateResponse> {
+    // Note: The endpoint is called "create-setting" to update a setting. 
+    // This is a mistake from the backend, but we are following their contract.
+    return apiClient<SettingUpdateResponse>("/api/create-setting", {
+        method: "POST",
+        body: JSON.stringify(data),
     });
-  },
-};
+}
+
+export async function deleteSetting(id: number): Promise<any> {
+    return apiClient<any>(`/api/setting/${id}`, { method: 'DELETE' });
+}

@@ -10,20 +10,12 @@ import { useSearchParams } from "next/navigation"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Languages, Type, AlignLeft } from "lucide-react"
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog"
+
 import { useFaqs, useDeleteFaq } from "@/features/faq/hooks"
 import { FaqItem } from "@/features/faq/types"
 import { TableActionMenu } from "@/components/ui/table-action-menu"
 import { HelpCircle } from "lucide-react"
+import { DeleteDialog } from "@/components/ui/delete-dialog";
 
 export function FaqTable() {
   const searchParams = useSearchParams()
@@ -166,33 +158,18 @@ export function FaqTable() {
         </DialogContent>
       </Dialog>
 
-      <AlertDialog open={!!deleteId} onOpenChange={(open) => !open && setDeleteId(null)}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>هل أنت متأكد من الحذف؟</AlertDialogTitle>
-            <AlertDialogDescription>
-              لا يمكن التراجع عن هذا الإجراء. سيتم حذف السؤال نهائياً.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel disabled={isDeleting}>إلغاء</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={(e) => {
-                e.preventDefault()
-                if (deleteId) {
-                  deleteFaq(deleteId, {
-                    onSuccess: () => setDeleteId(null),
-                  })
-                }
-              }}
-              disabled={isDeleting}
-              className="bg-red-500 hover:bg-red-600 text-white focus:ring-red-500"
-            >
-              {isDeleting ? "جاري الحذف..." : "تأكيد الحذف"}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <DeleteDialog
+        isOpen={!!deleteId}
+        onClose={() => setDeleteId(null)}
+        onConfirm={() => {
+          if (deleteId) {
+            deleteFaq(deleteId, {
+              onSuccess: () => setDeleteId(null),
+            });
+          }
+        }}
+        isDeleting={isDeleting}
+      />
     </div>
   )
 }
