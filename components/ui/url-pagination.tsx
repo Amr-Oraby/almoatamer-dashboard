@@ -30,12 +30,12 @@ export function UrlPagination({ pageCount }: UrlPaginationProps) {
       <button
         onClick={() => handlePageChange(Math.max(1, page - 1))}
         disabled={page === 1}
-        className="px-2 sm:px-4 py-2 text-zinc-400 font-bold hover:text-zinc-700 dark:hover:text-zinc-200 disabled:opacity-50 transition-colors text-xs sm:text-sm"
+        className="px-2 sm:px-3 py-2 text-zinc-500 font-medium hover:text-zinc-900 dark:hover:text-zinc-100 disabled:opacity-50 transition-colors text-sm"
       >
         {t("previous")}
       </button>
       
-      <div className="flex items-center gap-1 sm:gap-2">
+      <div className="flex items-center gap-1">
         {Array.from({ length: Math.min(5, pageCount) }, (_, i) => {
           // Simple window logic
           let pageNum = i + 1
@@ -50,9 +50,9 @@ export function UrlPagination({ pageCount }: UrlPaginationProps) {
               key={pageNum}
               onClick={() => handlePageChange(pageNum)}
               className={cn(
-                "w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl flex items-center justify-center font-bold text-xs sm:text-sm transition-colors shadow-sm",
+                "w-8 h-8 sm:w-9 sm:h-9 rounded-md flex items-center justify-center font-medium text-sm transition-colors",
                 isActive 
-                  ? "bg-primary text-primary-foreground" 
+                  ? "bg-primary text-primary-foreground shadow-sm" 
                   : "text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 bg-transparent"
               )}
             >
@@ -65,7 +65,7 @@ export function UrlPagination({ pageCount }: UrlPaginationProps) {
       <button
         onClick={() => handlePageChange(Math.min(pageCount, page + 1))}
         disabled={page === pageCount}
-        className="px-2 sm:px-4 py-2 text-zinc-600 font-bold hover:text-zinc-900 dark:hover:text-zinc-100 disabled:opacity-50 transition-colors text-xs sm:text-sm"
+        className="px-2 sm:px-3 py-2 text-zinc-500 font-medium hover:text-zinc-900 dark:hover:text-zinc-100 disabled:opacity-50 transition-colors text-sm"
       >
         {t("next")}
       </button>
