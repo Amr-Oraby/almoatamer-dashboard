@@ -45,7 +45,7 @@ export function UrlDateFilter({ filterKey, label }: UrlDateFilterProps) {
 
   return (
     <Popover>
-      <PopoverTrigger asChild>
+      <PopoverTrigger render={
         <Button
           variant={"outline"}
           className={cn(
@@ -56,13 +56,12 @@ export function UrlDateFilter({ filterKey, label }: UrlDateFilterProps) {
           <CalendarIcon className="mr-2 rtl:mr-0 rtl:ml-2 h-4 w-4 shrink-0" />
           <span className="truncate">{date ? format(date, "PPP") : (label || "Pick a date")}</span>
         </Button>
-      </PopoverTrigger>
+      } />
       <PopoverContent className="w-auto p-0" align="start">
         <Calendar
           mode="single"
           selected={date}
           onSelect={handleChange}
-          initialFocus
         />
       </PopoverContent>
     </Popover>
