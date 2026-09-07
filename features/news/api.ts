@@ -8,7 +8,9 @@ export async function getNewsList(page: number = 1, filters?: Record<string, str
     if (filters) {
         Object.entries(filters).forEach(([key, value]) => {
             if (value !== null && value !== undefined && value !== '') {
-                params.append(key, value)
+                // The URL uses 'keyword', but the backend API expects 'search'
+                const apiKey = key === 'keyword' ? 'search' : key;
+                params.append(apiKey, value)
             }
         })
     }
