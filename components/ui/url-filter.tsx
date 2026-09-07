@@ -57,9 +57,9 @@ export function UrlFilter({ filterKey, options, placeholder, isLoading }: UrlFil
         {isLoading && <Loader2 className="w-3.5 h-3.5 animate-spin shrink-0 text-zinc-500" />}
       </SelectTrigger>
       <SelectContent className="max-h-[250px]">
-        <SelectItem value="all">{placeholder || "All"}</SelectItem>
+        <SelectItem value="all" label={placeholder || "All"}>{placeholder || "All"}</SelectItem>
         {options.map((option) => (
-          <SelectItem key={option.value} value={option.value}>
+          <SelectItem key={option.value} value={option.value} label={option.label}>
             {option.label}
           </SelectItem>
         ))}
