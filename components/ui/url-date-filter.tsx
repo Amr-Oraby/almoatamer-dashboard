@@ -1,5 +1,17 @@
 "use client"
 
+import * as React from "react"
+import { format } from "date-fns"
+import { Calendar as CalendarIcon } from "lucide-react"
+
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Calendar } from "@/components/ui/calendar"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 import { usePathname, useRouter } from "@/i18n/routing"
 import { useSearchParams } from "next/navigation"
 
@@ -13,14 +25,14 @@ export function UrlDateFilter({ filterKey, label }: UrlDateFilterProps) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   
-  const value = searchParams.get(filterKey) || ""
+  const value = searchParams.get(filterKey)
+  const date = value ? new Date(value) : undefined
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value
+  const handleChange = (newDate: Date | undefined) => {
     const params = new URLSearchParams(searchParams.toString())
     
-    if (newValue) {
-      params.set(filterKey, newValue)
+    if (newDate) {
+      params.set(filterKey, format(newDate, "yyyy-MM-dd"))
     } else {
       params.delete(filterKey)
     }
@@ -32,14 +44,27 @@ export function UrlDateFilter({ filterKey, label }: UrlDateFilterProps) {
   }
 
   return (
-    <div className="flex flex-col gap-1.5">
-      {label && <label className="text-xs font-medium text-zinc-500 dark:text-zinc-400">{label}</label>}
-      <input
-        type="date"
-        value={value}
-        onChange={handleChange}
-        className="h-10 px-3 py-2 text-sm font-medium rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-primary/50 cursor-pointer shadow-sm transition-all hover:border-zinc-300 dark:hover:border-zinc-700 min-w-[140px]"
-      />
-    </div>
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button
+          variant={"outline"}
+          className={cn(
+            "h-10 px-4 py-2 text-sm font-medium rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 hover:bg-zinc-50 dark:hover:bg-zinc-900 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-primary/50 cursor-pointer shadow-sm transition-all hover:border-zinc-300 dark:hover:border-zinc-700 justify-start text-left min-w-[180px]",
+            !date && "text-zinc-500 dark:text-zinc-400"
+          )}
+        >
+          <CalendarIcon className="mr-2 rtl:mr-0 rtl:ml-2 h-4 w-4 shrink-0" />
+          <span className="truncate">{date ? format(date, "PPP") : (label || "Pick a date")}</span>
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0" align="start">
+        <Calendar
+          mode="single"
+          selected={date}
+          onSelect={handleChange}
+          initialFocus
+        />
+      </PopoverContent>
+    </Popover>
   )
 }
