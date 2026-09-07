@@ -2,10 +2,10 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getMoatmrs, getMoatmr, deleteMoatmr, getMoatmrsWithoutPagination } from "./api";
 import { toast } from "sonner";
 
-export function useMoatmrs(page: number = 1) {
+export function useMoatmrs(page: number = 1, filters?: Record<string, string | null>) {
     return useQuery({
-        queryKey: ["moatmrs", page],
-        queryFn: () => getMoatmrs(page),
+        queryKey: ["moatmrs", page, filters],
+        queryFn: () => getMoatmrs(page, filters),
     });
 }
 export function useMoatmrsWithoutPagination() {

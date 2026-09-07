@@ -2,10 +2,10 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getAdmins, getAdmin, deleteAdmin } from "./api";
 import { toast } from "sonner";
 
-export function useAdmins(page: number = 1) {
+export function useAdmins(page: number = 1, filters?: Record<string, string | null>) {
     return useQuery({
-        queryKey: ["admins", page],
-        queryFn: () => getAdmins(page),
+        queryKey: ["admins", page, filters],
+        queryFn: () => getAdmins(page, filters),
     });
 }
 

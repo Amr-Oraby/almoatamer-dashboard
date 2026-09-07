@@ -11,6 +11,8 @@ import { TableActionMenu } from "@/components/ui/table-action-menu"
 
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
+import { UrlSearchFilter } from "@/components/ui/url-search-filter"
+import { ClearFiltersButton } from "@/components/ui/clear-filters-button"
 
 // Fake Switch to match the UI visual exactly
 const FakeSwitch = ({ checked, onChange }: { checked: boolean, onChange: () => void }) => (
@@ -36,9 +38,13 @@ export function ClientsTable() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const page = Number(searchParams.get("page")) || 1
-  const { data, isLoading } = useClients(page)
+  const filters = {
+    keyword: searchParams.get("keyword"),
+  }
+  const { data, isLoading } = useClients(page, filters)
   // Using Umrahs translations for common table columns since they are already defined there
   const t = useTranslations("Umrahs")
+  const tCommon = useTranslations("Common")
 
   const columns = useMemo<ColumnDef<Client>[]>(() => [
     {
@@ -140,6 +146,16 @@ export function ClientsTable() {
       <DataTable
         columns={columns}
         data={data?.data || []}
+        topContent={
+          <div className="flex flex-wrap items-center gap-3 w-full bg-white dark:bg-zinc-900/50 p-4 rounded-2xl mb-4">
+            <UrlSearchFilter 
+              filterKey="keyword" 
+              placeholder={tCommon("search_placeholder")}
+              buttonText={tCommon("apply")}
+            />
+            <ClearFiltersButton label={tCommon("clear_filters")} />
+          </div>
+        }
         bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
       />
     </div>
