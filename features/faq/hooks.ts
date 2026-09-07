@@ -1,5 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
-import { getFaqs, getFaq } from "./api";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { getFaqs, getFaq, deleteFaq } from "./api";
+import { toast } from "sonner";
 
 export function useFaqs(page: number = 1) {
     return useQuery({
@@ -13,5 +14,19 @@ export function useFaq(id: string) {
         queryKey: ["faq", id],
         queryFn: () => getFaq(id),
         enabled: !!id,
+    });
+}
+
+export function useDeleteFaq() {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: deleteFaq,
+        onSuccess: (data: any) => {
+            toast.success(data?.message || "تم الحذف بنجاح");
+            queryClient.invalidateQueries({ queryKey: ["faqs"] });
+        },
+        onError: (error: any) => {
+            toast.error(error?.message || "حدث خطأ أثناء الحذف");
+        },
     });
 }

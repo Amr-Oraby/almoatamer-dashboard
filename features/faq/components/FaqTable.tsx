@@ -10,7 +10,17 @@ import { useSearchParams } from "next/navigation"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Languages, Type, AlignLeft } from "lucide-react"
 
-import { useFaqs } from "@/features/faq/hooks"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
+import { useFaqs, useDeleteFaq } from "@/features/faq/hooks"
 import { FaqItem } from "@/features/faq/types"
 import { TableActionMenu } from "@/components/ui/table-action-menu"
 import { HelpCircle } from "lucide-react"
@@ -19,6 +29,8 @@ export function FaqTable() {
   const searchParams = useSearchParams()
   const page = Number(searchParams.get("page")) || 1
   const { data, isLoading } = useFaqs(page)
+  const { mutate: deleteFaq, isPending: isDeleting } = useDeleteFaq()
+  const [deleteId, setDeleteId] = useState<string | null>(null)
   
   const [selectedFaq, setSelectedFaq] = useState<FaqItem | null>(null)
   
@@ -78,7 +90,10 @@ export function FaqTable() {
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
-            <TableActionMenu items={[{ text: t("details"), onClick: () => setSelectedFaq(row.original) }]} />
+            <TableActionMenu items={[
+              { text: t("details"), onClick: () => setSelectedFaq(row.original) },
+              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
+            ]} />
           </div>
         )
       },
@@ -150,6 +165,34 @@ export function FaqTable() {
           )}
         </DialogContent>
       </Dialog>
+
+      <AlertDialog open={!!deleteId} onOpenChange={(open) => !open && setDeleteId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>هل أنت متأكد من الحذف؟</AlertDialogTitle>
+            <AlertDialogDescription>
+              لا يمكن التراجع عن هذا الإجراء. سيتم حذف السؤال نهائياً.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isDeleting}>إلغاء</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={(e) => {
+                e.preventDefault()
+                if (deleteId) {
+                  deleteFaq(deleteId, {
+                    onSuccess: () => setDeleteId(null),
+                  })
+                }
+              }}
+              disabled={isDeleting}
+              className="bg-red-500 hover:bg-red-600 text-white focus:ring-red-500"
+            >
+              {isDeleting ? "جاري الحذف..." : "تأكيد الحذف"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }

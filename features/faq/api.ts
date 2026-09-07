@@ -8,3 +8,7 @@ export async function getFaqs(page: number = 1): Promise<FaqResponse> {
 export async function getFaq(id: string): Promise<SingleFaqResponse> {
     return apiClient<SingleFaqResponse>(`/api/faq/${id}`);
 }
+
+export async function deleteFaq(id: string): Promise<any> {
+    return apiClient<any>(`/api/faq/${id}`, { method: 'DELETE' });
+}
