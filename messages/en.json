@@ -141,7 +141,15 @@
     "gender": "Gender",
     "male": "Male",
     "female": "Female",
-    "most_rated": "Most Rated"
+    "most_rated": "Most Rated",
+    "not_found": "Client not found",
+    "no_name": "No Name",
+    "personal_info": "Personal Info",
+    "location": "Location",
+    "nationality": "Nationality",
+    "client_umrahs": "Client Umrahs",
+    "completed": "Completed",
+    "pending": "Pending"
   },
   "ThankingWords": {
     "not_found": "Thanking word not found",

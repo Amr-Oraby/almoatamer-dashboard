@@ -141,7 +141,15 @@
     "gender": "النوع",
     "male": "ذكر",
     "female": "أنثى",
-    "most_rated": "الأعلى تقييماً"
+    "most_rated": "الأعلى تقييماً",
+    "not_found": "لم يتم العثور على العميل",
+    "no_name": "بدون اسم",
+    "personal_info": "المعلومات الشخصية",
+    "location": "الموقع",
+    "nationality": "الجنسية",
+    "client_umrahs": "عمرات العميل",
+    "completed": "مكتمل",
+    "pending": "قيد الانتظار"
   },
   "ThankingWords": {
     "not_found": "كلمة الشكر غير موجودة",
