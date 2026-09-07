@@ -8,3 +8,7 @@ export async function getLanguages(page: number = 1): Promise<LanguagesResponse>
 export async function getLanguage(id: string): Promise<SingleLanguageResponse> {
     return apiClient<SingleLanguageResponse>(`/api/language/${id}`);
 }
+
+export async function deleteLanguage(id: string): Promise<any> {
+    return apiClient<any>(`/api/language/${id}`, { method: 'DELETE' });
+}

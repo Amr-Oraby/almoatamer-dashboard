@@ -10,7 +10,17 @@ import { TableActionMenu } from "@/components/ui/table-action-menu"
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
 
-import { useLanguages } from "@/features/languages/hooks"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
+import { useLanguages, useDeleteLanguage } from "@/features/languages/hooks"
 import { LanguageItem } from "@/features/languages/types"
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
@@ -22,6 +32,8 @@ export function LanguagesTable() {
   const router = useRouter()
   const page = Number(searchParams.get("page")) || 1
   const { data, isLoading } = useLanguages(page)
+  const { mutate: deleteLanguage, isPending: isDeleting } = useDeleteLanguage()
+  const [deleteId, setDeleteId] = useState<string | null>(null)
   
   const [selectedLanguage, setSelectedLanguage] = useState<LanguageItem | null>(null)
   
@@ -97,7 +109,10 @@ export function LanguagesTable() {
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
-            <TableActionMenu items={[{ text: t("details"), onClick: () => setSelectedLanguage(row.original) }]} />
+            <TableActionMenu items={[
+              { text: t("details"), onClick: () => setSelectedLanguage(row.original) },
+              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
+            ]} />
           </div>
         )
       },
@@ -186,6 +201,34 @@ export function LanguagesTable() {
           )}
         </DialogContent>
       </Dialog>
+
+      <AlertDialog open={!!deleteId} onOpenChange={(open) => !open && setDeleteId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>هل أنت متأكد من الحذف؟</AlertDialogTitle>
+            <AlertDialogDescription>
+              لا يمكن التراجع عن هذا الإجراء. سيتم حذف اللغة نهائياً.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isDeleting}>إلغاء</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={(e) => {
+                e.preventDefault()
+                if (deleteId) {
+                  deleteLanguage(deleteId, {
+                    onSuccess: () => setDeleteId(null),
+                  })
+                }
+              }}
+              disabled={isDeleting}
+              className="bg-red-500 hover:bg-red-600 text-white focus:ring-red-500"
+            >
+              {isDeleting ? "جاري الحذف..." : "تأكيد الحذف"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }
