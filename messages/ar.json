@@ -410,6 +410,7 @@
     "status_filter_placeholder": "الحالة",
     "active": "نشط",
     "inactive": "غير نشط",
-    "most_demanding": "الأكثر طلباً"
+    "most_demanding": "الأكثر طلباً",
+    "most_rated": "الأعلى تقييماً"
   }
 }

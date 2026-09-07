@@ -11,6 +11,7 @@ import { TableActionMenu } from "@/components/ui/table-action-menu"
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
 import { UrlSearchFilter } from "@/components/ui/url-search-filter"
+import { UrlFilter } from "@/components/ui/url-filter"
 import { ClearFiltersButton } from "@/components/ui/clear-filters-button"
 
 import { useMoatmrs, useDeleteMoatmr } from "@/features/moatmrs/hooks"
@@ -48,6 +49,7 @@ export function MoatmrsTable() {
   const page = Number(searchParams.get("page")) || 1
   const filters = {
     keyword: searchParams.get("keyword"),
+    status: searchParams.get("status"),
   }
   const { data, isLoading } = useMoatmrs(page, filters)
   const { mutate: deleteMoatmr, isPending: isDeleting } = useDeleteMoatmr()
@@ -56,6 +58,7 @@ export function MoatmrsTable() {
   // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
   const t = useTranslations("Umrahs")
   const tCommon = useTranslations("Common")
+  const tClients = useTranslations("Clients")
 
   const columns = useMemo<ColumnDef<Moatmr>[]>(() => [
     {
@@ -180,6 +183,16 @@ export function MoatmrsTable() {
               filterKey="keyword" 
               placeholder={tCommon("search_placeholder")}
               buttonText={tCommon("apply")}
+            />
+            <UrlFilter
+              filterKey="status"
+              placeholder={tClients("status_filter_placeholder")}
+              options={[
+                { value: "active", label: tClients("active") },
+                { value: "inactive", label: tClients("inactive") },
+                { value: "most_demanding", label: tClients("most_demanding") },
+                { value: "most_rated", label: tClients("most_rated") },
+              ]}
             />
             <ClearFiltersButton label={tCommon("clear_filters")} />
           </div>

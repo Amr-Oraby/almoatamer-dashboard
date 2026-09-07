@@ -410,6 +410,7 @@
     "status_filter_placeholder": "Status",
     "active": "Active",
     "inactive": "Inactive",
-    "most_demanding": "Most Demanding"
+    "most_demanding": "Most Demanding",
+    "most_rated": "Most Rated"
   }
 }
