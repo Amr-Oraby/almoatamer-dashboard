@@ -121,7 +121,9 @@
     "umrah_date_from": "Umrah Date From",
     "umrah_date_to": "Umrah Date To",
     "order_date_from": "Order Date From",
-    "order_date_to": "Order Date To"
+    "order_date_to": "Order Date To",
+    "client": "Client",
+    "provider": "Provider"
   },
   "Clients": {
     "not_found": "Client not found",

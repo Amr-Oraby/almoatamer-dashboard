@@ -1,11 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getMoatmrs, getMoatmr, deleteMoatmr } from "./api";
+import { getMoatmrs, getMoatmr, deleteMoatmr, getMoatmrsWithoutPagination } from "./api";
 import { toast } from "sonner";
 
 export function useMoatmrs(page: number = 1) {
     return useQuery({
         queryKey: ["moatmrs", page],
         queryFn: () => getMoatmrs(page),
+    });
+}
+export function useMoatmrsWithoutPagination() {
+    return useQuery({
+        queryKey: ["moatmrs-without-pagination"],
+        queryFn: () => getMoatmrsWithoutPagination(),
     });
 }
 

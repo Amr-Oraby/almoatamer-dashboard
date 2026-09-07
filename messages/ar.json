@@ -121,7 +121,9 @@
     "umrah_date_from": "تاريخ العمرة من",
     "umrah_date_to": "تاريخ العمرة إلى",
     "order_date_from": "تاريخ الطلب من",
-    "order_date_to": "تاريخ الطلب إلى"
+    "order_date_to": "تاريخ الطلب إلى",
+    "client": "العميل",
+    "provider": "المعتمر"
   },
   "Clients": {
     "not_found": "العميل غير موجود",

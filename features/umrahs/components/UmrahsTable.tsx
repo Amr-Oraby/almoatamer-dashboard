@@ -34,6 +34,8 @@ const FakeSwitch = ({ checked, onChange }: { checked: boolean, onChange: () => v
 
 import { useUmrahs } from "@/features/umrahs/hooks"
 import { Umrah } from "@/features/umrahs/types"
+import { useClientsWithoutPagination } from "@/features/clients/hooks"
+import { useMoatmrsWithoutPagination } from "@/features/moatmrs/hooks"
 import Image from "next/image"
 
 export function UmrahsTable() {
@@ -47,8 +49,17 @@ export function UmrahsTable() {
     umrah_date_to: searchParams.get("umrah_date_to"),
     order_date_from: searchParams.get("order_date_from"),
     order_date_to: searchParams.get("order_date_to"),
+    client_id: searchParams.get("client_id"),
+    provider_id: searchParams.get("provider_id"),
   }
   const { data, isLoading } = useUmrahs(page, filters)
+  
+  const { data: clientsData, isLoading: isLoadingClients } = useClientsWithoutPagination()
+  const { data: moatmrsData, isLoading: isLoadingMoatmrs } = useMoatmrsWithoutPagination()
+  
+  const clientOptions = clientsData?.data?.map((c: any) => ({ label: c.name, value: c.id.toString() })) || []
+  const providerOptions = moatmrsData?.data?.map((m: any) => ({ label: m.name, value: m.id.toString() })) || []
+
   const t = useTranslations("Umrahs")
   const tCommon = useTranslations("Common")
 
@@ -166,6 +177,18 @@ export function UmrahsTable() {
         topContent={
           <div className="flex flex-wrap items-end gap-4 w-full">
             <div className="flex flex-wrap items-center gap-4">
+              <UrlFilter
+                filterKey="client_id"
+                placeholder={t("client")}
+                options={clientOptions}
+                isLoading={isLoadingClients}
+              />
+              <UrlFilter
+                filterKey="provider_id"
+                placeholder={t("provider")}
+                options={providerOptions}
+                isLoading={isLoadingMoatmrs}
+              />
               <UrlFilter
                 filterKey="is_paid"
                 placeholder={t("payment_status")}
