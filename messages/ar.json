@@ -116,7 +116,11 @@
     "paid": "مدفوع",
     "unpaid": "غير مدفوع",
     "running": "جارية",
-    "canceled": "ملغاة"
+    "canceled": "ملغاة",
+    "umrah_date_from": "تاريخ العمرة من",
+    "umrah_date_to": "تاريخ العمرة إلى",
+    "order_date_from": "تاريخ الطلب من",
+    "order_date_to": "تاريخ الطلب إلى"
   },
   "Clients": {
     "not_found": "العميل غير موجود",

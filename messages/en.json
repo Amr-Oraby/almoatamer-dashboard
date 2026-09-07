@@ -116,7 +116,11 @@
     "paid": "Paid",
     "unpaid": "Unpaid",
     "running": "Running",
-    "canceled": "Canceled"
+    "canceled": "Canceled",
+    "umrah_date_from": "Umrah Date From",
+    "umrah_date_to": "Umrah Date To",
+    "order_date_from": "Order Date From",
+    "order_date_to": "Order Date To"
   },
   "Clients": {
     "not_found": "Client not found",

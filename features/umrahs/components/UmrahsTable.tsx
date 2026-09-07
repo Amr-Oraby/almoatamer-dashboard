@@ -12,6 +12,7 @@ import {  ChevronDown } from "lucide-react"
 
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { UrlFilter } from "@/components/ui/url-filter"
+import { UrlDateFilter } from "@/components/ui/url-date-filter"
 import { useSearchParams } from "next/navigation"
 
 // Fake Switch to match the UI visual exactly
@@ -38,9 +39,15 @@ export function UmrahsTable() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const page = Number(searchParams.get("page")) || 1
-  const is_paid = searchParams.get("is_paid")
-  const status = searchParams.get("status")
-  const { data, isLoading } = useUmrahs(page, is_paid, status)
+  const filters = {
+    is_paid: searchParams.get("is_paid"),
+    keyword: searchParams.get("status"),
+    umrah_date_from: searchParams.get("umrah_date_from"),
+    umrah_date_to: searchParams.get("umrah_date_to"),
+    order_date_from: searchParams.get("order_date_from"),
+    order_date_to: searchParams.get("order_date_to"),
+  }
+  const { data, isLoading } = useUmrahs(page, filters)
   const t = useTranslations("Umrahs")
 
   const columns = useMemo<ColumnDef<Umrah>[]>(() => [
@@ -155,25 +162,34 @@ export function UmrahsTable() {
         columns={columns}
         data={data?.data || []}
         topContent={
-          <div className="flex items-center gap-4">
-            <UrlFilter
-              filterKey="is_paid"
-              placeholder={t("payment_status")}
-              options={[
-                { label: t("paid"), value: "1" },
-                { label: t("unpaid"), value: "0" }
-              ]}
-            />
-            <UrlFilter
-              filterKey="status"
-              placeholder={t("status")}
-              options={[
-                { label: t("pending"), value: "pending" },
-                { label: t("running"), value: "running" },
-                { label: t("completed"), value: "done" },
-                { label: t("canceled"), value: "canceled" }
-              ]}
-            />
+          <div className="flex flex-wrap items-end gap-4 w-full">
+            <div className="flex flex-wrap items-center gap-4">
+              <UrlFilter
+                filterKey="is_paid"
+                placeholder={t("payment_status")}
+                options={[
+                  { label: t("paid"), value: "1" },
+                  { label: t("unpaid"), value: "0" }
+                ]}
+              />
+              <UrlFilter
+                filterKey="status"
+                placeholder={t("status")}
+                options={[
+                  { label: t("pending"), value: "pending" },
+                  { label: t("running"), value: "running" },
+                  { label: t("completed"), value: "done" },
+                  { label: t("canceled"), value: "canceled" }
+                ]}
+              />
+            </div>
+            
+            <div className="flex flex-wrap items-center gap-4 ml-auto rtl:mr-auto rtl:ml-0">
+              <UrlDateFilter filterKey="umrah_date_from" label={t("umrah_date_from")} />
+              <UrlDateFilter filterKey="umrah_date_to" label={t("umrah_date_to")} />
+              <UrlDateFilter filterKey="order_date_from" label={t("order_date_from")} />
+              <UrlDateFilter filterKey="order_date_to" label={t("order_date_to")} />
+            </div>
           </div>
         }
         bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
