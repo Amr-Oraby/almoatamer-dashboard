@@ -13,6 +13,7 @@ import {  ChevronDown } from "lucide-react"
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { UrlFilter } from "@/components/ui/url-filter"
 import { UrlDateFilter } from "@/components/ui/url-date-filter"
+import { ClearFiltersButton } from "@/components/ui/clear-filters-button"
 import { useSearchParams } from "next/navigation"
 
 // Fake Switch to match the UI visual exactly
@@ -49,6 +50,7 @@ export function UmrahsTable() {
   }
   const { data, isLoading } = useUmrahs(page, filters)
   const t = useTranslations("Umrahs")
+  const tCommon = useTranslations("Common")
 
   const columns = useMemo<ColumnDef<Umrah>[]>(() => [
     {
@@ -189,6 +191,8 @@ export function UmrahsTable() {
               <UrlDateFilter filterKey="umrah_date_to" label={t("umrah_date_to")} />
               <UrlDateFilter filterKey="order_date_from" label={t("order_date_from")} />
               <UrlDateFilter filterKey="order_date_to" label={t("order_date_to")} />
+              
+              <ClearFiltersButton label={tCommon("clear_filters")} />
             </div>
           </div>
         }

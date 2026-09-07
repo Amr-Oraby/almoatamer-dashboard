@@ -84,7 +84,8 @@
   "Common": {
     "no_results": "No results.",
     "previous": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "clear_filters": "Clear Filters"
   },
   "Umrahs": {
     "name": "Name",

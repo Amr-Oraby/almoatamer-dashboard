@@ -84,7 +84,8 @@
   "Common": {
     "no_results": "لا يوجد نتائج.",
     "previous": "السابق",
-    "next": "التالي"
+    "next": "التالي",
+    "clear_filters": "مسح الفلاتر"
   },
   "Umrahs": {
     "name": "الاسم",
