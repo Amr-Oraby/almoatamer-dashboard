@@ -25,7 +25,8 @@ export function UrlFilter({ filterKey, options, placeholder, isLoading }: UrlFil
   const pathname = usePathname()
   const searchParams = useSearchParams()
   
-  const value = searchParams.get(filterKey) || "all"
+  // Use undefined so Shadcn natively applies placeholder styling
+  const value = searchParams.get(filterKey) || undefined
 
   const handleChange = (newValue: string) => {
     const params = new URLSearchParams(searchParams.toString())
@@ -46,14 +47,14 @@ export function UrlFilter({ filterKey, options, placeholder, isLoading }: UrlFil
     <Select value={value} onValueChange={handleChange} disabled={isLoading}>
       <SelectTrigger
         className={cn(
-          "h-10 px-4 py-2 text-sm font-medium rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-primary/50 cursor-pointer shadow-sm transition-all hover:border-zinc-300 dark:hover:border-zinc-700 min-w-[120px] max-w-[180px]",
+          "h-10 px-4 py-2 text-sm font-medium rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-primary/50 shadow-sm transition-all hover:border-zinc-300 dark:hover:border-zinc-700 min-w-[140px] max-w-[200px] flex gap-2 w-full",
           isLoading && "opacity-50 cursor-not-allowed"
         )}
       >
-        <div className="flex items-center gap-2 truncate">
+        <span className="flex-1 text-left truncate rtl:text-right">
           <SelectValue placeholder={placeholder || "All"} />
-          {isLoading && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
-        </div>
+        </span>
+        {isLoading && <Loader2 className="w-3.5 h-3.5 animate-spin shrink-0 text-zinc-500" />}
       </SelectTrigger>
       <SelectContent className="max-h-[250px]">
         <SelectItem value="all">{placeholder || "All"}</SelectItem>
