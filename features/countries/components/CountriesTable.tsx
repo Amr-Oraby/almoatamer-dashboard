@@ -1,14 +1,24 @@
 "use client"
 
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { ColumnDef } from "@tanstack/react-table"
 import { DataTable } from "@/components/ui/data-table"
 import { TableSkeleton } from "@/components/ui/table-skeleton"
 import { useTranslations } from "next-intl"
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 
-import { useCountries } from "@/features/countries/hooks"
+import { useCountries, useDeleteCountry } from "@/features/countries/hooks"
 import { CountryItem } from "@/features/countries/types"
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
@@ -18,6 +28,8 @@ export function CountriesTable() {
   const searchParams = useSearchParams()
   const page = Number(searchParams.get("page")) || 1
   const { data, isLoading } = useCountries(page)
+  const { mutate: deleteCountry, isPending: isDeleting } = useDeleteCountry()
+  const [deleteId, setDeleteId] = useState<string | null>(null)
   
   // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
   const t = useTranslations("Umrahs")
@@ -91,7 +103,10 @@ export function CountriesTable() {
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
-            <TableActionMenu items={[{ text: t("details"), href: `/places/countries/show/${row.original.id}` }]} />
+            <TableActionMenu items={[
+              { text: t("details"), href: `/places/countries/show/${row.original.id}` },
+              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
+            ]} />
           </div>
         )
       },
@@ -109,6 +124,34 @@ export function CountriesTable() {
         data={data?.data || []}
         bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
       />
+
+      <AlertDialog open={!!deleteId} onOpenChange={(open) => !open && setDeleteId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>هل أنت متأكد من الحذف؟</AlertDialogTitle>
+            <AlertDialogDescription>
+              لا يمكن التراجع عن هذا الإجراء. سيتم حذف الدولة نهائياً.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isDeleting}>إلغاء</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={(e) => {
+                e.preventDefault()
+                if (deleteId) {
+                  deleteCountry(deleteId, {
+                    onSuccess: () => setDeleteId(null),
+                  })
+                }
+              }}
+              disabled={isDeleting}
+              className="bg-red-500 hover:bg-red-600 text-white focus:ring-red-500"
+            >
+              {isDeleting ? "جاري الحذف..." : "تأكيد الحذف"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }
