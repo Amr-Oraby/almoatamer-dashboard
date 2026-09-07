@@ -485,5 +485,24 @@
     "update": "Save Changes",
     "success": "Updated successfully",
     "error": "An error occurred"
+  },
+  "Common": {
+    "country": "Country",
+    "title": "Title",
+    "desc": "Description",
+    "code": "Code",
+    "discount_amount": "Discount Amount",
+    "usage": "Usage",
+    "validity_period": "Validity Period",
+    "marketer": "Marketer",
+    "sender_marketer": "Sender (Marketer)",
+    "phone_number": "Phone Number",
+    "codes_count": "Codes Count",
+    "city": "City",
+    "type_value": "Type / Value",
+    "total": "Total",
+    "link": "Link",
+    "copy_link": "Copy Link",
+    "open_link": "Open Link"
   }
 }

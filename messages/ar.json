@@ -485,5 +485,24 @@
     "update": "حفظ التغييرات",
     "success": "تم تحديث البيانات بنجاح",
     "error": "حدث خطأ أثناء التحديث"
+  },
+  "Common": {
+    "country": "الدولة",
+    "title": "العنوان",
+    "desc": "الوصف",
+    "code": "الكود",
+    "discount_amount": "قيمة الخصم",
+    "usage": "الاستخدام",
+    "validity_period": "فترة الصلاحية",
+    "marketer": "المسوق",
+    "sender_marketer": "المرسل (المسوق)",
+    "phone_number": "رقم الهاتف",
+    "codes_count": "عدد الأكواد",
+    "city": "المدينة",
+    "type_value": "النوع / القيمة",
+    "total": "الإجمالي",
+    "link": "الرابط",
+    "copy_link": "نسخ الرابط",
+    "open_link": "فتح الرابط"
   }
 }

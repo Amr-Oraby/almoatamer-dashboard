@@ -26,6 +26,7 @@ export function CouponsTable() {
   
   // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
   const t = useTranslations("Umrahs")
+  const tCommon = useTranslations("Common")
 
   const columns = useMemo<ColumnDef<CouponItem>[]>(() => [
     {
@@ -39,7 +40,7 @@ export function CouponsTable() {
     },
     {
       id: "code",
-      header: () => <div className="text-center">الكود</div>,
+      header: () => <div className="text-center">{tCommon("code")}</div>,
       size: 150,
       cell: ({ row }) => (
         <div className="text-center font-bold tracking-widest text-primary font-mono">
@@ -49,7 +50,7 @@ export function CouponsTable() {
     },
     {
       id: "discount",
-      header: () => <div className="text-center">قيمة الخصم</div>,
+      header: () => <div className="text-center">{tCommon("discount_amount")}</div>,
       size: 150,
       cell: ({ row }) => {
         const { type, discount_amount } = row.original
@@ -65,7 +66,7 @@ export function CouponsTable() {
     },
     {
       id: "usage",
-      header: () => <div className="text-center">الاستخدام</div>,
+      header: () => <div className="text-center">{tCommon("usage")}</div>,
       size: 150,
       cell: ({ row }) => (
         <div className="flex flex-col items-center justify-center">
@@ -83,7 +84,7 @@ export function CouponsTable() {
     },
     {
       id: "dates",
-      header: () => <div className="text-center">فترة الصلاحية</div>,
+      header: () => <div className="text-center">{tCommon("validity_period")}</div>,
       size: 200,
       cell: ({ row }) => (
         <div className="flex flex-col items-center justify-center gap-1">

@@ -27,6 +27,7 @@ export function ReferralLinksTable() {
   
   // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
   const t = useTranslations("Umrahs")
+  const tCommon = useTranslations("Common")
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
@@ -45,7 +46,7 @@ export function ReferralLinksTable() {
     },
     {
       id: "marketer",
-      header: () => <div className="text-center">المسوق</div>,
+      header: () => <div className="text-center">{tCommon("marketer")}</div>,
       size: 200,
       cell: ({ row }) => (
         <div className="font-bold text-zinc-900 dark:text-zinc-100 text-center">
@@ -55,7 +56,7 @@ export function ReferralLinksTable() {
     },
     {
       id: "city",
-      header: () => <div className="text-center">المدينة</div>,
+      header: () => <div className="text-center">{tCommon("city")}</div>,
       size: 150,
       cell: ({ row }) => (
         <div className="text-center text-sm font-medium text-zinc-700 dark:text-zinc-300">
@@ -65,7 +66,7 @@ export function ReferralLinksTable() {
     },
     {
       id: "type_value",
-      header: () => <div className="text-center">النوع / القيمة</div>,
+      header: () => <div className="text-center">{tCommon("type_value")}</div>,
       size: 150,
       cell: ({ row }) => {
         const { type, value } = row.original
@@ -81,7 +82,7 @@ export function ReferralLinksTable() {
     },
     {
       id: "total",
-      header: () => <div className="text-center">الإجمالي</div>,
+      header: () => <div className="text-center">{tCommon("total")}</div>,
       size: 120,
       cell: ({ row }) => (
         <div className="text-center text-sm font-bold text-primary">
@@ -91,7 +92,7 @@ export function ReferralLinksTable() {
     },
     {
       id: "link",
-      header: () => <div className="text-center">الرابط</div>,
+      header: () => <div className="text-center">{tCommon("link")}</div>,
       size: 100,
       cell: ({ row }) => (
         <div className="flex items-center justify-center gap-2">

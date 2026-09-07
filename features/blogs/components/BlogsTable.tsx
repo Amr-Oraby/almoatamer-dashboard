@@ -42,6 +42,7 @@ export function BlogsTable() {
   
   // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
   const t = useTranslations("Umrahs")
+  const tCommon = useTranslations("Common")
 
   const columns = useMemo<ColumnDef<BlogItem>[]>(() => [
     {
@@ -55,7 +56,7 @@ export function BlogsTable() {
     },
     {
       id: "title",
-      header: () => <div className="text-center">العنوان</div>,
+      header: () => <div className="text-center">{tCommon("title")}</div>,
       size: 300,
       cell: ({ row }) => {
         const item = row.original
@@ -80,7 +81,7 @@ export function BlogsTable() {
     },
     {
       id: "description",
-      header: () => <div className="text-center">الوصف</div>,
+      header: () => <div className="text-center">{tCommon("desc")}</div>,
       size: 300,
       cell: ({ row }) => (
         <div className="text-center text-sm text-zinc-600 dark:text-zinc-400 truncate max-w-[300px]" title={row.original.description}>

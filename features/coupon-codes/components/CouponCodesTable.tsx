@@ -18,6 +18,7 @@ export function CouponCodesTable() {
   
   // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
   const t = useTranslations("Umrahs")
+  const tCommon = useTranslations("Common")
 
   const columns = useMemo<ColumnDef<CouponCodeGroup>[]>(() => [
     {
@@ -31,7 +32,7 @@ export function CouponCodesTable() {
     },
     {
       id: "sender_name",
-      header: () => <div className="text-center">المرسل (المسوق)</div>,
+      header: () => <div className="text-center">{tCommon("sender_marketer")}</div>,
       size: 200,
       cell: ({ row }) => (
         <div className="text-center font-bold text-zinc-900 dark:text-zinc-100">
@@ -41,7 +42,7 @@ export function CouponCodesTable() {
     },
     {
       id: "sender_phone",
-      header: () => <div className="text-center">رقم الهاتف</div>,
+      header: () => <div className="text-center">{tCommon("phone_number")}</div>,
       size: 150,
       cell: ({ row }) => (
         <div className="text-center font-medium text-zinc-600 dark:text-zinc-400" dir="ltr">
@@ -51,7 +52,7 @@ export function CouponCodesTable() {
     },
     {
       id: "codes_count",
-      header: () => <div className="text-center">عدد الأكواد</div>,
+      header: () => <div className="text-center">{tCommon("codes_count")}</div>,
       size: 150,
       cell: ({ row }) => {
         const count = row.original.sender.codes?.length || 0;

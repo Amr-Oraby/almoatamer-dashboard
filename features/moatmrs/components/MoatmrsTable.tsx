@@ -104,7 +104,7 @@ export function MoatmrsTable() {
     },
     {
       id: "country",
-      header: () => <div className="text-center">الدولة</div>,
+      header: () => <div className="text-center">{tCommon("country")}</div>,
       size: 150,
       cell: ({ row }) => {
         const country = row.original.country
@@ -119,7 +119,7 @@ export function MoatmrsTable() {
     },
     {
       id: "gender",
-      header: () => <div className="text-center">الجنس</div>,
+      header: () => <div className="text-center">{tClients("gender")}</div>,
       size: 100,
       cell: ({ row }) => {
         const gender = row.original.gender
