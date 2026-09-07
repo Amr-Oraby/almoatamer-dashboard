@@ -81,8 +81,24 @@ When implementing a "show details" page for a specific entity (e.g., `app/[local
    - Ensure fonts are readable and sized appropriately (e.g., `text-lg`, `text-2xl` for headers, `text-base` for details) and use generous spacing/padding.
    - Use a compact header with the entity's avatar/icon, name, ID, and a status badge.
    - Use responsive grids (`grid-cols-1 md:grid-cols-2`) for displaying partitioned details (like Personal Info vs Location).
-4. **Error Handling & Loading States**:
+8. **Error Handling & Loading States**:
    - Handle `isLoading` with a centered spinner (`Loader2` from `lucide-react`).
    - Handle `isError` or missing data with a clean "Not Found" message using translations.
 5. **Commit and Push**:
    - Once the page is tested for layout responsiveness, data mapping, and translations (in both `ar` and `en`), commit the changes using `git add .` and `git commit -m "feat: Add [feature] show page with details"` and push to the repository.
+
+## Delete Feature Process
+
+When implementing a delete functionality for a table item, follow this exact process:
+
+1. **Verify the Endpoint**: Get the exact endpoint name from the user. The response shape is typically: `{ "status": "success", "message": "...", "data": null }`.
+2. **API Setup (`features/[feature-name]/api.ts`)**: Add a delete function using the global `apiClient` with `{ method: 'DELETE' }`.
+3. **Hooks Creation (`features/[feature-name]/hooks.ts`)**: Create a custom hook `useDelete[Feature]` using `useMutation` from `@tanstack/react-query`.
+   - In `onSuccess`, display the backend message using `toast.success` and invalidate the relevant query key using `queryClient.invalidateQueries`.
+   - In `onError`, display the error using `toast.error`.
+4. **Component Integration (`components/[Feature]Table.tsx`)**:
+   - Add a "Delete" button (text should be translated or "حذف") to the 3 dots action menu (`TableActionMenu` or similar).
+   - Use Shadcn UI's `AlertDialog` to show a confirmation modal when the user clicks the delete button.
+   - Only trigger the mutation hook if the user confirms the action.
+5. **Commit and Push**:
+   - Once the delete functionality is fully integrated and tested, commit the changes using `git add .` and `git commit -m "feat: Add delete functionality for [feature]"` and push to the repository.

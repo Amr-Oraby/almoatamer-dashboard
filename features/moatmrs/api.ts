@@ -8,3 +8,8 @@ export async function getMoatmrs(page: number = 1): Promise<MoatmrsResponse> {
 export async function getMoatmr(id: string): Promise<SingleMoatmrResponse> {
     return apiClient<SingleMoatmrResponse>(`/api/moatmr/${id}`);
 }
+
+
+export async function deleteMoatmr(id: string): Promise<any> {
+    return apiClient<any>(`/api/delete_moatmr/${id}`, { method: 'DELETE' });
+}

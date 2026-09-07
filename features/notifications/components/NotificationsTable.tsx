@@ -1,13 +1,24 @@
 "use client"
 
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { ColumnDef } from "@tanstack/react-table"
 import { DataTable } from "@/components/ui/data-table"
 import { TableSkeleton } from "@/components/ui/table-skeleton"
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
+import { TableActionMenu } from "@/components/ui/table-action-menu"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 
-import { useNotifications } from "@/features/notifications/hooks"
+import { useNotifications, useDeleteNotification } from "@/features/notifications/hooks"
 import { NotificationItem } from "@/features/notifications/types"
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
@@ -16,6 +27,8 @@ export function NotificationsTable() {
   const searchParams = useSearchParams()
   const page = Number(searchParams.get("page")) || 1
   const { data, isLoading } = useNotifications(page)
+  const { mutate: deleteNotification, isPending: isDeleting } = useDeleteNotification()
+  const [deleteId, setDeleteId] = useState<string | null>(null)
   
   const columns = useMemo<ColumnDef<NotificationItem>[]>(() => [
     {
@@ -107,6 +120,18 @@ export function NotificationsTable() {
         </div>
       )
     },
+    {
+      id: "actions",
+      header: () => <div className="text-center">إجراءات</div>,
+      size: 100,
+      cell: ({ row }) => (
+        <div className="flex items-center justify-center">
+          <TableActionMenu items={[
+            { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
+          ]} />
+        </div>
+      )
+    },
   ], [page, data?.meta?.per_page])
 
   if (isLoading) {
@@ -120,6 +145,34 @@ export function NotificationsTable() {
         data={data?.data || []}
         bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
       />
+
+      <AlertDialog open={!!deleteId} onOpenChange={(open) => !open && setDeleteId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>هل أنت متأكد من الحذف؟</AlertDialogTitle>
+            <AlertDialogDescription>
+              لا يمكن التراجع عن هذا الإجراء. سيتم حذف الإشعار نهائياً.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isDeleting}>إلغاء</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={(e) => {
+                e.preventDefault()
+                if (deleteId) {
+                  deleteNotification(deleteId, {
+                    onSuccess: () => setDeleteId(null),
+                  })
+                }
+              }}
+              disabled={isDeleting}
+              className="bg-red-500 hover:bg-red-600 text-white focus:ring-red-500"
+            >
+              {isDeleting ? "جاري الحذف..." : "تأكيد الحذف"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }
