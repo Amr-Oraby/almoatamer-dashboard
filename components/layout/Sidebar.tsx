@@ -60,8 +60,8 @@ export function Sidebar() {
     { href: '/ui-management/why-us', icon: Lightbulb, label: t('why_us') },
     { href: '/ui-management/main-section', icon: Monitor, label: t('main_section') },
     { href: '/ui-management/footer', icon: PanelBottom, label: t('footer') },
-    { href: '/ui-management/how-to-start', icon: Rocket, label: t('how_to_start') },
     { href: '/ui-management/who-is-almuatamer', icon: UserCircle, label: t('who_is_almuatamer') },
+    { href: '/ui-management/how-to-start', icon: Rocket, label: t('how_to_start') },
     { href: '/ui-management/statistics', icon: PieChart, label: t('statistics') },
   ];
 
