@@ -63,7 +63,7 @@
     "admins_page": "المدراء",
     "contact_menu": "التواصل",
     "contact_messages_page": "رسائل التواصل",
-    "admin_contacts_page": "جهات اتصال المدراء",
+    "admin_contacts_page": "إدارة بيانات التواصل",
     "seo_page": "SEO",
     "public_pages_menu": "الصفحات العامة",
     "faq_page": "الأسئلة الشائعة",
@@ -76,7 +76,8 @@
     "financial_reports_page": "التقارير المالية",
     "UI_Management": "إدارة واجهة المستخدم",
     "statistics_ui_title": "إدارة واجهة الإحصائيات",
-    "statistics_ui_subtitle": "قم بتحديث وتعديل الإحصائيات والعدادات الرئيسية للموقع بسهولة."
+    "statistics_ui_subtitle": "قم بتحديث وتعديل الإحصائيات والعدادات الرئيسية للموقع بسهولة.",
+    "admin_contacts_description": "قم بتحديث بيانات التواصل الخاصة بك وروابط مواقع التواصل الاجتماعي."
   },
   "Auth": {
     "login": "تسجيل الدخول",
@@ -409,5 +410,25 @@
     "success_update_message": "تم التعديل بنجاح",
     "error_update_message": "حدث خطأ أثناء التعديل",
     "description": "هذه الصفحة تتيح لك إدارة إحصائيات الموقع."
+  },
+  "AdminContacts": {
+    "title": "معلومات التواصل",
+    "description": "إدارة روابط التواصل الاجتماعي وبيانات الاتصال.",
+    "phone": "رقم الجوال",
+    "gmail": "البريد الإلكتروني (جيميل)",
+    "facebook": "فيسبوك",
+    "twitter": "تويتر (X)",
+    "linkedin": "لينكد إن",
+    "instagram": "إنستغرام",
+    "behance": "بيهانس",
+    "youtube": "يوتيوب",
+    "google_play": "جوجل بلاي",
+    "app_store": "آب ستور",
+    "tiktok": "تيك توك",
+    "snapchat": "سناب شات",
+    "insta_pay": "إنستا باي",
+    "update": "تحديث البيانات",
+    "success_update_message": "تم التعديل بنجاح",
+    "error_update_message": "حدث خطأ أثناء التعديل"
   }
 }

@@ -63,7 +63,7 @@
     "admins_page": "Admins",
     "contact_menu": "Contact",
     "contact_messages_page": "Contact Messages",
-    "admin_contacts_page": "Admin Contacts",
+    "admin_contacts_page": "Admin Contacts Management",
     "seo_page": "SEO",
     "public_pages_menu": "Public Pages",
     "faq_page": "FAQ",
@@ -76,7 +76,8 @@
     "financial_reports_page": "Financial Reports",
     "UI_Management": "UI Management",
     "statistics_ui_title": "Statistics UI Management",
-    "statistics_ui_subtitle": "Update your website's main statistics and counters easily."
+    "statistics_ui_subtitle": "Update your website's main statistics and counters easily.",
+    "admin_contacts_description": "Update your contact details and social media links."
   },
   "Auth": {
     "login": "Log in",
@@ -409,5 +410,25 @@
     "success_update_message": "Updated successfully",
     "error_update_message": "An error occurred during update",
     "description": "This page allows you to manage website statistics."
+  },
+  "AdminContacts": {
+    "title": "Contact Information",
+    "description": "Manage all social links and contact details.",
+    "phone": "Phone Number",
+    "gmail": "Gmail",
+    "facebook": "Facebook",
+    "twitter": "Twitter (X)",
+    "linkedin": "LinkedIn",
+    "instagram": "Instagram",
+    "behance": "Behance",
+    "youtube": "YouTube",
+    "google_play": "Google Play",
+    "app_store": "App Store",
+    "tiktok": "TikTok",
+    "snapchat": "Snapchat",
+    "insta_pay": "Insta Pay",
+    "update": "Update Contacts",
+    "success_update_message": "Updated successfully",
+    "error_update_message": "An error occurred during update"
   }
 }
