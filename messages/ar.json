@@ -505,6 +505,8 @@
     "copy_link": "نسخ الرابط",
     "open_link": "فتح الرابط",
     "search_placeholder": "ابحث...",
-    "apply": "تطبيق"
+    "apply": "تطبيق",
+    "previous": "السابق",
+    "next": "التالي"
   }
 }

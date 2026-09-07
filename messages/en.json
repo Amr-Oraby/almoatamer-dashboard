@@ -505,6 +505,8 @@
     "copy_link": "Copy Link",
     "open_link": "Open Link",
     "search_placeholder": "Search...",
-    "apply": "Apply"
+    "apply": "Apply",
+    "previous": "Previous",
+    "next": "Next"
   }
 }
