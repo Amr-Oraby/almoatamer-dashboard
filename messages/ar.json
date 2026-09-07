@@ -138,6 +138,9 @@
     "active": "نشط",
     "inactive": "غير نشط",
     "most_demanding": "الأكثر طلباً",
+    "gender": "النوع",
+    "male": "ذكر",
+    "female": "أنثى",
     "most_rated": "الأعلى تقييماً"
   },
   "ThankingWords": {

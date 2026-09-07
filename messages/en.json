@@ -138,6 +138,9 @@
     "active": "Active",
     "inactive": "Inactive",
     "most_demanding": "Most Demanding",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
     "most_rated": "Most Rated"
   },
   "ThankingWords": {

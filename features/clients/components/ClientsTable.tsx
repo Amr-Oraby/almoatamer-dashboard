@@ -102,13 +102,13 @@ export function ClientsTable() {
 
     {
       id: "gender",
-      header: () => <div className="text-center">النوع</div>,
+      header: () => <div className="text-center">{tClients("gender")}</div>,
       size: 100,
       cell: ({ row }) => {
         const gender = row.original.gender
         return (
           <div className="text-center font-bold text-zinc-900 dark:text-zinc-100">
-            {gender === 'male' ? 'ذكر' : gender === 'female' ? 'أنثى' : "-"}
+            {gender === 'male' ? tClients("male") : gender === 'female' ? tClients("female") : "-"}
           </div>
         )
       }
