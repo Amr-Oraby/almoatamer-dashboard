@@ -47,7 +47,7 @@ export function UrlFilter({ filterKey, options, placeholder, isLoading }: UrlFil
     <Select value={value} onValueChange={handleChange} disabled={isLoading}>
       <SelectTrigger
         className={cn(
-          "!h-10 !px-4 py-2 text-sm font-medium !rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-primary/50 shadow-sm transition-all hover:border-zinc-300 dark:hover:border-zinc-700 min-w-[140px] max-w-[200px] flex gap-2 w-full",
+          "!h-10 !px-4 py-2 text-sm font-medium !rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-primary/50 shadow-sm transition-all hover:border-zinc-300 dark:hover:border-zinc-700 w-[calc(50%-6px)] sm:w-auto min-w-[120px] max-w-full sm:max-w-[200px] flex gap-2",
           isLoading && "opacity-50 cursor-not-allowed"
         )}
       >

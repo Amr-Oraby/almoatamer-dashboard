@@ -49,7 +49,7 @@ export function UrlDateFilter({ filterKey, label }: UrlDateFilterProps) {
         <Button
           variant={"outline"}
           className={cn(
-            "h-10 px-4 py-2 text-sm font-medium rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 hover:bg-zinc-50 dark:hover:bg-zinc-900 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-primary/50 cursor-pointer shadow-sm transition-all hover:border-zinc-300 dark:hover:border-zinc-700 justify-start text-left min-w-[180px]",
+            "h-10 px-4 py-2 text-sm font-medium rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 hover:bg-zinc-50 dark:hover:bg-zinc-900 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-primary/50 cursor-pointer shadow-sm transition-all hover:border-zinc-300 dark:hover:border-zinc-700 justify-start text-left w-[calc(50%-6px)] sm:w-auto min-w-[120px] max-w-full sm:max-w-[200px] flex",
             !date && "text-zinc-500 dark:text-zinc-400"
           )}
         >
