@@ -175,48 +175,44 @@ export function UmrahsTable() {
         columns={columns}
         data={data?.data || []}
         topContent={
-          <div className="flex flex-wrap items-end gap-4 w-full">
-            <div className="flex flex-wrap items-center gap-4">
-              <UrlFilter
-                filterKey="client_id"
-                placeholder={t("client")}
-                options={clientOptions}
-                isLoading={isLoadingClients}
-              />
-              <UrlFilter
-                filterKey="provider_id"
-                placeholder={t("provider")}
-                options={providerOptions}
-                isLoading={isLoadingMoatmrs}
-              />
-              <UrlFilter
-                filterKey="is_paid"
-                placeholder={t("payment_status")}
-                options={[
-                  { label: t("paid"), value: "1" },
-                  { label: t("unpaid"), value: "0" }
-                ]}
-              />
-              <UrlFilter
-                filterKey="status"
-                placeholder={t("status")}
-                options={[
-                  { label: t("pending"), value: "pending" },
-                  { label: t("running"), value: "running" },
-                  { label: t("completed"), value: "done" },
-                  { label: t("canceled"), value: "canceled" }
-                ]}
-              />
-            </div>
+          <div className="flex flex-wrap items-center gap-3 w-full bg-white dark:bg-zinc-900/50 p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
+            <UrlFilter
+              filterKey="client_id"
+              placeholder={t("client")}
+              options={clientOptions}
+              isLoading={isLoadingClients}
+            />
+            <UrlFilter
+              filterKey="provider_id"
+              placeholder={t("provider")}
+              options={providerOptions}
+              isLoading={isLoadingMoatmrs}
+            />
+            <UrlFilter
+              filterKey="is_paid"
+              placeholder={t("payment_status")}
+              options={[
+                { label: t("paid"), value: "1" },
+                { label: t("unpaid"), value: "0" }
+              ]}
+            />
+            <UrlFilter
+              filterKey="status"
+              placeholder={t("status")}
+              options={[
+                { label: t("pending"), value: "pending" },
+                { label: t("running"), value: "running" },
+                { label: t("completed"), value: "done" },
+                { label: t("canceled"), value: "canceled" }
+              ]}
+            />
             
-            <div className="flex flex-wrap items-center gap-4 ml-auto rtl:mr-auto rtl:ml-0">
-              <UrlDateFilter filterKey="umrah_date_from" label={t("umrah_date_from")} />
-              <UrlDateFilter filterKey="umrah_date_to" label={t("umrah_date_to")} />
-              <UrlDateFilter filterKey="order_date_from" label={t("order_date_from")} />
-              <UrlDateFilter filterKey="order_date_to" label={t("order_date_to")} />
-              
-              <ClearFiltersButton label={tCommon("clear_filters")} />
-            </div>
+            <UrlDateFilter filterKey="umrah_date_from" label={t("umrah_date_from")} />
+            <UrlDateFilter filterKey="umrah_date_to" label={t("umrah_date_to")} />
+            <UrlDateFilter filterKey="order_date_from" label={t("order_date_from")} />
+            <UrlDateFilter filterKey="order_date_to" label={t("order_date_to")} />
+            
+            <ClearFiltersButton label={tCommon("clear_filters")} />
           </div>
         }
         bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
