@@ -20,10 +20,10 @@ export function ClearFiltersButton({ label }: ClearFiltersButtonProps) {
   if (!hasFilters) return null
 
   return (
-    <Button 
-      variant="destructive" 
+    <Button
+      variant="destructive"
       onClick={() => router.push(pathname)}
-      className="h-10 px-4 rounded-xl font-medium shrink-0 shadow-sm"
+      className="cursor-pointer h-10 px-4 rounded-xl font-medium shrink-0 shadow-sm"
     >
       <X className="mr-2 rtl:mr-0 rtl:ml-2 h-4 w-4 shrink-0" />
       <span className="truncate">{label}</span>

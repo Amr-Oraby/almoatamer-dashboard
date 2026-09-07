@@ -24,22 +24,22 @@ export function UrlFilter({ filterKey, options, placeholder, isLoading }: UrlFil
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  
+
   // Use null so Shadcn natively applies placeholder styling while remaining a controlled component
   const value = searchParams.get(filterKey) || null
 
   const handleChange = (newValue: string | null) => {
     const params = new URLSearchParams(searchParams.toString())
-    
+
     if (newValue && newValue !== "all") {
       params.set(filterKey, newValue)
     } else {
       params.delete(filterKey)
     }
-    
+
     // Reset to page 1 on filter change
     params.delete("page")
-    
+
     router.push(`${pathname}?${params.toString()}`, { scroll: false })
   }
 
@@ -47,12 +47,14 @@ export function UrlFilter({ filterKey, options, placeholder, isLoading }: UrlFil
     <Select value={value} onValueChange={handleChange} disabled={isLoading}>
       <SelectTrigger
         className={cn(
-          "!h-10 !px-4 py-2 text-sm font-medium !rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-primary/50 shadow-sm transition-all hover:border-zinc-300 dark:hover:border-zinc-700 flex-1 min-w-[130px] sm:flex-none max-w-full sm:max-w-[200px] flex gap-2",
+          "cursor-pointer !h-10 !px-4 py-2 text-sm font-medium !rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-primary/50 shadow-sm transition-all hover:border-zinc-300 dark:hover:border-zinc-700 flex-1 min-w-[130px] sm:flex-none max-w-full sm:max-w-[200px] flex gap-2",
           isLoading && "opacity-50 cursor-not-allowed"
         )}
       >
         <span className="flex-1 text-left truncate rtl:text-right">
-          <SelectValue placeholder={placeholder || "All"} />
+          <SelectValue placeholder={placeholder || "All"}>
+            {value ? options.find(o => o.value === value)?.label : undefined}
+          </SelectValue>
         </span>
         {isLoading && <Loader2 className="w-3.5 h-3.5 animate-spin shrink-0 text-zinc-500" />}
       </SelectTrigger>
