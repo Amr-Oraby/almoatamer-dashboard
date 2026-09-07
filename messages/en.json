@@ -503,6 +503,8 @@
     "total": "Total",
     "link": "Link",
     "copy_link": "Copy Link",
-    "open_link": "Open Link"
+    "open_link": "Open Link",
+    "search_placeholder": "Search...",
+    "apply": "Apply"
   }
 }
