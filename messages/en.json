@@ -460,5 +460,19 @@
     "add_setting": "Add Setting",
     "create_description": "Add a new custom setting to the application.",
     "existing_settings": "Existing Settings"
+  },
+  "HowToStart": {
+    "main_info": "Main Information",
+    "english_title": "Title (English)",
+    "arabic_title": "Title (Arabic)",
+    "english_desc": "Description (English)",
+    "arabic_desc": "Description (Arabic)",
+    "steps": "Steps",
+    "step": "Step",
+    "add_step": "Add Step",
+    "remove_step": "Remove Step",
+    "update": "Save Changes",
+    "success": "Updated successfully",
+    "error": "An error occurred"
   }
 }
