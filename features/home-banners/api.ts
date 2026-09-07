@@ -8,3 +8,7 @@ export async function getHomeBanners(page: number = 1): Promise<HomeBannersRespo
 export async function getHomeBanner(id: string): Promise<SingleHomeBannerResponse> {
     return apiClient<SingleHomeBannerResponse>(`/api/home-banner/${id}`);
 }
+
+export async function deleteHomeBanner(id: string): Promise<any> {
+    return apiClient<any>(`/api/home-banner/${id}`, { method: 'DELETE' });
+}
