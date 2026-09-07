@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { ColumnDef } from "@tanstack/react-table"
 import { DataTable } from "@/components/ui/data-table"
 import { TableSkeleton } from "@/components/ui/table-skeleton"
@@ -11,12 +11,15 @@ import { useSearchParams } from "next/navigation"
 import { useClientMessages } from "@/features/client-messages/hooks"
 import { ClientMessageItem } from "@/features/client-messages/types"
 import { TableActionMenu } from "@/components/ui/table-action-menu"
-import { Mail, Phone, Calendar } from "lucide-react"
+import { Mail, Phone, Calendar, MessageSquare } from "lucide-react"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 
 export function ClientMessagesTable() {
   const searchParams = useSearchParams()
   const page = Number(searchParams.get("page")) || 1
   const { data, isLoading } = useClientMessages(page)
+  
+  const [selectedMessage, setSelectedMessage] = useState<ClientMessageItem | null>(null)
   
   // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
   const t = useTranslations("Umrahs")
@@ -98,7 +101,7 @@ export function ClientMessagesTable() {
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
-            <TableActionMenu items={[{ text: t("details"), href: `/contact/messages/show/${row.original.id}` }]} />
+            <TableActionMenu items={[{ text: t("details"), onClick: () => setSelectedMessage(row.original) }]} />
           </div>
         )
       },
@@ -116,6 +119,68 @@ export function ClientMessagesTable() {
         data={data?.data || []}
         bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
       />
+
+      <Dialog open={!!selectedMessage} onOpenChange={(open) => !open && setSelectedMessage(null)}>
+        <DialogContent className="w-[95vw] sm:max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-black text-zinc-900 dark:text-zinc-100 flex items-center gap-2 mb-4">
+              <MessageSquare className="w-6 h-6 text-primary" />
+              تفاصيل الرسالة
+            </DialogTitle>
+          </DialogHeader>
+
+          {selectedMessage && (
+            <div className="bg-zinc-50 dark:bg-zinc-900/50 p-6 rounded-xl border border-zinc-100 dark:border-zinc-800 flex flex-col gap-6">
+              
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-sm font-bold text-zinc-500 uppercase tracking-wider mb-1">اسم المرسل</h3>
+                  <p className="text-lg font-black text-zinc-900 dark:text-zinc-100">
+                    {selectedMessage.user_info?.name || selectedMessage.name}
+                  </p>
+                </div>
+                <div className="flex items-center gap-1 text-zinc-500 text-xs font-mono" dir="ltr">
+                  <Calendar className="w-3.5 h-3.5" />
+                  <span>{selectedMessage.created_at}</span>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex flex-col gap-1.5 p-4 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-100 dark:border-zinc-800">
+                  <span className="text-xs font-bold text-zinc-400 flex items-center gap-1.5">
+                    <Mail className="w-3.5 h-3.5" />
+                    البريد الإلكتروني
+                  </span>
+                  <span className="text-sm font-mono text-zinc-700 dark:text-zinc-300">
+                    {selectedMessage.user_info?.email || selectedMessage.email}
+                  </span>
+                </div>
+                
+                <div className="flex flex-col gap-1.5 p-4 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-100 dark:border-zinc-800">
+                  <span className="text-xs font-bold text-zinc-400 flex items-center gap-1.5">
+                    <Phone className="w-3.5 h-3.5" />
+                    رقم الهاتف
+                  </span>
+                  <span className="text-sm font-mono text-zinc-700 dark:text-zinc-300" dir="ltr">
+                    +{selectedMessage.user_info?.phone_code || selectedMessage.phone_code} {selectedMessage.user_info?.phone || selectedMessage.phone}
+                  </span>
+                </div>
+              </div>
+              
+              <div className="flex flex-col gap-2 p-4 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-100 dark:border-zinc-800">
+                  <span className="text-xs font-bold text-zinc-400 flex items-center gap-1.5">
+                    <MessageSquare className="w-3.5 h-3.5" />
+                    محتوى الرسالة
+                  </span>
+                  <p className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed whitespace-pre-wrap">
+                    {selectedMessage.message_text}
+                  </p>
+              </div>
+
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }

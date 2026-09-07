@@ -6,5 +6,5 @@ export async function getUsersChats(page: number = 1): Promise<UsersChatsRespons
 }
 
 export async function getUsersChat(id: string): Promise<SingleUserChatResponse> {
-    return apiClient<SingleUserChatResponse>(`/api/users-chats/${id}`);
+    return apiClient<SingleUserChatResponse>(`/api/users-chat/${id}`);
 }

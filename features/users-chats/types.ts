@@ -47,8 +47,32 @@ export interface UsersChatsResponse {
     message: string;
 }
 
+export interface ChatMessage {
+    id: number;
+    sender: ChatParticipant;
+    receiver: ChatParticipant;
+    message_type: string;
+    message: string;
+    read_at: string | null;
+    type: string;
+    is_read: boolean;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface ChatDetails {
+    id: number;
+    umrah_id: number;
+    sender: ChatParticipant;
+    receiver: ChatParticipant;
+    messages: ChatMessage[];
+    ago_time: string;
+    created_at: string;
+    updated_at: string;
+}
+
 export interface SingleUserChatResponse {
-    data: UserChatItem;
+    data: ChatDetails;
     status: string;
     message: string;
 }
