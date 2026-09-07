@@ -8,3 +8,7 @@ export async function getRoles(page: number = 1): Promise<RolesResponse> {
 export async function getRole(id: string): Promise<SingleRoleResponse> {
     return apiClient<SingleRoleResponse>(`/api/roles/${id}`);
 }
+
+export async function deleteRole(id: string): Promise<any> {
+    return apiClient<any>(`/api/roles/${id}`, { method: 'DELETE' });
+}
