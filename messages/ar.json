@@ -405,5 +405,11 @@
     "terms": "الشروط والأحكام",
     "policies": "سياسة الخصوصية",
     "landing_page": "صفحة الهبوط"
+  },
+  "Clients": {
+    "status_filter_placeholder": "الحالة",
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "most_demanding": "الأكثر طلباً"
   }
 }

@@ -405,5 +405,11 @@
     "terms": "Terms & Conditions",
     "policies": "Privacy Policies",
     "landing_page": "Landing Page"
+  },
+  "Clients": {
+    "status_filter_placeholder": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "most_demanding": "Most Demanding"
   }
 }

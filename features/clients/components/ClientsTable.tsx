@@ -12,6 +12,7 @@ import { TableActionMenu } from "@/components/ui/table-action-menu"
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
 import { UrlSearchFilter } from "@/components/ui/url-search-filter"
+import { UrlFilter } from "@/components/ui/url-filter"
 import { ClearFiltersButton } from "@/components/ui/clear-filters-button"
 
 // Fake Switch to match the UI visual exactly
@@ -40,11 +41,13 @@ export function ClientsTable() {
   const page = Number(searchParams.get("page")) || 1
   const filters = {
     keyword: searchParams.get("keyword"),
+    status: searchParams.get("status"),
   }
   const { data, isLoading } = useClients(page, filters)
   // Using Umrahs translations for common table columns since they are already defined there
   const t = useTranslations("Umrahs")
   const tCommon = useTranslations("Common")
+  const tClients = useTranslations("Clients")
 
   const columns = useMemo<ColumnDef<Client>[]>(() => [
     {
@@ -152,6 +155,15 @@ export function ClientsTable() {
               filterKey="keyword" 
               placeholder={tCommon("search_placeholder")}
               buttonText={tCommon("apply")}
+            />
+            <UrlFilter
+              filterKey="status"
+              placeholder={tClients("status_filter_placeholder")}
+              options={[
+                { value: "active", label: tClients("active") },
+                { value: "inactive", label: tClients("inactive") },
+                { value: "most_demanding", label: tClients("most_demanding") },
+              ]}
             />
             <ClearFiltersButton label={tCommon("clear_filters")} />
           </div>
