@@ -110,7 +110,11 @@
     "discount": "الخصم",
     "total": "الإجمالي",
     "completed_step": "مكتمل",
-    "pending_step": "قيد الانتظار"
+    "pending_step": "قيد الانتظار",
+    "all": "الكل",
+    "payment_status": "حالة الدفع",
+    "paid": "مدفوع",
+    "unpaid": "غير مدفوع"
   },
   "Clients": {
     "not_found": "العميل غير موجود",

@@ -11,6 +11,7 @@ import { TableActionMenu } from "@/components/ui/table-action-menu"
 import {  ChevronDown } from "lucide-react"
 
 import { UrlPagination } from "@/components/ui/url-pagination"
+import { UrlFilter } from "@/components/ui/url-filter"
 import { useSearchParams } from "next/navigation"
 
 // Fake Switch to match the UI visual exactly
@@ -37,7 +38,8 @@ export function UmrahsTable() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const page = Number(searchParams.get("page")) || 1
-  const { data, isLoading } = useUmrahs(page)
+  const is_paid = searchParams.get("is_paid")
+  const { data, isLoading } = useUmrahs(page, is_paid)
   const t = useTranslations("Umrahs")
 
   const columns = useMemo<ColumnDef<Umrah>[]>(() => [
@@ -149,6 +151,16 @@ export function UmrahsTable() {
       <DataTable
         columns={columns}
         data={data?.data || []}
+        topContent={
+          <UrlFilter
+            filterKey="is_paid"
+            placeholder={t("payment_status")}
+            options={[
+              { label: t("paid"), value: "1" },
+              { label: t("unpaid"), value: "0" }
+            ]}
+          />
+        }
         bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
       />
     </div>

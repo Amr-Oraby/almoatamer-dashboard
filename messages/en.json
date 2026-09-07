@@ -110,7 +110,11 @@
     "discount": "Discount",
     "total": "Total",
     "completed_step": "Completed",
-    "pending_step": "Pending"
+    "pending_step": "Pending",
+    "all": "All",
+    "payment_status": "Payment Status",
+    "paid": "Paid",
+    "unpaid": "Unpaid"
   },
   "Clients": {
     "not_found": "Client not found",

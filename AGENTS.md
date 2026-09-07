@@ -102,3 +102,20 @@ When implementing a delete functionality for a table item, follow this exact pro
    - Only trigger the mutation hook if the user confirms the action.
 5. **Commit and Push**:
    - Once the delete functionality is fully integrated and tested, commit the changes using `git add .` and `git commit -m "feat: Add delete functionality for [feature]"` and push to the repository.
+
+## Filter Feature Process
+
+When implementing a filtering functionality (e.g., filtering a table by status, type, etc.), follow this exact process:
+
+1. **Verify the Requirement**: Identify the filter key (e.g., `is_paid`) and the allowed values (e.g., `0`, `1`) that the backend API expects.
+2. **Translation Setup (CRITICAL)**:
+   - Add translation keys for the filter placeholder (e.g., `payment_status`) and the options (e.g., `paid`, `unpaid`) in both `messages/ar.json` and `messages/en.json`.
+3. **API and Hook Setup (`features/[feature-name]/api.ts` & `hooks.ts`)**:
+   - Update the `get[Feature]s` API function to accept the new filter parameter and append it to the URL (using `URLSearchParams`).
+   - Update the `use[Feature]s` hook to accept the filter parameter. Pass it to the API function and include it in the `queryKey` array so React Query refetches when the filter changes.
+4. **Component Integration (`components/[Feature]Table.tsx`)**:
+   - Read the filter value from the URL using `useSearchParams().get('filter_key')`.
+   - Pass the value to the `use[Feature]s` hook.
+   - Add the `<UrlFilter>` component to the `topContent` prop of the `<DataTable>` component, passing the correct `filterKey`, `placeholder`, and `options`.
+5. **Commit and Push**:
+   - Once the feature is finished and everything is correct, commit the changes using `git add .` and `git commit -m "feat: Add filter functionality for [feature]"` and push to the repository.
