@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import { usePathname, useRouter } from "@/i18n/routing"
 import { useSearchParams } from "next/navigation"
 import { Search } from "lucide-react"
-import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
 interface UrlSearchFilterProps {
@@ -57,12 +56,12 @@ export function UrlSearchFilter({
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
           <Search className="h-4 w-4 text-zinc-500" />
         </div>
-        <Input
+        <input
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
-          className="h-10 ps-10 rounded-xl border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 focus-visible:ring-primary/50 shadow-sm"
+          className="flex h-10 w-full bg-transparent px-3 py-2 text-base file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 md:text-sm ps-10 rounded-xl border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:ring-2 focus:ring-primary/50 shadow-sm transition-colors"
         />
       </div>
       <Button 
