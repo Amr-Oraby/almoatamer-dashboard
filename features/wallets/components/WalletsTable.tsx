@@ -9,6 +9,8 @@ import { useRouter } from "@/i18n/routing"
 import { TableActionMenu } from "@/components/ui/table-action-menu"
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
+import { UrlSearchFilter } from "@/components/ui/url-search-filter"
+import { ClearFiltersButton } from "@/components/ui/clear-filters-button"
 
 import { useWallets } from "@/features/wallets/hooks"
 import { WalletItem } from "@/features/wallets/types"
@@ -18,10 +20,14 @@ export function WalletsTable() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const page = Number(searchParams.get("page")) || 1
-  const { data, isLoading } = useWallets(page)
+  const filters = {
+    keyword: searchParams.get("keyword"),
+  }
+  const { data, isLoading } = useWallets(page, filters)
   
   // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
   const t = useTranslations("Umrahs")
+  const tCommon = useTranslations("Common")
 
   const columns = useMemo<ColumnDef<WalletItem>[]>(() => [
     {
@@ -108,6 +114,16 @@ export function WalletsTable() {
       <DataTable
         columns={columns}
         data={data?.data || []}
+        topContent={
+          <div className="flex flex-wrap items-center gap-3 w-full bg-white dark:bg-zinc-900/50 p-4 rounded-2xl mb-4">
+            <UrlSearchFilter 
+              filterKey="keyword" 
+              placeholder={tCommon("search_placeholder")}
+              buttonText={tCommon("apply")}
+            />
+            <ClearFiltersButton label={tCommon("clear_filters")} />
+          </div>
+        }
         bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
       />
     </div>
