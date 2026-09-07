@@ -39,7 +39,8 @@ export function UmrahsTable() {
   const router = useRouter()
   const page = Number(searchParams.get("page")) || 1
   const is_paid = searchParams.get("is_paid")
-  const { data, isLoading } = useUmrahs(page, is_paid)
+  const status = searchParams.get("status")
+  const { data, isLoading } = useUmrahs(page, is_paid, status)
   const t = useTranslations("Umrahs")
 
   const columns = useMemo<ColumnDef<Umrah>[]>(() => [
@@ -152,14 +153,26 @@ export function UmrahsTable() {
         columns={columns}
         data={data?.data || []}
         topContent={
-          <UrlFilter
-            filterKey="is_paid"
-            placeholder={t("payment_status")}
-            options={[
-              { label: t("paid"), value: "1" },
-              { label: t("unpaid"), value: "0" }
-            ]}
-          />
+          <div className="flex items-center gap-4">
+            <UrlFilter
+              filterKey="is_paid"
+              placeholder={t("payment_status")}
+              options={[
+                { label: t("paid"), value: "1" },
+                { label: t("unpaid"), value: "0" }
+              ]}
+            />
+            <UrlFilter
+              filterKey="status"
+              placeholder={t("status")}
+              options={[
+                { label: t("pending"), value: "pending" },
+                { label: t("running"), value: "running" },
+                { label: t("completed"), value: "done" },
+                { label: t("canceled"), value: "canceled" }
+              ]}
+            />
+          </div>
         }
         bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
       />

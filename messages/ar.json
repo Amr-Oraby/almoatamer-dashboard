@@ -114,7 +114,9 @@
     "all": "الكل",
     "payment_status": "حالة الدفع",
     "paid": "مدفوع",
-    "unpaid": "غير مدفوع"
+    "unpaid": "غير مدفوع",
+    "running": "جارية",
+    "canceled": "ملغاة"
   },
   "Clients": {
     "not_found": "العميل غير موجود",

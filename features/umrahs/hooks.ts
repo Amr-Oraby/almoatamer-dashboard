@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { getUmrahs, getUmrah } from "./api";
 import { UmrahsResponse, SingleUmrahResponse } from "./types";
 
-export function useUmrahs(page: number, is_paid?: string | null) {
+export function useUmrahs(page: number, is_paid?: string | null, keyword?: string | null) {
   return useQuery<UmrahsResponse>({
-    queryKey: ["umrahs", page, is_paid],
-    queryFn: () => getUmrahs(page, is_paid),
+    queryKey: ["umrahs", page, is_paid, keyword],
+    queryFn: () => getUmrahs(page, is_paid, keyword),
   });
 }
 
