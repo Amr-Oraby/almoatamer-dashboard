@@ -51,8 +51,8 @@ export function UrlSearchFilter({
   }
 
   return (
-    <div className="flex-1 min-w-[200px] max-w-full sm:max-w-[300px] flex gap-2">
-      <div className="relative flex-1">
+    <div className="flex-1 min-w-[200px] max-w-full sm:max-w-[300px]">
+      <div className="relative w-full">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
           <Search className="h-4 w-4 text-zinc-500" />
         </div>
@@ -61,16 +61,17 @@ export function UrlSearchFilter({
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
-          className="flex h-10 w-full bg-transparent px-3 py-2 text-base file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 md:text-sm ps-10 rounded-xl border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:ring-2 focus:ring-primary/50 shadow-sm transition-colors"
+          className="flex h-10 w-full bg-transparent py-2 text-base file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 md:text-sm ps-10 pe-16 rounded-md border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:ring-2 focus:ring-primary/50 shadow-sm transition-colors"
         />
+        <Button 
+          onClick={handleApply}
+          variant="ghost"
+          size="sm"
+          className="absolute inset-y-1 end-1 h-8 px-3 font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+        >
+          {buttonText}
+        </Button>
       </div>
-      <Button 
-        onClick={handleApply}
-        variant="secondary"
-        className="h-10 rounded-xl px-4 shadow-sm"
-      >
-        {buttonText}
-      </Button>
     </div>
   )
 }
