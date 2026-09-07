@@ -8,3 +8,7 @@ export async function getReferralLinks(page: number = 1): Promise<ReferralLinksR
 export async function getReferralLink(id: string): Promise<SingleReferralLinkResponse> {
     return apiClient<SingleReferralLinkResponse>(`/api/referral-link/${id}`);
 }
+
+export async function deleteReferralLink(id: string): Promise<any> {
+    return apiClient<any>(`/api/delete-referral-link/${id}`, { method: 'DELETE' });
+}

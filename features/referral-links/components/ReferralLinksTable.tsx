@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { ColumnDef } from "@tanstack/react-table"
 import { DataTable } from "@/components/ui/data-table"
 import { TableSkeleton } from "@/components/ui/table-skeleton"
@@ -11,8 +11,18 @@ import {  Copy, ExternalLink } from "lucide-react"
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
 import { toast } from "sonner"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 
-import { useReferralLinks } from "@/features/referral-links/hooks"
+import { useReferralLinks, useDeleteReferralLink } from "@/features/referral-links/hooks"
 import { ReferralLink } from "@/features/referral-links/types"
 
 export function ReferralLinksTable() {
@@ -20,6 +30,8 @@ export function ReferralLinksTable() {
   const router = useRouter()
   const page = Number(searchParams.get("page")) || 1
   const { data, isLoading } = useReferralLinks(page)
+  const { mutate: deleteReferralLink, isPending: isDeleting } = useDeleteReferralLink()
+  const [deleteId, setDeleteId] = useState<string | null>(null)
   
   // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
   const t = useTranslations("Umrahs")
@@ -117,7 +129,10 @@ export function ReferralLinksTable() {
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
-            <TableActionMenu items={[{ text: t("details"), href: `/referral-links/show/${row.original.id}` }]} />
+            <TableActionMenu items={[
+              { text: t("details"), href: `/referral-links/show/${row.original.id}` },
+              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
+            ]} />
           </div>
         )
       },
@@ -135,6 +150,34 @@ export function ReferralLinksTable() {
         data={data?.data || []}
         bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
       />
+
+      <AlertDialog open={!!deleteId} onOpenChange={(open) => !open && setDeleteId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>هل أنت متأكد من الحذف؟</AlertDialogTitle>
+            <AlertDialogDescription>
+              لا يمكن التراجع عن هذا الإجراء. سيتم حذف الرابط نهائياً.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isDeleting}>إلغاء</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={(e) => {
+                e.preventDefault()
+                if (deleteId) {
+                  deleteReferralLink(deleteId, {
+                    onSuccess: () => setDeleteId(null),
+                  })
+                }
+              }}
+              disabled={isDeleting}
+              className="bg-red-500 hover:bg-red-600 text-white focus:ring-red-500"
+            >
+              {isDeleting ? "جاري الحذف..." : "تأكيد الحذف"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }
