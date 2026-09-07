@@ -2,10 +2,10 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getSeos, getSeo, deleteSeo } from "./api";
 import { toast } from "sonner";
 
-export function useSeos(page: number = 1) {
+export function useSeos(page: number = 1, filters?: Record<string, string | null>) {
     return useQuery({
-        queryKey: ["seo", page],
-        queryFn: () => getSeos(page),
+        queryKey: ["seo", page, filters],
+        queryFn: () => getSeos(page, filters),
     });
 }
 

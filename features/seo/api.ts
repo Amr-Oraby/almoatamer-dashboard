@@ -1,8 +1,19 @@
 import { apiClient } from "@/lib/api/client";
 import { SeoResponse, SingleSeoResponse } from "./types";
 
-export async function getSeos(page: number = 1): Promise<SeoResponse> {
-    return apiClient<SeoResponse>(`/api/seo?page=${page}`);
+export async function getSeos(page: number = 1, filters?: Record<string, string | null>): Promise<SeoResponse> {
+    const params = new URLSearchParams()
+    params.append('page', page.toString())
+    
+    if (filters) {
+        Object.entries(filters).forEach(([key, value]) => {
+            if (value !== null && value !== undefined && value !== '') {
+                params.append(key, value)
+            }
+        })
+    }
+    
+    return apiClient<SeoResponse>(`/api/seo?${params.toString()}`);
 }
 
 export async function getSeo(id: string): Promise<SingleSeoResponse> {

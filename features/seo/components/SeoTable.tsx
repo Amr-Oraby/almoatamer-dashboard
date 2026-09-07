@@ -9,6 +9,8 @@ import { useRouter } from "@/i18n/routing"
 import { TableActionMenu } from "@/components/ui/table-action-menu"
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
+import { UrlFilter } from "@/components/ui/url-filter"
+import { ClearFiltersButton } from "@/components/ui/clear-filters-button"
 
 import {
   AlertDialog,
@@ -30,7 +32,10 @@ export function SeoTable() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const page = Number(searchParams.get("page")) || 1
-  const { data, isLoading } = useSeos(page)
+  const filters = {
+    type: searchParams.get("type"),
+  }
+  const { data, isLoading } = useSeos(page, filters)
   const { mutate: deleteSeo, isPending: isDeleting } = useDeleteSeo()
   const [deleteId, setDeleteId] = useState<string | null>(null)
   
@@ -38,6 +43,8 @@ export function SeoTable() {
   
   // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
   const t = useTranslations("Umrahs")
+  const tSeo = useTranslations("Seo")
+  const tCommon = useTranslations("Common")
 
   const columns = useMemo<ColumnDef<SeoItem>[]>(() => [
     {
@@ -112,6 +119,26 @@ export function SeoTable() {
       <DataTable
         columns={columns}
         data={data?.data || []}
+        topContent={
+          <div className="flex flex-wrap items-center gap-3 w-full bg-white dark:bg-zinc-900/50 p-4 rounded-2xl mb-4">
+            <UrlFilter
+              filterKey="type"
+              placeholder={tSeo("type_filter_placeholder")}
+              options={[
+                { value: "home", label: tSeo("home") },
+                { value: "abouts", label: tSeo("abouts") },
+                { value: "galleries", label: tSeo("galleries") },
+                { value: "blogs", label: tSeo("blogs") },
+                { value: "news", label: tSeo("news") },
+                { value: "contact_us", label: tSeo("contact_us") },
+                { value: "terms", label: tSeo("terms") },
+                { value: "policies", label: tSeo("policies") },
+                { value: "landing_page", label: tSeo("landing_page") },
+              ]}
+            />
+            <ClearFiltersButton label={tCommon("clear_filters")} />
+          </div>
+        }
         bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
       />
 

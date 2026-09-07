@@ -393,5 +393,17 @@
     "ms": "Malay",
     "tr": "Turkish",
     "iid": "Indonesian"
+  },
+  "Seo": {
+    "type_filter_placeholder": "Type",
+    "home": "Home",
+    "abouts": "About Us",
+    "galleries": "Galleries",
+    "blogs": "Blogs",
+    "news": "News",
+    "contact_us": "Contact Us",
+    "terms": "Terms & Conditions",
+    "policies": "Privacy Policies",
+    "landing_page": "Landing Page"
   }
 }
