@@ -8,3 +8,7 @@ export async function getNewsList(page: number = 1): Promise<NewsResponse> {
 export async function getNewsItem(id: string): Promise<SingleNewsResponse> {
     return apiClient<SingleNewsResponse>(`/api/news/${id}`);
 }
+
+export async function deleteNews(id: string): Promise<any> {
+    return apiClient<any>(`/api/news/${id}`, { method: 'DELETE' });
+}
