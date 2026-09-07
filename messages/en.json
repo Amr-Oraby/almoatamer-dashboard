@@ -507,6 +507,7 @@
     "search_placeholder": "Search...",
     "apply": "Apply",
     "previous": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "clear_filters": "Clear Filters"
   }
 }

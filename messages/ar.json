@@ -507,6 +507,7 @@
     "search_placeholder": "ابحث...",
     "apply": "تطبيق",
     "previous": "السابق",
-    "next": "التالي"
+    "next": "التالي",
+    "clear_filters": "مسح الفلاتر"
   }
 }
