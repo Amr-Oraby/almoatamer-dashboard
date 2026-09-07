@@ -8,3 +8,7 @@ export async function getReportReasons(page: number = 1): Promise<ReportReasonsR
 export async function getReportReason(id: string): Promise<SingleReportReasonResponse> {
     return apiClient<SingleReportReasonResponse>(`/api/report-reason/${id}`);
 }
+
+export async function deleteReportReason(id: string): Promise<any> {
+    return apiClient<any>(`/api/report-reason/${id}`, { method: 'DELETE' });
+}
