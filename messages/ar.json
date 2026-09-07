@@ -73,7 +73,10 @@
     "settings_menu": "الإعدادات",
     "settings_page": "الإعدادات",
     "reservation_times_page": "أوقات الحجز",
-    "financial_reports_page": "التقارير المالية"
+    "financial_reports_page": "التقارير المالية",
+    "UI_Management": "إدارة واجهة المستخدم",
+    "statistics_ui_title": "إدارة واجهة الإحصائيات",
+    "statistics_ui_subtitle": "قم بتحديث وتعديل الإحصائيات والعدادات الرئيسية للموقع بسهولة."
   },
   "Auth": {
     "login": "تسجيل الدخول",
@@ -129,19 +132,11 @@
     "provider": "المعتمر"
   },
   "Clients": {
-    "not_found": "العميل غير موجود",
-    "no_name": "بدون اسم",
-    "client_details": "تفاصيل العميل",
-    "personal_info": "المعلومات الشخصية",
-    "location": "الموقع واللغة",
-    "status": "الحالة",
+    "status_filter_placeholder": "الحالة",
     "active": "نشط",
     "inactive": "غير نشط",
-    "client_umrahs": "رحلات عمرة العميل",
-    "no_umrahs": "لا يوجد رحلات عمرة",
-    "completed": "مكتمل",
-    "pending": "معلق",
-    "nationality": "الجنسية"
+    "most_demanding": "الأكثر طلباً",
+    "most_rated": "الأعلى تقييماً"
   },
   "ThankingWords": {
     "not_found": "كلمة الشكر غير موجودة",
@@ -406,11 +401,13 @@
     "policies": "سياسة الخصوصية",
     "landing_page": "صفحة الهبوط"
   },
-  "Clients": {
-    "status_filter_placeholder": "الحالة",
-    "active": "نشط",
-    "inactive": "غير نشط",
-    "most_demanding": "الأكثر طلباً",
-    "most_rated": "الأعلى تقييماً"
+  "Statistics": {
+    "title": "الإحصائيات",
+    "experience_years": "سنوات الخبرة",
+    "prizes": "الجوائز",
+    "update": "تحديث",
+    "success_update_message": "تم التعديل بنجاح",
+    "error_update_message": "حدث خطأ أثناء التعديل",
+    "description": "هذه الصفحة تتيح لك إدارة إحصائيات الموقع."
   }
 }

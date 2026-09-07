@@ -73,7 +73,10 @@
     "settings_menu": "Settings",
     "settings_page": "Settings",
     "reservation_times_page": "Reservation Times",
-    "financial_reports_page": "Financial Reports"
+    "financial_reports_page": "Financial Reports",
+    "UI_Management": "UI Management",
+    "statistics_ui_title": "Statistics UI Management",
+    "statistics_ui_subtitle": "Update your website's main statistics and counters easily."
   },
   "Auth": {
     "login": "Log in",
@@ -129,19 +132,11 @@
     "provider": "Provider"
   },
   "Clients": {
-    "not_found": "Client not found",
-    "no_name": "No name",
-    "client_details": "Client Details",
-    "personal_info": "Personal Information",
-    "location": "Location and Language",
-    "status": "Status",
+    "status_filter_placeholder": "Status",
     "active": "Active",
     "inactive": "Inactive",
-    "client_umrahs": "Client Umrahs",
-    "no_umrahs": "No Umrah trips",
-    "completed": "Completed",
-    "pending": "Pending",
-    "nationality": "Nationality"
+    "most_demanding": "Most Demanding",
+    "most_rated": "Most Rated"
   },
   "ThankingWords": {
     "not_found": "Thanking word not found",
@@ -406,11 +401,13 @@
     "policies": "Privacy Policies",
     "landing_page": "Landing Page"
   },
-  "Clients": {
-    "status_filter_placeholder": "Status",
-    "active": "Active",
-    "inactive": "Inactive",
-    "most_demanding": "Most Demanding",
-    "most_rated": "Most Rated"
+  "Statistics": {
+    "title": "Statistics",
+    "experience_years": "Experience Years",
+    "prizes": "Prizes",
+    "update": "Update",
+    "success_update_message": "Updated successfully",
+    "error_update_message": "An error occurred during update",
+    "description": "This page allows you to manage website statistics."
   }
 }
