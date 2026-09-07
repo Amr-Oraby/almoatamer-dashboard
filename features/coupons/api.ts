@@ -8,3 +8,7 @@ export async function getCoupons(page: number = 1): Promise<CouponsResponse> {
 export async function getCoupon(id: string): Promise<SingleCouponResponse> {
     return apiClient<SingleCouponResponse>(`/api/show_coupon/${id}`);
 }
+
+export async function deleteCoupon(id: string): Promise<any> {
+    return apiClient<any>(`/api/delete_coupon/${id}`, { method: 'DELETE' });
+}
