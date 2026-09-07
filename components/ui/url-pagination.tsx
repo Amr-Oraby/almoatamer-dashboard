@@ -26,16 +26,16 @@ export function UrlPagination({ pageCount }: UrlPaginationProps) {
   if (pageCount <= 1) return null
 
   return (
-    <div className="flex items-center justify-center space-x-2 space-x-reverse py-6">
+    <div className="flex flex-wrap items-center justify-center gap-1 sm:gap-2 py-4 sm:py-6">
       <button
         onClick={() => handlePageChange(Math.max(1, page - 1))}
         disabled={page === 1}
-        className="px-4 py-2 text-zinc-400 font-bold hover:text-zinc-700 dark:hover:text-zinc-200 disabled:opacity-50 transition-colors"
+        className="px-2 sm:px-4 py-2 text-zinc-400 font-bold hover:text-zinc-700 dark:hover:text-zinc-200 disabled:opacity-50 transition-colors text-xs sm:text-sm"
       >
         {t("previous")}
       </button>
       
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1 sm:gap-2">
         {Array.from({ length: Math.min(5, pageCount) }, (_, i) => {
           // Simple window logic
           let pageNum = i + 1
@@ -50,7 +50,7 @@ export function UrlPagination({ pageCount }: UrlPaginationProps) {
               key={pageNum}
               onClick={() => handlePageChange(pageNum)}
               className={cn(
-                "w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-sm transition-colors shadow-sm",
+                "w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl flex items-center justify-center font-bold text-xs sm:text-sm transition-colors shadow-sm",
                 isActive 
                   ? "bg-primary text-primary-foreground" 
                   : "text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 bg-transparent"
@@ -65,7 +65,7 @@ export function UrlPagination({ pageCount }: UrlPaginationProps) {
       <button
         onClick={() => handlePageChange(Math.min(pageCount, page + 1))}
         disabled={page === pageCount}
-        className="px-4 py-2 text-zinc-600 font-bold hover:text-zinc-900 dark:hover:text-zinc-100 disabled:opacity-50 transition-colors"
+        className="px-2 sm:px-4 py-2 text-zinc-600 font-bold hover:text-zinc-900 dark:hover:text-zinc-100 disabled:opacity-50 transition-colors text-xs sm:text-sm"
       >
         {t("next")}
       </button>
