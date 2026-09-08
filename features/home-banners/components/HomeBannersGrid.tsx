@@ -77,7 +77,7 @@ export function HomeBannersGrid() {
                     variant="outline" 
                     className="h-8 shadow-sm text-xs font-medium px-3"
                   >
-                    تحديث
+                    {t("update", { fallback: "Update" })}
                   </Button>
                   <Button 
                     size="icon" 
