@@ -17,6 +17,7 @@ Each feature located at `features/[feature-name]/` MUST follow this exact struct
 - `api.ts`
 - `hooks.ts`
 - `types.ts`
+- `schemas.ts` (If the feature contains a form, add this file and use `zod` and `react-hook-form` with the simplest code possible)
 
 **Core Principles:**
 - **Simplicity First**: Do NOT over-engineer. Always write the absolute simplest, most straightforward code possible.

@@ -14,11 +14,22 @@ import { UrlSearchFilter } from "@/components/ui/url-search-filter"
 import { UrlFilter } from "@/components/ui/url-filter"
 import { ClearFiltersButton } from "@/components/ui/clear-filters-button"
 
-import { useMoatmrs, useDeleteMoatmr } from "@/features/moatmrs/hooks"
+import { useMoatmrs, useDeleteMoatmr, useToggleAcceptMoatmr } from "@/features/moatmrs/hooks"
 
 import { Moatmr } from "@/features/moatmrs/types"
 import Image from "next/image"
 import { DeleteDialog } from "@/components/ui/delete-dialog";
+import { Badge } from "@/components/ui/badge"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 const FakeSwitch = ({ checked, onChange }: { checked: boolean, onChange: () => void }) => (
   <button
@@ -47,10 +58,14 @@ export function MoatmrsTable() {
   const { mutate: deleteMoatmr, isPending: isDeleting } = useDeleteMoatmr()
   const [deleteId, setDeleteId] = useState<string | null>(null)
   
+  const { mutate: toggleAccept, isPending: isToggling } = useToggleAcceptMoatmr()
+  const [toggleAcceptId, setToggleAcceptId] = useState<string | null>(null)
+  
   // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
   const t = useTranslations("Umrahs")
   const tCommon = useTranslations("Common")
   const tClients = useTranslations("Clients")
+  const tAlmoatamers = useTranslations("Almoatamers")
 
   const columns = useMemo<ColumnDef<Moatmr>[]>(() => [
     {
@@ -131,14 +146,70 @@ export function MoatmrsTable() {
       }
     },
     {
-      id: "isBlocked",
-      header: () => <div className="text-center">{t("block")}</div>,
+      id: "is_active",
+      header: () => <div className="text-center">{tAlmoatamers("status")}</div>,
       size: 120,
-      cell: function Cell({ row }) {
-        const [isBlocked, setIsBlocked] = useState(!row.original.is_active)
+      cell: ({ row }) => {
+        const isActive = row.original.is_active
         return (
           <div className="flex items-center justify-center">
-            <FakeSwitch checked={isBlocked} onChange={() => setIsBlocked(!isBlocked)} />
+            <Badge 
+              variant={isActive ? "default" : "secondary"} 
+              className={cn(
+                "px-2.5 py-0.5 rounded-full text-[11px] font-semibold border-0",
+                isActive 
+                  ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400" 
+                  : "bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-400"
+              )}
+            >
+              {isActive ? tAlmoatamers("active") : tAlmoatamers("inactive")}
+            </Badge>
+          </div>
+        )
+      }
+    },
+    {
+      id: "provider_total_orders",
+      header: () => <div className="text-center">{tAlmoatamers("total_orders")}</div>,
+      size: 100,
+      cell: ({ row }) => (
+        <div className="text-center font-bold text-zinc-900 dark:text-zinc-100">
+          {row.original.provider_total_orders}
+        </div>
+      )
+    },
+    {
+      id: "is_available",
+      header: () => <div className="text-center">{tAlmoatamers("available")}</div>,
+      size: 100,
+      cell: ({ row }) => {
+        const isAvailable = row.original.is_available === 1
+        return (
+          <div className="flex items-center justify-center">
+            <Badge 
+              variant={isAvailable ? "default" : "secondary"} 
+              className={cn(
+                "px-2.5 py-0.5 rounded-full text-[11px] font-semibold border-0",
+                isAvailable 
+                  ? "bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-400" 
+                  : "bg-zinc-100 text-zinc-700 dark:bg-zinc-500/20 dark:text-zinc-400"
+              )}
+            >
+              {isAvailable ? tAlmoatamers("available") : tAlmoatamers("unavailable")}
+            </Badge>
+          </div>
+        )
+      }
+    },
+    {
+      id: "accepted_by_admin",
+      header: () => <div className="text-center">{tAlmoatamers("accepted")}</div>,
+      size: 120,
+      cell: ({ row }) => {
+        const isAccepted = row.original.accepted_by_admin
+        return (
+          <div className="flex items-center justify-center">
+            <FakeSwitch checked={isAccepted} onChange={() => setToggleAcceptId(String(row.original.id))} />
           </div>
         )
       },
@@ -158,7 +229,7 @@ export function MoatmrsTable() {
         )
       },
     },
-  ], [t, router, page, data?.meta?.per_page])
+  ], [t, tCommon, tClients, tAlmoatamers, router, page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />
@@ -204,6 +275,35 @@ export function MoatmrsTable() {
         }}
         isDeleting={isDeleting}
       />
+
+      <AlertDialog open={!!toggleAcceptId} onOpenChange={(open) => !open && setToggleAcceptId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>تأكيد العملية</AlertDialogTitle>
+            <AlertDialogDescription>
+              هل أنت متأكد أنك تريد تغيير حالة القبول لهذا المعتمر؟
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isToggling} onClick={() => setToggleAcceptId(null)}>
+              إلغاء
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={(e) => {
+                e.preventDefault();
+                if (toggleAcceptId) {
+                  toggleAccept(toggleAcceptId, {
+                    onSuccess: () => setToggleAcceptId(null),
+                  });
+                }
+              }}
+              disabled={isToggling}
+            >
+              {isToggling ? "جاري التحميل..." : "تأكيد"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }

@@ -168,7 +168,8 @@
     "unavailable": "Unavailable",
     "accepted": "Accepted",
     "not_accepted": "Not Accepted",
-    "nationality": "Nationality"
+    "nationality": "Nationality",
+    "total_orders": "Total Orders"
   },
   "News": {
     "not_found": "News not found",

@@ -23,6 +23,13 @@ export interface Moatmr {
     locale: string;
     status: string;
     accepted_by_admin: boolean;
+    reviews: any[];
+    from_price_umrah: number | null;
+    to_price_umrah: number | null;
+    language: string | null;
+    latitude: number | null;
+    longitude: number | null;
+    provider_total_orders: number;
 }
 
 export interface MoatmrsResponse {

@@ -26,3 +26,7 @@ export async function getMoatmr(id: string): Promise<SingleMoatmrResponse> {
 export async function deleteMoatmr(id: string): Promise<any> {
     return apiClient<any>(`/api/delete_moatmr/${id}`, { method: 'DELETE' });
 }
+
+export async function toggleAcceptMoatmr(id: string): Promise<any> {
+    return apiClient<any>(`/api/accept-moatmer/${id}`, { method: 'POST' });
+}

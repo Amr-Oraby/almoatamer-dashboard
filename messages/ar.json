@@ -168,7 +168,8 @@
     "unavailable": "غير متاح",
     "accepted": "مقبول",
     "not_accepted": "غير مقبول",
-    "nationality": "الجنسية"
+    "nationality": "الجنسية",
+    "total_orders": "إجمالي الطلبات"
   },
   "News": {
     "not_found": "الخبر غير موجود",
