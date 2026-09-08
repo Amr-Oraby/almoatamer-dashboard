@@ -39,14 +39,14 @@ export function HomeBannersGrid() {
           {t("not_found", { fallback: "No banners found" })}
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {banners.map((banner) => (
             <div 
               key={banner.id} 
-              className="group relative bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+              className="group flex flex-col bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
             >
               {/* Image */}
-              <div className="relative aspect-video w-full bg-zinc-100 dark:bg-zinc-900">
+              <div className="relative aspect-[16/9] w-full bg-zinc-100 dark:bg-zinc-900 overflow-hidden">
                 {banner.image ? (
                   <Image 
                     src={banner.image} 
@@ -62,25 +62,32 @@ export function HomeBannersGrid() {
                 )}
               </div>
 
-              {/* Badges and Actions overlay */}
-              <div className="absolute top-3 left-3">
+              {/* Card Body */}
+              <div className="flex items-center justify-between p-4 bg-white dark:bg-zinc-950">
                 <Badge 
                   variant={banner.is_active ? "default" : "secondary"} 
-                  className={banner.is_active ? "shadow-sm bg-emerald-500 hover:bg-emerald-600 text-white" : "shadow-sm"}
+                  className={banner.is_active ? "shadow-sm bg-emerald-500 hover:bg-emerald-600 text-white" : "shadow-sm px-3"}
                 >
                   {banner.is_active ? t("active", { fallback: "Active" }) : t("inactive", { fallback: "Inactive" })}
                 </Badge>
-              </div>
 
-              <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                <Button 
-                  size="icon" 
-                  variant="destructive" 
-                  className="h-8 w-8 rounded-full shadow-md"
-                  onClick={() => setDeleteId(String(banner.id))}
-                >
-                  <Trash2 className="h-4 w-4" />
-                </Button>
+                <div className="flex items-center gap-2">
+                  <Button 
+                    size="sm" 
+                    variant="outline" 
+                    className="h-8 shadow-sm text-xs font-medium px-3"
+                  >
+                    تحديث
+                  </Button>
+                  <Button 
+                    size="icon" 
+                    variant="destructive" 
+                    className="h-8 w-8 shadow-sm shrink-0"
+                    onClick={() => setDeleteId(String(banner.id))}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
             </div>
           ))}
