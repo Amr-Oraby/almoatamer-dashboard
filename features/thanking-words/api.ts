@@ -24,3 +24,9 @@ export async function createThankingword(data: CreateThankingWordFormValues): Pr
         body: formData,
     });
 }
+
+export async function deleteThankingWord(id: number | string): Promise<{ status: string; message: string; data: null }> {
+    return apiClient<{ status: string; message: string; data: null }>(`/api/home-info/${id}`, {
+        method: "DELETE",
+    });
+}

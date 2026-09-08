@@ -12,8 +12,9 @@ import { TableActionMenu } from "@/components/ui/table-action-menu"
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
 
-import { useThankingWords } from "@/features/thanking-words/hooks"
+import { useThankingWords, useDeleteThankingWord } from "@/features/thanking-words/hooks"
 import { ThankingWord } from "@/features/thanking-words/types"
+import { DeleteDialog } from "@/components/ui/delete-dialog"
 import Image from "next/image"
 
 
@@ -24,8 +25,20 @@ export function ThankingWordsTable() {
   const page = Number(searchParams.get("page")) || 1
   const { data, isLoading } = useThankingWords(page)
   
+  const [itemToDelete, setItemToDelete] = useState<number | null>(null)
+  const { mutate: deleteItem, isPending: isDeleting } = useDeleteThankingWord()
+
+  const handleDelete = () => {
+    if (itemToDelete) {
+      deleteItem(itemToDelete, {
+        onSettled: () => setItemToDelete(null)
+      })
+    }
+  }
+  
   // Using "Umrahs" namespace for generic keys that we know exist, and hardcoding missing ones gracefully
-  const t = useTranslations("Umrahs")
+  const tUmrahs = useTranslations("Umrahs")
+  const t = useTranslations("ThankingWords")
 
   const columns = useMemo<ColumnDef<ThankingWord>[]>(() => [
     {
@@ -64,7 +77,7 @@ export function ThankingWordsTable() {
     },
     {
       id: "text",
-      header: () => <div className="text-center">النص</div>,
+      header: () => <div className="text-center">{t("text", { fallback: "Text Content" })}</div>,
       size: 300,
       cell: ({ row }) => (
         <div className="text-center text-sm text-zinc-600 dark:text-zinc-400 truncate max-w-[300px]" title={row.original.text}>
@@ -74,7 +87,7 @@ export function ThankingWordsTable() {
     },
     {
       id: "date",
-      header: () => <div className="text-center">التاريخ</div>,
+      header: () => <div className="text-center">{t("date", { fallback: "Date" })}</div>,
       size: 150,
       cell: ({ row }) => (
         <div className="text-center font-bold text-zinc-900 dark:text-zinc-100">
@@ -83,31 +96,41 @@ export function ThankingWordsTable() {
       )
     },
     {
-      id: "isBlocked",
-      header: () => <div className="text-center">{t("block")}</div>,
+      id: "status",
+      header: () => <div className="text-center">{t("status", { fallback: "Status" })}</div>,
       size: 140,
-      cell: function Cell({ row }) {
-        const [isBlocked, setIsBlocked] = useState(!row.original.is_active)
+      cell: ({ row }) => {
+        const isActive = row.original.is_active;
         return (
           <div className="flex items-center justify-center">
-            <Switch checked={isBlocked} onChange={() => setIsBlocked(!isBlocked)} />
+            <span className={cn(
+              "px-3 py-1 rounded-full text-xs font-bold transition-colors",
+              isActive 
+                ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
+            )}>
+              {isActive ? t("active", { fallback: "Active" }) : t("inactive", { fallback: "Inactive" })}
+            </span>
           </div>
         )
       },
     },
     {
       id: "actions",
-      header: () => <div className="text-center">{t("actions")}</div>,
+      header: () => <div className="text-center">{tUmrahs("actions", { fallback: "Actions" })}</div>,
       size: 130,
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
-            <TableActionMenu items={[{ text: t("details"), href: `/ui-management/thanking-word/show/${row.original.id}` }]} />
+            <TableActionMenu items={[
+              { text: tUmrahs("details", { fallback: "Details" }), href: `/ui-management/thanking-word/show/${row.original.id}` },
+              { text: tUmrahs("delete", { fallback: "Delete" }), onClick: () => setItemToDelete(row.original.id), isDestructive: true }
+            ]} />
           </div>
         )
       },
     },
-  ], [t, router, page, data?.meta?.per_page])
+  ], [t, tUmrahs, router, page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />
@@ -119,6 +142,12 @@ export function ThankingWordsTable() {
         columns={columns}
         data={data?.data || []}
         bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
+      />
+      <DeleteDialog
+        isOpen={itemToDelete !== null}
+        onClose={() => setItemToDelete(null)}
+        onConfirm={handleDelete}
+        isDeleting={isDeleting}
       />
     </div>
   )
