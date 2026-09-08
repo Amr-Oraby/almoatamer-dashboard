@@ -515,5 +515,17 @@
     "next": "التالي",
     "clear_filters": "مسح الفلاتر",
     "add": "إضافة"
+  },
+  "HomeBanners": {
+    "create_new": "إضافة بانر جديد",
+    "is_active": "حالة التفعيل",
+    "images": "الصور",
+    "add_more": "إضافة المزيد",
+    "upload_files": "رفع الملفات",
+    "save": "حفظ",
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "delete": "حذف",
+    "not_found": "البانر غير موجود"
   }
 }

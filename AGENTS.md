@@ -88,6 +88,25 @@ When implementing a "show details" page for a specific entity (e.g., `app/[local
 5. **Commit and Push**:
    - Once the page is tested for layout responsiveness, data mapping, and translations (in both `ar` and `en`), commit the changes using `git add .` and `git commit -m "feat: Add [feature] show page with details"` and push to the repository.
 
+## Create Feature Process
+
+When implementing a "Create" modal or page for a feature (e.g., creating a new item like Thanking Word or Gallery Banner), follow this exact process:
+
+1. **Verify the Endpoint and Payload**: Get the exact endpoint name and payload shape from the user. Pay special attention to whether the payload contains files (e.g., images).
+2. **Schema Definition (`features/[feature-name]/schemas.ts`)**: Create a Zod schema matching the required payload. Use `z.infer` to export a type for the form values. 
+3. **API Setup (`features/[feature-name]/api.ts`)**: 
+   - If the payload includes files, you MUST use `FormData` to construct the request body and omit the `Content-Type` header (so the browser sets it automatically with the boundary).
+   - If the payload contains an array of files, loop through them and append using indexed keys (e.g., `formData.append("images[${index}]", file)`).
+4. **Hooks Creation (`features/[feature-name]/hooks.ts`)**: Create a custom hook (e.g., `useCreate[Feature]`) using `useMutation`. On success, show a `toast.success` and invalidate the relevant query key using `queryClient.invalidateQueries`.
+5. **Translation Setup (CRITICAL)**: Add all required translation keys (e.g., for modal title, labels, "Add", "Save", validation messages) to BOTH `messages/ar.json` and `messages/en.json` in the appropriate namespace.
+6. **Component Implementation (`components/Create[Feature]Modal.tsx`)**:
+   - Use `react-hook-form` integrated with `@hookform/resolvers/zod`.
+   - Use Shadcn/Base UI `Dialog` for the modal. Remember to use the `render` prop for `DialogTrigger` and NOT `asChild` (see Custom UI Components Rules).
+   - Build a clean, responsive UI. Use grids (e.g., `md:grid-cols-2`) for forms with multiple inputs to avoid long scrolling.
+   - For image uploads, include a preview area and a way to remove selected images.
+7. **UI Integration**: Import and render the Create modal in the target page (e.g., `app/[locale]/(main)/[feature]/page.tsx`).
+8. **Commit and Push**: Commit the changes using `git add .` and `git commit -m "feat: Add create functionality for [feature]"` and push to the repository.
+
 ## Delete Feature Process
 
 When implementing a delete functionality for a table item, follow this exact process:

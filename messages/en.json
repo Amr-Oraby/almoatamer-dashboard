@@ -515,5 +515,17 @@
     "next": "Next",
     "clear_filters": "Clear Filters",
     "add": "Add"
+  },
+  "HomeBanners": {
+    "create_new": "Create New Banner",
+    "is_active": "Active Status",
+    "images": "Images",
+    "add_more": "Add More",
+    "upload_files": "Upload files",
+    "save": "Save",
+    "active": "Active",
+    "inactive": "Inactive",
+    "delete": "Delete",
+    "not_found": "Banner not found"
   }
 }
