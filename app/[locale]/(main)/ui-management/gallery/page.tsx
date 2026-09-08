@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import { HomeBannersTable } from '@/features/home-banners/components/HomeBannersTable';
+import { HomeBannersGrid } from '@/features/home-banners/components/HomeBannersGrid';
 import { CreateHomeBannerModal } from '@/features/home-banners/components/CreateHomeBannerModal';
 
 export default function GalleryPage() {
@@ -14,7 +14,7 @@ export default function GalleryPage() {
         <CreateHomeBannerModal />
       </div>
 
-      <HomeBannersTable />
+      <HomeBannersGrid />
     </div>
   );
 }

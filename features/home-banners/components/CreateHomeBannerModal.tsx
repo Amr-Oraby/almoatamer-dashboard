@@ -42,8 +42,10 @@ export function CreateHomeBannerModal() {
     };
 
     const removeImage = (index: number) => {
+        // cut
         const updatedPreviewImages = [...previewImages];
         updatedPreviewImages.splice(index, 1);
+        // update
         setPreviewImages(updatedPreviewImages);
         setValue("images", updatedPreviewImages.map(p => p.file), { shouldValidate: true });
     };
@@ -84,13 +86,13 @@ export function CreateHomeBannerModal() {
                         />
                     </div>
                 </DialogHeader>
-                
+
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-4">
                     <div className="space-y-2">
                         <label className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
                             {t("images", { fallback: "Images" })} <span className="text-red-500">*</span>
                         </label>
-                        
+
                         <div className="mt-2 rounded-xl border border-dashed border-zinc-300 dark:border-zinc-700 p-6 hover:bg-zinc-50 dark:hover:bg-zinc-900/50 transition-colors relative">
                             {previewImages.length > 0 ? (
                                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
