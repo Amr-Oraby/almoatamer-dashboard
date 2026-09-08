@@ -1,19 +1,9 @@
-import { useTranslations } from 'next-intl';
-import { EndpointBadge } from '@/components/ui/endpoint-badge';
+import { MainSectionForm } from '@/features/main-section/components/MainSectionForm';
 
 export default function MainSectionPage() {
-  const t = useTranslations('Dashboard');
-  
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">{t('main_section')}</h1>
-      <EndpointBadge>umrah-home-info</EndpointBadge>
-      <p className="text-zinc-600 dark:text-zinc-400">
-        This is the main section management page.
-      </p>
-      <p className="text-sm font-medium text-blue-600 mt-2">
-        Text & image changer
-      </p>
+    <div className="w-full p-4 md:p-6 lg:p-8">
+      <MainSectionForm />
     </div>
   );
 }

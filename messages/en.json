@@ -86,15 +86,6 @@
     "password": "Password",
     "submit": "Sign in"
   },
-  "Common": {
-    "no_results": "No results.",
-    "previous": "Previous",
-    "next": "Next",
-    "clear_filters": "Clear Filters",
-    "search": "Search",
-    "apply": "Apply",
-    "search_placeholder": "Search..."
-  },
   "Umrahs": {
     "name": "Name",
     "phone": "Phone Number",
@@ -470,7 +461,9 @@
     "setting_value": "Setting Value",
     "add_setting": "Add Setting",
     "create_description": "Add a new custom setting to the application.",
-    "existing_settings": "Existing Settings"
+    "existing_settings": "Existing Settings",
+    "main_section": "Main Section Info",
+    "main_section_desc": "Manage main section information."
   },
   "HowToStart": {
     "main_info": "Main Information",
@@ -487,6 +480,8 @@
     "error": "An error occurred"
   },
   "Common": {
+    "no_results": "No results.",
+    "search": "Search",
     "country": "Country",
     "title": "Title",
     "desc": "Description",

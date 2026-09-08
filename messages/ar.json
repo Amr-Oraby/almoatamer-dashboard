@@ -86,15 +86,6 @@
     "password": "كلمة المرور",
     "submit": "دخول"
   },
-  "Common": {
-    "no_results": "لا يوجد نتائج.",
-    "previous": "السابق",
-    "next": "التالي",
-    "clear_filters": "مسح الفلاتر",
-    "search": "بحث",
-    "apply": "تطبيق",
-    "search_placeholder": "بحث..."
-  },
   "Umrahs": {
     "name": "الاسم",
     "phone": "رقم الهاتف",
@@ -470,7 +461,9 @@
     "setting_value": "قيمة الإعداد (Value)",
     "add_setting": "إضافة الإعداد",
     "create_description": "أضف إعداداً جديداً مخصصاً للتطبيق.",
-    "existing_settings": "الإعدادات الحالية"
+    "existing_settings": "الإعدادات الحالية",
+    "main_section": "القسم الرئيسي",
+    "main_section_desc": "إدارة معلومات القسم الرئيسي."
   },
   "HowToStart": {
     "main_info": "المعلومات الأساسية",
@@ -487,6 +480,8 @@
     "error": "حدث خطأ أثناء التحديث"
   },
   "Common": {
+    "no_results": "لا يوجد نتائج.",
+    "search": "بحث",
     "country": "الدولة",
     "title": "العنوان",
     "desc": "الوصف",
