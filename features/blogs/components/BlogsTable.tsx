@@ -5,6 +5,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { DataTable } from "@/components/ui/data-table"
 import { TableSkeleton } from "@/components/ui/table-skeleton"
 import { cn } from "@/lib/utils"
+import { Switch } from "@/components/ui/switch"
 import { useTranslations } from "next-intl"
 import { useRouter } from "@/i18n/routing"
 import { TableActionMenu } from "@/components/ui/table-action-menu"
@@ -17,20 +18,7 @@ import { BlogItem } from "@/features/blogs/types"
 import Image from "next/image"
 import { DeleteDialog } from "@/components/ui/delete-dialog";
 
-const FakeSwitch = ({ checked, onChange }: { checked: boolean, onChange: () => void }) => (
-  <button
-    onClick={onChange}
-    className={cn(
-      "w-11 h-6 rounded-full flex items-center px-1 transition-colors outline-none",
-      checked ? "bg-primary" : "bg-zinc-200 dark:bg-zinc-800"
-    )}
-  >
-    <div className={cn(
-      "w-4 h-4 rounded-full bg-white transition-transform shadow-sm",
-      checked ? "translate-x-5 rtl:-translate-x-5" : "translate-x-0"
-    )} />
-  </button>
-)
+
 
 export function BlogsTable() {
   const searchParams = useSearchParams()
@@ -97,7 +85,7 @@ export function BlogsTable() {
         const [isBlocked, setIsBlocked] = useState(!row.original.is_active)
         return (
           <div className="flex items-center justify-center">
-            <FakeSwitch checked={isBlocked} onChange={() => setIsBlocked(!isBlocked)} />
+            <Switch checked={isBlocked} onChange={() => setIsBlocked(!isBlocked)} />
           </div>
         )
       },
