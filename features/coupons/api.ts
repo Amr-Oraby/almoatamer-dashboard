@@ -12,3 +12,7 @@ export async function getCoupon(id: string): Promise<SingleCouponResponse> {
 export async function deleteCoupon(id: string): Promise<any> {
     return apiClient<any>(`/api/delete_coupon/${id}`, { method: 'DELETE' });
 }
+
+export async function toggleActivateCoupon(id: string): Promise<any> {
+    return apiClient<any>(`/api/change_coupon_status/${id}`, { method: 'PUT', body: JSON.stringify({}) });
+}
