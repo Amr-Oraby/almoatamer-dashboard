@@ -64,7 +64,10 @@ export function HomeBannersGrid() {
 
               {/* Badges and Actions overlay */}
               <div className="absolute top-3 left-3">
-                <Badge variant={banner.is_active ? "success" : "secondary"} className="shadow-sm">
+                <Badge 
+                  variant={banner.is_active ? "default" : "secondary"} 
+                  className={banner.is_active ? "shadow-sm bg-emerald-500 hover:bg-emerald-600 text-white" : "shadow-sm"}
+                >
                   {banner.is_active ? t("active", { fallback: "Active" }) : t("inactive", { fallback: "Inactive" })}
                 </Badge>
               </div>
