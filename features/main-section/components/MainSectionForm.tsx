@@ -8,9 +8,9 @@ import { useMainSectionInfo, useUpdateMainSectionInfo } from "../hooks";
 import { Loader2 } from "lucide-react";
 import { mainSectionSchema, MainSectionFormValues } from "../schemas";
 
-import { FormLayout } from "./FormLayout";
-import { ImageChanger } from "./ImageChanger";
-import { LocalizedTextareas } from "./LocalizedTextareas";
+import { FormLayout } from "@/components/ui/FormLayout";
+import { ImageChanger } from "@/components/ui/ImageChanger";
+import { LocalizedTextareas } from "@/components/ui/LocalizedTextareas";
 
 export function MainSectionForm() {
   const t = useTranslations("Settings");

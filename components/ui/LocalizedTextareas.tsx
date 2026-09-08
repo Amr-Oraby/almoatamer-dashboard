@@ -1,8 +1,7 @@
 import { UseFormRegister } from "react-hook-form";
-import { MainSectionFormValues } from "../schemas";
 
 interface LocalizedTextareasProps {
-  register: UseFormRegister<MainSectionFormValues>;
+  register: UseFormRegister<any>;
 }
 
 const LANGUAGES = [

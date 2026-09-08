@@ -463,7 +463,8 @@
     "create_description": "أضف إعداداً جديداً مخصصاً للتطبيق.",
     "existing_settings": "الإعدادات الحالية",
     "main_section": "القسم الرئيسي",
-    "main_section_desc": "إدارة معلومات القسم الرئيسي."
+    "main_section_desc": "إدارة معلومات القسم الرئيسي.",
+    "footer_desc": "إدارة نصوص الفوتر."
   },
   "HowToStart": {
     "main_info": "المعلومات الأساسية",

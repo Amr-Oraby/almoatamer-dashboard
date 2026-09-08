@@ -463,7 +463,8 @@
     "create_description": "Add a new custom setting to the application.",
     "existing_settings": "Existing Settings",
     "main_section": "Main Section Info",
-    "main_section_desc": "Manage main section information."
+    "main_section_desc": "Manage main section information.",
+    "footer_desc": "Manage the footer information text."
   },
   "HowToStart": {
     "main_info": "Main Information",
