@@ -11,10 +11,12 @@ import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
 
 
-import { useCoupons, useDeleteCoupon } from "@/features/coupons/hooks"
+import { useCoupons, useDeleteCoupon, useToggleActivateCoupon } from "@/features/coupons/hooks"
 import { CouponItem } from "@/features/coupons/types"
 import { Badge } from "@/components/ui/badge"
 import { DeleteDialog } from "@/components/ui/delete-dialog";
+import { Switch } from "@/components/ui/switch"
+import { ConfirmDialog } from "@/components/ui/confirm-dialog"
 
 export function CouponsTable() {
   const searchParams = useSearchParams()
@@ -104,12 +106,10 @@ export function CouponsTable() {
       header: () => <div className="text-center">الحالة</div>,
       size: 100,
       cell: ({ row }) => {
-        const isActive = row.original.status
+        const isActive = !!row.original.status
         return (
           <div className="flex justify-center">
-            <Badge variant={isActive ? "default" : "secondary"}>
-              {isActive ? "نشط" : "غير نشط"}
-            </Badge>
+            <Switch checked={isActive} onChange={() => setToggleActivateId(String(row.original.id))} />
           </div>
         )
       }
@@ -154,6 +154,22 @@ export function CouponsTable() {
           }
         }}
         isDeleting={isDeleting}
+      />
+
+      <ConfirmDialog
+        isOpen={!!toggleActivateId}
+        onClose={() => setToggleActivateId(null)}
+        onConfirm={() => {
+          if (toggleActivateId) {
+            toggleActivate(toggleActivateId, {
+              onSuccess: () => setToggleActivateId(null),
+            });
+          }
+        }}
+        isLoading={isToggling}
+        title="تأكيد العملية"
+        description="هل أنت متأكد أنك تريد تغيير حالة هذا الكوبون؟"
+        confirmButtonColor="bg-primary hover:bg-primary/90"
       />
     </div>
   )
