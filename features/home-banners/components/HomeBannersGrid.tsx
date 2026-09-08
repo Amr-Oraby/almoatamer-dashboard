@@ -39,7 +39,7 @@ export function HomeBannersGrid() {
           {t("not_found", { fallback: "No banners found" })}
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-6">
           {banners.map((banner) => (
             <div 
               key={banner.id} 
