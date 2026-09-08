@@ -8,11 +8,13 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { MoreVertical } from "lucide-react"
 import { useRouter } from "@/i18n/routing"
+import { cn } from "@/lib/utils"
 
 export interface ActionMenuItem {
   text: string;
   href?: string;
   onClick?: () => void;
+  isDestructive?: boolean;
 }
 
 interface TableActionMenuProps {
@@ -37,7 +39,12 @@ export function TableActionMenu({ items }: TableActionMenuProps) {
               if (item.onClick) item.onClick();
               if (item.href) router.push(item.href);
             }}
-            className="cursor-pointer font-bold text-zinc-700 dark:text-zinc-300 justify-end"
+            className={cn(
+              "cursor-pointer font-bold justify-end",
+              item.isDestructive 
+                ? "text-red-600 focus:bg-red-50 focus:text-red-700 dark:text-red-500 dark:focus:bg-red-950 dark:focus:text-red-400" 
+                : "text-zinc-700 dark:text-zinc-300"
+            )}
           >
             {item.text}
           </DropdownMenuItem>
