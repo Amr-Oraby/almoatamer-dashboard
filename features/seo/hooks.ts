@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getSeos, getSeo, deleteSeo } from "./api";
+import { getSeos, getSeo, deleteSeo, toggleActivateSeo } from "./api";
 import { toast } from "sonner";
 
 export function useSeos(page: number = 1, filters?: Record<string, string | null>) {
@@ -27,6 +27,20 @@ export function useDeleteSeo() {
         },
         onError: (error: any) => {
             toast.error(error?.message || "حدث خطأ أثناء الحذف");
+        },
+    });
+}
+
+export function useToggleActivateSeo() {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: toggleActivateSeo,
+        onSuccess: (data: any) => {
+            toast.success(data.message || "تم تغيير حالة الـ SEO بنجاح");
+            queryClient.invalidateQueries({ queryKey: ["seo"] });
+        },
+        onError: (error: any) => {
+            toast.error(error.message || "فشلت العملية");
         },
     });
 }

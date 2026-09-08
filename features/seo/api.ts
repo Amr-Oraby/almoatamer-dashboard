@@ -23,3 +23,7 @@ export async function getSeo(id: string): Promise<SingleSeoResponse> {
 export async function deleteSeo(id: string): Promise<any> {
     return apiClient<any>(`/api/seo/${id}`, { method: 'DELETE' });
 }
+
+export async function toggleActivateSeo(id: string): Promise<any> {
+    return apiClient<any>(`/api/seo/${id}`, { method: 'PUT', body: JSON.stringify({}) });
+}

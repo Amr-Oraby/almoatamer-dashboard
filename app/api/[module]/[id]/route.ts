@@ -1,4 +1,4 @@
-import { serverDelete, serverGet } from "@/lib/api/serverRoute";
+import { serverDelete, serverGet, serverPut } from "@/lib/api/serverRoute";
 import { serverPost } from "@/lib/api/serverRoute";
 
 export async function GET(
@@ -60,4 +60,28 @@ export async function DELETE(
     const endpoint = `${module}/${id}`
 
     return serverDelete(endpoint);
+}
+
+export async function PUT(request: Request,
+    {
+        params,
+    }: {
+        params: Promise<{ module: string; id: string }>;
+    }) {
+    const { module, id } = await params;
+
+    const { searchParams } = new URL(request.url);
+    const queryString = searchParams.toString();
+
+    const endpoint = queryString
+        ? `${module}/${id}?${queryString}`
+        : `${module}/${id}`;
+
+    const contentType = request.headers.get("content-type") || "";
+
+    const body = contentType.includes("multipart/form-data")
+        ? await request.formData()
+        : await request.json();
+
+    return serverPut(endpoint, body);
 }

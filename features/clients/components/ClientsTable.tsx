@@ -17,8 +17,6 @@ import { UrlSearchFilter } from "@/components/ui/url-search-filter"
 import { UrlFilter } from "@/components/ui/url-filter"
 import { ClearFiltersButton } from "@/components/ui/clear-filters-button"
 
-
-
 import { useClients, useToggleActivateClient } from "@/features/clients/hooks"
 import { Client } from "@/features/clients/types"
 import Image from "next/image"
@@ -32,7 +30,7 @@ export function ClientsTable() {
     status: searchParams.get("status"),
   }
   const { data, isLoading } = useClients(page, filters)
-  
+
   const { mutate: toggleActivate, isPending: isToggling } = useToggleActivateClient()
   const [toggleActivateId, setToggleActivateId] = useState<string | null>(null)
 
@@ -170,8 +168,8 @@ export function ClientsTable() {
         data={data?.data || []}
         topContent={
           <div className="flex flex-wrap items-center gap-3 w-full bg-white dark:bg-zinc-900/50 p-4 rounded-2xl mb-4">
-            <UrlSearchFilter 
-              filterKey="keyword" 
+            <UrlSearchFilter
+              filterKey="keyword"
               placeholder={tCommon("search_placeholder")}
               buttonText={tCommon("apply")}
             />

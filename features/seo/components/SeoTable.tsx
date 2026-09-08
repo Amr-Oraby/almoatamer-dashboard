@@ -13,12 +13,14 @@ import { UrlFilter } from "@/components/ui/url-filter"
 import { ClearFiltersButton } from "@/components/ui/clear-filters-button"
 
 
-import { useSeos, useDeleteSeo } from "@/features/seo/hooks"
+import { useSeos, useDeleteSeo, useToggleActivateSeo } from "@/features/seo/hooks"
 import { SeoItem } from "@/features/seo/types"
 import { Badge } from "@/components/ui/badge"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Search, Hash, Tag, Activity } from "lucide-react"
 import { DeleteDialog } from "@/components/ui/delete-dialog";
+import { Switch } from "@/components/ui/switch"
+import { ConfirmDialog } from "@/components/ui/confirm-dialog"
 
 export function SeoTable() {
   const searchParams = useSearchParams()
@@ -30,6 +32,9 @@ export function SeoTable() {
   const { data, isLoading } = useSeos(page, filters)
   const { mutate: deleteSeo, isPending: isDeleting } = useDeleteSeo()
   const [deleteId, setDeleteId] = useState<string | null>(null)
+  
+  const { mutate: toggleActivate, isPending: isToggling } = useToggleActivateSeo()
+  const [toggleActivateId, setToggleActivateId] = useState<string | null>(null)
   
   const [selectedSeo, setSelectedSeo] = useState<SeoItem | null>(null)
   
@@ -75,12 +80,10 @@ export function SeoTable() {
       header: () => <div className="text-center">الحالة</div>,
       size: 100,
       cell: ({ row }) => {
-        const isActive = row.original.is_active
+        const isActive = !!row.original.is_active
         return (
           <div className="flex justify-center">
-            <Badge variant={isActive ? "default" : "secondary"}>
-              {isActive ? "نشط" : "غير نشط"}
-            </Badge>
+            <Switch checked={isActive} onChange={() => setToggleActivateId(String(row.original.id))} />
           </div>
         )
       }
@@ -192,6 +195,22 @@ export function SeoTable() {
           }
         }}
         isDeleting={isDeleting}
+      />
+
+      <ConfirmDialog
+        isOpen={!!toggleActivateId}
+        onClose={() => setToggleActivateId(null)}
+        onConfirm={() => {
+          if (toggleActivateId) {
+            toggleActivate(toggleActivateId, {
+              onSuccess: () => setToggleActivateId(null),
+            });
+          }
+        }}
+        isLoading={isToggling}
+        title="تأكيد العملية"
+        description="هل أنت متأكد أنك تريد تغيير حالة هذا العنصر؟"
+        confirmButtonColor="bg-primary hover:bg-primary/90"
       />
     </div>
   )
