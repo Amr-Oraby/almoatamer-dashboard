@@ -464,7 +464,9 @@
     "existing_settings": "Existing Settings",
     "main_section": "Main Section Info",
     "main_section_desc": "Manage main section information.",
-    "footer_desc": "Manage the footer information text."
+    "footer_desc": "Manage the footer information text.",
+    "who_is_almuatamer": "Who is Al-Muatamer",
+    "who_is_almuatamer_desc": "Manage 'Who is Al-Muatamer' section information."
   },
   "HowToStart": {
     "main_info": "Main Information",

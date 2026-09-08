@@ -1,19 +1,9 @@
-import { useTranslations } from 'next-intl';
-import { EndpointBadge } from '@/components/ui/endpoint-badge';
+import { WhoIsAlmuatamerForm } from '@/features/who-is-almuatamer/components/WhoIsAlmuatamerForm';
 
 export default function WhoIsAlmuatamerPage() {
-  const t = useTranslations('Dashboard');
-  
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">{t('who_is_almuatamer')}</h1>
-      <EndpointBadge>moatamer-home-info</EndpointBadge>
-      <p className="text-zinc-600 dark:text-zinc-400">
-        This is the who is almuatamer management page.
-      </p>
-      <p className="text-sm font-medium text-blue-600 mt-2">
-        Text & image changer
-      </p>
+    <div className="w-full p-4 md:p-6 lg:p-8">
+      <WhoIsAlmuatamerForm />
     </div>
   );
 }

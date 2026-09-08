@@ -464,7 +464,9 @@
     "existing_settings": "الإعدادات الحالية",
     "main_section": "القسم الرئيسي",
     "main_section_desc": "إدارة معلومات القسم الرئيسي.",
-    "footer_desc": "إدارة نصوص الفوتر."
+    "footer_desc": "إدارة نصوص الفوتر.",
+    "who_is_almuatamer": "من هو المعتمر",
+    "who_is_almuatamer_desc": "إدارة قسم من هو المعتمر."
   },
   "HowToStart": {
     "main_info": "المعلومات الأساسية",
