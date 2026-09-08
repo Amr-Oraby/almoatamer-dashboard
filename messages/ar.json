@@ -155,7 +155,8 @@
     "name": "الاسم",
     "is_active": "حالة التفعيل",
     "image": "الصورة",
-    "save": "حفظ"
+    "save": "حفظ",
+    "delete": "حذف"
   },
   "Almoatamers": {
     "not_found": "المعتمر غير موجود",

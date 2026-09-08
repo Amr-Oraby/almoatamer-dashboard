@@ -155,7 +155,8 @@
     "name": "Name",
     "is_active": "Active Status",
     "image": "Image",
-    "save": "Save"
+    "save": "Save",
+    "delete": "Delete"
   },
   "Almoatamers": {
     "not_found": "Moatamer not found",

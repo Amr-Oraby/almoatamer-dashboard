@@ -124,7 +124,7 @@ export function ThankingWordsTable() {
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
               { text: tUmrahs("details", { fallback: "Details" }), href: `/ui-management/thanking-word/show/${row.original.id}` },
-              { text: tUmrahs("delete", { fallback: "Delete" }), onClick: () => setItemToDelete(row.original.id), isDestructive: true }
+              { text: t("delete", { fallback: "Delete" }), onClick: () => setItemToDelete(row.original.id), isDestructive: true }
             ]} />
           </div>
         )
