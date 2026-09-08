@@ -25,3 +25,10 @@ export async function getNewsItem(id: string): Promise<SingleNewsResponse> {
 export async function deleteNews(id: string): Promise<any> {
     return apiClient<any>(`/api/news/${id}`, { method: 'DELETE' });
 }
+
+export async function createNews(data: FormData): Promise<SingleNewsResponse> {
+    return apiClient<SingleNewsResponse>('/api/news', {
+        method: 'POST',
+        body: data,
+    });
+}

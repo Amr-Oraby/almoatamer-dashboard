@@ -528,5 +528,26 @@
     "inactive": "غير نشط",
     "delete": "حذف",
     "not_found": "البانر غير موجود"
+  },
+  "News": {
+    "create_new": "إضافة خبر جديد",
+    "is_active": "حالة التفعيل",
+    "upload_files": "رفع الصورة",
+    "save": "حفظ",
+    "title": "العنوان",
+    "description": "الوصف",
+    "alt": "النص البديل للصورة",
+    "slug": "الرابط الفرعي (Slug)",
+    "canonical": "الرابط الأساسي (Canonical)",
+    "short_desc": "وصف قصير",
+    "keywords": "الكلمات المفتاحية",
+    "arabic": "عربي",
+    "english": "إنجليزي",
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "not_found": "الخبر غير موجود",
+    "no_title": "بدون عنوان",
+    "seo_info": "معلومات SEO",
+    "alt_text": "النص البديل للصورة"
   }
 }
