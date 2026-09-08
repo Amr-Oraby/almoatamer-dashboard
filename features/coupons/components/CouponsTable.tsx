@@ -25,6 +25,8 @@ export function CouponsTable() {
   const { data, isLoading } = useCoupons(page)
   const { mutate: deleteCoupon, isPending: isDeleting } = useDeleteCoupon()
   const [deleteId, setDeleteId] = useState<string | null>(null)
+  const { mutate: toggleActivate, isPending: isToggling } = useToggleActivateCoupon()
+  const [toggleActivateId, setToggleActivateId] = useState<string | null>(null)
   
   // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
   const t = useTranslations("Umrahs")
