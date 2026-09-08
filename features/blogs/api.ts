@@ -12,3 +12,10 @@ export async function getBlogItem(id: string): Promise<SingleBlogResponse> {
 export async function deleteBlog(id: string): Promise<any> {
     return apiClient<any>(`/api/blog/${id}`, { method: 'DELETE' });
 }
+
+export async function createBlog(data: FormData): Promise<SingleBlogResponse> {
+    return apiClient<SingleBlogResponse>('/api/blog', {
+        method: 'POST',
+        body: data,
+    });
+}

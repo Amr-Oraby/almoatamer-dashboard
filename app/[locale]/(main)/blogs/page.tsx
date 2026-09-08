@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { BlogsTable } from '@/features/blogs/components/BlogsTable';
+import { CreateBlogModal } from '@/features/blogs/components/CreateBlogModal';
 
 export default function BlogsPage() {
   const t = useTranslations('Dashboard');
@@ -10,6 +11,7 @@ export default function BlogsPage() {
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-bold">{t('blogs_page')}</h1>
         </div>
+        <CreateBlogModal />
       </div>
 
       <BlogsTable />

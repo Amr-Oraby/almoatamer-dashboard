@@ -549,5 +549,26 @@
     "no_title": "No title",
     "seo_info": "SEO Info",
     "alt_text": "Image Alt Text"
+  },
+  "Blogs": {
+    "create_new": "Create Blog",
+    "is_active": "Active Status",
+    "upload_files": "Upload Image",
+    "save": "Save",
+    "title": "Title",
+    "description": "Description",
+    "alt": "Image Alt Text",
+    "slug": "Slug",
+    "canonical": "Canonical URL",
+    "short_desc": "Short Description",
+    "keywords": "Keywords",
+    "arabic": "Arabic",
+    "english": "English",
+    "active": "Active",
+    "inactive": "Inactive",
+    "not_found": "Blog not found",
+    "no_title": "No title",
+    "seo_info": "SEO Info",
+    "alt_text": "Image Alt Text"
   }
 }

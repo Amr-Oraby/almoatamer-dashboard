@@ -8,18 +8,18 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Loader2, Plus, Upload, X } from "lucide-react";
-import { useCreateNews } from "../hooks";
-import { createNewsSchema, CreateNewsFormValues } from "../schemas";
+import { useCreateBlog } from "../hooks";
+import { createBlogSchema, CreateBlogFormValues } from "../schemas";
 
-export function CreateNewsModal() {
-    const t = useTranslations("News");
+export function CreateBlogModal() {
+    const t = useTranslations("Blogs");
     const [open, setOpen] = useState(false);
     const [activeTab, setActiveTab] = useState<"ar" | "en">("ar");
     const [previewImage, setPreviewImage] = useState<{ url: string; file: File } | null>(null);
-    const { mutateAsync: createNews, isPending } = useCreateNews();
+    const { mutateAsync: createBlog, isPending } = useCreateBlog();
 
-    const { register, handleSubmit, formState: { errors }, reset, setValue, watch } = useForm<CreateNewsFormValues>({
-        resolver: zodResolver(createNewsSchema),
+    const { register, handleSubmit, formState: { errors }, reset, setValue, watch } = useForm<CreateBlogFormValues>({
+        resolver: zodResolver(createBlogSchema),
         defaultValues: {
             is_active: true,
             ar: { title: "", description: "", alt: "", slug: "", canonical: "", short_desc: "", keywords: "" },
@@ -42,32 +42,29 @@ export function CreateNewsModal() {
         setValue("image", [], { shouldValidate: true });
     };
 
-    const onSubmit = async (data: CreateNewsFormValues) => {
+    const onSubmit = async (data: CreateBlogFormValues) => {
         try {
             const formData = new FormData();
             formData.append("is_active", data.is_active ? "1" : "0");
 
-            // Append single image
             if (data.image && data.image[0]) {
                 formData.append("image", data.image[0]);
             }
 
-            // Append AR fields
             Object.entries(data.ar).forEach(([key, value]) => {
                 formData.append(`ar[${key}]`, (value as string) || "");
             });
 
-            // Append EN fields
             Object.entries(data.en).forEach(([key, value]) => {
                 formData.append(`en[${key}]`, (value as string) || "");
             });
 
-            await createNews(formData);
+            await createBlog(formData);
             setOpen(false);
             reset();
             setPreviewImage(null);
         } catch (error) {
-            console.error("Error creating news:", error);
+            console.error("Error creating blog:", error);
         }
     };
 
@@ -96,7 +93,7 @@ export function CreateNewsModal() {
                     </div>
                 </DialogHeader>
 
-                <form onSubmit={handleSubmit((data) => onSubmit(data as unknown as CreateNewsFormValues))} className="p-6 space-y-6">
+                <form onSubmit={handleSubmit((data) => onSubmit(data as unknown as CreateBlogFormValues))} className="p-6 space-y-6">
                     {/* Image Upload */}
                     <div className="space-y-2">
                         <label className="text-sm font-medium text-zinc-900 dark:text-zinc-100">

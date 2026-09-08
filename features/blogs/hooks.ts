@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getBlogsList, getBlogItem, deleteBlog } from "./api";
+import { getBlogsList, getBlogItem, deleteBlog, createBlog } from "./api";
 import { toast } from "sonner";
 
 export function useBlogsList(page: number = 1) {
@@ -27,6 +27,20 @@ export function useDeleteBlog() {
         },
         onError: (error: any) => {
             toast.error(error?.message || "حدث خطأ أثناء الحذف");
+        },
+    });
+}
+
+export function useCreateBlog() {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: createBlog,
+        onSuccess: (data: any) => {
+            toast.success(data?.message || "تمت الإضافة بنجاح");
+            queryClient.invalidateQueries({ queryKey: ["blogs"] });
+        },
+        onError: (error: any) => {
+            toast.error(error?.message || "حدث خطأ أثناء الإضافة");
         },
     });
 }
