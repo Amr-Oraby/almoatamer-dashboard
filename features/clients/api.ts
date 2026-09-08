@@ -24,3 +24,7 @@ export async function getClientsWithoutPagination(): Promise<any> {
 export async function getClient(id: string): Promise<SingleClientResponse> {
     return apiClient<SingleClientResponse>(`/api/client/${id}`);
 }
+
+export async function toggleActivateClient(id: string): Promise<any> {
+    return apiClient<any>(`/api/activate-client/${id}`, { method: 'POST', body: JSON.stringify({}) });
+}

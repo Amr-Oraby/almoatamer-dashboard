@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils"
 import { useTranslations } from "next-intl"
 import { useRouter } from "@/i18n/routing"
 import { TableActionMenu } from "@/components/ui/table-action-menu"
+import { ConfirmDialog } from "@/components/ui/confirm-dialog"
 
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
@@ -31,7 +32,7 @@ const FakeSwitch = ({ checked, onChange }: { checked: boolean, onChange: () => v
   </button>
 )
 
-import { useClients } from "@/features/clients/hooks"
+import { useClients, useToggleActivateClient } from "@/features/clients/hooks"
 import { Client } from "@/features/clients/types"
 import Image from "next/image"
 
@@ -44,10 +45,15 @@ export function ClientsTable() {
     status: searchParams.get("status"),
   }
   const { data, isLoading } = useClients(page, filters)
+  
+  const { mutate: toggleActivate, isPending: isToggling } = useToggleActivateClient()
+  const [toggleActivateId, setToggleActivateId] = useState<string | null>(null)
+
   // Using Umrahs translations for common table columns since they are already defined there
   const t = useTranslations("Umrahs")
   const tCommon = useTranslations("Common")
   const tClients = useTranslations("Clients")
+  const tAuth = useTranslations("Auth")
 
   const columns = useMemo<ColumnDef<Client>[]>(() => [
     {
@@ -79,11 +85,22 @@ export function ClientsTable() {
             </div>
             <div className="flex flex-col">
               <span className="font-bold text-zinc-900 dark:text-zinc-100">{name}</span>
-              <span className="text-xs text-zinc-500">{client.email || t("not_found")}</span>
             </div>
           </div>
         )
       },
+    },
+    {
+      id: "email",
+      header: () => <div className="text-center">{tAuth("email")}</div>,
+      size: 200,
+      cell: ({ row }) => {
+        return (
+          <div className="text-center text-sm font-medium text-zinc-700 dark:text-zinc-300">
+            {row.original.email || "-"}
+          </div>
+        )
+      }
     },
     {
       id: "phone",
@@ -114,14 +131,29 @@ export function ClientsTable() {
       }
     },
     {
-      id: "isBlocked",
-      header: () => <div className="text-center">{t("block")}</div>,
-      size: 140,
-      cell: function Cell({ row }) {
-        const [isBlocked, setIsBlocked] = useState(!row.original.is_active)
+      id: "country",
+      header: () => <div className="text-center">{tCommon("country")}</div>,
+      size: 150,
+      cell: ({ row }) => {
+        const country = row.original.country
         return (
           <div className="flex items-center justify-center">
-            <FakeSwitch checked={isBlocked} onChange={() => setIsBlocked(!isBlocked)} />
+            <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+              {country?.name || "-"}
+            </span>
+          </div>
+        )
+      }
+    },
+    {
+      id: "is_active",
+      header: () => <div className="text-center">{tClients("active")}</div>,
+      size: 140,
+      cell: ({ row }) => {
+        const isActive = !!row.original.is_active
+        return (
+          <div className="flex items-center justify-center">
+            <FakeSwitch checked={isActive} onChange={() => setToggleActivateId(String(row.original.id))} />
           </div>
         )
       },
@@ -138,7 +170,7 @@ export function ClientsTable() {
         )
       },
     },
-  ], [t, router])
+  ], [t, tCommon, tClients, tAuth, router, page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />
@@ -169,6 +201,22 @@ export function ClientsTable() {
           </div>
         }
         bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
+      />
+
+      <ConfirmDialog
+        isOpen={!!toggleActivateId}
+        onClose={() => setToggleActivateId(null)}
+        onConfirm={() => {
+          if (toggleActivateId) {
+            toggleActivate(toggleActivateId, {
+              onSuccess: () => setToggleActivateId(null),
+            });
+          }
+        }}
+        isLoading={isToggling}
+        title="تأكيد العملية"
+        description="هل أنت متأكد أنك تريد تغيير حالة حساب هذا العميل؟"
+        confirmButtonColor="bg-primary hover:bg-primary/90"
       />
     </div>
   )
