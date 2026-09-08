@@ -150,7 +150,12 @@
     "status": "Status",
     "active": "Active",
     "inactive": "Inactive",
-    "date": "Date"
+    "date": "Date",
+    "create_new": "Create New Thanking Word",
+    "name": "Name",
+    "is_active": "Active Status",
+    "image": "Image",
+    "save": "Save"
   },
   "Almoatamers": {
     "not_found": "Moatamer not found",
@@ -507,6 +512,7 @@
     "apply": "Apply",
     "previous": "Previous",
     "next": "Next",
-    "clear_filters": "Clear Filters"
+    "clear_filters": "Clear Filters",
+    "add": "Add"
   }
 }

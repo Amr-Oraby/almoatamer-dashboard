@@ -1,5 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
-import { getThankingWords, getThankingWord } from "./api";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { getThankingWords, getThankingWord, createThankingword } from "./api";
+import { toast } from "sonner";
+import { CreateThankingWordFormValues } from "./schemas";
 
 export function useThankingWords(page: number = 1) {
     return useQuery({
@@ -13,5 +15,24 @@ export function useThankingWord(id: string) {
         queryKey: ["thanking-word", id],
         queryFn: () => getThankingWord(id),
         enabled: !!id,
+    });
+}
+
+export function useCreateThankingWord() {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: (data: CreateThankingWordFormValues) => createThankingword(data),
+        onSuccess: (response) => {
+            if (response.status === "success") {
+                toast.success(response.message || "Created successfully");
+                queryClient.invalidateQueries({ queryKey: ["thanking-words"] });
+            } else {
+                toast.error(response.message || "Something went wrong");
+            }
+        },
+        onError: (error: any) => {
+            toast.error(error?.response?.data?.message || error.message || "Something went wrong");
+        },
     });
 }

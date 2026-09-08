@@ -15,6 +15,7 @@ export function Switch({
 }: SwitchProps) {
   return (
     <button
+      type="button"
       onClick={onChange}
       className={cn(
         "w-11 h-6 rounded-full flex items-center px-1 transition-colors outline-none",

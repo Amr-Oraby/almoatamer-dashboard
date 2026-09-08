@@ -34,3 +34,9 @@ export interface SingleThankingWordResponse {
     status: string;
     message: string;
 }
+
+export interface CreateThankingWordResponse {
+    data: ThankingWord;
+    status: string;
+    message: string;
+}

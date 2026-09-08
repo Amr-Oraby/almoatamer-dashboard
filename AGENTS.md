@@ -120,3 +120,17 @@ When implementing a filtering functionality (e.g., filtering a table by status, 
    - Add the `<UrlFilter>` component to the `topContent` prop of the `<DataTable>` component, passing the correct `filterKey`, `placeholder`, and `options`.
 5. **Commit and Push**:
    - Once the feature is finished and everything is correct, commit the changes using `git add .` and `git commit -m "feat: Add filter functionality for [feature]"` and push to the repository.
+
+## Custom UI Components Rules
+
+When building or modifying UI components, be aware of the following custom implementations in this repository that differ from standard Radix/Shadcn defaults:
+
+1. **`Switch` Component (`components/ui/switch.tsx`)**: 
+   - This project uses a custom Switch component. DO NOT use Radix's `onCheckedChange` prop.
+   - **Correct**: `<Switch checked={isActive} onChange={() => setValue("is_active", !isActive)} />`
+   - **Incorrect**: `<Switch checked={isActive} onCheckedChange={(checked) => setValue("is_active", checked)} />` (This will throw a TypeScript error).
+2. **`DialogTrigger` (`components/ui/dialog.tsx`)**:
+   - This project uses `@base-ui/react/dialog` instead of Radix. 
+   - DO NOT use the `asChild` prop on `<DialogTrigger>`. It does not exist in Base UI.
+   - **Correct**: Use the `render` prop instead: `<DialogTrigger render={<Button className="..." />}>...</DialogTrigger>`
+   - **Incorrect**: `<DialogTrigger asChild><Button>...</Button></DialogTrigger>` (This will throw a TypeScript error).

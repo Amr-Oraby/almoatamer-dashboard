@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { ThankingWordsTable } from '@/features/thanking-words/components/ThankingWordsTable';
+import { CreateThankingWordModal } from '@/features/thanking-words/components/CreateThankingWordModal';
 
 export default function ThankingWordPage() {
   const t = useTranslations('Dashboard');
@@ -10,6 +11,7 @@ export default function ThankingWordPage() {
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-bold">{t('thanking_word')}</h1>
         </div>
+        <CreateThankingWordModal />
       </div>
 
       <ThankingWordsTable />
