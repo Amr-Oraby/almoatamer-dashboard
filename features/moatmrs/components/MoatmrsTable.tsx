@@ -20,16 +20,7 @@ import { Moatmr } from "@/features/moatmrs/types"
 import Image from "next/image"
 import { DeleteDialog } from "@/components/ui/delete-dialog";
 import { Badge } from "@/components/ui/badge"
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 
 const FakeSwitch = ({ checked, onChange }: { checked: boolean, onChange: () => void }) => (
   <button
@@ -276,34 +267,21 @@ export function MoatmrsTable() {
         isDeleting={isDeleting}
       />
 
-      <AlertDialog open={!!toggleAcceptId} onOpenChange={(open) => !open && setToggleAcceptId(null)}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>تأكيد العملية</AlertDialogTitle>
-            <AlertDialogDescription>
-              هل أنت متأكد أنك تريد تغيير حالة القبول لهذا المعتمر؟
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel disabled={isToggling} onClick={() => setToggleAcceptId(null)}>
-              إلغاء
-            </AlertDialogCancel>
-            <AlertDialogAction
-              onClick={(e) => {
-                e.preventDefault();
-                if (toggleAcceptId) {
-                  toggleAccept(toggleAcceptId, {
-                    onSuccess: () => setToggleAcceptId(null),
-                  });
-                }
-              }}
-              disabled={isToggling}
-            >
-              {isToggling ? "جاري التحميل..." : "تأكيد"}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <ConfirmDialog
+        isOpen={!!toggleAcceptId}
+        onClose={() => setToggleAcceptId(null)}
+        onConfirm={() => {
+          if (toggleAcceptId) {
+            toggleAccept(toggleAcceptId, {
+              onSuccess: () => setToggleAcceptId(null),
+            });
+          }
+        }}
+        isLoading={isToggling}
+        title="تأكيد العملية"
+        description="هل أنت متأكد أنك تريد تغيير حالة القبول لهذا المعتمر؟"
+        confirmButtonColor="bg-primary hover:bg-primary/90"
+      />
     </div>
   )
 }

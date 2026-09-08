@@ -4,7 +4,7 @@ import { MoatmrsResponse, SingleMoatmrResponse } from "./types";
 export async function getMoatmrs(page: number = 1, filters?: Record<string, string | null>): Promise<MoatmrsResponse> {
     const params = new URLSearchParams()
     params.append('page', page.toString())
-    
+
     if (filters) {
         Object.entries(filters).forEach(([key, value]) => {
             if (value !== null && value !== undefined && value !== '') {
@@ -12,7 +12,7 @@ export async function getMoatmrs(page: number = 1, filters?: Record<string, stri
             }
         })
     }
-    
+
     return apiClient<MoatmrsResponse>(`/api/moatmrs?${params.toString()}`);
 }
 export async function getMoatmrsWithoutPagination(): Promise<any> {
@@ -28,5 +28,5 @@ export async function deleteMoatmr(id: string): Promise<any> {
 }
 
 export async function toggleAcceptMoatmr(id: string): Promise<any> {
-    return apiClient<any>(`/api/accept-moatmer/${id}`, { method: 'POST' });
+    return apiClient<any>(`/api/accept-moatmer/${id}`, { method: 'POST', body: JSON.stringify({}) });
 }
