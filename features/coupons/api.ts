@@ -16,3 +16,10 @@ export async function deleteCoupon(id: string): Promise<any> {
 export async function toggleActivateCoupon(id: string): Promise<any> {
     return apiClient<any>(`/api/change_coupon_status/${id}`, { method: 'PUT', body: JSON.stringify({}) });
 }
+
+export async function createCoupon(data: FormData): Promise<SingleCouponResponse> {
+    return apiClient<SingleCouponResponse>('/api/add_coupon', {
+        method: 'POST',
+        body: data,
+    });
+}

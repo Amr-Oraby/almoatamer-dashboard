@@ -220,7 +220,13 @@
     "times_used": "Times Used",
     "status": "Status",
     "active": "Active",
-    "inactive": "Inactive"
+    "inactive": "Inactive",
+    "create_new": "Create Coupon",
+    "coupon_type": "Coupon Type",
+    "amount": "Fixed Amount",
+    "percentage": "Percentage",
+    "coupon_value": "Coupon Value",
+    "save": "Save"
   },
   "CouponCodes": {
     "not_found": "Coupon codes group not found",

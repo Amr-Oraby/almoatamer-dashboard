@@ -220,7 +220,13 @@
     "times_used": "مرات الاستخدام",
     "status": "الحالة",
     "active": "نشط",
-    "inactive": "غير نشط"
+    "inactive": "غير نشط",
+    "create_new": "إضافة كوبون جديد",
+    "coupon_type": "نوع الكوبون",
+    "amount": "مبلغ ثابت",
+    "percentage": "نسبة مئوية",
+    "coupon_value": "قيمة الكوبون",
+    "save": "حفظ"
   },
   "CouponCodes": {
     "not_found": "مجموعة الأكواد غير موجودة",
