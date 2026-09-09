@@ -38,7 +38,7 @@ export function UpdateReferralLinkForm({ linkId }: UpdateReferralLinkFormProps) 
             const item = linkData.data;
             reset({
                 name: item.marketer || "",
-                city_id: item.city?.id || item.city_id || 2,
+                city_id: item.city?.id || 2,
                 type: item.type || "",
                 value: item.value || 0,
                 identifier: item.identifier || "id",
