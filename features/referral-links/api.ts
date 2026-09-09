@@ -19,3 +19,10 @@ export async function createReferralLink(formData: FormData): Promise<any> {
         body: formData,
     });
 }
+
+export async function updateReferralLink(id: string, formData: FormData): Promise<any> {
+    return apiClient<any>(`/api/update-referral-link/${id}`, {
+        method: "PUT",
+        body: formData,
+    });
+}

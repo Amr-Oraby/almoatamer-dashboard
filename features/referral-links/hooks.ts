@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getReferralLinks, getReferralLink, deleteReferralLink, createReferralLink } from "./api";
+import { getReferralLinks, getReferralLink, deleteReferralLink, createReferralLink, updateReferralLink } from "./api";
 import { toast } from "sonner";
 
 export function useReferralLinks(page: number = 1) {
@@ -41,6 +41,21 @@ export function useCreateReferralLink() {
         },
         onError: (error: any) => {
             toast.error(error?.message || "حدث خطأ أثناء الإضافة");
+        },
+    });
+}
+
+export function useUpdateReferralLink(id: string) {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (formData: FormData) => updateReferralLink(id, formData),
+        onSuccess: (data: any) => {
+            toast.success(data?.message || "تم التعديل بنجاح");
+            queryClient.invalidateQueries({ queryKey: ["referral-links"] });
+            queryClient.invalidateQueries({ queryKey: ["referral-link", id] });
+        },
+        onError: (error: any) => {
+            toast.error(error?.message || "حدث خطأ أثناء التعديل");
         },
     });
 }

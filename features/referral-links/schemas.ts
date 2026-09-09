@@ -9,3 +9,6 @@ export const createReferralLinkSchema = z.object({
 });
 
 export type CreateReferralLinkFormValues = z.infer<typeof createReferralLinkSchema>;
+
+export const updateReferralLinkSchema = createReferralLinkSchema;
+export type UpdateReferralLinkFormValues = z.infer<typeof updateReferralLinkSchema>;

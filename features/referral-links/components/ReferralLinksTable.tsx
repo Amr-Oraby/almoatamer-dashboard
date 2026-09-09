@@ -124,6 +124,7 @@ export function ReferralLinksTable() {
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
               { text: t("details"), href: `/referral-links/show/${row.original.id}` },
+              { text: "تعديل", href: `/referral-links/update/${row.original.id}` },
               { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
             ]} />
           </div>
