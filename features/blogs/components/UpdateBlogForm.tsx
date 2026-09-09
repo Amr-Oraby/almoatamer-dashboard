@@ -23,6 +23,7 @@ export function UpdateBlogForm({ blogId }: UpdateBlogFormProps) {
     const router = useRouter();
     const [activeTab, setActiveTab] = useState<"ar" | "en">("ar");
     const [previewImage, setPreviewImage] = useState<{ url: string; isExisting?: boolean } | null>(null);
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
     const { mutateAsync: updateBlog, isPending } = useUpdateBlog(blogId);
     const { data: blogData, isLoading } = useBlogItem(blogId);
@@ -72,12 +73,14 @@ export function UpdateBlogForm({ blogId }: UpdateBlogFormProps) {
         const file = e.target.files?.[0];
         if (file) {
             setPreviewImage({ url: URL.createObjectURL(file) });
+            setSelectedFile(file);
             setValue("image", file);
         }
     };
 
     const removeImage = () => {
         setPreviewImage(null);
+        setSelectedFile(null);
         setValue("image", undefined);
     };
 
@@ -85,7 +88,7 @@ export function UpdateBlogForm({ blogId }: UpdateBlogFormProps) {
         try {
             const formData = new FormData();
             formData.append("is_active", values.is_active ? "1" : "0");
-            if (values.image) formData.append("image", values.image);
+            if (selectedFile) formData.append("image", selectedFile);
             Object.entries(values.ar).forEach(([key, value]) => formData.append(`ar[${key}]`, (value as string) || ""));
             Object.entries(values.en).forEach(([key, value]) => formData.append(`en[${key}]`, (value as string) || ""));
             await updateBlog(formData);
