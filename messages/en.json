@@ -594,6 +594,7 @@
     "title": "Title",
     "description": "Description",
     "cancel": "Cancel",
-    "save": "Save"
+    "save": "Save",
+    "translations": "Translations"
   }
 }

@@ -112,7 +112,7 @@ export function UpdateWhyUsModal({ isOpen, onClose, itemId }: UpdateWhyUsModalPr
                                     {iconPreview ? (
                                         <>
                                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                                            <img src={iconPreview} alt="Icon" className="w-full h-full object-contain p-2" unoptimized={undefined} />
+                                            <img src={iconPreview} alt="Icon" className="w-full h-full object-contain p-2" />
                                             <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                                 <Upload className="w-4 h-4 text-white" />
                                             </div>
