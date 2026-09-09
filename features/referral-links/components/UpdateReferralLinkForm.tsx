@@ -73,7 +73,7 @@ export function UpdateReferralLinkForm({ linkId }: UpdateReferralLinkFormProps) 
     }
 
     return (
-        <form onSubmit={handleSubmit((data) => onSubmit(data as UpdateReferralLinkFormValues))} className="w-full space-y-6">
+        <form onSubmit={handleSubmit((data) => onSubmit(data as unknown as UpdateReferralLinkFormValues))} className="w-full space-y-6">
             
             <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 md:p-6 space-y-6 shadow-sm">
                 <div className="border-b border-zinc-100 dark:border-zinc-800 pb-4">
@@ -121,7 +121,7 @@ export function UpdateReferralLinkForm({ linkId }: UpdateReferralLinkFormProps) 
                         <input
                             type="number"
                             {...register("city_id")}
-                            disabled
+                            readOnly
                             className="w-full h-10 px-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm cursor-not-allowed text-zinc-500"
                             dir="ltr"
                         />
@@ -132,7 +132,7 @@ export function UpdateReferralLinkForm({ linkId }: UpdateReferralLinkFormProps) 
                         <input
                             type="text"
                             {...register("identifier")}
-                            disabled
+                            readOnly
                             className="w-full h-10 px-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm cursor-not-allowed text-zinc-500"
                             dir="ltr"
                         />
