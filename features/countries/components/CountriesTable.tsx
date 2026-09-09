@@ -97,6 +97,7 @@ export function CountriesTable() {
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
               { text: t("details"), href: `/places/countries/show/${row.original.id}` },
+              { text: "تعديل", href: `/places/countries/update/${row.original.id}` },
               { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
             ]} />
           </div>

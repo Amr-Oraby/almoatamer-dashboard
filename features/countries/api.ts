@@ -19,3 +19,10 @@ export async function createCountry(formData: FormData): Promise<any> {
 export async function deleteCountry(id: string): Promise<any> {
     return apiClient<any>(`/api/delete_country/${id}`, { method: 'DELETE' });
 }
+
+export async function updateCountry(id: string, formData: FormData): Promise<any> {
+    return apiClient<any>(`/api/update_country/${id}`, {
+        method: "POST",
+        body: formData,
+    });
+}

@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getCountries, getCountry, deleteCountry, createCountry } from "./api";
+import { getCountries, getCountry, deleteCountry, createCountry, updateCountry } from "./api";
 import { toast } from "sonner";
 
 export function useCountries(page: number = 1) {
@@ -41,6 +41,21 @@ export function useCreateCountry() {
         },
         onError: (error: any) => {
             toast.error(error?.message || "حدث خطأ أثناء الإضافة");
+        },
+    });
+}
+
+export function useUpdateCountry(id: string) {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (formData: FormData) => updateCountry(id, formData),
+        onSuccess: (data: any) => {
+            toast.success(data?.message || "تم التعديل بنجاح");
+            queryClient.invalidateQueries({ queryKey: ["countries"] });
+            queryClient.invalidateQueries({ queryKey: ["country", id] });
+        },
+        onError: (error: any) => {
+            toast.error(error?.message || "حدث خطأ أثناء التعديل");
         },
     });
 }

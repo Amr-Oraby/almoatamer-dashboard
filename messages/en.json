@@ -107,7 +107,8 @@
     "identifier": "Identifier",
     "value": "Value",
     "city_id": "City ID",
-    "type": "Type"
+    "type": "Type",
+    "update_country": "Update Country"
   },
   "Auth": {
     "login": "Log in",

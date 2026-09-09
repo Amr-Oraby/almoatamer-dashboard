@@ -107,6 +107,32 @@ When implementing a "Create" modal or page for a feature (e.g., creating a new i
 7. **UI Integration**: Import and render the Create modal in the target page (e.g., `app/[locale]/(main)/[feature]/page.tsx`).
 8. **Commit and Push**: Commit the changes using `git add .` and `git commit -m "feat: Add create functionality for [feature]"` and push to the repository.
 
+## Update Feature Process
+
+When implementing an "Update" page for an existing feature (e.g., editing a Country), follow this exact process to ensure data is fetched, populated securely, and saved correctly:
+
+1. **Verify the Endpoint and Payload**: Verify the update endpoint (e.g., `update_country/{id}` via `POST`). The payload is typically identical to the Create payload, except file inputs (like images) might be optional.
+2. **Schema Definition (`features/[feature-name]/schemas.ts`)**: 
+   - Create an `update[Feature]Schema` based on the create schema.
+   - For file inputs, make them optional (e.g., `z.any().optional()`) so users aren't forced to re-upload files to change text.
+3. **API Setup (`features/[feature-name]/api.ts`)**: 
+   - Ensure the single fetch endpoint `get[Feature](id)` exists.
+   - Add the update function `update[Feature](id, formData)` using `apiClient` with `{ method: "POST", body: formData }`.
+4. **Hooks Creation (`features/[feature-name]/hooks.ts`)**: 
+   - Ensure `use[Feature](id)` query hook exists.
+   - Create `useUpdate[Feature](id)` mutation hook. On success, show a `toast.success`, and invalidate BOTH the list cache (`queryClient.invalidateQueries({ queryKey: ["features"] })`) and the single item cache (`queryClient.invalidateQueries({ queryKey: ["feature", id] })`).
+5. **Component Implementation (`components/Update[Feature]Form.tsx`)**:
+   - Create a full-width form mirroring the Create form UI.
+   - Use the `use[Feature](id)` hook to fetch existing data. Display a loading spinner while fetching.
+   - Use `useEffect` with `reset(defaultValues)` to map the fetched API data correctly into the `react-hook-form` inputs.
+   - Handle the submit similarly to Create, using `FormData`.
+6. **Page Integration (`app/[locale]/(main)/[feature]/update/[id]/page.tsx`)**:
+   - **CRITICAL (Next.js 15 & next-intl)**: The page component MUST be `async`, and `params` MUST be awaited as a Promise (`const { id } = await params;`).
+   - Because the page is async, you CANNOT use the client `useTranslations()` hook. You MUST use `import { getTranslations, getLocale } from 'next-intl/server';` and await them (`const t = await getTranslations(...)`). Failure to do this will cause the page to throw a silent server error and load forever.
+   - Pass the resolved `id` to the `<Update[Feature]Form countryId={id} />`.
+7. **Table Integration (`components/[Feature]Table.tsx`)**:
+   - Add an "Edit" (or "تعديل") button to the 3-dots `TableActionMenu` that links to `/[locale]/(main)/[feature]/update/${row.original.id}`.
+
 ## Delete Feature Process
 
 When implementing a delete functionality for a table item, follow this exact process:
