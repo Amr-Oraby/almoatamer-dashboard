@@ -18,7 +18,6 @@ import { useNewsList, useDeleteNews } from "@/features/news/hooks"
 import { NewsItem } from "@/features/news/types"
 import Image from "next/image"
 import { DeleteDialog } from "@/components/ui/delete-dialog"
-import { UpdateNewsModal } from "./UpdateNewsModal"
 
 export function NewsTable() {
   const searchParams = useSearchParams()
@@ -30,7 +29,6 @@ export function NewsTable() {
   const { data, isLoading } = useNewsList(page, filters)
   const { mutate: deleteNews, isPending: isDeleting } = useDeleteNews()
   const [deleteId, setDeleteId] = useState<string | null>(null)
-  const [updateId, setUpdateId] = useState<string | null>(null)
 
   const t = useTranslations("Umrahs")
   const tCommon = useTranslations("Common")
@@ -102,7 +100,7 @@ export function NewsTable() {
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
               { text: t("details"), href: `/news/show/${row.original.id}` },
-              { text: "تعديل", onClick: () => setUpdateId(String(row.original.id)) },
+              { text: "تعديل", href: `/news/update/${row.original.id}` },
               { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) },
             ]} />
           </div>
@@ -142,11 +140,6 @@ export function NewsTable() {
           }
         }}
         isDeleting={isDeleting}
-      />
-      <UpdateNewsModal
-        isOpen={!!updateId}
-        onClose={() => setUpdateId(null)}
-        newsId={updateId}
       />
     </div>
   )

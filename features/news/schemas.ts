@@ -21,10 +21,21 @@ export const createNewsSchema = z.object({
 
 export type CreateNewsFormValues = z.infer<typeof createNewsSchema>;
 
-export const updateNewsSchema = z.object({
+const localizedNewsUpdateSchema = z.object({
   title: z.string().min(1, "هذا الحقل مطلوب"),
   description: z.string().min(1, "هذا الحقل مطلوب"),
+  alt: z.string().optional(),
+  slug: z.string().optional(),
+  canonical: z.string().optional(),
+  short_desc: z.string().optional(),
+  keywords: z.string().optional(),
+});
+
+export const updateNewsSchema = z.object({
+  ar: localizedNewsUpdateSchema,
+  en: localizedNewsUpdateSchema,
   is_active: z.boolean(),
+  image: z.any().optional(),
 });
 
 export type UpdateNewsFormValues = z.infer<typeof updateNewsSchema>;
