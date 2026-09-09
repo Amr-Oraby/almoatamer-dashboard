@@ -234,7 +234,9 @@
     "seo_info": "SEO Info",
     "alt_text": "Image Alt Text",
     "edit": "Edit News",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "edit_hint": "Edit news details",
+    "create_hint": "Add a new news article with details"
   },
   "Blogs": {
     "create_new": "Create Blog",
