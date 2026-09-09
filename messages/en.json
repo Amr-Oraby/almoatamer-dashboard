@@ -114,7 +114,24 @@
     "update_language": "Update Language",
     "update_report_reason": "Update Report Reason",
     "edit_referral_link": "Edit Referral Link",
-    "edit_referral_link_desc": "Edit referral link details"
+    "edit_referral_link_desc": "Edit referral link details",
+    "view_profile": "View Profile",
+    "logout": "Logout",
+    "edit_profile_desc": "Manage your profile information",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "phone_code": "Phone Code",
+    "gender": "Gender",
+    "language": "Locale",
+    "location": "Location",
+    "change_image": "Change Image",
+    "change_password": "Change Password",
+    "change_password_desc": "Update your account password",
+    "old_password": "Old Password",
+    "new_password": "New Password",
+    "confirm_password": "Confirm New Password",
+    "security_details": "Security Details",
+    "security_details_desc": "Ensure your account is using a long, random password to stay secure."
   },
   "Auth": {
     "login": "Log in",
@@ -608,5 +625,9 @@
     "cancel": "Cancel",
     "save": "Save",
     "translations": "Translations"
+  },
+  "Profile": {
+    "title": "Profile",
+    "description": "View and manage your profile details."
   }
 }

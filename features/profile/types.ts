@@ -33,4 +33,10 @@ export interface ProfileResponse {
   message: string;
 }
 
-export type UpdateProfilePayload = any;
+export type UpdateProfilePayload = FormData;
+
+export interface ChangePasswordPayload {
+  old_password: string;
+  new_password: string;
+  new_password_confirmation: string;
+}

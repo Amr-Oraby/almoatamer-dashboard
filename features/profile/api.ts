@@ -3,4 +3,7 @@ import { ProfileResponse, UpdateProfilePayload } from "./types";
 
 export const getProfile = () => apiClient<ProfileResponse>("/api/profile");
 
-export const updateProfile = (data: UpdateProfilePayload) => apiClient("/api/profile", { method: "POST", body: JSON.stringify(data) });
+export const updateProfile = (data: FormData) => apiClient("/api/profile", { method: "POST", body: data });
+
+export const changePassword = (data: import("./types").ChangePasswordPayload) => 
+  apiClient("/api/change-password", { method: "POST", body: JSON.stringify(data) });

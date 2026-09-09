@@ -114,7 +114,24 @@
     "update_language": "تعديل اللغة",
     "update_report_reason": "تعديل سبب البلاغ",
     "edit_referral_link": "تعديل رابط الإحالة",
-    "edit_referral_link_desc": "تعديل بيانات رابط الإحالة"
+    "edit_referral_link_desc": "تعديل بيانات رابط الإحالة",
+    "view_profile": "عرض الملف الشخصي",
+    "logout": "تسجيل الخروج",
+    "edit_profile_desc": "إدارة معلومات ملفك الشخصي",
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "phone_code": "كود الدولة",
+    "gender": "الجنس",
+    "language": "اللغة",
+    "location": "الموقع",
+    "change_image": "تغيير الصورة",
+    "change_password": "تغيير كلمة المرور",
+    "change_password_desc": "قم بتحديث كلمة المرور الخاصة بحسابك",
+    "old_password": "كلمة المرور القديمة",
+    "new_password": "كلمة المرور الجديدة",
+    "confirm_password": "تأكيد كلمة المرور الجديدة",
+    "security_details": "تفاصيل الأمان",
+    "security_details_desc": "تأكد من أن حسابك يستخدم كلمة مرور طويلة وعشوائية للبقاء آمناً."
   },
   "Auth": {
     "login": "تسجيل الدخول",
@@ -608,5 +625,9 @@
     "cancel": "إلغاء",
     "save": "حفظ",
     "translations": "الترجمات"
+  },
+  "Profile": {
+    "title": "الملف الشخصي",
+    "description": "عرض وإدارة تفاصيل ملفك الشخصي."
   }
 }
