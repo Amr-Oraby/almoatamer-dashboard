@@ -48,7 +48,7 @@ export function useCreateReferralLink() {
 export function useUpdateReferralLink(id: string) {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (formData: FormData) => updateReferralLink(id, formData),
+        mutationFn: (data: any) => updateReferralLink(id, data),
         onSuccess: (data: any) => {
             toast.success(data?.message || "تم التعديل بنجاح");
             queryClient.invalidateQueries({ queryKey: ["referral-links"] });

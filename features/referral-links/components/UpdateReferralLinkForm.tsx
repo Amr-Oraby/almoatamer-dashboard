@@ -18,7 +18,7 @@ export function UpdateReferralLinkForm({ linkId }: UpdateReferralLinkFormProps) 
     const t = useTranslations("Dashboard");
     const router = useRouter();
     const localeCode = useLocale();
-    
+
     const { mutateAsync: updateReferralLink, isPending } = useUpdateReferralLink(linkId);
     const { data: linkData, isLoading } = useReferralLink(linkId);
 
@@ -48,16 +48,15 @@ export function UpdateReferralLinkForm({ linkId }: UpdateReferralLinkFormProps) 
 
     const onSubmit = async (data: UpdateReferralLinkFormValues) => {
         try {
-            const formData = new FormData();
-            formData.append("name", data.name);
-            formData.append("city_id", String(data.city_id));
-            formData.append("type", data.type);
-            formData.append("value", String(data.value));
-            formData.append("identifier", data.identifier);
-            // Include PUT method spoofing just in case, though apiClient has method: "PUT"
-            formData.append("_method", "PUT");
+            // Prepare payload matching the API requirements
+            const payload = {
+                name: data.name,
+                city_id: data.city_id,
+                type: data.type,
+                value: data.value,
+            };
 
-            await updateReferralLink(formData);
+            await updateReferralLink(payload);
             router.push(`/${localeCode}/referral-links`);
         } catch (error) {
             console.error("Error updating referral link:", error);
@@ -74,13 +73,13 @@ export function UpdateReferralLinkForm({ linkId }: UpdateReferralLinkFormProps) 
 
     return (
         <form onSubmit={handleSubmit((data) => onSubmit(data as unknown as UpdateReferralLinkFormValues))} className="w-full space-y-6">
-            
+
             <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 md:p-6 space-y-6 shadow-sm">
                 <div className="border-b border-zinc-100 dark:border-zinc-800 pb-4">
                     <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">{t("general_information", { fallback: "General Information" })}</h2>
                     <p className="text-sm text-zinc-500 mt-1">Update the details for the referral link</p>
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                         <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">{t("name", { fallback: "Name" })}</label>
