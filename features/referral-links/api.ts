@@ -12,3 +12,10 @@ export async function getReferralLink(id: string): Promise<SingleReferralLinkRes
 export async function deleteReferralLink(id: string): Promise<any> {
     return apiClient<any>(`/api/delete-referral-link/${id}`, { method: 'DELETE' });
 }
+
+export async function createReferralLink(formData: FormData): Promise<any> {
+    return apiClient<any>(`/api/create-referral-link`, {
+        method: "POST",
+        body: formData,
+    });
+}

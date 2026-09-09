@@ -9,6 +9,13 @@ export async function getFaq(id: string): Promise<SingleFaqResponse> {
     return apiClient<SingleFaqResponse>(`/api/faq/${id}`);
 }
 
+export async function createFaq(formData: FormData): Promise<any> {
+    return apiClient<any>(`/api/create-faq`, {
+        method: "POST",
+        body: formData,
+    });
+}
+
 export async function deleteFaq(id: string): Promise<any> {
     return apiClient<any>(`/api/faq/${id}`, { method: 'DELETE' });
 }

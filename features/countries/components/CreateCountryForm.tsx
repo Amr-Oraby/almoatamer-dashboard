@@ -45,10 +45,10 @@ export function CreateCountryForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit((data) => onSubmit(data as CreateCountryFormValues))} className="max-w-4xl mx-auto space-y-8">
+        <form onSubmit={handleSubmit((data) => onSubmit(data as CreateCountryFormValues))} className="w-full space-y-6">
             
             {/* General Information */}
-            <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 md:p-8 space-y-6 shadow-sm">
+            <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 md:p-6 space-y-6 shadow-sm">
                 <div className="border-b border-zinc-100 dark:border-zinc-800 pb-4">
                     <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">{t("general_information")}</h2>
                     <p className="text-sm text-zinc-500 mt-1">Enter the core details and flag for the country</p>
@@ -61,7 +61,7 @@ export function CreateCountryForm() {
                             type="file"
                             accept="image/*"
                             {...register("flag")}
-                            className="w-full h-11 px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer"
+                            className="w-full h-10 px-3 py-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer"
                         />
                         {errors.flag && <p className="text-sm text-red-500">{errors.flag.message as string}</p>}
                     </div>
@@ -72,7 +72,7 @@ export function CreateCountryForm() {
                             type="text"
                             placeholder="e.g. SA, EG"
                             {...register("code")}
-                            className="w-full h-11 px-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-left"
+                            className="w-full h-10 px-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-left text-sm"
                             dir="ltr"
                         />
                         {errors.code && <p className="text-sm text-red-500">{errors.code.message as string}</p>}
@@ -84,7 +84,7 @@ export function CreateCountryForm() {
                             type="text"
                             placeholder="e.g. KSA, EGY"
                             {...register("short_name")}
-                            className="w-full h-11 px-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-left"
+                            className="w-full h-10 px-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-left text-sm"
                             dir="ltr"
                         />
                         {errors.short_name && <p className="text-sm text-red-500">{errors.short_name.message as string}</p>}
@@ -96,7 +96,7 @@ export function CreateCountryForm() {
                             type="number"
                             placeholder="e.g. 9 or 10"
                             {...register("phone_length")}
-                            className="w-full h-11 px-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-left"
+                            className="w-full h-10 px-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-left text-sm"
                             dir="ltr"
                         />
                         {errors.phone_length && <p className="text-sm text-red-500">{errors.phone_length.message as string}</p>}
@@ -105,7 +105,7 @@ export function CreateCountryForm() {
             </div>
 
             {/* Translations */}
-            <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 md:p-8 space-y-6 shadow-sm">
+            <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 md:p-6 space-y-6 shadow-sm">
                 <div className="border-b border-zinc-100 dark:border-zinc-800 pb-4">
                     <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">{t("translations")}</h2>
                     <p className="text-sm text-zinc-500 mt-1">Provide the country and nationality name for each language</p>
@@ -113,7 +113,7 @@ export function CreateCountryForm() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {LOCALES.map((loc) => (
-                        <div key={loc} className="space-y-5 p-5 border border-zinc-100 dark:border-zinc-800 rounded-2xl bg-zinc-50/50 dark:bg-zinc-900/30">
+                        <div key={loc} className="space-y-5 p-4 md:p-5 border border-zinc-100 dark:border-zinc-800 rounded-2xl bg-zinc-50/50 dark:bg-zinc-900/30 transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-900/50">
                             <div className="flex items-center gap-3 border-b border-zinc-200/60 dark:border-zinc-800 pb-3">
                                 <div className="w-8 h-8 rounded-full bg-white dark:bg-zinc-800 shadow-sm border border-zinc-200 dark:border-zinc-700 flex items-center justify-center text-xs font-bold uppercase text-zinc-700 dark:text-zinc-300">
                                     {loc}
@@ -123,22 +123,22 @@ export function CreateCountryForm() {
                             
                             <div className="space-y-4">
                                 <div className="space-y-2">
-                                    <label className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase">{t("name")}</label>
+                                    <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">{t("name")}</label>
                                     <input
                                         type="text"
                                         {...register(`${loc}.name`)}
-                                        className="w-full h-11 px-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                                        className="w-full h-10 px-3 text-sm rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                                     />
                                     {errors[loc]?.name && (
                                         <p className="text-xs text-red-500 font-medium">{errors[loc]?.name?.message as string}</p>
                                     )}
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase">{t("nationality_name")}</label>
+                                    <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">{t("nationality_name")}</label>
                                     <input
                                         type="text"
                                         {...register(`${loc}.nationality_name`)}
-                                        className="w-full h-11 px-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                                        className="w-full h-10 px-3 text-sm rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                                     />
                                     {errors[loc]?.nationality_name && (
                                         <p className="text-xs text-red-500 font-medium">{errors[loc]?.nationality_name?.message as string}</p>

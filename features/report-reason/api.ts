@@ -12,3 +12,10 @@ export async function getReportReason(id: string): Promise<SingleReportReasonRes
 export async function deleteReportReason(id: string): Promise<any> {
     return apiClient<any>(`/api/report-reason/${id}`, { method: 'DELETE' });
 }
+
+export async function createReportReason(formData: FormData): Promise<any> {
+    return apiClient<any>(`/api/create-report-reason`, {
+        method: "POST",
+        body: formData,
+    });
+}

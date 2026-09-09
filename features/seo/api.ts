@@ -20,6 +20,13 @@ export async function getSeo(id: string): Promise<SingleSeoResponse> {
     return apiClient<SingleSeoResponse>(`/api/seo/${id}`);
 }
 
+export async function createSeo(formData: FormData): Promise<any> {
+    return apiClient<any>(`/api/seo`, {
+        method: "POST",
+        body: formData,
+    });
+}
+
 export async function deleteSeo(id: string): Promise<any> {
     return apiClient<any>(`/api/seo/${id}`, { method: 'DELETE' });
 }

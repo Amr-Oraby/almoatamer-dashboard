@@ -5,86 +5,48 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations, useLocale } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
-import { useCreateLanguage } from "../hooks";
-import { createLanguageSchema, CreateLanguageFormValues } from "../schemas";
+import { useCreateReportReason } from "../hooks";
+import { createReportReasonSchema, CreateReportReasonFormValues } from "../schemas";
 import { useRouter } from "next/navigation";
 
 const LOCALES = ["en", "ar", "fa", "ms", "tr", "iid"] as const;
 
-export function CreateLanguageForm() {
+export function CreateReportReasonForm() {
     const t = useTranslations("Dashboard");
     const router = useRouter();
     const localeCode = useLocale();
-    const { mutateAsync: createLanguage, isPending } = useCreateLanguage();
+    const { mutateAsync: createReportReason, isPending } = useCreateReportReason();
 
-    const { register, handleSubmit, formState: { errors } } = useForm<CreateLanguageFormValues>({
-        resolver: zodResolver(createLanguageSchema),
+    const { register, handleSubmit, formState: { errors } } = useForm<CreateReportReasonFormValues>({
+        resolver: zodResolver(createReportReasonSchema),
     });
 
-    const onSubmit = async (data: CreateLanguageFormValues) => {
+    const onSubmit = async (data: CreateReportReasonFormValues) => {
         try {
             const formData = new FormData();
-            formData.append("short_name", data.short_name);
             
-            if (data.flag && data.flag.length > 0) {
-                formData.append("flag", data.flag[0]);
-            }
-
             LOCALES.forEach(loc => {
                 formData.append(`${loc}[name]`, data[loc].name);
             });
 
-            await createLanguage(formData);
-            router.push(`/${localeCode}/languages`);
+            await createReportReason(formData);
+            router.push(`/${localeCode}/report-reason`);
         } catch (error) {
-            console.error("Error creating language:", error);
+            console.error("Error creating report reason:", error);
         }
     };
 
     return (
-        <form onSubmit={handleSubmit((data) => onSubmit(data as CreateLanguageFormValues))} className="w-full space-y-6">
+        <form onSubmit={handleSubmit((data) => onSubmit(data as CreateReportReasonFormValues))} className="w-full space-y-6">
             
-            {/* General Information */}
-            <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 md:p-6 space-y-6 shadow-sm">
-                <div className="border-b border-zinc-100 dark:border-zinc-800 pb-4">
-                    <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">{t("general_information")}</h2>
-                    <p className="text-sm text-zinc-500 mt-1">Enter the core details and flag for the language</p>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                        <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">{t("flag")}</label>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            {...register("flag")}
-                            className="w-full h-10 px-3 py-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer"
-                        />
-                        {errors.flag && <p className="text-sm text-red-500">{errors.flag.message as string}</p>}
-                    </div>
-
-                    <div className="space-y-2">
-                        <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">{t("short_name")}</label>
-                        <input
-                            type="text"
-                            placeholder="e.g. AR, EN"
-                            {...register("short_name")}
-                            className="w-full h-10 px-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-left text-sm"
-                            dir="ltr"
-                        />
-                        {errors.short_name && <p className="text-sm text-red-500">{errors.short_name.message as string}</p>}
-                    </div>
-                </div>
-            </div>
-
             {/* Translations */}
             <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 md:p-6 space-y-6 shadow-sm">
                 <div className="border-b border-zinc-100 dark:border-zinc-800 pb-4">
                     <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">{t("translations")}</h2>
-                    <p className="text-sm text-zinc-500 mt-1">Provide the language name for each locale</p>
+                    <p className="text-sm text-zinc-500 mt-1">Provide the name of the report reason for each locale</p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {LOCALES.map((loc) => (
                         <div key={loc} className="space-y-5 p-4 md:p-5 border border-zinc-100 dark:border-zinc-800 rounded-2xl bg-zinc-50/50 dark:bg-zinc-900/30 transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-900/50">
                             <div className="flex items-center gap-3 border-b border-zinc-200/60 dark:border-zinc-800 pb-3">
