@@ -43,8 +43,24 @@ export function UpdateBlogForm({ blogId }: UpdateBlogFormProps) {
             const item = blogData.data;
             reset({
                 is_active: item.is_active,
-                ar: { title: item.title || "", description: item.description || "", alt: item.alt || "", slug: item.slug || "", canonical: item.canonical || "", short_desc: item.short_desc || "", keywords: item.keywords || "" },
-                en: { title: item.title || "", description: item.description || "", alt: item.alt || "", slug: item.slug || "", canonical: item.canonical || "", short_desc: item.short_desc || "", keywords: item.keywords || "" },
+                ar: { 
+                    title: item.ar?.title || "", 
+                    description: item.ar?.description || "", 
+                    alt: item.ar?.alt || "", 
+                    slug: item.ar?.slug || "", 
+                    canonical: item.ar?.canonical || "", 
+                    short_desc: item.ar?.short_desc || "", 
+                    keywords: item.ar?.keywords || "" 
+                },
+                en: { 
+                    title: item.en?.title || "", 
+                    description: item.en?.description || "", 
+                    alt: item.en?.alt || "", 
+                    slug: item.en?.slug || "", 
+                    canonical: item.en?.canonical || "", 
+                    short_desc: item.en?.short_desc || "", 
+                    keywords: item.en?.keywords || "" 
+                },
             });
             if (item.images?.image) {
                 setPreviewImage({ url: item.images.image, isExisting: true });
