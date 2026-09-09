@@ -32,3 +32,10 @@ export async function createNews(data: FormData): Promise<SingleNewsResponse> {
         body: data,
     });
 }
+
+export async function updateNews(id: string, data: FormData): Promise<any> {
+    return apiClient<any>(`/api/update-news/${id}`, {
+        method: 'POST',
+        body: data,
+    });
+}

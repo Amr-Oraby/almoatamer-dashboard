@@ -232,7 +232,9 @@
     "not_found": "News not found",
     "no_title": "No title",
     "seo_info": "SEO Info",
-    "alt_text": "Image Alt Text"
+    "alt_text": "Image Alt Text",
+    "edit": "Edit News",
+    "cancel": "Cancel"
   },
   "Blogs": {
     "create_new": "Create Blog",

@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getNewsList, getNewsItem, deleteNews, createNews } from "./api";
+import { getNewsList, getNewsItem, deleteNews, createNews, updateNews } from "./api";
 import { toast } from "sonner";
 
 export function useNewsList(page: number = 1, filters?: Record<string, string | null>) {
@@ -41,6 +41,21 @@ export function useCreateNews() {
         },
         onError: (error: any) => {
             toast.error(error?.message || "حدث خطأ أثناء الإضافة");
+        },
+    });
+}
+
+export function useUpdateNews(id: string) {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (formData: FormData) => updateNews(id, formData),
+        onSuccess: (data: any) => {
+            toast.success(data?.message || "تم التعديل بنجاح");
+            queryClient.invalidateQueries({ queryKey: ["news"] });
+            queryClient.invalidateQueries({ queryKey: ["news", id] });
+        },
+        onError: (error: any) => {
+            toast.error(error?.message || "حدث خطأ أثناء التعديل");
         },
     });
 }

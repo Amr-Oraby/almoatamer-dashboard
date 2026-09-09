@@ -14,13 +14,11 @@ import { useSearchParams } from "next/navigation"
 import { UrlSearchFilter } from "@/components/ui/url-search-filter"
 import { ClearFiltersButton } from "@/components/ui/clear-filters-button"
 
-
 import { useNewsList, useDeleteNews } from "@/features/news/hooks"
 import { NewsItem } from "@/features/news/types"
 import Image from "next/image"
-import { DeleteDialog } from "@/components/ui/delete-dialog";
-
-
+import { DeleteDialog } from "@/components/ui/delete-dialog"
+import { UpdateNewsModal } from "./UpdateNewsModal"
 
 export function NewsTable() {
   const searchParams = useSearchParams()
@@ -32,8 +30,8 @@ export function NewsTable() {
   const { data, isLoading } = useNewsList(page, filters)
   const { mutate: deleteNews, isPending: isDeleting } = useDeleteNews()
   const [deleteId, setDeleteId] = useState<string | null>(null)
-  
-  // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
+  const [updateId, setUpdateId] = useState<string | null>(null)
+
   const t = useTranslations("Umrahs")
   const tCommon = useTranslations("Common")
 
@@ -104,13 +102,14 @@ export function NewsTable() {
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
               { text: t("details"), href: `/news/show/${row.original.id}` },
-              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
+              { text: "تعديل", onClick: () => setUpdateId(String(row.original.id)) },
+              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) },
             ]} />
           </div>
         )
       },
     },
-  ], [t, router, page, data?.meta?.per_page])
+  ], [t, tCommon, router, page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />
@@ -123,8 +122,8 @@ export function NewsTable() {
         data={data?.data || []}
         topContent={
           <div className="flex flex-wrap items-center gap-3 w-full bg-white dark:bg-zinc-900/50 p-4 rounded-2xl mb-4">
-            <UrlSearchFilter 
-              filterKey="keyword" 
+            <UrlSearchFilter
+              filterKey="keyword"
               placeholder={tCommon("search_placeholder")}
               buttonText={tCommon("apply")}
             />
@@ -139,12 +138,15 @@ export function NewsTable() {
         onClose={() => setDeleteId(null)}
         onConfirm={() => {
           if (deleteId) {
-            deleteNews(deleteId, {
-              onSuccess: () => setDeleteId(null),
-            });
+            deleteNews(deleteId, { onSuccess: () => setDeleteId(null) });
           }
         }}
         isDeleting={isDeleting}
+      />
+      <UpdateNewsModal
+        isOpen={!!updateId}
+        onClose={() => setUpdateId(null)}
+        newsId={updateId}
       />
     </div>
   )
