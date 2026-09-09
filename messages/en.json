@@ -112,7 +112,9 @@
     "update_faq": "Update FAQ",
     "update_seo": "Update SEO",
     "update_language": "Update Language",
-    "update_report_reason": "Update Report Reason"
+    "update_report_reason": "Update Report Reason",
+    "edit_referral_link": "Edit Referral Link",
+    "edit_referral_link_desc": "Edit referral link details"
   },
   "Auth": {
     "login": "Log in",

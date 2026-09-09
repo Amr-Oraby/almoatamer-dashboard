@@ -112,7 +112,9 @@
     "update_faq": "تعديل الأسئلة الشائعة",
     "update_seo": "تعديل السيو",
     "update_language": "تعديل اللغة",
-    "update_report_reason": "تعديل سبب البلاغ"
+    "update_report_reason": "تعديل سبب البلاغ",
+    "edit_referral_link": "تعديل رابط الإحالة",
+    "edit_referral_link_desc": "تعديل بيانات رابط الإحالة"
   },
   "Auth": {
     "login": "تسجيل الدخول",
