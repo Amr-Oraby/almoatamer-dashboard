@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getSeos, getSeo, deleteSeo, toggleActivateSeo, createSeo } from "./api";
+import { getSeos, getSeo, deleteSeo, toggleActivateSeo, createSeo, updateSeo } from "./api";
 import { toast } from "sonner";
 
 export function useSeos(page: number = 1, filters?: Record<string, string | null>) {
@@ -55,6 +55,21 @@ export function useCreateSeo() {
         },
         onError: (error: any) => {
             toast.error(error?.message || "حدث خطأ أثناء الإضافة");
+        },
+    });
+}
+
+export function useUpdateSeo(id: string) {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (formData: FormData) => updateSeo(id, formData),
+        onSuccess: (data: any) => {
+            toast.success(data?.message || "تم التعديل بنجاح");
+            queryClient.invalidateQueries({ queryKey: ["seo"] });
+            queryClient.invalidateQueries({ queryKey: ["seo", id] });
+        },
+        onError: (error: any) => {
+            toast.error(error?.message || "حدث خطأ أثناء التعديل");
         },
     });
 }

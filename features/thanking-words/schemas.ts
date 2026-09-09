@@ -12,3 +12,12 @@ export const createThankingWordSchema = z.object({
 });
 
 export type CreateThankingWordFormValues = z.infer<typeof createThankingWordSchema>;
+
+export const updateThankingWordSchema = z.object({
+    name: z.string().min(1, { message: "Name is required" }),
+    text: z.string().min(1, { message: "Text is required" }),
+    image: z.any().optional(),
+    is_active: z.boolean(),
+});
+
+export type UpdateThankingWordFormValues = z.infer<typeof updateThankingWordSchema>;

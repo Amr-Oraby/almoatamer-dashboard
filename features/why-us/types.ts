@@ -1,10 +1,21 @@
+export interface WhyUsLocale {
+    title: string | null;
+    description: string | null;
+}
+
 export interface WhyUsItem {
     id: number;
-    icon: string;
+    icon: string | null;
     title: string;
     description: string;
     created_at: string;
     updated_at: string;
+    en: WhyUsLocale;
+    ar: WhyUsLocale;
+    fa: WhyUsLocale;
+    ms: WhyUsLocale;
+    tr: WhyUsLocale;
+    iid: WhyUsLocale;
 }
 
 export interface WhyUsResponse {

@@ -28,3 +28,10 @@ export async function createHomeBanner(data: CreateHomeBannerFormValues): Promis
         body: formData,
     });
 }
+
+export async function updateHomeBanner(formData: FormData): Promise<any> {
+    return apiClient<any>(`/api/update-home-banner`, {
+        method: "POST",
+        body: formData,
+    });
+}

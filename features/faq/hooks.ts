@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getFaqs, getFaq, deleteFaq, createFaq } from "./api";
+import { getFaqs, getFaq, deleteFaq, createFaq, updateFaq } from "./api";
 import { toast } from "sonner";
 
 export function useFaqs(page: number = 1) {
@@ -41,6 +41,21 @@ export function useCreateFaq() {
         },
         onError: (error: any) => {
             toast.error(error?.message || "حدث خطأ أثناء الإضافة");
+        },
+    });
+}
+
+export function useUpdateFaq(id: string) {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (formData: FormData) => updateFaq(id, formData),
+        onSuccess: (data: any) => {
+            toast.success(data?.message || "تم التعديل بنجاح");
+            queryClient.invalidateQueries({ queryKey: ["faqs"] });
+            queryClient.invalidateQueries({ queryKey: ["faq", id] });
+        },
+        onError: (error: any) => {
+            toast.error(error?.message || "حدث خطأ أثناء التعديل");
         },
     });
 }

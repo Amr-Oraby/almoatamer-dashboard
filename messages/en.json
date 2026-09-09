@@ -108,7 +108,11 @@
     "value": "Value",
     "city_id": "City ID",
     "type": "Type",
-    "update_country": "Update Country"
+    "update_country": "Update Country",
+    "update_faq": "Update FAQ",
+    "update_seo": "Update SEO",
+    "update_language": "Update Language",
+    "update_report_reason": "Update Report Reason"
   },
   "Auth": {
     "login": "Log in",
@@ -176,17 +180,19 @@
     "not_found": "Thanking word not found",
     "no_name": "No name",
     "word_details": "Word Details",
-    "text": "Text",
+    "text": "Text Content",
     "status": "Status",
     "active": "Active",
     "inactive": "Inactive",
     "date": "Date",
-    "create_new": "Create New Thanking Word",
+    "create_new": "Create New",
     "name": "Name",
     "is_active": "Active Status",
     "image": "Image",
     "save": "Save",
-    "delete": "Delete"
+    "delete": "Delete",
+    "update": "Update Thanking Word",
+    "cancel": "Cancel"
   },
   "Almoatamers": {
     "not_found": "Moatamer not found",
@@ -571,10 +577,23 @@
     "add_more": "Add More",
     "upload_files": "Upload files",
     "save": "Save",
-    "update": "Update",
+    "update": "Update Banner",
     "active": "Active",
     "inactive": "Inactive",
     "delete": "Delete",
-    "not_found": "Banner not found"
+    "not_found": "Banner not found",
+    "cancel": "Cancel",
+    "image": "Image"
+  },
+  "WhyUs": {
+    "add": "Add",
+    "create_title": "Add New Why Us",
+    "update_title": "Edit Why Us",
+    "icon": "Icon",
+    "icon_hint": "Select an image file for the icon (PNG, SVG, JPG)",
+    "title": "Title",
+    "description": "Description",
+    "cancel": "Cancel",
+    "save": "Save"
   }
 }

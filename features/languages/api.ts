@@ -19,3 +19,10 @@ export async function createLanguage(formData: FormData): Promise<any> {
 export async function deleteLanguage(id: string): Promise<any> {
     return apiClient<any>(`/api/language/${id}`, { method: 'DELETE' });
 }
+
+export async function updateLanguage(id: string, formData: FormData): Promise<any> {
+    return apiClient<any>(`/api/language/${id}`, {
+        method: "POST",
+        body: formData,
+    });
+}

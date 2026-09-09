@@ -15,9 +15,8 @@ import { useSearchParams } from "next/navigation"
 import { useThankingWords, useDeleteThankingWord } from "@/features/thanking-words/hooks"
 import { ThankingWord } from "@/features/thanking-words/types"
 import { DeleteDialog } from "@/components/ui/delete-dialog"
+import { UpdateThankingWordModal } from "./UpdateThankingWordModal"
 import Image from "next/image"
-
-
 
 export function ThankingWordsTable() {
   const searchParams = useSearchParams()
@@ -27,6 +26,8 @@ export function ThankingWordsTable() {
   
   const [itemToDelete, setItemToDelete] = useState<number | null>(null)
   const { mutate: deleteItem, isPending: isDeleting } = useDeleteThankingWord()
+
+  const [itemToUpdate, setItemToUpdate] = useState<string | null>(null)
 
   const handleDelete = () => {
     if (itemToDelete) {
@@ -124,6 +125,7 @@ export function ThankingWordsTable() {
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
               { text: tUmrahs("details", { fallback: "Details" }), href: `/ui-management/thanking-word/show/${row.original.id}` },
+              { text: "تعديل", onClick: () => setItemToUpdate(String(row.original.id)) },
               { text: t("delete", { fallback: "Delete" }), onClick: () => setItemToDelete(row.original.id), isDestructive: true }
             ]} />
           </div>
@@ -148,6 +150,11 @@ export function ThankingWordsTable() {
         onClose={() => setItemToDelete(null)}
         onConfirm={handleDelete}
         isDeleting={isDeleting}
+      />
+      <UpdateThankingWordModal 
+        isOpen={itemToUpdate !== null} 
+        onClose={() => setItemToUpdate(null)} 
+        wordId={itemToUpdate} 
       />
     </div>
   )

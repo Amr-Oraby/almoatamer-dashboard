@@ -108,7 +108,11 @@
     "value": "القيمة",
     "city_id": "معرف المدينة",
     "type": "النوع",
-    "update_country": "تعديل الدولة"
+    "update_country": "تعديل الدولة",
+    "update_faq": "تعديل الأسئلة الشائعة",
+    "update_seo": "تعديل السيو",
+    "update_language": "تعديل اللغة",
+    "update_report_reason": "تعديل سبب البلاغ"
   },
   "Auth": {
     "login": "تسجيل الدخول",
@@ -176,17 +180,19 @@
     "not_found": "كلمة الشكر غير موجودة",
     "no_name": "بدون اسم",
     "word_details": "تفاصيل الكلمة",
-    "text": "نص الكلمة",
+    "text": "النص",
     "status": "الحالة",
     "active": "نشط",
     "inactive": "غير نشط",
     "date": "التاريخ",
-    "create_new": "إنشاء كلمة شكر جديدة",
+    "create_new": "إضافة جديد",
     "name": "الاسم",
-    "is_active": "حالة التفعيل",
+    "is_active": "الحالة (نشط)",
     "image": "الصورة",
     "save": "حفظ",
-    "delete": "حذف"
+    "delete": "حذف",
+    "update": "تعديل رسالة الشكر",
+    "cancel": "إلغاء"
   },
   "Almoatamers": {
     "not_found": "المعتمر غير موجود",
@@ -566,15 +572,28 @@
   },
   "HomeBanners": {
     "create_new": "إضافة بانر جديد",
-    "is_active": "حالة التفعيل",
+    "is_active": "الحالة (نشط)",
     "images": "الصور",
     "add_more": "إضافة المزيد",
-    "upload_files": "رفع الملفات",
+    "upload_files": "رفع ملفات",
     "save": "حفظ",
-    "update": "تحديث",
+    "update": "تعديل البانر",
     "active": "نشط",
     "inactive": "غير نشط",
     "delete": "حذف",
-    "not_found": "البانر غير موجود"
+    "not_found": "البانر غير موجود",
+    "cancel": "إلغاء",
+    "image": "الصورة"
+  },
+  "WhyUs": {
+    "add": "إضافة",
+    "create_title": "إضافة سبب جديد",
+    "update_title": "تعديل السبب",
+    "icon": "الأيقونة",
+    "icon_hint": "اختر ملف صورة للأيقونة (PNG, SVG, JPG)",
+    "title": "العنوان",
+    "description": "الوصف",
+    "cancel": "إلغاء",
+    "save": "حفظ"
   }
 }

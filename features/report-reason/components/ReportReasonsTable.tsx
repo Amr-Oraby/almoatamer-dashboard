@@ -70,6 +70,7 @@ export function ReportReasonsTable() {
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
               { text: t("details"), onClick: () => setSelectedReportReason(row.original) },
+              { text: "تعديل", href: `/report-reason/update/${row.original.id}` },
               { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
             ]} />
           </div>

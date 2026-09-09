@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getThankingWords, getThankingWord, createThankingword, deleteThankingWord } from "./api";
+import { getThankingWords, getThankingWord, createThankingword, deleteThankingWord, updateThankingWord } from "./api";
 import { toast } from "sonner";
 import { CreateThankingWordFormValues } from "./schemas";
 
@@ -46,6 +46,26 @@ export function useDeleteThankingWord() {
             if (response.status === "success") {
                 toast.success(response.message || "Deleted successfully");
                 queryClient.invalidateQueries({ queryKey: ["thanking-words"] });
+            } else {
+                toast.error(response.message || "Something went wrong");
+            }
+        },
+        onError: (error: any) => {
+            toast.error(error?.response?.data?.message || error.message || "Something went wrong");
+        },
+    });
+}
+
+export function useUpdateThankingWord(id: string) {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: updateThankingWord,
+        onSuccess: (response: any) => {
+            if (response.status === "success") {
+                toast.success(response.message || "Updated successfully");
+                queryClient.invalidateQueries({ queryKey: ["thanking-words"] });
+                queryClient.invalidateQueries({ queryKey: ["thanking-word", id] });
             } else {
                 toast.error(response.message || "Something went wrong");
             }

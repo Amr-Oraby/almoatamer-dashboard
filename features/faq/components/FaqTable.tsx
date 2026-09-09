@@ -84,6 +84,7 @@ export function FaqTable() {
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
               { text: t("details"), onClick: () => setSelectedFaq(row.original) },
+              { text: "تعديل", href: `/public-pages/faq/update/${row.original.id}` },
               { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
             ]} />
           </div>

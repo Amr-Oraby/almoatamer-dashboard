@@ -97,6 +97,7 @@ export function SeoTable() {
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
               { text: t("details"), onClick: () => setSelectedSeo(row.original) },
+              { text: "تعديل", href: `/seo/update/${row.original.id}` },
               { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
             ]} />
           </div>

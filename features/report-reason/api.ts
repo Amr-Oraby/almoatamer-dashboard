@@ -19,3 +19,10 @@ export async function createReportReason(formData: FormData): Promise<any> {
         body: formData,
     });
 }
+
+export async function updateReportReason(formData: FormData): Promise<any> {
+    return apiClient<any>(`/api/update-report-reason`, {
+        method: "POST",
+        body: formData,
+    });
+}

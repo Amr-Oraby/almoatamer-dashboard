@@ -1,8 +1,22 @@
+export interface SeoTranslation {
+    title: string | null;
+    description: string | null;
+    canonical: string | null;
+    slug: string | null;
+    keywords: string | null;
+}
+
 export interface SeoItem {
     id: number;
     title: string;
     seoable_type: string;
     is_active: boolean;
+    en?: SeoTranslation | null;
+    ar?: SeoTranslation | null;
+    fa?: SeoTranslation | null;
+    ms?: SeoTranslation | null;
+    tr?: SeoTranslation | null;
+    iid?: SeoTranslation | null;
 }
 
 export interface SeoResponse {

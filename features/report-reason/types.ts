@@ -6,6 +6,10 @@ export interface ReportReasonItem {
     id: number;
     en: ReportReasonTranslation | null;
     ar: ReportReasonTranslation | null;
+    fa?: ReportReasonTranslation | null;
+    ms?: ReportReasonTranslation | null;
+    tr?: ReportReasonTranslation | null;
+    iid?: ReportReasonTranslation | null;
     created_at: string | null;
     updated_at: string | null;
 }

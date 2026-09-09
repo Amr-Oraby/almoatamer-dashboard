@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { ColumnDef } from "@tanstack/react-table"
 import { DataTable } from "@/components/ui/data-table"
 import { TableSkeleton } from "@/components/ui/table-skeleton"
@@ -9,18 +9,23 @@ import { useRouter } from "@/i18n/routing"
 import { TableActionMenu } from "@/components/ui/table-action-menu"
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
-
-import { useWhyUsItems } from "@/features/why-us/hooks"
-import { WhyUsItem } from "@/features/why-us/types"
+import { DeleteDialog } from "@/components/ui/delete-dialog"
 import Image from "next/image"
+
+import { useWhyUsItems, useDeleteWhyUs } from "@/features/why-us/hooks"
+import { WhyUsItem } from "@/features/why-us/types"
+import { UpdateWhyUsModal } from "./UpdateWhyUsModal"
 
 export function WhyUsTable() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const page = Number(searchParams.get("page")) || 1
   const { data, isLoading } = useWhyUsItems(page)
-  
-  // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
+
+  const [deleteId, setDeleteId] = useState<string | null>(null)
+  const [updateId, setUpdateId] = useState<string | null>(null)
+  const { mutate: deleteItem, isPending: isDeleting } = useDeleteWhyUs()
+
   const t = useTranslations("Umrahs")
 
   const columns = useMemo<ColumnDef<WhyUsItem>[]>(() => [
@@ -75,7 +80,11 @@ export function WhyUsTable() {
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
-            <TableActionMenu items={[{ text: t("details"), href: `/ui-management/why-us/show/${row.original.id}` }]} />
+            <TableActionMenu items={[
+              { text: t("details"), href: `/ui-management/why-us/show/${row.original.id}` },
+              { text: "تعديل", onClick: () => setUpdateId(String(row.original.id)) },
+              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)), isDestructive: true },
+            ]} />
           </div>
         )
       },
@@ -92,6 +101,19 @@ export function WhyUsTable() {
         columns={columns}
         data={data?.data || []}
         bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
+      />
+      <DeleteDialog
+        isOpen={!!deleteId}
+        onClose={() => setDeleteId(null)}
+        onConfirm={() => {
+          if (deleteId) deleteItem(deleteId, { onSettled: () => setDeleteId(null) });
+        }}
+        isDeleting={isDeleting}
+      />
+      <UpdateWhyUsModal
+        isOpen={!!updateId}
+        onClose={() => setUpdateId(null)}
+        itemId={updateId}
       />
     </div>
   )

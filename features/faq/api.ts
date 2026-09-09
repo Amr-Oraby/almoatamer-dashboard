@@ -19,3 +19,10 @@ export async function createFaq(formData: FormData): Promise<any> {
 export async function deleteFaq(id: string): Promise<any> {
     return apiClient<any>(`/api/faq/${id}`, { method: 'DELETE' });
 }
+
+export async function updateFaq(id: string, formData: FormData): Promise<any> {
+    return apiClient<any>(`/api/update-faq/${id}`, {
+        method: "POST",
+        body: formData,
+    });
+}

@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getHomeBanners, getHomeBanner, deleteHomeBanner, createHomeBanner } from "./api";
+import { getHomeBanners, getHomeBanner, deleteHomeBanner, createHomeBanner, updateHomeBanner } from "./api";
 import { CreateHomeBannerFormValues } from "./schemas";
 import { toast } from "sonner";
 
@@ -41,6 +41,26 @@ export function useCreateHomeBanner() {
             if (response.status === "success") {
                 toast.success(response.message || "Created successfully");
                 queryClient.invalidateQueries({ queryKey: ["home-banners"] });
+            } else {
+                toast.error(response.message || "Something went wrong");
+            }
+        },
+        onError: (error: any) => {
+            toast.error(error?.response?.data?.message || error.message || "Something went wrong");
+        },
+    });
+}
+
+export function useUpdateHomeBanner(id: string) {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: updateHomeBanner,
+        onSuccess: (response: any) => {
+            if (response.status === "success") {
+                toast.success(response.message || "Updated successfully");
+                queryClient.invalidateQueries({ queryKey: ["home-banners"] });
+                queryClient.invalidateQueries({ queryKey: ["home-banner", id] });
             } else {
                 toast.error(response.message || "Something went wrong");
             }

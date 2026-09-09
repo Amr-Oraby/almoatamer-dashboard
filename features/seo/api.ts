@@ -34,3 +34,10 @@ export async function deleteSeo(id: string): Promise<any> {
 export async function toggleActivateSeo(id: string): Promise<any> {
     return apiClient<any>(`/api/seo/${id}`, { method: 'PUT', body: JSON.stringify({}) });
 }
+
+export async function updateSeo(id: string, formData: FormData): Promise<any> {
+    return apiClient<any>(`/api/update-seo/${id}`, {
+        method: "POST",
+        body: formData,
+    });
+}

@@ -14,3 +14,7 @@ export const createReportReasonSchema = z.object({
 });
 
 export type CreateReportReasonFormValues = z.infer<typeof createReportReasonSchema>;
+
+export const updateReportReasonSchema = createReportReasonSchema;
+
+export type UpdateReportReasonFormValues = z.infer<typeof updateReportReasonSchema>;

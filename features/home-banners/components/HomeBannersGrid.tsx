@@ -13,12 +13,15 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Loader2 } from "lucide-react"
 
+import { UpdateHomeBannerModal } from "./UpdateHomeBannerModal"
+
 export function HomeBannersGrid() {
   const searchParams = useSearchParams()
   const page = Number(searchParams.get("page")) || 1
   const { data, isLoading } = useHomeBanners(page)
   const { mutate: deleteHomeBanner, isPending: isDeleting } = useDeleteHomeBanner()
   const [deleteId, setDeleteId] = useState<string | null>(null)
+  const [updateId, setUpdateId] = useState<string | null>(null)
   
   const t = useTranslations("HomeBanners")
 
@@ -76,6 +79,7 @@ export function HomeBannersGrid() {
                     size="sm" 
                     variant="outline" 
                     className="h-8 shadow-sm text-xs font-medium px-3"
+                    onClick={() => setUpdateId(String(banner.id))}
                   >
                     {t("update", { fallback: "Update" })}
                   </Button>
@@ -111,6 +115,12 @@ export function HomeBannersGrid() {
           }
         }}
         isDeleting={isDeleting}
+      />
+
+      <UpdateHomeBannerModal
+        isOpen={!!updateId}
+        onClose={() => setUpdateId(null)}
+        bannerId={updateId}
       />
     </div>
   )

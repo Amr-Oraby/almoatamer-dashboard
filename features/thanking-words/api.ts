@@ -30,3 +30,10 @@ export async function deleteThankingWord(id: number | string): Promise<{ status:
         method: "DELETE",
     });
 }
+
+export async function updateThankingWord(formData: FormData): Promise<any> {
+    return apiClient<any>(`/api/update-home-info`, {
+        method: "POST",
+        body: formData,
+    });
+}

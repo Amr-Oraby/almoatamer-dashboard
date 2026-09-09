@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getReportReasons, getReportReason, deleteReportReason, createReportReason } from "./api";
+import { getReportReasons, getReportReason, deleteReportReason, createReportReason, updateReportReason } from "./api";
 import { toast } from "sonner";
 
 export function useReportReasons(page: number = 1) {
@@ -41,6 +41,21 @@ export function useCreateReportReason() {
         },
         onError: (error: any) => {
             toast.error(error?.message || "حدث خطأ أثناء الإضافة");
+        },
+    });
+}
+
+export function useUpdateReportReason(id: string) {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: updateReportReason,
+        onSuccess: (data: any) => {
+            toast.success(data?.message || "تم التعديل بنجاح");
+            queryClient.invalidateQueries({ queryKey: ["report-reasons"] });
+            queryClient.invalidateQueries({ queryKey: ["report-reason", id] });
+        },
+        onError: (error: any) => {
+            toast.error(error?.message || "حدث خطأ أثناء التعديل");
         },
     });
 }
