@@ -216,7 +216,7 @@
   "News": {
     "create_new": "Create News",
     "is_active": "Active Status",
-    "upload_files": "Upload Image",
+    "upload_files": "Image",
     "save": "Save",
     "title": "Title",
     "description": "Description",
@@ -236,7 +236,8 @@
     "edit": "Edit News",
     "cancel": "Cancel",
     "edit_hint": "Edit news details",
-    "create_hint": "Add a new news article with details"
+    "create_hint": "Add a new news article with details",
+    "upload_hint": "PNG, JPG, WEBP"
   },
   "Blogs": {
     "create_new": "Create Blog",

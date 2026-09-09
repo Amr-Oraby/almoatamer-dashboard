@@ -216,7 +216,7 @@
   "News": {
     "create_new": "إضافة خبر جديد",
     "is_active": "حالة التفعيل",
-    "upload_files": "رفع الصورة",
+    "upload_files": "الصورة",
     "save": "حفظ",
     "title": "العنوان",
     "description": "الوصف",
@@ -236,7 +236,8 @@
     "edit": "تعديل الخبر",
     "cancel": "إلغاء",
     "edit_hint": "تعديل تفاصيل الخبر",
-    "create_hint": "أضف خبراً جديداً مع تفاصيله"
+    "create_hint": "أضف خبراً جديداً مع تفاصيله",
+    "upload_hint": "PNG, JPG, WEBP"
   },
   "Blogs": {
     "create_new": "إضافة مدونة جديدة",
