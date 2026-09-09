@@ -70,12 +70,8 @@ export async function PUT(request: Request,
     }) {
     const { module, id } = await params;
 
-    const { searchParams } = new URL(request.url);
-    const queryString = searchParams.toString();
 
-    const endpoint = queryString
-        ? `${module}/${id}?${queryString}`
-        : `${module}/${id}`;
+    const endpoint = `${module}/${id}`;
 
     const contentType = request.headers.get("content-type") || "";
 

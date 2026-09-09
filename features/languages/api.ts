@@ -9,6 +9,13 @@ export async function getLanguage(id: string): Promise<SingleLanguageResponse> {
     return apiClient<SingleLanguageResponse>(`/api/language/${id}`);
 }
 
+export async function createLanguage(formData: FormData): Promise<any> {
+    return apiClient<any>(`/api/language`, {
+        method: "POST",
+        body: formData,
+    });
+}
+
 export async function deleteLanguage(id: string): Promise<any> {
     return apiClient<any>(`/api/language/${id}`, { method: 'DELETE' });
 }

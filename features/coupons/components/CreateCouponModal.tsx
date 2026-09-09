@@ -21,9 +21,10 @@ export function CreateCouponModal() {
         defaultValues: {
             status: true,
             type: "amount",
-            value: 0,
+            value: "",
             start_date: new Date().toISOString().split('T')[0],
             expiry_date: new Date().toISOString().split('T')[0],
+            usage_limit: "",
         }
     });
 
@@ -73,7 +74,7 @@ export function CreateCouponModal() {
                     </div>
                 </DialogHeader>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-4">
+                <form onSubmit={handleSubmit((data) => onSubmit(data as unknown as CreateCouponFormValues))} className="p-6 space-y-4">
                     <div className="grid grid-cols-1 gap-4">
                         <div className="space-y-2">
                             <label className="text-sm font-medium">{t("coupon_type")}</label>

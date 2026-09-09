@@ -153,3 +153,12 @@ When building or modifying UI components, be aware of the following custom imple
    - DO NOT use the `asChild` prop on `<DialogTrigger>`. It does not exist in Base UI.
    - **Correct**: Use the `render` prop instead: `<DialogTrigger render={<Button className="..." />}>...</DialogTrigger>`
    - **Incorrect**: `<DialogTrigger asChild><Button>...</Button></DialogTrigger>` (This will throw a TypeScript error).
+
+## Zod & React Hook Form Rules
+
+When using `zodResolver` with `react-hook-form`, you MUST avoid using Zod methods that create mismatched `input` and `output` types, as this breaks TypeScript's type inference for the form submission handler.
+
+1. **DO NOT use `z.coerce`** (e.g., `z.coerce.number()`). React Hook Form registers inputs as strings by default. Instead of coercing in the schema, accept `z.union([z.string(), z.number()])` and handle the transformation or validation using `.refine()` (e.g., `z.union([z.string(), z.number()]).refine(val => val !== "", "Required")`), then do the explicit casting in your `onSubmit` function when appending to `FormData`.
+2. **DO NOT use `.transform()`** in your schemas for forms. This changes the output type and causes the `SubmitHandler` to complain that the form's `FieldValues` are incompatible with the inferred output type.
+3. **DO NOT use `.default()`** in Zod schemas for forms. Handle default values exclusively in the `useForm({ defaultValues: ... })` configuration. Using Zod defaults makes fields optional in the input type, clashing with the required output type.
+4. **Always explicitly cast the submit handler argument** if needed: `<form onSubmit={handleSubmit((data) => onSubmit(data as unknown as YourFormValues))}>`.

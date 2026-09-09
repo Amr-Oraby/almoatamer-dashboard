@@ -2,10 +2,10 @@ import * as z from "zod";
 
 export const createCouponSchema = z.object({
   type: z.enum(["amount", "percentage"]),
-  value: z.coerce.number().min(0, "القيمة مطلوبة"),
+  value: z.union([z.string(), z.number()]).refine(val => val !== "" && Number(val) >= 0, "القيمة مطلوبة وصحيحة"),
   start_date: z.string().min(1, "تاريخ البدء مطلوب"),
   expiry_date: z.string().min(1, "تاريخ الانتهاء مطلوب"),
-  usage_limit: z.coerce.number().min(1).optional().or(z.literal("").transform(() => undefined)),
+  usage_limit: z.union([z.string(), z.number()]).optional(),
   status: z.boolean(),
 }).refine((data) => {
   if (data.start_date && data.expiry_date) {

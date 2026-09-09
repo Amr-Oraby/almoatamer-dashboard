@@ -9,6 +9,13 @@ export async function getCountry(id: string): Promise<SingleCountryResponse> {
     return apiClient<SingleCountryResponse>(`/api/country/${id}`);
 }
 
+export async function createCountry(formData: FormData): Promise<any> {
+    return apiClient<any>(`/api/create_country`, {
+        method: "POST",
+        body: formData,
+    });
+}
+
 export async function deleteCountry(id: string): Promise<any> {
     return apiClient<any>(`/api/delete_country/${id}`, { method: 'DELETE' });
 }
