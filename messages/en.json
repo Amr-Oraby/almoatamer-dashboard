@@ -239,7 +239,7 @@
   "Blogs": {
     "create_new": "Create Blog",
     "is_active": "Active Status",
-    "upload_files": "Upload Image",
+    "upload_files": "Image",
     "save": "Save",
     "title": "Title",
     "description": "Description",
@@ -255,7 +255,12 @@
     "not_found": "Blog not found",
     "no_title": "No title",
     "seo_info": "SEO Info",
-    "alt_text": "Image Alt Text"
+    "alt_text": "Image Alt Text",
+    "edit": "Edit Blog",
+    "edit_hint": "Edit blog details",
+    "create_hint": "Add a new blog post",
+    "cancel": "Cancel",
+    "upload_hint": "PNG, JPG, WEBP"
   },
   "Coupons": {
     "not_found": "Coupon not found",

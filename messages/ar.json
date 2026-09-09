@@ -239,7 +239,7 @@
   "Blogs": {
     "create_new": "إضافة مدونة جديدة",
     "is_active": "حالة التفعيل",
-    "upload_files": "رفع الصورة",
+    "upload_files": "الصورة",
     "save": "حفظ",
     "title": "العنوان",
     "description": "الوصف",
@@ -255,7 +255,12 @@
     "not_found": "المدونة غير موجودة",
     "no_title": "بدون عنوان",
     "seo_info": "معلومات SEO",
-    "alt_text": "النص البديل للصورة"
+    "alt_text": "النص البديل للصورة",
+    "edit": "تعديل المقال",
+    "edit_hint": "تعديل تفاصيل المقال",
+    "create_hint": "أضف مقالاً جديداً مع تفاصيله",
+    "cancel": "إلغاء",
+    "upload_hint": "PNG, JPG, WEBP"
   },
   "Coupons": {
     "not_found": "الكوبون غير موجود",

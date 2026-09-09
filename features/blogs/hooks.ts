@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getBlogsList, getBlogItem, deleteBlog, createBlog } from "./api";
+import { getBlogsList, getBlogItem, deleteBlog, createBlog, updateBlog } from "./api";
 import { toast } from "sonner";
 
 export function useBlogsList(page: number = 1) {
@@ -41,6 +41,21 @@ export function useCreateBlog() {
         },
         onError: (error: any) => {
             toast.error(error?.message || "حدث خطأ أثناء الإضافة");
+        },
+    });
+}
+
+export function useUpdateBlog(id: string) {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (formData: FormData) => updateBlog(id, formData),
+        onSuccess: (data: any) => {
+            toast.success(data?.message || "تم التعديل بنجاح");
+            queryClient.invalidateQueries({ queryKey: ["blogs"] });
+            queryClient.invalidateQueries({ queryKey: ["blog", id] });
+        },
+        onError: (error: any) => {
+            toast.error(error?.message || "حدث خطأ أثناء التعديل");
         },
     });
 }

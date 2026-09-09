@@ -19,3 +19,10 @@ export async function createBlog(data: FormData): Promise<SingleBlogResponse> {
         body: data,
     });
 }
+
+export async function updateBlog(id: string, data: FormData): Promise<any> {
+    return apiClient<any>(`/api/update-blog/${id}`, {
+        method: 'POST',
+        body: data,
+    });
+}
