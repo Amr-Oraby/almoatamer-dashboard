@@ -21,7 +21,7 @@ export async function getWallet(id: string): Promise<SingleWalletResponse> {
 }
 
 export async function chargeWallet(data: FormData): Promise<any> {
-    return apiClient<any>('/api/charge_wallet', {
+    return apiClient<any>('/api/charge-wallet', {
         method: 'POST',
         body: data,
     });

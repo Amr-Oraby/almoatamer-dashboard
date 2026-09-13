@@ -9,11 +9,14 @@ import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
 
 
-import { useRoles, useDeleteRole } from "@/features/roles/hooks"
+import { useRoles, useDeleteRole, useToggleRoleStatus } from "@/features/roles/hooks"
 import { RoleItem } from "@/features/roles/types"
 import { Badge } from "@/components/ui/badge"
 import { TableActionMenu } from "@/components/ui/table-action-menu"
 import { DeleteDialog } from "@/components/ui/delete-dialog";
+import { ConfirmDialog } from "@/components/ui/confirm-dialog";
+import { PermissionGuard } from "@/components/permissions-provider";
+import { Switch } from "@/components/ui/switch";
 
 export function RolesTable() {
   const searchParams = useSearchParams()
@@ -24,6 +27,7 @@ export function RolesTable() {
   
   // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
   const t = useTranslations("Umrahs")
+  const tCommon = useTranslations("Common")
 
   const columns = useMemo<ColumnDef<RoleItem>[]>(() => [
     {
@@ -73,18 +77,36 @@ export function RolesTable() {
     },
     {
       id: "is_active",
-      header: () => <div className="text-center">الحالة</div>,
-      size: 100,
-      cell: ({ row }) => {
-        const isActive = row.original.is_active
+      header: () => <div className="text-center">{tCommon("activation", { fallback: "التفعيل" })}</div>,
+      size: 120,
+      cell: function Cell({ row }) {
+        const isActive = row.original.is_active;
+        const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+        const { mutate: toggleStatus, isPending } = useToggleRoleStatus();
+
+        const handleConfirm = () => {
+          toggleStatus(String(row.original.id), {
+            onSuccess: () => setIsConfirmOpen(false)
+          });
+        };
+
         return (
-          <div className="flex justify-center">
-            <Badge variant={isActive ? "default" : "secondary"}>
-              {isActive ? "نشط" : "غير نشط"}
-            </Badge>
+          <div className="flex items-center justify-center">
+             <PermissionGuard permission="update-role" type="element">
+               <Switch checked={isActive} onChange={() => setIsConfirmOpen(true)} />
+             </PermissionGuard>
+             <ConfirmDialog
+               isOpen={isConfirmOpen}
+               onClose={() => setIsConfirmOpen(false)}
+               onConfirm={handleConfirm}
+               isLoading={isPending}
+               title="تأكيد العملية"
+               description="هل أنت متأكد أنك تريد تغيير حالة التفعيل لهذا الدور؟"
+               confirmButtonColor="bg-primary hover:bg-primary/90"
+             />
           </div>
         )
-      }
+      },
     },
     {
       id: "actions",

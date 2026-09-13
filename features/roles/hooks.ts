@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getRoles, getRole, deleteRole, updateRole } from "./api";
+import { getRoles, getRole, deleteRole, updateRole, toggleRoleStatus } from "./api";
 import { toast } from "sonner";
 
 export function useRoles(page: number = 1) {
@@ -66,6 +66,20 @@ export function useUpdateRole(id: string) {
         },
         onError: (error: any) => {
             toast.error(error?.message || "حدث خطأ أثناء التحديث");
+        },
+    });
+}
+
+export function useToggleRoleStatus() {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: toggleRoleStatus,
+        onSuccess: (data: any) => {
+            toast.success(data?.message || "تم تحديث الحالة بنجاح");
+            queryClient.invalidateQueries({ queryKey: ["roles"] });
+        },
+        onError: (error: any) => {
+            toast.error(error?.message || "حدث خطأ أثناء تحديث الحالة");
         },
     });
 }
