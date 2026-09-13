@@ -4,13 +4,12 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogPortal } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
 import { createCouponCodeSchema, CreateCouponCodeFormValues } from "../schemas";
 import { useGenerateCouponCodes } from "../hooks";
 import { Plus, Loader2 } from "lucide-react";
-import { DialogPortal } from "@base-ui/react/dialog";
 
 export function CreateCouponCodeModal() {
   const [isOpen, setIsOpen] = useState(false);
