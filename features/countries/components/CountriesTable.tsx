@@ -7,6 +7,7 @@ import { TableSkeleton } from "@/components/ui/table-skeleton"
 import { useTranslations } from "next-intl"
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
+import { PermissionGuard } from "@/components/permissions-provider"
 
 
 import { useCountries, useDeleteCountry } from "@/features/countries/hooks"
@@ -96,9 +97,9 @@ export function CountriesTable() {
         return (
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
-              { text: t("details"), href: `/places/countries/show/${row.original.id}` },
-              { text: "تعديل", href: `/places/countries/update/${row.original.id}` },
-              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
+              { text: t("details"), href: `/places/countries/show/${row.original.id}`, permission: "show-countries" },
+              { text: "تعديل", href: `/places/countries/update/${row.original.id}`, permission: "update-countries" },
+              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)), permission: "delete-countries", isDanger: true }
             ]} />
           </div>
         )
@@ -115,7 +116,11 @@ export function CountriesTable() {
       <DataTable
         columns={columns}
         data={data?.data || []}
-        bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
+        bottomContent={
+          <PermissionGuard permission="pagination-countries">
+            <UrlPagination pageCount={data?.meta?.last_page || 1} />
+          </PermissionGuard>
+        }
       />
 
       <DeleteDialog

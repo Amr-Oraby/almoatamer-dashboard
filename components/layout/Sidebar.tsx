@@ -394,9 +394,8 @@ export function Sidebar() {
                 <CollapsibleContent className="space-y-1 pt-1 pb-2">
                   {placesItems.map((item) => {
                     const isActive = pathname === item.href || (item.href !== '/places' && pathname.startsWith(item.href));
-                    return (
+                    const linkElement = (
                       <Link
-                        key={item.href}
                         href={item.href}
                         onClick={() => setIsOpen(false)}
                         className={`flex items-center gap-3 px-4 py-2 ml-4 rounded-md transition-colors text-sm ${isActive
@@ -407,6 +406,20 @@ export function Sidebar() {
                         <item.icon className="w-4 h-4" />
                         <span>{item.label}</span>
                       </Link>
+                    );
+
+                    if (item.href === '/places/countries') {
+                      return (
+                        <PermissionGuard permission="index-countries" type="element" key={item.href}>
+                          {linkElement}
+                        </PermissionGuard>
+                      );
+                    }
+
+                    return (
+                      <div key={item.href}>
+                        {linkElement}
+                      </div>
                     );
                   })}
                 </CollapsibleContent>
