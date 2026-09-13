@@ -640,7 +640,9 @@
     "edit": "تعديل",
     "activation": "التفعيل",
     "loading": "جاري التحميل...",
-    "load_more": "عرض المزيد"
+    "load_more": "عرض المزيد",
+    "cancel": "إلغاء",
+    "save": "حفظ"
   },
   "HomeBanners": {
     "create_new": "إضافة بانر جديد",
