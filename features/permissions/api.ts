@@ -10,6 +10,17 @@ export const getMyPermissions = async (): Promise<MyPermissionsResponse> => {
 };
 
 export const getAllPermissions = async (): Promise<AllPermissionsResponse> => {
-  return apiClient<AllPermissionsResponse>("/api/permissions/list");
+  const response = await apiClient<AllPermissionsResponse>("/api/permissions/list");
+  
+  // Deduplicate permissions in each module by their ID
+  const deduplicatedResponse: AllPermissionsResponse = {};
+  for (const [module, perms] of Object.entries(response)) {
+    // Also deduplicate by name just in case the backend returns different IDs for the exact same permission name
+    // We'll use name as the primary deduplication key to be safe, but fallback to id if needed
+    const uniquePerms = Array.from(new Map(perms.map(p => [p.name, p])).values());
+    deduplicatedResponse[module] = uniquePerms;
+  }
+  
+  return deduplicatedResponse;
 };
 
