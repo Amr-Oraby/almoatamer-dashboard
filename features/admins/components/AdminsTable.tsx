@@ -7,6 +7,7 @@ import { TableSkeleton } from "@/components/ui/table-skeleton"
 import { useTranslations } from "next-intl"
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
+import { PermissionGuard } from "@/components/permissions-provider"
 import { UrlSearchFilter } from "@/components/ui/url-search-filter"
 import { ClearFiltersButton } from "@/components/ui/clear-filters-button"
 
@@ -117,8 +118,8 @@ export function AdminsTable() {
         return (
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
-              { text: t("details"), href: `/roles/admins/show/${row.original.id}` },
-              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
+              { text: t("details"), href: `/roles/admins/show/${row.original.id}`, permission: "show-admin" },
+              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)), permission: "delete-admin", isDanger: true }
             ]} />
           </div>
         )
@@ -145,7 +146,11 @@ export function AdminsTable() {
             <ClearFiltersButton label={tCommon("clear_filters")} />
           </div>
         }
-        bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
+        bottomContent={
+          <PermissionGuard permission="pagination-admin">
+            <UrlPagination pageCount={data?.meta?.last_page || 1} />
+          </PermissionGuard>
+        }
       />
 
       <DeleteDialog
