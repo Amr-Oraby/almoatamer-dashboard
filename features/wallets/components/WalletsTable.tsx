@@ -107,7 +107,9 @@ export function WalletsTable() {
                 text: "شحن المحفظة", 
                 onClick: () => {
                   if (row.original.user) {
-                    setChargeWalletUser({ id: row.original.user.id, name: row.original.user.name })
+                    setTimeout(() => {
+                      setChargeWalletUser({ id: row.original.user.id, name: row.original.user.name })
+                    }, 150)
                   }
                 },
                 permission: "charge-wallet"
