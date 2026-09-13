@@ -106,9 +106,10 @@ export function WalletsTable() {
               { 
                 text: "شحن المحفظة", 
                 onClick: () => {
-                  if (row.original.user) {
+                  const user = row.original.user;
+                  if (user) {
                     setTimeout(() => {
-                      setChargeWalletUser({ id: row.original.user.id, name: row.original.user.name })
+                      setChargeWalletUser({ id: user.id, name: user.name })
                     }, 150)
                   }
                 },
