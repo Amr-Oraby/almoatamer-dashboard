@@ -15,6 +15,8 @@ import { ClearFiltersButton } from "@/components/ui/clear-filters-button"
 import { useWallets } from "@/features/wallets/hooks"
 import { WalletItem } from "@/features/wallets/types"
 import Image from "next/image"
+import { ChargeWalletModal } from "./ChargeWalletModal"
+import { useState } from "react"
 
 export function WalletsTable() {
   const searchParams = useSearchParams()
@@ -24,6 +26,7 @@ export function WalletsTable() {
     keyword: searchParams.get("keyword"),
   }
   const { data, isLoading } = useWallets(page, filters)
+  const [chargeWalletUser, setChargeWalletUser] = useState<{ id: number, name: string } | null>(null)
   
   // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
   const t = useTranslations("Umrahs")
@@ -98,7 +101,18 @@ export function WalletsTable() {
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
-            <TableActionMenu items={[{ text: t("details"), href: `/wallets/show/${row.original.id}`, permission: "show-wallet" }]} />
+            <TableActionMenu items={[
+              { text: t("details"), href: `/wallets/show/${row.original.id}`, permission: "show-wallet" },
+              { 
+                text: "شحن المحفظة", 
+                onClick: () => {
+                  if (row.original.user) {
+                    setChargeWalletUser({ id: row.original.user.id, name: row.original.user.name })
+                  }
+                },
+                permission: "charge-wallet"
+              }
+            ]} />
           </div>
         )
       },
@@ -125,6 +139,13 @@ export function WalletsTable() {
           </div>
         }
         bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
+      />
+
+      <ChargeWalletModal
+        isOpen={!!chargeWalletUser}
+        onClose={() => setChargeWalletUser(null)}
+        userId={chargeWalletUser?.id || 0}
+        userName={chargeWalletUser?.name || ""}
       />
     </div>
   )

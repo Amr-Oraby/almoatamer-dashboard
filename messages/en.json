@@ -400,7 +400,11 @@
     "amount": "Available Balance",
     "pending_amount": "Pending Balance",
     "user_info": "User Information",
-    "no_user": "No user"
+    "no_user": "No user",
+    "charge_wallet": "Charge Wallet",
+    "charge_for": "Charge wallet for:",
+    "charge_amount": "Charge Amount",
+    "charge": "Charge"
   },
   "Countries": {
     "not_found": "Country not found",

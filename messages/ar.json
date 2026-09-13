@@ -400,7 +400,11 @@
     "amount": "الرصيد المتاح",
     "pending_amount": "الرصيد المعلق",
     "user_info": "معلومات المستخدم",
-    "no_user": "لا يوجد مستخدم"
+    "no_user": "لا يوجد مستخدم",
+    "charge_wallet": "شحن المحفظة",
+    "charge_for": "شحن محفظة العميل:",
+    "charge_amount": "قيمة الشحن",
+    "charge": "شحن"
   },
   "Countries": {
     "not_found": "الدولة غير موجودة",

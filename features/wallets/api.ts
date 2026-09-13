@@ -19,3 +19,10 @@ export async function getWallets(page: number = 1, filters?: Record<string, stri
 export async function getWallet(id: string): Promise<SingleWalletResponse> {
     return apiClient<SingleWalletResponse>(`/api/wallet/${id}`);
 }
+
+export async function chargeWallet(data: FormData): Promise<any> {
+    return apiClient<any>('/api/charge_wallet', {
+        method: 'POST',
+        body: data,
+    });
+}
