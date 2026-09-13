@@ -92,7 +92,7 @@ export function PoliciesTable() {
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
-            <TableActionMenu items={[{ text: t("details"), href: `/public-pages/privacy/show/${row.original.id}` }]} />
+            <TableActionMenu items={[{ text: t("details"), href: `/public-pages/privacy/show/${row.original.id}`, permission: "show-policy" }]} />
           </div>
         )
       },

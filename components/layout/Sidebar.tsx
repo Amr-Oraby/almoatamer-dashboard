@@ -556,6 +556,14 @@ export function Sidebar() {
                       );
                     }
 
+                    if (item.href === '/public-pages/privacy') {
+                      return (
+                        <PermissionGuard permission="index-policy" type="element" key={item.href}>
+                          {linkElement}
+                        </PermissionGuard>
+                      );
+                    }
+
                     return (
                       <div key={item.href}>
                         {linkElement}

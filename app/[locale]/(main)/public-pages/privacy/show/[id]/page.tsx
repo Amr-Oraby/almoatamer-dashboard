@@ -6,6 +6,7 @@ import { usePolicy } from "@/features/policies/hooks"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Loader2, ShieldAlert, Languages, Type, AlignLeft, Calendar, Hash } from "lucide-react"
+import { PermissionGuard } from "@/components/permissions-provider"
 
 export default function PrivacyDetailsPage() {
   const params = useParams()
@@ -42,7 +43,8 @@ export default function PrivacyDetailsPage() {
   ]
 
   return (
-    <div className="space-y-6 pb-10 max-w-5xl mx-auto">
+    <PermissionGuard permission="show-policy">
+      <div className="space-y-6 pb-10 max-w-5xl mx-auto">
       {/* Header Card */}
       <Card className="rounded-2xl border-zinc-100 dark:border-zinc-800 shadow-sm overflow-hidden bg-white dark:bg-zinc-950">
         <div className="flex flex-col md:flex-row md:items-start justify-between p-6 gap-6">
@@ -120,5 +122,6 @@ export default function PrivacyDetailsPage() {
         ))}
       </div>
     </div>
+    </PermissionGuard>
   )
 }
