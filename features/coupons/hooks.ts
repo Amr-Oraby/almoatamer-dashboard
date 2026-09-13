@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getCoupons, getCoupon, deleteCoupon, toggleActivateCoupon, createCoupon } from "./api";
+import { getCoupons, getCoupon, deleteCoupon, toggleActivateCoupon, createCoupon, updateCoupon } from "./api";
 import { toast } from "sonner";
 
 export function useCoupons(page: number = 1) {
@@ -55,6 +55,21 @@ export function useCreateCoupon() {
         },
         onError: (error: any) => {
             toast.error(error?.message || "حدث خطأ أثناء الإضافة");
+        },
+    });
+}
+
+export function useUpdateCoupon(id: string) {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (formData: FormData) => updateCoupon(id, formData),
+        onSuccess: (data: any) => {
+            toast.success(data?.message || "تم التعديل بنجاح");
+            queryClient.invalidateQueries({ queryKey: ["coupons"] });
+            queryClient.invalidateQueries({ queryKey: ["coupon", id] });
+        },
+        onError: (error: any) => {
+            toast.error(error?.message || "حدث خطأ أثناء التعديل");
         },
     });
 }

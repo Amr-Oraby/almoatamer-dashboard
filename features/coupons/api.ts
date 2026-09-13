@@ -23,3 +23,10 @@ export async function createCoupon(data: FormData): Promise<SingleCouponResponse
         body: data,
     });
 }
+
+export async function updateCoupon(id: string, data: FormData): Promise<SingleCouponResponse> {
+    return apiClient<SingleCouponResponse>(`/api/update_coupon/${id}`, {
+        method: 'POST',
+        body: data,
+    });
+}

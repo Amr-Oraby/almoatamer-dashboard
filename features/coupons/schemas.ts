@@ -18,3 +18,6 @@ export const createCouponSchema = z.object({
 });
 
 export type CreateCouponFormValues = z.infer<typeof createCouponSchema>;
+
+export const updateCouponSchema = createCouponSchema;
+export type UpdateCouponFormValues = z.infer<typeof updateCouponSchema>;
