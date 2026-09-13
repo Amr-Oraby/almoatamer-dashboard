@@ -16,6 +16,7 @@ export async function getClients(page: number = 1, filters?: Record<string, stri
     // Using the local API proxy which maps to the backend endpoint
     return apiClient<ClientsResponse>(`/api/clients?${params.toString()}`);
 }
+
 export async function getClientsWithoutPagination(): Promise<any> {
     // Using the local API proxy which maps to the backend endpoint
     return apiClient<any>(`/api/clients-without-pagination`);
@@ -27,4 +28,11 @@ export async function getClient(id: string): Promise<SingleClientResponse> {
 
 export async function toggleActivateClient(id: string): Promise<any> {
     return apiClient<any>(`/api/activate-client/${id}`, { method: 'POST', body: JSON.stringify({}) });
+}
+
+export async function updateClient(id: string | number, formData: FormData): Promise<any> {
+    return apiClient<any>(`/api/update-client/${id}`, {
+        method: "POST",
+        body: formData,
+    });
 }

@@ -1,11 +1,18 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getLanguages, getLanguage, deleteLanguage, createLanguage, updateLanguage } from "./api";
+import { getLanguages, getLanguage, deleteLanguage, createLanguage, updateLanguage, getLanguagesWithoutPagination } from "./api";
 import { toast } from "sonner";
 
 export function useLanguages(page: number = 1) {
     return useQuery({
         queryKey: ["languages", page],
         queryFn: () => getLanguages(page),
+    });
+}
+
+export function useLanguagesWithoutPagination() {
+    return useQuery({
+        queryKey: ["languages-without-pagination"],
+        queryFn: getLanguagesWithoutPagination,
     });
 }
 

@@ -196,7 +196,19 @@
     "nationality": "Nationality",
     "client_umrahs": "Client Umrahs",
     "completed": "Completed",
-    "pending": "Pending"
+    "pending": "Pending",
+    "edit_client": "Edit Client",
+    "edit_client_desc": "Modify client information",
+    "change_image": "Change Image",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "phone_code": "Phone Code",
+    "select": "Select",
+    "language": "Language",
+    "country": "Country",
+    "active_desc": "Is this client active?",
+    "save": "Save"
   },
   "ThankingWords": {
     "not_found": "Thanking word not found",
@@ -233,7 +245,16 @@
     "accepted": "Accepted",
     "not_accepted": "Not Accepted",
     "nationality": "Nationality",
-    "total_orders": "Total Orders"
+    "total_orders": "Total Orders",
+    "create_new": "Add Moatamer",
+    "create_desc": "Add a new moatamer to the system",
+    "update": "Update Moatamer",
+    "update_desc": "Modify moatamer information",
+    "password": "Password",
+    "password_confirmation": "Confirm Password",
+    "pricing": "Pricing",
+    "price_from": "From Price",
+    "price_to": "To Price"
   },
   "News": {
     "create_new": "Create News",
@@ -603,7 +624,8 @@
     "previous": "Previous",
     "next": "Next",
     "clear_filters": "Clear Filters",
-    "add": "Add"
+    "add": "Add",
+    "edit": "Edit"
   },
   "HomeBanners": {
     "create_new": "Create New Banner",

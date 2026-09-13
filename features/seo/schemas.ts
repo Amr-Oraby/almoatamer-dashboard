@@ -9,9 +9,7 @@ const translationSchema = z.object({
 });
 
 export const createSeoSchema = z.object({
-  seoable_type: z.enum(["blogs", "news", "terms", "policies", "abouts", "galleries", "home", "contact_us", "landing_page"], {
-    required_error: "Type is required"
-  }),
+  seoable_type: z.enum(["blogs", "news", "terms", "policies", "abouts", "galleries", "home", "contact_us", "landing_page"]),
   en: translationSchema,
   ar: translationSchema,
   fa: translationSchema,

@@ -1,5 +1,5 @@
 import { apiClient } from "@/lib/api/client";
-import { HomeInfoResponse, StatisticsResponse } from "@/app/types/HomeManagementType";
+import { HomeInfoResponse, StatisticsResponse } from "@/features/home-management/types";
 
 export const homeManagementApi = {
   getUmrahHomeInfo: () => {

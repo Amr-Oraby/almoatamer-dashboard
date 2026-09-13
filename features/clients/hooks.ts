@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getClients, getClient, getClientsWithoutPagination, toggleActivateClient } from "./api";
+import { getClients, getClient, getClientsWithoutPagination, toggleActivateClient, updateClient } from "./api";
 import { toast } from "sonner";
 
 export function useClients(page: number = 1, filters?: Record<string, string | null>) {
@@ -34,6 +34,21 @@ export function useToggleActivateClient() {
         },
         onError: (error: any) => {
             toast.error(error.message || "فشلت العملية");
+        },
+    });
+}
+
+export function useUpdateClient(id: string | number) {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (formData: FormData) => updateClient(id, formData),
+        onSuccess: (data: any) => {
+            toast.success(data?.message || "تم التعديل بنجاح");
+            queryClient.invalidateQueries({ queryKey: ["clients"] });
+            queryClient.invalidateQueries({ queryKey: ["client", id.toString()] });
+        },
+        onError: (error: any) => {
+            toast.error(error?.message || "حدث خطأ أثناء التعديل");
         },
     });
 }

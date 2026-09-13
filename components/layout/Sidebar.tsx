@@ -72,9 +72,9 @@ export function Sidebar() {
   ];
 
   const additionalItems = [
-    { href: '/clients/show-all', icon: Users, label: t('clients_page') },
+    { href: '/clients/show-all', icon: Users, label: t('clients_page'), permission: "index-client" },
     { href: '/umrahs/show-all', icon: Plane, label: t('umrahs_page') },
-    { href: '/almoatamers', icon: UserCheck, label: t('almoatamers_page') },
+    { href: '/almoatamers/show-all', icon: UserCheck, label: t('almoatamers_page') },
     { href: '/news', icon: Newspaper, label: t('news_page') },
     { href: '/blogs', icon: BookOpen, label: t('blogs_page') },
   ];
@@ -262,9 +262,21 @@ export function Sidebar() {
                 </Link>
               );
 
-              if (item.href === '/umrahs/show-all') {
+              if (item.href === '/clients/show-all') {
+                return (
+                  <PermissionGuard permission="index-client" type="element" key={item.href}>
+                    <li>{linkElement}</li>
+                  </PermissionGuard>
+                );
+              } else if (item.href === '/umrahs/show-all') {
                 return (
                   <PermissionGuard permission="index-umrahs" type="element" key={item.href}>
+                    <li>{linkElement}</li>
+                  </PermissionGuard>
+                );
+              } else if (item.href === '/almoatamers/show-all') {
+                return (
+                  <PermissionGuard permission="index-moatmer" type="element" key={item.href}>
                     <li>{linkElement}</li>
                   </PermissionGuard>
                 );

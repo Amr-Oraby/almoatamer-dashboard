@@ -196,7 +196,19 @@
     "nationality": "الجنسية",
     "client_umrahs": "عمرات العميل",
     "completed": "مكتمل",
-    "pending": "قيد الانتظار"
+    "pending": "قيد الانتظار",
+    "edit_client": "تعديل بيانات العميل",
+    "edit_client_desc": "تعديل معلومات العميل الخاصة به",
+    "change_image": "تغيير الصورة",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الجوال",
+    "phone_code": "رمز الدولة",
+    "select": "اختر",
+    "language": "اللغة",
+    "country": "الدولة",
+    "active_desc": "هل هذا العميل نشط؟",
+    "save": "حفظ"
   },
   "ThankingWords": {
     "not_found": "كلمة الشكر غير موجودة",
@@ -233,7 +245,16 @@
     "accepted": "مقبول",
     "not_accepted": "غير مقبول",
     "nationality": "الجنسية",
-    "total_orders": "إجمالي الطلبات"
+    "total_orders": "إجمالي الطلبات",
+    "create_new": "إضافة معتمر",
+    "create_desc": "إضافة معتمر جديد إلى النظام",
+    "update": "تحديث المعتمر",
+    "update_desc": "تعديل بيانات المعتمر",
+    "password": "كلمة المرور",
+    "password_confirmation": "تأكيد كلمة المرور",
+    "pricing": "التسعير",
+    "price_from": "السعر من",
+    "price_to": "السعر إلى"
   },
   "News": {
     "create_new": "إضافة خبر جديد",
@@ -603,7 +624,8 @@
     "previous": "السابق",
     "next": "التالي",
     "clear_filters": "مسح الفلاتر",
-    "add": "إضافة"
+    "add": "إضافة",
+    "edit": "تعديل"
   },
   "HomeBanners": {
     "create_new": "إضافة بانر جديد",

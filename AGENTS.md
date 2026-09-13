@@ -207,7 +207,7 @@ When protecting a module or a feature with role-based permissions, follow these 
 
 4. **Protect Table Actions (`components/[Feature]Table.tsx`)**:
    - For actions in the `TableActionMenu` (e.g., Details, Edit, Delete), add the `permission` property to the respective items in the `items` array.
-   - Example: `{ text: "تعديل", href: \`/[feature]/update/\${row.original.id}\`, permission: "update-[feature]" }`.
+   - Example: `{ text: "تعديل", href: \`/[feature]/update/\${row.original.id}\`, permission: "update-[feature]" `.
    - Note: Do NOT use `isDanger` for delete actions as it is not supported by the `TableActionMenu` type.
 
 5. **Protect Sidebar Links (`components/layout/Sidebar.tsx`)**:

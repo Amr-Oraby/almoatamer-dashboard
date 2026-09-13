@@ -99,7 +99,7 @@ export function CountriesTable() {
             <TableActionMenu items={[
               { text: t("details"), href: `/places/countries/show/${row.original.id}`, permission: "show-countries" },
               { text: "تعديل", href: `/places/countries/update/${row.original.id}`, permission: "update-countries" },
-              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)), permission: "delete-countries", isDanger: true }
+              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)), permission: "delete-countries" }
             ]} />
           </div>
         )

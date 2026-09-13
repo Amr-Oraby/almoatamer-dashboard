@@ -41,7 +41,7 @@ export function UpdateNewsForm({ newsId }: UpdateNewsFormProps) {
 
     useEffect(() => {
         if (newsData?.data) {
-            const item = newsData.data;
+            const item: any = newsData.data;
             reset({
                 is_active: item.is_active,
                 ar: { 

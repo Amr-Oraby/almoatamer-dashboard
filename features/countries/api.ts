@@ -5,6 +5,10 @@ export async function getCountries(page: number = 1): Promise<CountriesResponse>
     return apiClient<CountriesResponse>(`/api/countries?page=${page}`);
 }
 
+export async function getCountriesWithoutPagination(): Promise<any> {
+    return apiClient<any>(`/api/countries-with-no-pag`);
+}
+
 export async function getCountry(id: string): Promise<SingleCountryResponse> {
     return apiClient<SingleCountryResponse>(`/api/country/${id}`);
 }

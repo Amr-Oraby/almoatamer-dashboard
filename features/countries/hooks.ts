@@ -1,11 +1,18 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getCountries, getCountry, deleteCountry, createCountry, updateCountry } from "./api";
+import { getCountries, getCountry, deleteCountry, createCountry, updateCountry, getCountriesWithoutPagination } from "./api";
 import { toast } from "sonner";
 
 export function useCountries(page: number = 1) {
     return useQuery({
         queryKey: ["countries", page],
         queryFn: () => getCountries(page),
+    });
+}
+
+export function useCountriesWithoutPagination() {
+    return useQuery({
+        queryKey: ["countries-without-pagination"],
+        queryFn: getCountriesWithoutPagination,
     });
 }
 

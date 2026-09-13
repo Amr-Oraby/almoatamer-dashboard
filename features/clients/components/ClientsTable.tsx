@@ -10,6 +10,7 @@ import { useTranslations } from "next-intl"
 import { useRouter } from "@/i18n/routing"
 import { TableActionMenu } from "@/components/ui/table-action-menu"
 import { ConfirmDialog } from "@/components/ui/confirm-dialog"
+import { PermissionGuard } from "@/components/permissions-provider"
 
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
@@ -138,7 +139,9 @@ export function ClientsTable() {
         const isActive = !!row.original.is_active
         return (
           <div className="flex items-center justify-center">
-            <Switch checked={isActive} onChange={() => setToggleActivateId(String(row.original.id))} />
+            <PermissionGuard permission="update-client" type="element">
+              <Switch checked={isActive} onChange={() => setToggleActivateId(String(row.original.id))} />
+            </PermissionGuard>
           </div>
         )
       },
@@ -150,7 +153,10 @@ export function ClientsTable() {
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
-            <TableActionMenu items={[{ text: t("details"), href: `/clients/show/${row.original.id}` }]} />
+            <TableActionMenu items={[
+              { text: t("details"), href: `/clients/show/${row.original.id}`, permission: "show-client" },
+              { text: tCommon("edit", { fallback: "تعديل" }), href: `/clients/update/${row.original.id}`, permission: "update-client" }
+            ]} />
           </div>
         )
       },

@@ -14,6 +14,7 @@ import { useSearchParams } from "next/navigation"
 import { UrlSearchFilter } from "@/components/ui/url-search-filter"
 import { UrlFilter } from "@/components/ui/url-filter"
 import { ClearFiltersButton } from "@/components/ui/clear-filters-button"
+import { PermissionGuard } from "@/components/permissions-provider"
 
 import { useMoatmrs, useDeleteMoatmr, useToggleAcceptMoatmr } from "@/features/moatmrs/hooks"
 
@@ -188,7 +189,9 @@ export function MoatmrsTable() {
         const isAccepted = row.original.accepted_by_admin
         return (
           <div className="flex items-center justify-center">
-            <Switch checked={isAccepted} onChange={() => setToggleAcceptId(String(row.original.id))} />
+            <PermissionGuard permission="update-moatmer" type="element">
+              <Switch checked={isAccepted} onChange={() => setToggleAcceptId(String(row.original.id))} />
+            </PermissionGuard>
           </div>
         )
       },
@@ -201,8 +204,9 @@ export function MoatmrsTable() {
         return (
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
-              { text: t("details") || "التفاصيل", href: `/almoatamers/show/${row.original.id}` },
-              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
+              { text: t("details") || "التفاصيل", href: `/almoatamers/show/${row.original.id}`, permission: "show-moatmer" },
+              { text: tCommon("edit", { fallback: "تعديل" }), href: `/almoatamers/update/${row.original.id}`, permission: "update-moatmer" },
+              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)), permission: "delete-moatmer" }
             ]} />
           </div>
         )

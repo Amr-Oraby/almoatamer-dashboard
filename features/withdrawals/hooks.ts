@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getWithdrawals } from "./api";
-import { WithdrawalsResponse } from "@/app/types/WithdrawalType";
+import { WithdrawalsResponse } from "./types";
 
 interface UseWithdrawalsOptions {
   page?: number;

@@ -41,7 +41,7 @@ export function UpdateBlogForm({ blogId }: UpdateBlogFormProps) {
 
     useEffect(() => {
         if (blogData?.data) {
-            const item = blogData.data;
+            const item: any = blogData.data;
             reset({
                 is_active: item.is_active,
                 ar: { 
