@@ -327,7 +327,10 @@
     "amount": "مبلغ ثابت",
     "percentage": "نسبة مئوية",
     "coupon_value": "قيمة الكوبون",
-    "save": "حفظ"
+    "save": "حفظ",
+    "update": "تعديل الكوبون",
+    "cancel": "إلغاء",
+    "is_active": "مفعل"
   },
   "CouponCodes": {
     "not_found": "مجموعة الأكواد غير موجودة",

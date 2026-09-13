@@ -20,7 +20,7 @@ export function UpdateCouponForm({ couponId }: UpdateCouponFormProps) {
     const router = useRouter();
     
     const { data: couponData, isLoading: isFetching } = useCoupon(couponId);
-    const { mutateAsync: updateCoupon, isPending } = useUpdateCoupon(couponId);
+    const { mutate: updateCoupon, isPending } = useUpdateCoupon(couponId);
 
     const { register, handleSubmit, formState: { errors }, reset, setValue, watch } = useForm<UpdateCouponFormValues>({
         resolver: zodResolver(updateCouponSchema),
@@ -50,24 +50,23 @@ export function UpdateCouponForm({ couponId }: UpdateCouponFormProps) {
         }
     }, [couponData, reset]);
 
-    const onSubmit = async (data: UpdateCouponFormValues) => {
-        try {
-            const formData = new FormData();
-            formData.append("status", data.status ? "1" : "0");
-            formData.append("type", data.type);
-            formData.append("value", String(data.value));
-            formData.append("start_date", data.start_date);
-            formData.append("expiry_date", data.expiry_date);
-            
-            if (data.usage_limit) {
-                formData.append("usage_limit", String(data.usage_limit));
-            }
-
-            await updateCoupon(formData);
-            router.push('/discounts/coupons');
-        } catch (error) {
-            console.error("Error updating coupon:", error);
+    const onSubmit = (data: UpdateCouponFormValues) => {
+        const formData = new FormData();
+        formData.append("status", data.status ? "1" : "0");
+        formData.append("type", data.type);
+        formData.append("value", String(data.value));
+        formData.append("start_date", data.start_date);
+        formData.append("expiry_date", data.expiry_date);
+        
+        if (data.usage_limit) {
+            formData.append("usage_limit", String(data.usage_limit));
         }
+
+        updateCoupon(formData, {
+            onSuccess: () => {
+                router.push('/discounts/coupons');
+            }
+        });
     };
 
     if (isFetching) {

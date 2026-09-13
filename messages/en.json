@@ -327,7 +327,10 @@
     "amount": "Fixed Amount",
     "percentage": "Percentage",
     "coupon_value": "Coupon Value",
-    "save": "Save"
+    "save": "Save",
+    "update": "Update Coupon",
+    "cancel": "Cancel",
+    "is_active": "Active"
   },
   "CouponCodes": {
     "not_found": "Coupon codes group not found",

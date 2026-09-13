@@ -14,7 +14,7 @@ import { createCouponSchema, CreateCouponFormValues } from "../schemas";
 export function CreateCouponModal() {
     const t = useTranslations("Coupons");
     const [open, setOpen] = useState(false);
-    const { mutateAsync: createCoupon, isPending } = useCreateCoupon();
+    const { mutate: createCoupon, isPending } = useCreateCoupon();
 
     const { register, handleSubmit, formState: { errors }, reset, setValue, watch } = useForm<CreateCouponFormValues>({
         resolver: zodResolver(createCouponSchema),
@@ -30,25 +30,24 @@ export function CreateCouponModal() {
 
     const status = watch("status");
 
-    const onSubmit = async (data: CreateCouponFormValues) => {
-        try {
-            const formData = new FormData();
-            formData.append("status", data.status ? "1" : "0");
-            formData.append("type", data.type);
-            formData.append("value", String(data.value));
-            formData.append("start_date", data.start_date);
-            formData.append("expiry_date", data.expiry_date);
-            
-            if (data.usage_limit) {
-                formData.append("usage_limit", String(data.usage_limit));
-            }
-
-            await createCoupon(formData);
-            setOpen(false);
-            reset();
-        } catch (error) {
-            console.error("Error creating coupon:", error);
+    const onSubmit = (data: CreateCouponFormValues) => {
+        const formData = new FormData();
+        formData.append("status", data.status ? "1" : "0");
+        formData.append("type", data.type);
+        formData.append("value", String(data.value));
+        formData.append("start_date", data.start_date);
+        formData.append("expiry_date", data.expiry_date);
+        
+        if (data.usage_limit) {
+            formData.append("usage_limit", String(data.usage_limit));
         }
+
+        createCoupon(formData, {
+            onSuccess: () => {
+                setOpen(false);
+                reset();
+            }
+        });
     };
 
     const handleOpenChange = (newOpen: boolean) => {
