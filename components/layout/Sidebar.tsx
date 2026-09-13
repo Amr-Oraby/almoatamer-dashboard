@@ -343,6 +343,14 @@ export function Sidebar() {
                 );
               }
 
+              if (item.href === '/transactions') {
+                return (
+                  <PermissionGuard permission="index-transactions" type="element" key={item.href}>
+                    <li>{linkElement}</li>
+                  </PermissionGuard>
+                );
+              }
+
               if (item.href === '/report-reason') {
                 return (
                   <PermissionGuard permission="index-report-reason" type="element" key={item.href}>

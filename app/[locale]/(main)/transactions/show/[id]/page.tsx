@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import { useTransaction } from "@/features/transactions/hooks"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Loader2, Receipt, User as UserIcon, Phone, Mail, Hash, Calendar, Banknote, Landmark, Percent, ReceiptText } from "lucide-react"
+import { PermissionGuard } from "@/components/permissions-provider"
 
 export default function TransactionDetailsPage() {
   const params = useParams()
@@ -76,8 +77,9 @@ export default function TransactionDetailsPage() {
   )
 
   return (
-    <div className="space-y-6 pb-10 max-w-6xl mx-auto">
-      {/* Header */}
+    <PermissionGuard permission="show-transactions">
+      <div className="space-y-6 pb-10 max-w-6xl mx-auto">
+        {/* Header */}
       <Card className="rounded-2xl border-zinc-100 dark:border-zinc-800 shadow-sm overflow-hidden bg-white dark:bg-zinc-950">
         <div className="flex items-center justify-between p-6">
           <div className="flex items-center gap-4">
@@ -201,5 +203,6 @@ export default function TransactionDetailsPage() {
         </div>
       </div>
     </div>
+    </PermissionGuard>
   )
 }

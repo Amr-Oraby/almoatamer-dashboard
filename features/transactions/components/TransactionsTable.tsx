@@ -128,7 +128,7 @@ export function TransactionsTable() {
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
-            <TableActionMenu items={[{ text: t("details"), href: `/transactions/show/${row.original.id}` }]} />
+            <TableActionMenu items={[{ text: t("details"), href: `/transactions/show/${row.original.id}`, permission: "show-transactions" }]} />
           </div>
         )
       },
