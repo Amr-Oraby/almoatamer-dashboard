@@ -15,7 +15,6 @@ import { Badge } from "@/components/ui/badge"
 import { TableActionMenu } from "@/components/ui/table-action-menu"
 import { DeleteDialog } from "@/components/ui/delete-dialog";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
-import { PermissionGuard } from "@/components/permissions-provider";
 import { Switch } from "@/components/ui/switch";
 
 export function RolesTable() {
@@ -92,9 +91,7 @@ export function RolesTable() {
 
         return (
           <div className="flex items-center justify-center">
-             <PermissionGuard permission="update-role" type="element">
-               <Switch checked={isActive} onChange={() => setIsConfirmOpen(true)} />
-             </PermissionGuard>
+             <Switch checked={isActive} onChange={() => setIsConfirmOpen(true)} />
              <ConfirmDialog
                isOpen={isConfirmOpen}
                onClose={() => setIsConfirmOpen(false)}
