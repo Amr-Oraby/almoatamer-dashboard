@@ -7,15 +7,25 @@ import { TableSkeleton } from "@/components/ui/table-skeleton"
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
 
-import { useWithdrawalRequests } from "@/features/withdrawal-requests/hooks"
+import { useWithdrawalRequests, useUpdateWithdrawalRequest } from "@/features/withdrawal-requests/hooks"
 import { WithdrawalRequestItem } from "@/features/withdrawal-requests/types"
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { ConfirmDialog } from "@/components/ui/confirm-dialog"
+import { useState } from "react"
 
 export function WithdrawalRequestsTable() {
   const searchParams = useSearchParams()
   const page = Number(searchParams.get("page")) || 1
   const { data, isLoading } = useWithdrawalRequests(page)
+  const { mutate: updateStatus, isPending: isUpdating } = useUpdateWithdrawalRequest()
+
+  const [confirmState, setConfirmState] = useState<{ isOpen: boolean; id: number | null; action: 'confirmed' | 'rejected' | null }>({ 
+    isOpen: false, 
+    id: null, 
+    action: null 
+  })
 
   const columns = useMemo<ColumnDef<WithdrawalRequestItem>[]>(() => [
     {
@@ -121,6 +131,35 @@ export function WithdrawalRequestsTable() {
         </div>
       )
     },
+    {
+      id: "actions",
+      header: () => <div className="text-center">الإجراءات</div>,
+      size: 150,
+      cell: ({ row }) => {
+        if (row.original.status !== "pending") return null;
+
+        return (
+          <div className="flex items-center justify-center gap-2">
+            <Button 
+              size="sm" 
+              variant="default" 
+              className="bg-emerald-600 hover:bg-emerald-700 h-8 text-xs text-white" 
+              onClick={() => setConfirmState({ isOpen: true, id: row.original.id, action: "confirmed" })}
+            >
+              قبول
+            </Button>
+            <Button 
+              size="sm" 
+              variant="destructive" 
+              className="h-8 text-xs text-white" 
+              onClick={() => setConfirmState({ isOpen: true, id: row.original.id, action: "rejected" })}
+            >
+              رفض
+            </Button>
+          </div>
+        )
+      }
+    }
   ], [page, data?.meta?.per_page])
 
   if (isLoading) {
@@ -133,6 +172,27 @@ export function WithdrawalRequestsTable() {
         columns={columns}
         data={data?.data || []}
         bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
+      />
+
+      <ConfirmDialog
+        isOpen={confirmState.isOpen}
+        onClose={() => !isUpdating && setConfirmState(prev => ({ ...prev, isOpen: false }))}
+        onConfirm={() => {
+          if (confirmState.id && confirmState.action) {
+            updateStatus(
+              { id: confirmState.id, status: confirmState.action, status_confirmation: confirmState.action },
+              {
+                onSuccess: () => setConfirmState(prev => ({ ...prev, isOpen: false }))
+              }
+            );
+          }
+        }}
+        isLoading={isUpdating}
+        title={confirmState.action === "confirmed" ? "قبول طلب السحب" : "رفض طلب السحب"}
+        description={confirmState.action === "confirmed" ? "هل أنت متأكد من قبول طلب السحب هذا؟" : "هل أنت متأكد من رفض طلب السحب هذا؟"}
+        confirmText={confirmState.action === "confirmed" ? "نعم، أقبل" : "نعم، أرفض"}
+        cancelText="إلغاء"
+        confirmButtonColor={confirmState.action === "confirmed" ? "bg-emerald-600 hover:bg-emerald-700" : "bg-red-600 hover:bg-red-700"}
       />
     </div>
   )
