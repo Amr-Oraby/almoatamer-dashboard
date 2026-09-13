@@ -359,6 +359,14 @@ export function Sidebar() {
                 );
               }
 
+              if (item.href === '/languages') {
+                return (
+                  <PermissionGuard permission="index-language" type="element" key={item.href}>
+                    <li>{linkElement}</li>
+                  </PermissionGuard>
+                );
+              }
+
               return (
                 <li key={item.href}>
                   {linkElement}

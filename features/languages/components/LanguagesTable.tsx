@@ -18,6 +18,7 @@ import { Badge } from "@/components/ui/badge"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Languages, Globe, Flag, Hash, Type } from "lucide-react"
 import { DeleteDialog } from "@/components/ui/delete-dialog";
+import { PermissionGuard } from "@/components/permissions-provider"
 
 export function LanguagesTable() {
   const searchParams = useSearchParams()
@@ -102,9 +103,9 @@ export function LanguagesTable() {
         return (
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
-              { text: t("details"), onClick: () => setSelectedLanguage(row.original) },
-              { text: "تعديل", href: `/languages/update/${row.original.id}` },
-              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
+              { text: t("details"), onClick: () => setSelectedLanguage(row.original), permission: "show-language" },
+              { text: "تعديل", href: `/languages/update/${row.original.id}`, permission: "update-language" },
+              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)), permission: "delete-language" }
             ]} />
           </div>
         )
@@ -121,7 +122,11 @@ export function LanguagesTable() {
       <DataTable
         columns={columns}
         data={data?.data || []}
-        bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
+        bottomContent={
+          <PermissionGuard permission="pagination-language" type="element">
+            <UrlPagination pageCount={data?.meta?.last_page || 1} />
+          </PermissionGuard>
+        }
       />
 
       <Dialog open={!!selectedLanguage} onOpenChange={(open) => !open && setSelectedLanguage(null)}>
