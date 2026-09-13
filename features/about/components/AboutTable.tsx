@@ -92,7 +92,7 @@ export function AboutTable() {
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
-            <TableActionMenu items={[{ text: t("details"), href: `/public-pages/about/show/${row.original.id}` }]} />
+            <TableActionMenu items={[{ text: t("details"), href: `/public-pages/about/show/${row.original.id}`, permission: "show-about" }]} />
           </div>
         )
       },

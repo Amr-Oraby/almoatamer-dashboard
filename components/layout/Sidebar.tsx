@@ -616,6 +616,14 @@ export function Sidebar() {
                       );
                     }
 
+                    if (item.href === '/public-pages/about') {
+                      return (
+                        <PermissionGuard permission="index-about" type="element" key={item.href}>
+                          {linkElement}
+                        </PermissionGuard>
+                      );
+                    }
+
                     if (item.href === '/public-pages/privacy') {
                       return (
                         <PermissionGuard permission="index-policy" type="element" key={item.href}>
