@@ -84,7 +84,7 @@ export function RolesTable() {
         const { mutate: toggleStatus, isPending } = useToggleRoleStatus();
 
         const handleConfirm = () => {
-          toggleStatus(String(row.original.id), {
+          toggleStatus({ id: String(row.original.id), is_active: isActive ? 0 : 1 }, {
             onSuccess: () => setIsConfirmOpen(false)
           });
         };
