@@ -23,5 +23,6 @@ export async function updateRole(id: string, data: any): Promise<any> {
 export async function toggleRoleStatus(id: string): Promise<any> {
     return apiClient<any>(`/api/roles/${id}/status`, {
         method: "PUT",
+        body: JSON.stringify({})
     });
 }
