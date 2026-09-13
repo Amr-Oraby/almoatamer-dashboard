@@ -625,7 +625,8 @@
     "next": "التالي",
     "clear_filters": "مسح الفلاتر",
     "add": "إضافة",
-    "edit": "تعديل"
+    "edit": "تعديل",
+    "activation": "التفعيل"
   },
   "HomeBanners": {
     "create_new": "إضافة بانر جديد",

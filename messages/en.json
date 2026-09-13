@@ -625,7 +625,8 @@
     "next": "Next",
     "clear_filters": "Clear Filters",
     "add": "Add",
-    "edit": "Edit"
+    "edit": "Edit",
+    "activation": "Activation"
   },
   "HomeBanners": {
     "create_new": "Create New Banner",

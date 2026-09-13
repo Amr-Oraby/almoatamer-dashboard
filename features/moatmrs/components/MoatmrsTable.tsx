@@ -243,7 +243,11 @@ export function MoatmrsTable() {
             <ClearFiltersButton label={tCommon("clear_filters")} />
           </div>
         }
-        bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
+        bottomContent={
+          <PermissionGuard permission="pagination-moatmer" type="element">
+            <UrlPagination pageCount={data?.meta?.last_page || 1} />
+          </PermissionGuard>
+        }
       />
 
       <DeleteDialog

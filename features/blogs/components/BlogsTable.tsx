@@ -13,10 +13,12 @@ import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
 
 
-import { useBlogsList, useDeleteBlog } from "@/features/blogs/hooks"
+import { useBlogsList, useDeleteBlog, useUpdateBlog } from "@/features/blogs/hooks"
 import { BlogItem } from "@/features/blogs/types"
 import Image from "next/image"
 import { DeleteDialog } from "@/components/ui/delete-dialog";
+import { ConfirmDialog } from "@/components/ui/confirm-dialog";
+import { PermissionGuard } from "@/components/permissions-provider";
 
 
 
@@ -78,14 +80,36 @@ export function BlogsTable() {
       )
     },
     {
-      id: "isBlocked",
-      header: () => <div className="text-center">{t("block")}</div>,
+      id: "is_active",
+      header: () => <div className="text-center">{tCommon("activation", { fallback: "التفعيل" })}</div>,
       size: 120,
       cell: function Cell({ row }) {
-        const [isBlocked, setIsBlocked] = useState(!row.original.is_active)
+        const isActive = row.original.is_active;
+        const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+        const { mutate: updateBlog, isPending } = useUpdateBlog(String(row.original.id));
+
+        const handleConfirm = () => {
+          const formData = new FormData();
+          formData.append("is_active", isActive ? "0" : "1");
+          updateBlog(formData, {
+            onSuccess: () => setIsConfirmOpen(false)
+          });
+        };
+
         return (
           <div className="flex items-center justify-center">
-            <Switch checked={isBlocked} onChange={() => setIsBlocked(!isBlocked)} />
+            <PermissionGuard permission="update-blog" type="element">
+              <Switch checked={isActive} onChange={() => setIsConfirmOpen(true)} />
+            </PermissionGuard>
+            <ConfirmDialog
+              isOpen={isConfirmOpen}
+              onClose={() => setIsConfirmOpen(false)}
+              onConfirm={handleConfirm}
+              isLoading={isPending}
+              title="تأكيد العملية"
+              description="هل أنت متأكد أنك تريد تغيير حالة التفعيل لهذه المدونة؟"
+              confirmButtonColor="bg-primary hover:bg-primary/90"
+            />
           </div>
         )
       },

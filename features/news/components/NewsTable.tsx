@@ -4,7 +4,6 @@ import { useState, useMemo } from "react"
 import { ColumnDef } from "@tanstack/react-table"
 import { DataTable } from "@/components/ui/data-table"
 import { TableSkeleton } from "@/components/ui/table-skeleton"
-import { cn } from "@/lib/utils"
 import { Switch } from "@/components/ui/switch"
 import { useTranslations } from "next-intl"
 import { useRouter } from "@/i18n/routing"
@@ -14,10 +13,12 @@ import { useSearchParams } from "next/navigation"
 import { UrlSearchFilter } from "@/components/ui/url-search-filter"
 import { ClearFiltersButton } from "@/components/ui/clear-filters-button"
 
-import { useNewsList, useDeleteNews } from "@/features/news/hooks"
+import { useNewsList, useDeleteNews, useUpdateNews } from "@/features/news/hooks"
+import { PermissionGuard } from "@/components/permissions-provider"
 import { NewsItem } from "@/features/news/types"
 import Image from "next/image"
 import { DeleteDialog } from "@/components/ui/delete-dialog"
+import { ConfirmDialog } from "@/components/ui/confirm-dialog"
 
 export function NewsTable() {
   const searchParams = useSearchParams()
@@ -79,14 +80,36 @@ export function NewsTable() {
       )
     },
     {
-      id: "isBlocked",
-      header: () => <div className="text-center">{t("block")}</div>,
+      id: "is_active",
+      header: () => <div className="text-center">{tCommon("activation", { fallback: "التفعيل" })}</div>,
       size: 120,
       cell: function Cell({ row }) {
-        const [isBlocked, setIsBlocked] = useState(!row.original.is_active)
+        const isActive = row.original.is_active;
+        const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+        const { mutate: updateNews, isPending } = useUpdateNews(String(row.original.id));
+
+        const handleConfirm = () => {
+          const formData = new FormData();
+          formData.append("is_active", isActive ? "0" : "1");
+          updateNews(formData, {
+            onSuccess: () => setIsConfirmOpen(false)
+          });
+        };
+
         return (
           <div className="flex items-center justify-center">
-            <Switch checked={isBlocked} onChange={() => setIsBlocked(!isBlocked)} />
+             <PermissionGuard permission="update-news" type="element">
+               <Switch checked={isActive} onChange={() => setIsConfirmOpen(true)} />
+             </PermissionGuard>
+             <ConfirmDialog
+               isOpen={isConfirmOpen}
+               onClose={() => setIsConfirmOpen(false)}
+               onConfirm={handleConfirm}
+               isLoading={isPending}
+               title="تأكيد العملية"
+               description="هل أنت متأكد أنك تريد تغيير حالة التفعيل لهذا الخبر؟"
+               confirmButtonColor="bg-primary hover:bg-primary/90"
+             />
           </div>
         )
       },
