@@ -633,7 +633,9 @@
     "clear_filters": "Clear Filters",
     "add": "Add",
     "edit": "Edit",
-    "activation": "Activation"
+    "activation": "Activation",
+    "loading": "Loading...",
+    "load_more": "Load More"
   },
   "HomeBanners": {
     "create_new": "Create New Banner",

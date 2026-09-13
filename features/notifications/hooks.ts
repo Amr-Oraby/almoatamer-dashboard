@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient, useInfiniteQuery } from "@tanstack/react-query";
 import { getNotifications, deleteNotification } from "./api";
 import { toast } from "sonner";
 
@@ -20,5 +20,17 @@ export function useDeleteNotification() {
         onError: (error: any) => {
             toast.error(error?.message || "حدث خطأ أثناء الحذف");
         },
+    });
+}
+
+export function useInfiniteNotifications() {
+    return useInfiniteQuery({
+        queryKey: ["infinite-notifications"],
+        queryFn: ({ pageParam = 1 }) => getNotifications(pageParam),
+        getNextPageParam: (lastPage) => {
+            const hasMore = lastPage.meta.current_page < lastPage.meta.last_page;
+            return hasMore ? lastPage.meta.current_page + 1 : undefined;
+        },
+        initialPageParam: 1,
     });
 }

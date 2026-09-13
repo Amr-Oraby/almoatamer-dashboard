@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getMoatmrs, getMoatmr, deleteMoatmr, getMoatmrsWithoutPagination, toggleAcceptMoatmr, createMoatmr, updateMoatmr } from "./api";
+import { getMoatmrs, getMoatmr, deleteMoatmr, getMoatmrsWithoutPagination, toggleAcceptMoatmr, createMoatmr, updateMoatmr, getMoatmrUmrahs } from "./api";
 import { toast } from "sonner";
 
 export function useMoatmrs(page: number = 1, filters?: Record<string, string | null>) {
@@ -77,5 +77,13 @@ export function useUpdateMoatmr(id: string) {
         onError: (error: any) => {
             toast.error(error.message || "حدث خطأ أثناء التعديل");
         },
+    });
+}
+
+export function useMoatmrUmrahs(id: string, page: number = 1, filters?: Record<string, string | null>) {
+    return useQuery({
+        queryKey: ["moatmr-umrahs", id, page, filters],
+        queryFn: () => getMoatmrUmrahs(id, page, filters),
+        enabled: !!id,
     });
 }

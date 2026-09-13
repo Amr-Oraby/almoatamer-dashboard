@@ -1,5 +1,6 @@
 import { apiClient } from "@/lib/api/client";
 import { MoatmrsResponse, SingleMoatmrResponse } from "./types";
+import { UmrahsResponse } from "@/features/umrahs/types";
 
 export async function getMoatmrs(page: number = 1, filters?: Record<string, string | null>): Promise<MoatmrsResponse> {
     const params = new URLSearchParams()
@@ -43,4 +44,20 @@ export async function updateMoatmr(id: string, data: FormData): Promise<any> {
         method: 'POST',
         body: data,
     });
+}
+
+export async function getMoatmrUmrahs(id: string, page: number = 1, filters?: Record<string, string | null>): Promise<UmrahsResponse> {
+    const params = new URLSearchParams()
+    params.append('moatmer_id', id)
+    params.append('page', page.toString())
+
+    if (filters) {
+        Object.entries(filters).forEach(([key, value]) => {
+            if (value !== null && value !== undefined && value !== '') {
+                params.append(key, value)
+            }
+        })
+    }
+
+    return apiClient<UmrahsResponse>(`/api/moatmer-umrahs-info?${params.toString()}`);
 }

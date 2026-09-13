@@ -3,6 +3,7 @@
 import { useParams } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useMoatmr } from "@/features/moatmrs/hooks"
+import { MoatmrUmrahsTable } from "@/features/moatmrs/components/MoatmrUmrahsTable"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Loader2, Phone, Mail, User, MapPin, Globe2, Wallet, Star, CheckCircle2, XCircle } from "lucide-react"
@@ -155,6 +156,8 @@ export default function MoatmrDetailsPage() {
           </div>
         </CardContent>
       </Card>
+
+      <MoatmrUmrahsTable moatmerId={id} />
     </div>
   )
 }

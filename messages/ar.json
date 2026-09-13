@@ -633,7 +633,9 @@
     "clear_filters": "مسح الفلاتر",
     "add": "إضافة",
     "edit": "تعديل",
-    "activation": "التفعيل"
+    "activation": "التفعيل",
+    "loading": "جاري التحميل...",
+    "load_more": "عرض المزيد"
   },
   "HomeBanners": {
     "create_new": "إضافة بانر جديد",
