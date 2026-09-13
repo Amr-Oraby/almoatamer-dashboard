@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button"
 import { Loader2 } from "lucide-react"
 
 import { UpdateHomeBannerModal } from "./UpdateHomeBannerModal"
+import { PermissionGuard } from "@/components/permissions-provider"
 
 export function HomeBannersGrid() {
   const searchParams = useSearchParams()
@@ -75,22 +76,26 @@ export function HomeBannersGrid() {
                 </Badge>
 
                 <div className="flex items-center gap-2">
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    className="h-8 shadow-sm text-xs font-medium px-3"
-                    onClick={() => setUpdateId(String(banner.id))}
-                  >
-                    {t("update", { fallback: "Update" })}
-                  </Button>
-                  <Button 
-                    size="icon" 
-                    variant="destructive" 
-                    className="h-8 w-8 shadow-sm shrink-0"
-                    onClick={() => setDeleteId(String(banner.id))}
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
+                  <PermissionGuard permission="update-banner" type="element">
+                    <Button 
+                      size="sm" 
+                      variant="outline" 
+                      className="h-8 shadow-sm text-xs font-medium px-3"
+                      onClick={() => setUpdateId(String(banner.id))}
+                    >
+                      {t("update", { fallback: "Update" })}
+                    </Button>
+                  </PermissionGuard>
+                  <PermissionGuard permission="delete-banner" type="element">
+                    <Button 
+                      size="icon" 
+                      variant="destructive" 
+                      className="h-8 w-8 shadow-sm shrink-0"
+                      onClick={() => setDeleteId(String(banner.id))}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </PermissionGuard>
                 </div>
               </div>
             </div>

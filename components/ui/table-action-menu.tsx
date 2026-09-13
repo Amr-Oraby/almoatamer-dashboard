@@ -9,12 +9,14 @@ import {
 import { MoreVertical } from "lucide-react"
 import { useRouter } from "@/i18n/routing"
 import { cn } from "@/lib/utils"
+import { usePermissions } from "@/components/permissions-provider"
 
 export interface ActionMenuItem {
   text: string;
   href?: string;
   onClick?: () => void;
   isDestructive?: boolean;
+  permission?: string;
 }
 
 interface TableActionMenuProps {
@@ -23,8 +25,13 @@ interface TableActionMenuProps {
 
 export function TableActionMenu({ items }: TableActionMenuProps) {
   const router = useRouter()
+  const { can } = usePermissions()
 
-  if (!items || items.length === 0) return null
+  if (!items) return null
+
+  const filteredItems = items.filter(item => !item.permission || can(item.permission))
+
+  if (filteredItems.length === 0) return null
 
   return (
     <DropdownMenu>
@@ -32,7 +39,7 @@ export function TableActionMenu({ items }: TableActionMenuProps) {
         <MoreVertical className="w-5 h-5" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-40 rounded-xl">
-        {items.map((item, index) => (
+        {filteredItems.map((item, index) => (
           <DropdownMenuItem
             key={index}
             onClick={() => {

@@ -124,9 +124,9 @@ export function ThankingWordsTable() {
         return (
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
-              { text: tUmrahs("details", { fallback: "Details" }), href: `/ui-management/thanking-word/show/${row.original.id}` },
-              { text: "تعديل", onClick: () => setItemToUpdate(String(row.original.id)) },
-              { text: t("delete", { fallback: "Delete" }), onClick: () => setItemToDelete(row.original.id), isDestructive: true }
+              { text: tUmrahs("details", { fallback: "Details" }), href: `/ui-management/thanking-word/show/${row.original.id}`, permission: "show-home-info" },
+              { text: "تعديل", onClick: () => setItemToUpdate(String(row.original.id)), permission: "update-home-info" },
+              { text: t("delete", { fallback: "Delete" }), onClick: () => setItemToDelete(row.original.id), isDestructive: true, permission: "delete-home-info" }
             ]} />
           </div>
         )

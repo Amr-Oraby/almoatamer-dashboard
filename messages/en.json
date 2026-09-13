@@ -1,5 +1,6 @@
 {
   "Dashboard": {
+    "permissions_page": "Permissions",
     "title": "Home",
     "subtitle": "Overview of your statistics and metrics.",
     "home": "Dashboard",
@@ -131,7 +132,9 @@
     "new_password": "New Password",
     "confirm_password": "Confirm New Password",
     "security_details": "Security Details",
-    "security_details_desc": "Ensure your account is using a long, random password to stay secure."
+    "security_details_desc": "Ensure your account is using a long, random password to stay secure.",
+    "confirm_logout": "Confirm Logout",
+    "confirm_logout_desc": "Are you sure you want to log out?"
   },
   "Auth": {
     "login": "Log in",
@@ -394,6 +397,9 @@
     "iid": "Indonesian"
   },
   "Roles": {
+    "save_changes": "Save Changes",
+    "role_name": "Name",
+    "is_active": "Active",
     "not_found": "Role not found",
     "role_details": "Role Details",
     "role_id": "Role ID",
@@ -629,5 +635,10 @@
   "Profile": {
     "title": "Profile",
     "description": "View and manage your profile details."
+  },
+  "Permissions": {
+    "name": "Name",
+    "title_ar": "Title (Arabic)",
+    "title_en": "Title (English)"
   }
 }

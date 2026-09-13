@@ -37,13 +37,14 @@ export function UrlPagination({ pageCount }: UrlPaginationProps) {
       
       <div className="flex items-center gap-1">
         {Array.from({ length: Math.min(5, pageCount) }, (_, i) => {
-          // Simple window logic
-          let pageNum = i + 1
-          if (pageCount > 5 && page > 3) {
-            pageNum = page - 3 + i
-            if (pageNum > pageCount) pageNum = pageCount - (4 - i)
+          let startPage = 1;
+          if (pageCount > 5) {
+            startPage = Math.max(1, page - 2);
+            if (startPage + 4 > pageCount) {
+              startPage = pageCount - 4;
+            }
           }
-          
+          const pageNum = startPage + i;
           const isActive = pageNum === page
           return (
             <button

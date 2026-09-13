@@ -1,4 +1,4 @@
-import { serverGet, serverPost, serverPut } from "@/lib/api/serverRoute";
+import { serverGet, serverPost, serverPut, serverPatch } from "@/lib/api/serverRoute";
 
 export async function GET(request: Request, { params }: { params: Promise<{ module: string }> }) {
     const { module } = await params;
@@ -27,4 +27,11 @@ export async function PUT(request: Request, { params }: { params: Promise<{ modu
     const contentType = request.headers.get("content-type") || "";
     const body = contentType.includes("multipart/form-data") ? await request.formData() : await request.json();
     return serverPut(`${module}`, body);
+}
+
+export async function PATCH(request: Request, { params }: { params: Promise<{ module: string }> }) {
+    const { module } = await params;
+    const contentType = request.headers.get("content-type") || "";
+    const body = contentType.includes("multipart/form-data") ? await request.formData() : await request.json();
+    return serverPatch(`${module}`, body);
 }

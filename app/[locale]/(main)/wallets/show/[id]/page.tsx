@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import { useWallet } from "@/features/wallets/hooks"
 import { Card, CardContent } from "@/components/ui/card"
 import { Loader2, Wallet, Banknote, Hourglass, User as UserIcon, Phone, Mail, Hash } from "lucide-react"
+import { PermissionGuard } from "@/components/permissions-provider"
 
 export default function WalletDetailsPage() {
   const params = useParams()
@@ -32,8 +33,9 @@ export default function WalletDetailsPage() {
   const user = wallet.user
 
   return (
-    <div className="space-y-6 pb-10 max-w-4xl mx-auto">
-      {/* Header Card */}
+    <PermissionGuard permission="show-wallet">
+      <div className="space-y-6 pb-10 max-w-4xl mx-auto">
+        {/* Header Card */}
       <Card className="rounded-2xl border-zinc-100 dark:border-zinc-800 shadow-sm overflow-hidden bg-white dark:bg-zinc-950">
         <div className="flex flex-col md:flex-row md:items-center justify-between p-6 gap-4">
           <div className="flex items-center gap-4">
@@ -120,5 +122,6 @@ export default function WalletDetailsPage() {
         </CardContent>
       </Card>
     </div>
+    </PermissionGuard>
   )
 }

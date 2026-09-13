@@ -101,7 +101,7 @@ export function ClientMessagesTable() {
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
-            <TableActionMenu items={[{ text: t("details"), onClick: () => setSelectedMessage(row.original) }]} />
+            <TableActionMenu items={[{ text: t("details"), onClick: () => setSelectedMessage(row.original), permission: "show-client-messages" }]} />
           </div>
         )
       },

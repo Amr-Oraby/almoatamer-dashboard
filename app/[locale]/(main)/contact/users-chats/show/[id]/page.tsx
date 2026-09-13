@@ -5,6 +5,7 @@ import { useUsersChat } from "@/features/users-chats/hooks"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Loader2, MessageCircle, User } from "lucide-react"
+import { PermissionGuard } from "@/components/permissions-provider"
 
 export default function UserChatShowPage() {
   const params = useParams()
@@ -31,7 +32,8 @@ export default function UserChatShowPage() {
   const chat = data.data
 
   return (
-    <div className="flex flex-col gap-6 w-full pb-10">
+    <PermissionGuard permission="show-users-chats">
+      <div className="flex flex-col gap-6 w-full pb-10">
 
       {/* Participants Info */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -118,5 +120,6 @@ export default function UserChatShowPage() {
         </CardContent>
       </Card>
     </div>
+    </PermissionGuard>
   )
 }

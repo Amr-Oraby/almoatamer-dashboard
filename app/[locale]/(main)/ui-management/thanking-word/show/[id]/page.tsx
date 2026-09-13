@@ -6,6 +6,7 @@ import { useThankingWord } from "@/features/thanking-words/hooks"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Loader2, Calendar, MessageSquare, Quote } from "lucide-react"
+import { PermissionGuard } from "@/components/permissions-provider"
 
 export default function ThankingWordDetailsPage() {
   const params = useParams()
@@ -32,8 +33,9 @@ export default function ThankingWordDetailsPage() {
   const word = response.data
 
   return (
-    <div className="space-y-6 pb-10 max-w-4xl mx-auto">
-      {/* Unified Details Card */}
+    <PermissionGuard permission="show-home-info">
+      <div className="space-y-6 pb-10 max-w-4xl mx-auto">
+        {/* Unified Details Card */}
       <Card className="rounded-2xl border-zinc-100 dark:border-zinc-800 shadow-sm overflow-hidden">
         {/* Compact Header */}
         <div className="flex items-center justify-between bg-zinc-50/50 dark:bg-zinc-900/50 p-6 border-b border-zinc-100 dark:border-zinc-800">
@@ -83,5 +85,6 @@ export default function ThankingWordDetailsPage() {
         </CardContent>
       </Card>
     </div>
+    </PermissionGuard>
   )
 }

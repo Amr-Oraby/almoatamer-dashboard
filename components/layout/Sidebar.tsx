@@ -11,6 +11,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
+import { PermissionGuard } from '@/components/permissions-provider';
 
 export function Sidebar() {
   const t = useTranslations('Dashboard');
@@ -95,6 +96,7 @@ export function Sidebar() {
   const rolesItems = [
     { href: '/roles', icon: ShieldCheck, label: t('roles_page') },
     { href: '/roles/admins', icon: UserCog, label: t('admins_page') },
+    { href: '/roles/permissions', icon: FileKey, label: t('permissions_page') },
   ];
 
   const contactItems = [
@@ -163,19 +165,21 @@ export function Sidebar() {
                 : pathname.startsWith(item.href);
 
               return (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className={`flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${isExactlyActive
-                      ? 'bg-primary text-primary-foreground font-medium shadow-sm'
-                      : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900'
-                      }`}
-                  >
-                    <item.icon className="w-5 h-5" />
-                    <span>{item.label}</span>
-                  </Link>
-                </li>
+                <PermissionGuard permission="show-dashboard" type="element" key={item.href}>
+                  <li>
+                    <Link
+                      href={item.href}
+                      onClick={() => setIsOpen(false)}
+                      className={`flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${isExactlyActive
+                        ? 'bg-primary text-primary-foreground font-medium shadow-sm'
+                        : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900'
+                        }`}
+                    >
+                      <item.icon className="w-5 h-5" />
+                      <span>{item.label}</span>
+                    </Link>
+                  </li>
+                </PermissionGuard>
               );
             })}
 
@@ -199,9 +203,8 @@ export function Sidebar() {
                 <CollapsibleContent className="space-y-1 pt-1 pb-2">
                   {uiManagementItems.map((item) => {
                     const isActive = pathname.startsWith(item.href);
-                    return (
+                    const linkElement = (
                       <Link
-                        key={item.href}
                         href={item.href}
                         onClick={() => setIsOpen(false)}
                         className={`flex items-center gap-3 px-4 py-2 ml-4 rounded-md transition-colors text-sm ${isActive
@@ -212,6 +215,28 @@ export function Sidebar() {
                         <item.icon className="w-4 h-4" />
                         <span>{item.label}</span>
                       </Link>
+                    );
+
+                    if (item.href === '/ui-management/gallery') {
+                      return (
+                        <PermissionGuard permission="index-banner" type="element" key={item.href}>
+                          {linkElement}
+                        </PermissionGuard>
+                      );
+                    }
+
+                    if (item.href === '/ui-management/thanking-word') {
+                      return (
+                        <PermissionGuard permission="index-home-info" type="element" key={item.href}>
+                          {linkElement}
+                        </PermissionGuard>
+                      );
+                    }
+
+                    return (
+                      <div key={item.href}>
+                        {linkElement}
+                      </div>
                     );
                   })}
                 </CollapsibleContent>
@@ -284,19 +309,31 @@ export function Sidebar() {
                 ? pathname === '/'
                 : pathname.startsWith(item.href);
 
+              const linkElement = (
+                <Link
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${isExactlyActive
+                    ? 'bg-primary text-primary-foreground font-medium shadow-sm'
+                    : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900'
+                    }`}
+                >
+                  <item.icon className="w-5 h-5" />
+                  <span>{item.label}</span>
+                </Link>
+              );
+
+              if (item.href === '/wallets') {
+                return (
+                  <PermissionGuard permission="index-wallet" type="element" key={item.href}>
+                    <li>{linkElement}</li>
+                  </PermissionGuard>
+                );
+              }
+
               return (
                 <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className={`flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${isExactlyActive
-                      ? 'bg-primary text-primary-foreground font-medium shadow-sm'
-                      : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900'
-                      }`}
-                  >
-                    <item.icon className="w-5 h-5" />
-                    <span>{item.label}</span>
-                  </Link>
+                  {linkElement}
                 </li>
               );
             })}
@@ -421,9 +458,8 @@ export function Sidebar() {
                 <CollapsibleContent className="space-y-1 pt-1 pb-2">
                   {contactItems.map((item) => {
                     const isActive = pathname === item.href || (item.href !== '/contact' && pathname.startsWith(item.href));
-                    return (
+                    const linkElement = (
                       <Link
-                        key={item.href}
                         href={item.href}
                         onClick={() => setIsOpen(false)}
                         className={`flex items-center gap-3 px-4 py-2 ml-4 rounded-md transition-colors text-sm ${isActive
@@ -434,6 +470,36 @@ export function Sidebar() {
                         <item.icon className="w-4 h-4" />
                         <span>{item.label}</span>
                       </Link>
+                    );
+
+                    if (item.href === '/contact/admin-contacts') {
+                      return (
+                        <PermissionGuard permission="index-admin-contacts" type="element" key={item.href}>
+                          {linkElement}
+                        </PermissionGuard>
+                      );
+                    }
+
+                    if (item.href === '/contact/messages') {
+                      return (
+                        <PermissionGuard permission="index-client-messages" type="element" key={item.href}>
+                          {linkElement}
+                        </PermissionGuard>
+                      );
+                    }
+
+                    if (item.href === '/contact/users-chats') {
+                      return (
+                        <PermissionGuard permission="index-users-chats" type="element" key={item.href}>
+                          {linkElement}
+                        </PermissionGuard>
+                      );
+                    }
+
+                    return (
+                      <div key={item.href}>
+                        {linkElement}
+                      </div>
                     );
                   })}
                 </CollapsibleContent>
@@ -460,9 +526,8 @@ export function Sidebar() {
                 <CollapsibleContent className="space-y-1 pt-1 pb-2">
                   {publicPagesItems.map((item) => {
                     const isActive = pathname === item.href || (item.href !== '/public-pages' && pathname.startsWith(item.href));
-                    return (
+                    const linkElement = (
                       <Link
-                        key={item.href}
                         href={item.href}
                         onClick={() => setIsOpen(false)}
                         className={`flex items-center gap-3 px-4 py-2 ml-4 rounded-md transition-colors text-sm ${isActive
@@ -473,6 +538,20 @@ export function Sidebar() {
                         <item.icon className="w-4 h-4" />
                         <span>{item.label}</span>
                       </Link>
+                    );
+
+                    if (item.href === '/public-pages/terms') {
+                      return (
+                        <PermissionGuard permission="index-terms" type="element" key={item.href}>
+                          {linkElement}
+                        </PermissionGuard>
+                      );
+                    }
+
+                    return (
+                      <div key={item.href}>
+                        {linkElement}
+                      </div>
                     );
                   })}
                 </CollapsibleContent>
@@ -499,9 +578,8 @@ export function Sidebar() {
                 <CollapsibleContent className="space-y-1 pt-1 pb-2">
                   {settingsItems.map((item) => {
                     const isActive = pathname === item.href || (item.href !== '/settings' && pathname.startsWith(item.href));
-                    return (
+                    const linkElement = (
                       <Link
-                        key={item.href}
                         href={item.href}
                         onClick={() => setIsOpen(false)}
                         className={`flex items-center gap-3 px-4 py-2 ml-4 rounded-md transition-colors text-sm ${isActive
@@ -512,6 +590,20 @@ export function Sidebar() {
                         <item.icon className="w-4 h-4" />
                         <span>{item.label}</span>
                       </Link>
+                    );
+
+                    if (item.href === '/settings') {
+                      return (
+                        <PermissionGuard permission="index-settings" type="element" key={item.href}>
+                          {linkElement}
+                        </PermissionGuard>
+                      );
+                    }
+
+                    return (
+                      <div key={item.href}>
+                        {linkElement}
+                      </div>
                     );
                   })}
                 </CollapsibleContent>

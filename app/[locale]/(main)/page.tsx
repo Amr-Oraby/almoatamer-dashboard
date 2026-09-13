@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Loader2, Users, Briefcase, Activity, Tag, FileText, Share2, Globe, Languages, MessageSquare, Target } from 'lucide-react';
 import Link from 'next/link';
 import { DashboardStat } from '@/features/dashboard/types';
+import { PermissionGuard } from '@/components/permissions-provider';
 
 const getIconForStat = (key: string) => {
   if (key.includes('moatmer')) return Users;
@@ -26,7 +27,8 @@ export default function DashboardPage() {
   const stats: DashboardStat[] = statsResponse?.data || [];
 
   return (
-    <div className="w-full space-y-8">
+    <PermissionGuard permission="show-dashboard" type="page">
+      <div className="w-full space-y-8">
       <div>
         <div className="mb-2">
           <span className="text-primary font-bold text-sm tracking-wider uppercase">{t('title')}</span>
@@ -75,5 +77,6 @@ export default function DashboardPage() {
         </div>
       )}
     </div>
+    </PermissionGuard>
   );
 }

@@ -71,3 +71,6 @@ export const serverPut = (endpoint: string, body: unknown, requireAuth = true, h
 
 export const serverDelete = (endpoint: string, requireAuth = true, headers?: Record<string, string>) =>
     serverRoute({ endpoint, method: "DELETE", requireAuth, headers, errorMessage: "Failed to delete data" });
+
+export const serverPatch = (endpoint: string, body: unknown, requireAuth = true, headers?: Record<string, string>) =>
+    serverRoute({ endpoint, method: "PATCH", body, requireAuth, headers, errorMessage: "Failed to update data" });

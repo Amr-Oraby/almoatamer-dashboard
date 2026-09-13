@@ -12,3 +12,10 @@ export async function getRole(id: string): Promise<SingleRoleResponse> {
 export async function deleteRole(id: string): Promise<any> {
     return apiClient<any>(`/api/roles/${id}`, { method: 'DELETE' });
 }
+
+export async function updateRole(id: string, data: any): Promise<any> {
+    return apiClient<any>(`/api/roles/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify(data),
+    });
+}

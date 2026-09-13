@@ -98,7 +98,7 @@ export function WalletsTable() {
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
-            <TableActionMenu items={[{ text: t("details"), href: `/wallets/show/${row.original.id}` }]} />
+            <TableActionMenu items={[{ text: t("details"), href: `/wallets/show/${row.original.id}`, permission: "show-wallet" }]} />
           </div>
         )
       },
