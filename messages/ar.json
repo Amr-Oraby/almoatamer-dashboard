@@ -345,7 +345,12 @@
     "used": "مستخدم",
     "not_used": "غير مستخدم",
     "active": "نشط",
-    "inactive": "غير نشط"
+    "inactive": "غير نشط",
+    "create_new": "إنشاء جديد",
+    "name": "الاسم",
+    "phone_code": "رمز الدولة",
+    "phone_number": "رقم الهاتف",
+    "number_of_recipients": "عدد المستلمين"
   },
   "ReferralLinks": {
     "not_found": "رابط الإحالة غير موجود",

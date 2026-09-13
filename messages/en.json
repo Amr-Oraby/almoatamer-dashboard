@@ -345,7 +345,12 @@
     "used": "Used",
     "not_used": "Not Used",
     "active": "Active",
-    "inactive": "Inactive"
+    "inactive": "Inactive",
+    "create_new": "Create New",
+    "name": "Name",
+    "phone_code": "Phone Code",
+    "phone_number": "Phone Number",
+    "number_of_recipients": "Number of Recipients"
   },
   "ReferralLinks": {
     "not_found": "Referral link not found",
