@@ -119,7 +119,7 @@ export function AdminsTable() {
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
               { text: t("details"), href: `/roles/admins/show/${row.original.id}`, permission: "show-admin" },
-              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)), permission: "delete-admin", isDanger: true }
+              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)), permission: "delete-admin" }
             ]} />
           </div>
         )
