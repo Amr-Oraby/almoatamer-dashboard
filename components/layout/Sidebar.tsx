@@ -248,19 +248,31 @@ export function Sidebar() {
                 ? pathname === '/'
                 : pathname.startsWith(item.href);
 
+              const linkElement = (
+                <Link
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${isExactlyActive
+                    ? 'bg-primary text-primary-foreground font-medium shadow-sm'
+                    : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900'
+                    }`}
+                >
+                  <item.icon className="w-5 h-5" />
+                  <span>{item.label}</span>
+                </Link>
+              );
+
+              if (item.href === '/umrahs/show-all') {
+                return (
+                  <PermissionGuard permission="index-umrahs" type="element" key={item.href}>
+                    <li>{linkElement}</li>
+                  </PermissionGuard>
+                );
+              }
+
               return (
                 <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className={`flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${isExactlyActive
-                      ? 'bg-primary text-primary-foreground font-medium shadow-sm'
-                      : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900'
-                      }`}
-                  >
-                    <item.icon className="w-5 h-5" />
-                    <span>{item.label}</span>
-                  </Link>
+                  {linkElement}
                 </li>
               );
             })}

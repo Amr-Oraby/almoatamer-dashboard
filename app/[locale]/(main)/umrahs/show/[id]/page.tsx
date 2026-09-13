@@ -6,6 +6,7 @@ import { useUmrah } from "@/features/umrahs/hooks"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Loader2, Phone, Mail, User, CheckCircle2, Heart, Shirt, MapPin, RotateCw, MoonStar, Footprints, Scissors, Handshake } from "lucide-react"
+import { PermissionGuard } from "@/components/permissions-provider"
 
 const getStepIcon = (key: string) => {
   switch (key) {
@@ -47,8 +48,9 @@ export default function UmrahDetailsPage() {
   const client = umrah.client
 
   return (
-    <div className="space-y-6 pb-10 max-w-5xl mx-auto">
-      {/* Unified Details Card */}
+    <PermissionGuard permission="show-umrahs">
+      <div className="space-y-6 pb-10 max-w-5xl mx-auto">
+        {/* Unified Details Card */}
       <Card className="rounded-2xl border-zinc-100 dark:border-zinc-800 shadow-sm overflow-hidden">
         {/* Compact Header */}
         <div className="flex items-center justify-between bg-zinc-50/50 dark:bg-zinc-900/50 p-4 border-b border-zinc-100 dark:border-zinc-800">
@@ -139,5 +141,6 @@ export default function UmrahDetailsPage() {
         </Card>
       )}
     </div>
+    </PermissionGuard>
   )
 }

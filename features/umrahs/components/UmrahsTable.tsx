@@ -145,7 +145,7 @@ export function UmrahsTable() {
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
-            <TableActionMenu items={[{ text: t("details"), href: `/umrahs/show/${row.original.id}` }]} />
+            <TableActionMenu items={[{ text: t("details"), href: `/umrahs/show/${row.original.id}`, permission: "show-umrahs" }]} />
           </div>
         )
       },
