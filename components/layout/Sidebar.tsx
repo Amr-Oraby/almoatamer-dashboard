@@ -268,6 +268,12 @@ export function Sidebar() {
                     <li>{linkElement}</li>
                   </PermissionGuard>
                 );
+              } else if (item.href === '/news') {
+                return (
+                  <PermissionGuard permission="index-news" type="element" key={item.href}>
+                    <li>{linkElement}</li>
+                  </PermissionGuard>
+                );
               }
 
               return (

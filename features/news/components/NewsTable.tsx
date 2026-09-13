@@ -99,9 +99,9 @@ export function NewsTable() {
         return (
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
-              { text: t("details"), href: `/news/show/${row.original.id}` },
-              { text: "تعديل", href: `/news/update/${row.original.id}` },
-              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) },
+              { text: t("details"), href: `/news/show/${row.original.id}`, permission: "show-news" },
+              { text: "تعديل", href: `/news/update/${row.original.id}`, permission: "update-news" },
+              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)), permission: "delete-news" },
             ]} />
           </div>
         )
