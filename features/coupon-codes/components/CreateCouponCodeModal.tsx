@@ -6,8 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import { createCouponCodeSchema, CreateCouponCodeFormValues } from "../schemas";
 import { useGenerateCouponCodes } from "../hooks";
 import { Plus, Loader2 } from "lucide-react";
@@ -61,27 +60,42 @@ export function CreateCouponCodeModal() {
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-4">
             <div className="space-y-2">
-              <Label>{t("name", { fallback: "Name" })}</Label>
-              <Input {...register("name")} />
+              <label className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{t("name", { fallback: "Name" })}</label>
+              <input 
+                {...register("name")} 
+                className="flex h-10 w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100" 
+              />
               {errors.name && <p className="text-sm text-red-500">{errors.name.message}</p>}
             </div>
 
             <div className="grid grid-cols-3 gap-4">
               <div className="space-y-2">
-                <Label>{t("phone_code", { fallback: "Phone Code" })}</Label>
-                <Input {...register("phone_code")} dir="ltr" />
+                <label className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{t("phone_code", { fallback: "Phone Code" })}</label>
+                <input 
+                  {...register("phone_code")} 
+                  dir="ltr" 
+                  className="flex h-10 w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 text-left" 
+                />
                 {errors.phone_code && <p className="text-sm text-red-500">{errors.phone_code.message}</p>}
               </div>
               <div className="space-y-2 col-span-2">
-                <Label>{t("phone_number", { fallback: "Phone Number" })}</Label>
-                <Input {...register("phone_number")} dir="ltr" />
+                <label className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{t("phone_number", { fallback: "Phone Number" })}</label>
+                <input 
+                  {...register("phone_number")} 
+                  dir="ltr" 
+                  className="flex h-10 w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 text-left" 
+                />
                 {errors.phone_number && <p className="text-sm text-red-500">{errors.phone_number.message}</p>}
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label>{t("number_of_recipients", { fallback: "Number of Recipients" })}</Label>
-              <Input type="number" {...register("number_of_recipients")} />
+              <label className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{t("number_of_recipients", { fallback: "Number of Recipients" })}</label>
+              <input 
+                type="number" 
+                {...register("number_of_recipients")} 
+                className="flex h-10 w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100" 
+              />
               {errors.number_of_recipients && <p className="text-sm text-red-500">{errors.number_of_recipients.message}</p>}
             </div>
 
