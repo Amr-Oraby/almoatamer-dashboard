@@ -98,9 +98,9 @@ export function BlogsTable() {
         return (
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
-              { text: t("details"), href: `/blogs/show/${row.original.id}` },
-              { text: "تعديل", href: `/blogs/update/${row.original.id}` },
-              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
+              { text: t("details"), href: `/blogs/show/${row.original.id}`, permission: "show-blog" },
+              { text: "تعديل", href: `/blogs/update/${row.original.id}`, permission: "update-blog" },
+              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)), permission: "delete-blog" }
             ]} />
           </div>
         )
