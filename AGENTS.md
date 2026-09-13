@@ -189,3 +189,31 @@ When using `zodResolver` with `react-hook-form`, you MUST avoid using Zod method
 2. **DO NOT use `.transform()`** in your schemas for forms. This changes the output type and causes the `SubmitHandler` to complain that the form's `FieldValues` are incompatible with the inferred output type.
 3. **DO NOT use `.default()`** in Zod schemas for forms. Handle default values exclusively in the `useForm({ defaultValues: ... })` configuration. Using Zod defaults makes fields optional in the input type, clashing with the required output type.
 4. **Always explicitly cast the submit handler argument** if needed: `<form onSubmit={handleSubmit((data) => onSubmit(data as unknown as YourFormValues))}>`.
+
+## Feature Permission Guarding Process
+
+When protecting a module or a feature with role-based permissions, follow these exact steps to ensure full coverage of the feature (pages, sidebar links, and actions):
+
+1. **Verify the Permissions**:
+   - Check the specific permission names required (e.g., `index-news`, `create-news`, `show-news`, `update-news`, `delete-news`).
+   
+2. **Protect Pages**:
+   - For any page component (e.g., `app/[locale]/(main)/[feature]/page.tsx`), import `PermissionGuard` from `@/components/permissions-provider`.
+   - Wrap the entire content of the `return` statement in `<PermissionGuard permission="[permission-name]">`.
+   
+3. **Protect Elements (Buttons, Links)**:
+   - For UI elements like the "Create" button on a list page, wrap the element with `<PermissionGuard permission="create-[feature]" type="element">`.
+   - This ensures the element is simply hidden rather than redirecting the user if they lack permission.
+
+4. **Protect Table Actions (`components/[Feature]Table.tsx`)**:
+   - For actions in the `TableActionMenu` (e.g., Details, Edit, Delete), add the `permission` property to the respective items in the `items` array.
+   - Example: `{ text: "تعديل", href: \`/[feature]/update/\${row.original.id}\`, permission: "update-[feature]" }`.
+   - Note: Do NOT use `isDanger` for delete actions as it is not supported by the `TableActionMenu` type.
+
+5. **Protect Sidebar Links (`components/layout/Sidebar.tsx`)**:
+   - Locate where the feature's link is rendered (e.g., in `additionalItems.map` or `publicPagesItems.map`).
+   - If it is rendered through a `.map()` function, add an `if (item.href === '/[feature]')` check to return the `<PermissionGuard>` wrapped `<li>`.
+   - Ensure the guard has `type="element"` and `key={item.href}`.
+
+6. **Commit and Push**:
+   - Commit the changes using `git add .` and `git commit -m "feat: Protect [feature] module with permissions"` and push to the repository.
