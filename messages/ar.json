@@ -808,6 +808,9 @@
     "clear_filters": "مسح التصفية",
     "loading": "جاري التحميل...",
     "no_results": "لا توجد نتائج",
-    "load_more": "تحميل المزيد"
+    "load_more": "تحميل المزيد",
+    "activation": "التفعيل",
+    "previous": "السابق",
+    "next": "التالي"
   }
 }

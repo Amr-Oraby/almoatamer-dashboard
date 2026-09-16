@@ -808,6 +808,9 @@
     "clear_filters": "Clear Filters",
     "loading": "Loading...",
     "no_results": "No results",
-    "load_more": "Load More"
+    "load_more": "Load More",
+    "activation": "Activation",
+    "previous": "Previous",
+    "next": "Next"
   }
 }
