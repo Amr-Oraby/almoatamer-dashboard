@@ -1,8 +1,12 @@
 import { apiClient } from "@/lib/api/client";
-import { RolesResponse, SingleRoleResponse } from "./types";
+import { RolesResponse, SingleRoleResponse, RolesListResponse } from "./types";
 
 export async function getRoles(page: number = 1): Promise<RolesResponse> {
     return apiClient<RolesResponse>(`/api/roles?page=${page}`);
+}
+
+export async function getRolesList(): Promise<RolesListResponse> {
+    return apiClient<RolesListResponse>(`/api/roles/list`);
 }
 
 export async function createRole(data: any): Promise<any> {

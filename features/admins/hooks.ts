@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getAdmins, getAdmin, deleteAdmin } from "./api";
+import { getAdmins, getAdmin, deleteAdmin, createAdmin, updateAdmin } from "./api";
 import { toast } from "sonner";
 
 export function useAdmins(page: number = 1, filters?: Record<string, string | null>) {
@@ -27,6 +27,35 @@ export function useDeleteAdmin() {
         },
         onError: (error: any) => {
             toast.error(error?.message || "حدث خطأ أثناء الحذف");
+        },
+    });
+}
+
+export function useCreateAdmin() {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: createAdmin,
+        onSuccess: (data: any) => {
+            toast.success(data?.message || "تم إنشاء المشرف بنجاح");
+            queryClient.invalidateQueries({ queryKey: ["admins"] });
+        },
+        onError: (error: any) => {
+            toast.error(error?.message || "حدث خطأ أثناء الإنشاء");
+        },
+    });
+}
+
+export function useUpdateAdmin(id: string) {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (formData: FormData) => updateAdmin(id, formData),
+        onSuccess: (data: any) => {
+            toast.success(data?.message || "تم التحديث بنجاح");
+            queryClient.invalidateQueries({ queryKey: ["admin", id] });
+            queryClient.invalidateQueries({ queryKey: ["admins"] });
+        },
+        onError: (error: any) => {
+            toast.error(error?.message || "حدث خطأ أثناء التحديث");
         },
     });
 }

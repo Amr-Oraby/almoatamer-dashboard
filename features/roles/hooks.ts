@@ -1,6 +1,13 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getRoles, getRole, deleteRole, updateRole, toggleRoleStatus, createRole } from "./api";
+import { getRoles, getRole, deleteRole, updateRole, toggleRoleStatus, createRole, getRolesList } from "./api";
 import { toast } from "sonner";
+
+export function useRolesList() {
+    return useQuery({
+        queryKey: ["roles", "list"],
+        queryFn: getRolesList,
+    });
+}
 
 export function useRoles(page: number = 1) {
     return useQuery({

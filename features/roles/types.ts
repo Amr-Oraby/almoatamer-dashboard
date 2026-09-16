@@ -44,3 +44,16 @@ export interface RolesResponse {
 }
 
 export type SingleRoleResponse = RoleItem;
+
+export interface SimpleRoleItem {
+    id: number;
+    name: string | null;
+    title: string;
+    is_active: boolean;
+}
+
+export interface RolesListResponse {
+    data: SimpleRoleItem[];
+    message: string;
+    status: string;
+}

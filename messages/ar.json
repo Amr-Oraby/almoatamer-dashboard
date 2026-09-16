@@ -1,5 +1,17 @@
 {
   "Dashboard": {
+    "add_admin": "إضافة مشرف",
+    "edit_admin": "تعديل بيانات المشرف",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "password": "كلمة المرور",
+    "gender": "النوع",
+    "male": "ذكر",
+    "female": "أنثى",
+    "password_confirmation": "تأكيد كلمة المرور",
+    "role": "الدور",
+    "is_active": "نشط",
     "period_histories": "سجل الفترات",
     "deletion_audits": "سجلات الحذف",
     "deleted_user": "المستخدم المحذوف",
@@ -783,5 +795,19 @@
     "sending_disabled": "إرسال الرسائل معطل حالياً.",
     "message_sent": "تم إرسال الرسالة بنجاح",
     "send_failed": "فشل إرسال الرسالة"
+  },
+  "Common": {
+    "upload_image": "رفع صورة",
+    "remove": "إزالة",
+    "select": "اختر...",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "leave_blank_to_keep": "اتركه فارغاً لعدم التغيير",
+    "search_placeholder": "ابحث...",
+    "apply": "تطبيق",
+    "clear_filters": "مسح التصفية",
+    "loading": "جاري التحميل...",
+    "no_results": "لا توجد نتائج",
+    "load_more": "تحميل المزيد"
   }
 }

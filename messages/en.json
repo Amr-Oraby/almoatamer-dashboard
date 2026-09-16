@@ -1,5 +1,17 @@
 {
   "Dashboard": {
+    "add_admin": "Add Admin",
+    "edit_admin": "Edit Admin",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "password": "Password",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "password_confirmation": "Confirm Password",
+    "role": "Role",
+    "is_active": "Active",
     "period_histories": "Period Histories",
     "deletion_audits": "Deletion Audits",
     "deleted_user": "Deleted User",
@@ -783,5 +795,19 @@
     "sending_disabled": "Sending messages is currently disabled.",
     "message_sent": "Message sent successfully",
     "send_failed": "Failed to send message"
+  },
+  "Common": {
+    "upload_image": "Upload Image",
+    "remove": "Remove",
+    "select": "Select...",
+    "cancel": "Cancel",
+    "save": "Save",
+    "leave_blank_to_keep": "Leave blank to keep unchanged",
+    "search_placeholder": "Search...",
+    "apply": "Apply",
+    "clear_filters": "Clear Filters",
+    "loading": "Loading...",
+    "no_results": "No results",
+    "load_more": "Load More"
   }
 }

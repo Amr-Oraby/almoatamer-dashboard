@@ -24,3 +24,17 @@ export async function getAdmin(id: string): Promise<SingleAdminResponse> {
 export async function deleteAdmin(id: string): Promise<any> {
     return apiClient<any>(`/api/admins/${id}`, { method: 'DELETE' });
 }
+
+export async function createAdmin(formData: FormData): Promise<any> {
+    return apiClient<any>('/api/admins', {
+        method: 'POST',
+        body: formData,
+    });
+}
+
+export async function updateAdmin(id: string, formData: FormData): Promise<any> {
+    return apiClient<any>(`/api/update-admin/${id}`, {
+        method: 'POST',
+        body: formData,
+    });
+}
