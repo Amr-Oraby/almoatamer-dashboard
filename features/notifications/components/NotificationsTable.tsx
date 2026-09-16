@@ -9,18 +9,23 @@ import { useSearchParams } from "next/navigation"
 import { TableActionMenu } from "@/components/ui/table-action-menu"
 
 
-import { useNotifications, useDeleteNotification } from "@/features/notifications/hooks"
+import { useNotifications, useDeleteNotification, useReadNotification, useReadAllNotifications } from "@/features/notifications/hooks"
 import { NotificationItem } from "@/features/notifications/types"
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import { DeleteDialog } from "@/components/ui/delete-dialog";
+import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 export function NotificationsTable() {
   const searchParams = useSearchParams()
   const page = Number(searchParams.get("page")) || 1
   const { data, isLoading } = useNotifications(page)
   const { mutate: deleteNotification, isPending: isDeleting } = useDeleteNotification()
+  const { mutate: readAllNotifications, isPending: isReadingAll } = useReadAllNotifications()
+  const { mutate: readNotification } = useReadNotification()
   const [deleteId, setDeleteId] = useState<string | null>(null)
+  const t = useTranslations('Dashboard')
   
   const columns = useMemo<ColumnDef<NotificationItem>[]>(() => [
     {
@@ -119,12 +124,13 @@ export function NotificationsTable() {
       cell: ({ row }) => (
         <div className="flex items-center justify-center">
           <TableActionMenu items={[
+            ...(row.original.is_readed ? [] : [{ text: t('mark_as_read'), onClick: () => readNotification(String(row.original.id)) }]),
             { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
           ]} />
         </div>
       )
     },
-  ], [page, data?.meta?.per_page])
+  ], [page, data?.meta?.per_page, t, readNotification])
 
   if (isLoading) {
     return <TableSkeleton />
@@ -135,6 +141,18 @@ export function NotificationsTable() {
       <DataTable
         columns={columns}
         data={data?.data || []}
+        topContent={
+          <div className="flex justify-end items-center w-full mb-4">
+            <Button 
+              onClick={() => readAllNotifications()} 
+              disabled={isReadingAll || data?.unread_count === 0} 
+              variant="default"
+              className="bg-blue-600 hover:bg-blue-700 text-white"
+            >
+              {t('mark_all_as_read')}
+            </Button>
+          </div>
+        }
         bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
       />
 

@@ -56,7 +56,10 @@ export function UpdateWhyUsModal({ isOpen, onClose, itemId }: UpdateWhyUsModalPr
                 tr: { title: item.tr?.title || "", description: item.tr?.description || "" },
                 iid: { title: item.iid?.title || "", description: item.iid?.description || "" },
             });
-            if (item.icon) setIconPreview(item.icon);
+            if (item.icon) {
+                // eslint-disable-next-line react-hooks/set-state-in-effect
+                setIconPreview(item.icon);
+            }
         }
     }, [itemData, isOpen, reset]);
 

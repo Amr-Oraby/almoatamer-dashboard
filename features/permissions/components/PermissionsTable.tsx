@@ -1,20 +1,27 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { DataTable } from "@/components/ui/data-table";
 import { TableSkeleton } from "@/components/ui/table-skeleton";
 import { useTranslations } from "next-intl";
 import { UrlPagination } from "@/components/ui/url-pagination";
 import { useSearchParams } from "next/navigation";
+import { DeleteDialog } from "@/components/ui/delete-dialog";
+import { TableActionMenu } from "@/components/ui/table-action-menu";
+import { UpdatePermissionModal } from "./UpdatePermissionModal";
 
-import { usePermissions } from "@/features/permissions/hooks";
+import { usePermissions, useDeletePermission } from "@/features/permissions/hooks";
 import { PermissionItem } from "@/features/permissions/types";
 
 export function PermissionsTable() {
   const searchParams = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
   const { data, isLoading } = usePermissions(page);
+  
+  const [updateItem, setUpdateItem] = useState<PermissionItem | null>(null);
+  const [deleteItem, setDeleteItem] = useState<PermissionItem | null>(null);
+  const { mutate: deletePermission, isPending: isDeleting } = useDeletePermission();
 
   const t = useTranslations("Permissions");
 
@@ -58,6 +65,28 @@ export function PermissionsTable() {
         </div>
       )
     },
+    {
+      id: "actions",
+      header: "",
+      size: 60,
+      cell: ({ row }) => (
+        <div className="flex justify-end">
+          <TableActionMenu
+            items={[
+              {
+                text: t("edit", { fallback: "تعديل" }),
+                onClick: () => setUpdateItem(row.original),
+              },
+              {
+                text: t("delete", { fallback: "حذف" }),
+                onClick: () => setDeleteItem(row.original),
+                isDestructive: true,
+              },
+            ]}
+          />
+        </div>
+      )
+    }
   ], [t, page, data?.meta?.per_page]);
 
   if (isLoading) {
@@ -70,6 +99,25 @@ export function PermissionsTable() {
         columns={columns}
         data={data?.data || []}
         bottomContent={<UrlPagination pageCount={data?.meta?.last_page || 1} />}
+      />
+      {updateItem && (
+        <UpdatePermissionModal
+          permission={updateItem}
+          isOpen={!!updateItem}
+          onClose={() => setUpdateItem(null)}
+        />
+      )}
+      <DeleteDialog
+        isOpen={!!deleteItem}
+        onClose={() => setDeleteItem(null)}
+        onConfirm={() => {
+          if (deleteItem) {
+            deletePermission(deleteItem.id, {
+              onSuccess: () => setDeleteItem(null),
+            });
+          }
+        }}
+        isDeleting={isDeleting}
       />
     </div>
   );

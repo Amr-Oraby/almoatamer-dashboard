@@ -35,10 +35,18 @@ export async function apiClient<T>(url: string, options?: RequestInit): Promise<
         headers.delete("Content-Type");
     }
 
-    const response = await fetch(url, {
+    const method = (options?.method || 'GET').toUpperCase();
+    const fetchOptions: RequestInit = {
         ...options,
         headers,
-    });
+    };
+
+    // Only set a default empty body for methods that allow it
+    if (!fetchOptions.body && ['POST', 'PUT', 'PATCH', 'DELETE'].includes(method) && !isFormData) {
+        fetchOptions.body = JSON.stringify({});
+    }
+
+    const response = await fetch(url, fetchOptions);
 
     if (!response.ok) {
         if (response.status === 401) {

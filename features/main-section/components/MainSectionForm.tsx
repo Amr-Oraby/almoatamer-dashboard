@@ -40,6 +40,7 @@ export function MainSectionForm() {
 
   useEffect(() => {
     if (response?.data?.image && !previewImage) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPreviewImage(response.data.image);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

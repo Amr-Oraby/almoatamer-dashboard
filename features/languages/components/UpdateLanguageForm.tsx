@@ -33,6 +33,7 @@ export function UpdateLanguageForm({ languageId }: UpdateLanguageFormProps) {
     useEffect(() => {
         if (languageData?.data) {
             const lang = languageData.data;
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setCurrentFlag(lang.flag);
 
             const defaultValues: any = {

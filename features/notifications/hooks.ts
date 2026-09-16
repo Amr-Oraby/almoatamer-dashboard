@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient, useInfiniteQuery } from "@tanstack/react-query";
-import { getNotifications, deleteNotification } from "./api";
+import { getNotifications, deleteNotification, readAllNotifications, readNotification } from "./api";
 import { toast } from "sonner";
 
 export function useNotifications(page: number = 1) {
@@ -19,6 +19,36 @@ export function useDeleteNotification() {
         },
         onError: (error: any) => {
             toast.error(error?.message || "حدث خطأ أثناء الحذف");
+        },
+    });
+}
+
+export function useReadAllNotifications() {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: readAllNotifications,
+        onSuccess: (data: any) => {
+            toast.success(data?.message || "تم التحديث بنجاح");
+            queryClient.invalidateQueries({ queryKey: ["notifications"] });
+            queryClient.invalidateQueries({ queryKey: ["infinite-notifications"] });
+        },
+        onError: (error: any) => {
+            toast.error(error?.message || "حدث خطأ");
+        },
+    });
+}
+
+export function useReadNotification() {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: readNotification,
+        onSuccess: (data: any) => {
+            toast.success(data?.message || "تم التحديث بنجاح");
+            queryClient.invalidateQueries({ queryKey: ["notifications"] });
+            queryClient.invalidateQueries({ queryKey: ["infinite-notifications"] });
+        },
+        onError: (error: any) => {
+            toast.error(error?.message || "حدث خطأ");
         },
     });
 }

@@ -86,7 +86,9 @@ export default function LocationPickerInner({
 
     const trimmed = query.trim();
     if (trimmed.length < 2) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setResults([]);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShowDropdown(false);
       return;
     }

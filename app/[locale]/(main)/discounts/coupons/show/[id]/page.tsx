@@ -5,7 +5,8 @@ import { useTranslations } from "next-intl"
 import { useCoupon } from "@/features/coupons/hooks"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Loader2, Ticket, Percent, Calendar, Hash, Activity } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Loader2, Ticket, Percent, Calendar, Hash, Activity, Download } from "lucide-react"
 
 export default function CouponDetailsPage() {
   const params = useParams()
@@ -48,9 +49,20 @@ export default function CouponDetailsPage() {
               <p className="text-sm text-zinc-500 font-medium mt-1">#{coupon.id}</p>
             </div>
           </div>
-          <Badge variant={coupon.status ? "default" : "secondary"} className="rounded-lg text-sm px-3 py-1">
-            {coupon.status ? t("active") : t("inactive")}
-          </Badge>
+          <div className="flex items-center gap-3">
+            <Badge variant={coupon.status ? "default" : "secondary"} className="rounded-lg text-sm px-3 py-1">
+              {coupon.status ? t("active") : t("inactive")}
+            </Badge>
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-2 border-zinc-200 dark:border-zinc-800"
+              onClick={() => window.open(`/api/export-coupon-codes?sender_id=${id}`, '_blank')}
+            >
+              <Download className="w-4 h-4" />
+              {t("export_codes", { fallback: "Export Codes" })}
+            </Button>
+          </div>
         </div>
 
         <CardContent className="p-0">

@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/routing';
-import { Home, Users, X, Calendar, ChevronDown, LayoutTemplate, PieChart, PanelBottom, Plane, UserCheck, Newspaper, BookOpen, Tag, Ticket, Share2, ArrowRightLeft, HandCoins, Wallet, Flag, Bell, Languages, Map, Globe, MapPin, Shield, ShieldCheck, UserCog, Headset, Mail, Contact, MessageCircle, Search, Files, CircleHelp, FileText, FileKey, Info, Settings, Settings2, Clock, BarChart, HeartHandshake, Images, Lightbulb, Monitor, Rocket, UserCircle } from 'lucide-react';
+import { Home, Users, X, Calendar, ChevronDown, LayoutTemplate, PieChart, PanelBottom, Plane, UserCheck, Newspaper, BookOpen, Tag, Ticket, Share2, ArrowRightLeft, HandCoins, Wallet, Flag, Bell, Languages, Map, Globe, MapPin, Shield, ShieldCheck, UserCog, Headset, Mail, Contact, MessageCircle, MessageSquare, Search, Files, CircleHelp, FileText, FileKey, Info, Settings, Settings2, Clock, BarChart, HeartHandshake, Images, Lightbulb, Monitor, Rocket, UserCircle, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 import { useSidebar } from '@/components/layout/SidebarContext';
 import { useState, useEffect } from 'react';
@@ -103,6 +103,7 @@ export function Sidebar() {
     { href: '/contact/messages', icon: Mail, label: t('contact_messages_page') },
     { href: '/contact/admin-contacts', icon: Contact, label: t('admin_contacts_page') },
     { href: '/contact/users-chats', icon: MessageCircle, label: t('users_chats') },
+    { href: '/contact/chats', icon: MessageSquare, label: t('chats_page', { fallback: "Chats" }) },
   ];
 
   const publicPagesItems = [
@@ -120,6 +121,8 @@ export function Sidebar() {
     { href: '/settings', icon: Settings2, label: t('settings_page') },
     { href: '/settings/reservation-times', icon: Clock, label: t('reservation_times_page') },
     { href: '/settings/financial-reports', icon: BarChart, label: t('financial_reports_page') },
+    { href: '/period-histories', icon: Clock, label: t('period_histories') },
+    { href: '/deletion-audits', icon: Trash2, label: t('deletion_audits') },
   ];
 
   return (

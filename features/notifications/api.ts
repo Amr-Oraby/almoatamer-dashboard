@@ -8,3 +8,11 @@ export async function getNotifications(page: number = 1): Promise<NotificationsR
 export async function deleteNotification(id: string): Promise<any> {
     return apiClient<any>(`/api/delete-notification/${id}`, { method: 'DELETE' });
 }
+
+export async function readAllNotifications(): Promise<any> {
+    return apiClient<any>('/api/read-all-notification', { method: 'PUT' });
+}
+
+export async function readNotification(id: string): Promise<any> {
+    return apiClient<any>(`/api/read-notification/${id}`, { method: 'PUT' });
+}

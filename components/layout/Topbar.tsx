@@ -33,6 +33,7 @@ export function Topbar() {
   // Quick theme toggle implementation (can be refined later with next-themes if needed)
   useEffect(() => {
     if (document.documentElement.classList.contains('dark')) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsDark(true);
     }
   }, []);

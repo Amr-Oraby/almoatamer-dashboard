@@ -7,6 +7,50 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Loader2, Receipt, User as UserIcon, Phone, Mail, Hash, Calendar, Banknote, Landmark, Percent, ReceiptText } from "lucide-react"
 import { PermissionGuard } from "@/components/permissions-provider"
 
+const PersonCard = ({ person, title, notFoundText }: { person: any, title: string, notFoundText: string }) => (
+  <Card className="border-zinc-100 dark:border-zinc-800 shadow-sm h-full">
+    <CardHeader className="bg-zinc-50/50 dark:bg-zinc-900/50 border-b border-zinc-100 dark:border-zinc-800 pb-4">
+      <CardTitle className="text-lg font-bold flex items-center gap-2">
+          <UserIcon className="w-5 h-5 text-primary" />
+          {title}
+      </CardTitle>
+    </CardHeader>
+    <CardContent className="p-6">
+      {person ? (
+          <div className="space-y-4">
+              <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden shrink-0">
+                      {person.image ? (
+                          <img src={person.image} alt={person.name} className="w-full h-full object-cover" />
+                      ) : (
+                          <UserIcon className="w-8 h-8 text-primary" />
+                      )}
+                  </div>
+                  <div>
+                      <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">{person.name}</h3>
+                      <p className="text-sm text-zinc-500 font-medium capitalize">{person.gender}</p>
+                  </div>
+              </div>
+              
+              <div className="flex items-center gap-3 text-sm text-zinc-600 dark:text-zinc-400 bg-zinc-50/50 dark:bg-zinc-900/50 p-3 rounded-xl border border-zinc-100 dark:border-zinc-800">
+                  <Phone className="w-4 h-4 text-zinc-400 shrink-0" />
+                  <span dir="ltr" className="font-medium">{person.phone ? `+${person.phone_code} ${person.phone}` : "-"}</span>
+              </div>
+              <div className="flex items-center gap-3 text-sm text-zinc-600 dark:text-zinc-400 bg-zinc-50/50 dark:bg-zinc-900/50 p-3 rounded-xl border border-zinc-100 dark:border-zinc-800">
+                  <Mail className="w-4 h-4 text-zinc-400 shrink-0" />
+                  <span className="font-medium break-all">{person.email || "-"}</span>
+              </div>
+          </div>
+      ) : (
+          <div className="flex flex-col items-center justify-center h-40 text-zinc-400">
+              <UserIcon className="w-12 h-12 mb-2 opacity-50" />
+              <p className="font-medium">{notFoundText}</p>
+          </div>
+      )}
+    </CardContent>
+  </Card>
+)
+
 export default function TransactionDetailsPage() {
   const params = useParams()
   const id = params.id as string
@@ -32,49 +76,7 @@ export default function TransactionDetailsPage() {
   const transaction = response.data
   const { user, moatmer } = transaction
 
-  const PersonCard = ({ person, title, notFoundText }: { person: any, title: string, notFoundText: string }) => (
-    <Card className="border-zinc-100 dark:border-zinc-800 shadow-sm h-full">
-      <CardHeader className="bg-zinc-50/50 dark:bg-zinc-900/50 border-b border-zinc-100 dark:border-zinc-800 pb-4">
-        <CardTitle className="text-lg font-bold flex items-center gap-2">
-            <UserIcon className="w-5 h-5 text-primary" />
-            {title}
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="p-6">
-        {person ? (
-            <div className="space-y-4">
-                <div className="flex items-center gap-4 mb-6">
-                    <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden shrink-0">
-                        {person.image ? (
-                            <img src={person.image} alt={person.name} className="w-full h-full object-cover" />
-                        ) : (
-                            <UserIcon className="w-8 h-8 text-primary" />
-                        )}
-                    </div>
-                    <div>
-                        <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">{person.name}</h3>
-                        <p className="text-sm text-zinc-500 font-medium capitalize">{person.gender}</p>
-                    </div>
-                </div>
-                
-                <div className="flex items-center gap-3 text-sm text-zinc-600 dark:text-zinc-400 bg-zinc-50/50 dark:bg-zinc-900/50 p-3 rounded-xl border border-zinc-100 dark:border-zinc-800">
-                    <Phone className="w-4 h-4 text-zinc-400 shrink-0" />
-                    <span dir="ltr" className="font-medium">{person.phone ? `+${person.phone_code} ${person.phone}` : "-"}</span>
-                </div>
-                <div className="flex items-center gap-3 text-sm text-zinc-600 dark:text-zinc-400 bg-zinc-50/50 dark:bg-zinc-900/50 p-3 rounded-xl border border-zinc-100 dark:border-zinc-800">
-                    <Mail className="w-4 h-4 text-zinc-400 shrink-0" />
-                    <span className="font-medium break-all">{person.email || "-"}</span>
-                </div>
-            </div>
-        ) : (
-            <div className="flex flex-col items-center justify-center h-40 text-zinc-400">
-                <UserIcon className="w-12 h-12 mb-2 opacity-50" />
-                <p className="font-medium">{notFoundText}</p>
-            </div>
-        )}
-      </CardContent>
-    </Card>
-  )
+
 
   return (
     <PermissionGuard permission="show-transactions">

@@ -33,3 +33,23 @@ export const getAllPermissions = async (): Promise<AllPermissionsResponse> => {
   return deduplicatedResponse;
 };
 
+export const createPermission = async (data: any): Promise<any> => {
+  return apiClient<any>("/api/permissions", {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+};
+
+export const updatePermission = async (id: number, data: any): Promise<any> => {
+  return apiClient<any>(`/api/permissions/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(data),
+  });
+};
+
+export const deletePermission = async (id: number): Promise<any> => {
+  return apiClient<any>(`/api/permissions/${id}`, {
+    method: "DELETE",
+  });
+};
+

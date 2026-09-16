@@ -26,6 +26,7 @@ export function UrlSearchFilter({
 
   // Sync state with URL if it changes externally (e.g. clear filters)
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setValue(searchParams.get(filterKey) || "")
   }, [searchParams, filterKey])
 
