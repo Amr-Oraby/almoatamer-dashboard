@@ -1,3 +1,4 @@
+import { PageContainer } from "@/components/layout/PageContainer";
 import { getTranslations, getLocale } from 'next-intl/server';
 import { UpdateFaqForm } from '@/features/faq/components/UpdateFaqForm';
 import { ArrowRight } from 'lucide-react';
@@ -9,7 +10,7 @@ export default async function UpdateFaqPage({ params }: { params: Promise<{ id: 
   const { id } = await params;
   
   return (
-    <div className="flex flex-col gap-6 p-6">
+    <PageContainer>
       <div className="flex items-center gap-4">
         <Link href={`/${locale}/public-pages/faq`} className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-colors">
             <ArrowRight className="w-5 h-5 rtl:rotate-180" />
@@ -20,6 +21,6 @@ export default async function UpdateFaqPage({ params }: { params: Promise<{ id: 
       </div>
 
       <UpdateFaqForm faqId={id} />
-    </div>
+    </PageContainer>
   );
 }

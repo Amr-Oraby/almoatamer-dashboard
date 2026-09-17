@@ -1,3 +1,4 @@
+import { PageContainer } from "@/components/layout/PageContainer";
 import { useTranslations } from 'next-intl';
 import { AdminsTable } from '@/features/admins/components/AdminsTable';
 import { CreateAdminModal } from '@/features/admins/components/CreateAdminModal';
@@ -9,7 +10,7 @@ export default function AdminsPage() {
   
   return (
     <PermissionGuard permission="index-admin">
-      <div className="flex flex-col gap-6 p-6">
+      <PageContainer>
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-2">
             <h1 className="text-2xl font-bold">{t('admins_page')}</h1>
@@ -20,7 +21,7 @@ export default function AdminsPage() {
         </div>
 
         <AdminsTable />
-      </div>
+      </PageContainer>
     </PermissionGuard>
   );
 }

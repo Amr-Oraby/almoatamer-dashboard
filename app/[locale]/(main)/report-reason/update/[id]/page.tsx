@@ -1,3 +1,4 @@
+import { PageContainer } from "@/components/layout/PageContainer";
 import { getTranslations, getLocale } from 'next-intl/server';
 import { UpdateReportReasonForm } from '@/features/report-reason/components/UpdateReportReasonForm';
 import { ArrowRight } from 'lucide-react';
@@ -11,7 +12,7 @@ export default async function UpdateReportReasonPage({ params }: { params: Promi
   
   return (
     <PermissionGuard permission="update-report-reason">
-      <div className="flex flex-col gap-6 p-6">
+      <PageContainer>
       <div className="flex items-center gap-4">
         <Link href={`/${locale}/report-reason`} className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-colors">
             <ArrowRight className="w-5 h-5 rtl:rotate-180" />
@@ -22,7 +23,7 @@ export default async function UpdateReportReasonPage({ params }: { params: Promi
       </div>
 
       <UpdateReportReasonForm reportReasonId={id} />
-    </div>
+    </PageContainer>
     </PermissionGuard>
   );
 }

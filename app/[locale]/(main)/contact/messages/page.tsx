@@ -1,3 +1,4 @@
+import { PageContainer } from "@/components/layout/PageContainer";
 import { useTranslations } from 'next-intl';
 import { ClientMessagesTable } from '@/features/client-messages/components/ClientMessagesTable';
 import { PermissionGuard } from '@/components/permissions-provider';
@@ -7,7 +8,7 @@ export default function ClientMessagesPage() {
   
   return (
     <PermissionGuard permission="index-client-messages">
-      <div className="flex flex-col gap-6 p-6">
+      <PageContainer>
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-bold">{t('contact_messages_page')}</h1>
@@ -15,7 +16,7 @@ export default function ClientMessagesPage() {
       </div>
 
       <ClientMessagesTable />
-    </div>
+    </PageContainer>
     </PermissionGuard>
   );
 }

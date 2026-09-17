@@ -1,3 +1,4 @@
+import { PageContainer } from "@/components/layout/PageContainer";
 import { useTranslations } from 'next-intl';
 import { AboutTable } from '@/features/about/components/AboutTable';
 
@@ -8,7 +9,7 @@ export default function AboutPage() {
   
   return (
     <PermissionGuard permission="index-about">
-      <div className="flex flex-col gap-6 p-6">
+      <PageContainer>
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-2">
             <h1 className="text-2xl font-bold">{t('about_page')}</h1>
@@ -16,7 +17,7 @@ export default function AboutPage() {
         </div>
 
         <AboutTable />
-      </div>
+      </PageContainer>
     </PermissionGuard>
   );
 }

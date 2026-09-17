@@ -1,3 +1,4 @@
+import { PageContainer } from "@/components/layout/PageContainer";
 import { useTranslations } from 'next-intl';
 import { HomeBannersGrid } from '@/features/home-banners/components/HomeBannersGrid';
 import { CreateHomeBannerModal } from '@/features/home-banners/components/CreateHomeBannerModal';
@@ -8,7 +9,7 @@ export default function GalleryPage() {
   
   return (
     <PermissionGuard permission="index-banner">
-      <div className="flex flex-col gap-6 p-6">
+      <PageContainer>
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-bold">{t('gallery')}</h1>
@@ -19,7 +20,7 @@ export default function GalleryPage() {
       </div>
 
       <HomeBannersGrid />
-    </div>
+    </PageContainer>
     </PermissionGuard>
   );
 }

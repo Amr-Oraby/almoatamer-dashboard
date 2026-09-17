@@ -1,3 +1,4 @@
+import { PageContainer } from "@/components/layout/PageContainer";
 import { getTranslations } from 'next-intl/server';
 import { BlogsTable } from '@/features/blogs/components/BlogsTable';
 import { Link } from '@/i18n/routing';
@@ -11,7 +12,7 @@ export default async function BlogsPage() {
 
   return (
     <PermissionGuard permission="index-blog">
-      <div className="flex flex-col gap-6 p-6">
+      <PageContainer>
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-2">
             <h1 className="text-2xl font-bold">{t('blogs_page')}</h1>
@@ -28,7 +29,7 @@ export default async function BlogsPage() {
         </div>
 
         <BlogsTable />
-      </div>
+      </PageContainer>
     </PermissionGuard>
   );
 }

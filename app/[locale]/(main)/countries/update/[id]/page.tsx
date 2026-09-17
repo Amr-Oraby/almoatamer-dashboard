@@ -1,3 +1,4 @@
+import { PageContainer } from "@/components/layout/PageContainer";
 import { getTranslations, getLocale } from 'next-intl/server';
 import { UpdateCountryForm } from '@/features/countries/components/UpdateCountryForm';
 import { ArrowRight } from 'lucide-react';
@@ -12,7 +13,7 @@ export default async function UpdateCountryPage({ params }: { params: Promise<{ 
   
   return (
     <PermissionGuard permission="update-countries">
-      <div className="flex flex-col gap-6 p-6">
+      <PageContainer>
         <div className="flex items-center gap-4">
           <Link href={`/${locale}/countries/show-all`} className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-colors">
               <ArrowRight className="w-5 h-5 rtl:rotate-180" />
@@ -23,7 +24,7 @@ export default async function UpdateCountryPage({ params }: { params: Promise<{ 
         </div>
 
         <UpdateCountryForm countryId={id} />
-      </div>
+      </PageContainer>
     </PermissionGuard>
   );
 }

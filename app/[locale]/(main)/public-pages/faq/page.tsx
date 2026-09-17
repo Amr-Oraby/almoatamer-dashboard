@@ -1,3 +1,4 @@
+import { PageContainer } from "@/components/layout/PageContainer";
 import { useTranslations, useLocale } from 'next-intl';
 import { FaqTable } from '@/features/faq/components/FaqTable';
 import { Plus } from 'lucide-react';
@@ -8,7 +9,7 @@ export default function FaqPage() {
   const locale = useLocale();
   
   return (
-    <div className="flex flex-col gap-6 p-6">
+    <PageContainer>
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-bold">{t('faq_page')}</h1>
@@ -19,6 +20,6 @@ export default function FaqPage() {
       </div>
 
       <FaqTable />
-    </div>
+    </PageContainer>
   );
 }

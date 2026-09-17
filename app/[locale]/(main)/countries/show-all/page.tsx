@@ -1,3 +1,4 @@
+import { PageContainer } from "@/components/layout/PageContainer";
 import { useTranslations, useLocale } from 'next-intl';
 import { CountriesTable } from '@/features/countries/components/CountriesTable';
 import { Plus } from 'lucide-react';
@@ -10,7 +11,7 @@ export default function CountriesPage() {
   
   return (
     <PermissionGuard permission="index-countries">
-      <div className="flex flex-col gap-6 p-6">
+      <PageContainer>
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-bold">{t('countries_page')}</h1>
@@ -23,7 +24,7 @@ export default function CountriesPage() {
       </div>
 
       <CountriesTable />
-    </div>
+    </PageContainer>
     </PermissionGuard>
   );
 }

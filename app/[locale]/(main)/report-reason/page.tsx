@@ -1,3 +1,4 @@
+import { PageContainer } from "@/components/layout/PageContainer";
 import { useTranslations, useLocale } from 'next-intl';
 import { ReportReasonsTable } from '@/features/report-reason/components/ReportReasonsTable';
 import { Plus } from 'lucide-react';
@@ -10,7 +11,7 @@ export default function ReportReasonPage() {
   
   return (
     <PermissionGuard permission="index-report-reason">
-      <div className="flex flex-col gap-6 p-6">
+      <PageContainer>
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-bold">{t('report_reason_page')}</h1>
@@ -23,7 +24,7 @@ export default function ReportReasonPage() {
       </div>
 
       <ReportReasonsTable />
-    </div>
+    </PageContainer>
     </PermissionGuard>
   );
 }

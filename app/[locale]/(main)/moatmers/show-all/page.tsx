@@ -1,3 +1,4 @@
+import { PageContainer } from "@/components/layout/PageContainer";
 import { getTranslations } from 'next-intl/server';
 import { MoatmrsTable } from '@/features/moatmrs/components/MoatmrsTable';
 import { Link } from '@/i18n/routing';
@@ -10,7 +11,7 @@ export default async function AlmoatamersPage() {
   
   return (
     <PermissionGuard permission="index-moatmer">
-      <div className="flex flex-col gap-6 p-6">
+      <PageContainer>
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-2">
             <h1 className="text-2xl font-bold">{t('almoatamers_page')}</h1>
@@ -27,7 +28,7 @@ export default async function AlmoatamersPage() {
         </div>
 
         <MoatmrsTable />
-      </div>
+      </PageContainer>
     </PermissionGuard>
   );
 }
