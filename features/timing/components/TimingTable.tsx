@@ -8,16 +8,26 @@ import { Switch } from "@/components/ui/switch";
 import { Loader2, ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { BulkUpdateModal } from "./BulkUpdateModal";
+import { UpdateDayModal } from "./UpdateDayModal";
+import { AddDayModal } from "./AddDayModal";
+import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { cn } from "@/lib/utils";
+
+const MAX_DAYS_PER_MONTH: Record<number, number> = {
+    1: 31, 2: 29, 3: 31, 4: 30, 5: 31, 6: 30, 7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31
+};
 
 export function TimingTable() {
     const t = useTranslations("Timing");
     const { data: response, isLoading, isError } = useTimings();
-    const { mutate: toggleDay } = useToggleTimingDay();
+    const { mutate: toggleDay, isPending: isToggling } = useToggleTimingDay();
     const [selectedDays, setSelectedDays] = useState<Set<number>>(new Set());
     
     // Accordion state
     const [openMonth, setOpenMonth] = useState<number | null>(null);
+
+    // Confirm Modal state
+    const [dayToToggle, setDayToToggle] = useState<number | null>(null);
 
     const toggleSelection = (id: number) => {
         const newSet = new Set(selectedDays);
@@ -78,10 +88,18 @@ export function TimingTable() {
                                         {t("month")} {month.month}
                                     </CardTitle>
                                     <span className="text-sm text-zinc-500 dark:text-zinc-400">
-                                        ({month.days.length} {t("days")})
+                                        ({month.days.length} / {MAX_DAYS_PER_MONTH[month.month] || 31} {t("days")})
                                     </span>
                                 </div>
-                                <ChevronDown className={cn("h-5 w-5 text-zinc-500 transition-transform", openMonth === month.id && "rotate-180")} />
+                                <div className="flex items-center gap-2">
+                                    <div onClick={(e) => e.stopPropagation()}>
+                                        <AddDayModal 
+                                            monthId={month.id} 
+                                            disabled={month.days.length >= (MAX_DAYS_PER_MONTH[month.month] || 31)} 
+                                        />
+                                    </div>
+                                    <ChevronDown className={cn("h-5 w-5 text-zinc-500 transition-transform", openMonth === month.id && "rotate-180")} />
+                                </div>
                             </CollapsibleTrigger>
                             <CollapsibleContent>
                                 <CardContent className="p-4 pt-0 border-t border-zinc-100 dark:border-zinc-800">
@@ -110,10 +128,11 @@ export function TimingTable() {
                                                                 onChange={() => toggleSelection(day.id)}
                                                             />
                                                             <span className="font-semibold text-lg">{t("day")} {day.day}</span>
+                                                            <UpdateDayModal day={day} />
                                                         </div>
                                                         <Switch 
                                                             checked={day.is_open} 
-                                                            onChange={() => toggleDay(day.id)} 
+                                                            onChange={() => setDayToToggle(day.id)} 
                                                         />
                                                     </div>
                                                     
@@ -145,6 +164,25 @@ export function TimingTable() {
                     </Collapsible>
                 ))}
             </div>
+
+            <ConfirmDialog 
+                isOpen={dayToToggle !== null}
+                onClose={() => setDayToToggle(null)}
+                onConfirm={() => {
+                    if (dayToToggle !== null) {
+                        toggleDay(dayToToggle, {
+                            onSuccess: () => {
+                                setDayToToggle(null);
+                            }
+                        });
+                    }
+                }}
+                isLoading={isToggling}
+                title={t("confirm_toggle")}
+                description={t("confirm_toggle_desc")}
+                confirmText={t("save")}
+                cancelText={t("cancel")}
+            />
         </div>
     );
 }

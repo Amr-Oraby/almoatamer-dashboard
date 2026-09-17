@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getTimings, bulkUpdateTimingDays, toggleTimingDay, updateTimingDay } from "./api";
+import { getTimings, bulkUpdateTimingDays, toggleTimingDay, updateTimingDay, addTimingDay } from "./api";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
@@ -66,6 +66,26 @@ export const useUpdateTimingDay = (dayId: number) => {
         },
         onError: () => {
             toast.error(t("update_error") || "Error updating");
+        }
+    });
+};
+
+export const useAddTimingDay = () => {
+    const queryClient = useQueryClient();
+    const t = useTranslations("Timing");
+    
+    return useMutation({
+        mutationFn: addTimingDay,
+        onSuccess: (res) => {
+            if (res?.status === "success" || res?.status === true || res?.status === 200) {
+                toast.success(res?.message || t("add_success") || "Added successfully");
+            } else {
+                toast.success(t("add_success") || "Added successfully");
+            }
+            queryClient.invalidateQueries({ queryKey: ["timings"] });
+        },
+        onError: () => {
+            toast.error(t("add_error") || "Error adding");
         }
     });
 };

@@ -181,6 +181,10 @@
     "submit": "Sign in"
   },
   "Umrahs": {
+    "update_status_and_notify": "Update Status & Notify",
+    "set_moatmer": "Set Moatmer",
+    "select_moatmer": "Select Moatmer",
+    "moatmers": "Moatmers",
     "name": "Name",
     "phone": "Phone Number",
     "price_type": "Price (Umrah Type)",
@@ -652,6 +656,9 @@
     "error": "An error occurred"
   },
   "Common": {
+    "image": "Image",
+    "name": "Name",
+    "contact": "Contact",
     "delete": "Delete",
     "no_results": "No results.",
     "search": "Search",
@@ -683,7 +690,11 @@
     "loading": "Loading...",
     "load_more": "Load More",
     "cancel": "Cancel",
-    "save": "Save"
+    "save": "Save",
+    "upload_image": "Upload Image",
+    "remove": "Remove",
+    "select": "Select...",
+    "leave_blank_to_keep": "Leave blank to keep unchanged"
   },
   "HomeBanners": {
     "create_new": "Create New Banner",
@@ -766,6 +777,13 @@
     "update_error": "Error updating",
     "toggle_success": "Toggled successfully",
     "toggle_error": "Error toggling",
+    "add_success": "Added successfully",
+    "add_error": "Add error",
+    "add_day": "Add Day",
+    "is_open": "Is Open",
+    "update_day": "Update Day",
+    "confirm_toggle": "Confirm Toggle",
+    "confirm_toggle_desc": "Are you sure you want to change the status of this day?",
     "months": "Months",
     "month": "Month",
     "days": "Days",
@@ -795,22 +813,5 @@
     "sending_disabled": "Sending messages is currently disabled.",
     "message_sent": "Message sent successfully",
     "send_failed": "Failed to send message"
-  },
-  "Common": {
-    "upload_image": "Upload Image",
-    "remove": "Remove",
-    "select": "Select...",
-    "cancel": "Cancel",
-    "save": "Save",
-    "leave_blank_to_keep": "Leave blank to keep unchanged",
-    "search_placeholder": "Search...",
-    "apply": "Apply",
-    "clear_filters": "Clear Filters",
-    "loading": "Loading...",
-    "no_results": "No results",
-    "load_more": "Load More",
-    "activation": "Activation",
-    "previous": "Previous",
-    "next": "Next"
   }
 }

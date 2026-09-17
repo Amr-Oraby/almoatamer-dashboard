@@ -5,8 +5,13 @@ import { useTranslations } from "next-intl"
 import { useUmrah } from "@/features/umrahs/hooks"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Loader2, Phone, Mail, User, CheckCircle2, Heart, Shirt, MapPin, RotateCw, MoonStar, Footprints, Scissors, Handshake } from "lucide-react"
+import { Loader2, Phone, Mail, User, CheckCircle2, Heart, Shirt, MapPin, RotateCw, MoonStar, Footprints, Scissors, Handshake, Send } from "lucide-react"
 import { PermissionGuard } from "@/components/permissions-provider"
+import { UmrahMoatmersTable } from "@/features/umrahs/components/UmrahMoatmersTable"
+import { SetMoatmerForm } from "@/features/umrahs/components/SetMoatmerForm"
+import { Button } from "@/components/ui/button"
+import { useUpdateStatusAndNotify } from "@/features/umrahs/hooks"
+import { useRouter } from "@/i18n/routing"
 
 const getStepIcon = (key: string) => {
   switch (key) {
@@ -25,8 +30,12 @@ const getStepIcon = (key: string) => {
 export default function UmrahDetailsPage() {
   const params = useParams()
   const id = params.id as string
+  const router = useRouter()
   const { data: response, isLoading, isError } = useUmrah(id)
   const t = useTranslations("Umrahs")
+  const { mutate: updateStatus, isPending: isUpdating } = useUpdateStatusAndNotify(() => {
+    router.push("/umrahs/show-all")
+  })
 
   if (isLoading) {
     return (
@@ -65,9 +74,22 @@ export default function UmrahDetailsPage() {
               <p className="text-xs text-zinc-500 font-medium">#{umrah.id}</p>
             </div>
           </div>
-          <Badge variant={umrah.umrah_status === "done" ? "default" : "secondary"} className="rounded-lg">
-            {umrah.umrah_status === "done" ? t("completed") : umrah.umrah_status === "pending" ? t("pending") : umrah.umrah_status}
-          </Badge>
+          <div className="flex items-center gap-2">
+            <Badge variant={umrah.umrah_status === "done" ? "default" : "secondary"} className="rounded-lg">
+              {umrah.umrah_status === "done" ? t("completed") : umrah.umrah_status === "pending" ? t("pending") : umrah.umrah_status}
+            </Badge>
+            {!umrah.is_paid && (
+              <Button 
+                size="sm" 
+                onClick={() => updateStatus(id)} 
+                disabled={isUpdating}
+                className="rounded-lg h-7 px-3 text-xs"
+              >
+                {isUpdating ? <Loader2 className="w-3 h-3 mr-1 animate-spin" /> : <Send className="w-3 h-3 mr-1" />}
+                {t("update_status_and_notify")}
+              </Button>
+            )}
+          </div>
         </div>
 
         <CardContent className="p-0">
@@ -140,6 +162,12 @@ export default function UmrahDetailsPage() {
           </CardContent>
         </Card>
       )}
+
+      {/* Set Moatmer Form */}
+      <SetMoatmerForm umrahId={id} />
+
+      {/* Moatmers Table */}
+      <UmrahMoatmersTable umrahId={id} />
     </div>
     </PermissionGuard>
   )

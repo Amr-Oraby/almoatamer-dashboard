@@ -15,6 +15,10 @@ const nextConfig: NextConfig = {
         hostname: 'umrah.azmy.aait-d.com',
       },
       {
+        protocol: 'https',
+        hostname: 'img.freepik.com',
+      },
+      {
         protocol: 'http',
         hostname: 'umrah.backend.aait-d.com',
       },

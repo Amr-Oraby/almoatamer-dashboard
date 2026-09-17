@@ -3,41 +3,42 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { BulkUpdateTimingDaysValues, bulkUpdateTimingDaysSchema } from "../schemas";
-import { useBulkUpdateTimingDays } from "../hooks";
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogClose, DialogFooter } from "@/components/ui/dialog";
+import { UpdateTimingDayValues, updateTimingDaySchema } from "../schemas";
+import { useUpdateTimingDay } from "../hooks";
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
+import { Edit, Loader2 } from "lucide-react";
+import { TimingDay } from "../types";
 
-export function BulkUpdateModal({ selectedDayIds, onClearSelection }: { selectedDayIds: number[], onClearSelection: () => void }) {
+export function UpdateDayModal({ day }: { day: TimingDay }) {
     const t = useTranslations("Timing");
-    const { mutate: bulkUpdate, isPending } = useBulkUpdateTimingDays();
+    const { mutate: updateDay, isPending } = useUpdateTimingDay(day.id);
     const [open, setOpen] = useState(false);
 
-    const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm<BulkUpdateTimingDaysValues>({
-        resolver: zodResolver(bulkUpdateTimingDaysSchema),
+    const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm<UpdateTimingDayValues>({
+        resolver: zodResolver(updateTimingDaySchema),
         defaultValues: {
-            day_ids: selectedDayIds,
-            price: "",
-            app_tax: "",
+            price: day.price.toString(),
+            app_tax: day.app_tax.toString(),
         }
     });
 
     useEffect(() => {
-        setValue("day_ids", selectedDayIds);
-    }, [selectedDayIds, setValue]);
+        if (open) {
+            setValue("price", day.price.toString());
+            setValue("app_tax", day.app_tax.toString());
+        }
+    }, [day, open, setValue]);
 
-    const onSubmit = (data: BulkUpdateTimingDaysValues) => {
+    const onSubmit = (data: UpdateTimingDayValues) => {
         const formData = new FormData();
-        selectedDayIds.forEach(id => formData.append("day_ids[]", id.toString()));
         formData.append("price", data.price.toString());
         formData.append("app_tax", data.app_tax.toString());
         
-        bulkUpdate(formData, {
+        updateDay(formData, {
             onSuccess: () => {
                 setOpen(false);
-                reset();
-                onClearSelection();
             }
         });
     };
@@ -47,12 +48,16 @@ export function BulkUpdateModal({ selectedDayIds, onClearSelection }: { selected
             setOpen(isOpen);
             if (!isOpen) reset();
         }}>
-            <DialogTrigger render={<Button disabled={selectedDayIds.length === 0} variant="default">{t("bulk_update")} ({selectedDayIds.length})</Button>} />
+            <DialogTrigger render={
+                <button className="text-zinc-400 hover:text-blue-500 transition-colors p-1 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800">
+                    <Edit className="w-4 h-4" />
+                </button>
+            } />
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>{t("bulk_update_days")}</DialogTitle>
+                    <DialogTitle>{t("update_day") || "Update Day"}</DialogTitle>
                 </DialogHeader>
-                <form onSubmit={handleSubmit((data) => onSubmit(data as unknown as BulkUpdateTimingDaysValues))} className="space-y-4 mt-4">
+                <form onSubmit={handleSubmit((data) => onSubmit(data as unknown as UpdateTimingDayValues))} className="space-y-4 mt-4">
                     <div className="space-y-2">
                         <label className="text-sm font-medium">{t("price")}</label>
                         <input type="number" step="any" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" {...register("price")} />
@@ -63,12 +68,17 @@ export function BulkUpdateModal({ selectedDayIds, onClearSelection }: { selected
                         <input type="number" step="any" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" {...register("app_tax")} />
                         {errors.app_tax && <span className="text-red-500 text-sm">{errors.app_tax.message}</span>}
                     </div>
-                    <DialogFooter className="mt-6">
-                        <DialogClose render={<Button variant="outline" type="button">{t("cancel")}</Button>} />
-                        <Button type="submit" disabled={isPending}>{t("save")}</Button>
+                    <DialogFooter className="mt-6 flex gap-2 sm:justify-end">
+                        <Button type="button" variant="outline" onClick={() => setOpen(false)}>
+                            {t("cancel")}
+                        </Button>
+                        <Button type="submit" disabled={isPending}>
+                            {isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                            {t("save")}
+                        </Button>
                     </DialogFooter>
                 </form>
             </DialogContent>
         </Dialog>
-    )
+    );
 }

@@ -7,3 +7,19 @@ export const bulkUpdateTimingDaysSchema = z.object({
 });
 
 export type BulkUpdateTimingDaysValues = z.infer<typeof bulkUpdateTimingDaysSchema>;
+
+export const updateTimingDaySchema = z.object({
+    price: z.union([z.string(), z.number()]).refine(val => val !== "", "Required"),
+    app_tax: z.union([z.string(), z.number()]).refine(val => val !== "", "Required"),
+});
+
+export type UpdateTimingDayValues = z.infer<typeof updateTimingDaySchema>;
+
+export const addTimingDaySchema = z.object({
+    timing_id: z.number(),
+    price: z.union([z.string(), z.number()]).refine(val => val !== "", "Required"),
+    app_tax: z.union([z.string(), z.number()]).refine(val => val !== "", "Required"),
+    is_open: z.boolean(),
+});
+
+export type AddTimingDayValues = z.infer<typeof addTimingDaySchema>;
