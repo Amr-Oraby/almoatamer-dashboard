@@ -47,7 +47,7 @@ export function NewsTable() {
     {
       id: "title",
       header: () => <div className="text-center">{tCommon("title")}</div>,
-      size: 300,
+      size: 200,
       cell: ({ row }) => {
         const item = row.original
         const title = item.title || "بدون عنوان"
@@ -63,7 +63,7 @@ export function NewsTable() {
               )}
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-zinc-900 dark:text-zinc-100">{title}</span>
+              <span className="font-bold text-zinc-900 dark:text-zinc-100 truncate max-w-[150px] block" title={title}>{title}</span>
             </div>
           </div>
         )

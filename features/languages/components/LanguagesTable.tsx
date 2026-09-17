@@ -32,6 +32,7 @@ export function LanguagesTable() {
   
   // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
   const t = useTranslations("Umrahs")
+  const tCommon = useTranslations("Common")
 
   const columns = useMemo<ColumnDef<LanguageItem>[]>(() => [
     {
@@ -45,7 +46,7 @@ export function LanguagesTable() {
     },
     {
       id: "flag",
-      header: () => <div className="text-center">العلم</div>,
+      header: () => <div className="text-center">{tCommon("flag", { fallback: "العلم" })}</div>,
       size: 100,
       cell: ({ row }) => {
         return (
@@ -65,7 +66,7 @@ export function LanguagesTable() {
     },
     {
       id: "short_name",
-      header: () => <div className="text-center">الرمز</div>,
+      header: () => <div className="text-center">{tCommon("code", { fallback: "الرمز" })}</div>,
       size: 100,
       cell: ({ row }) => (
         <div className="text-center">
@@ -77,7 +78,7 @@ export function LanguagesTable() {
     },
     {
       id: "name_ar",
-      header: () => <div className="text-center">الاسم (عربي)</div>,
+      header: () => <div className="text-center">{tCommon("name_ar", { fallback: "الاسم (عربي)" })}</div>,
       size: 200,
       cell: ({ row }) => (
         <div className="text-center font-bold text-zinc-900 dark:text-zinc-100">
@@ -87,7 +88,7 @@ export function LanguagesTable() {
     },
     {
       id: "name_en",
-      header: () => <div className="text-center">الاسم (إنجليزي)</div>,
+      header: () => <div className="text-center">{tCommon("name_en", { fallback: "الاسم (إنجليزي)" })}</div>,
       size: 200,
       cell: ({ row }) => (
         <div className="text-center font-bold text-zinc-900 dark:text-zinc-100">
@@ -97,21 +98,21 @@ export function LanguagesTable() {
     },
     {
       id: "actions",
-      header: () => <div className="text-center">{t("actions")}</div>,
+      header: () => <div className="text-center">{tCommon("actions", { fallback: "Actions" })}</div>,
       size: 80,
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
-              { text: t("details"), onClick: () => setSelectedLanguage(row.original), permission: "show-language" },
-              { text: "تعديل", href: `/languages/update/${row.original.id}`, permission: "update-language" },
-              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)), permission: "delete-language" }
+              { text: tCommon("details", { fallback: "Details" }), onClick: () => setSelectedLanguage(row.original), permission: "show-language" },
+              { text: tCommon("edit", { fallback: "Edit" }), href: `/languages/update/${row.original.id}`, permission: "update-language" },
+              { text: tCommon("delete", { fallback: "Delete" }), onClick: () => setDeleteId(String(row.original.id)), permission: "delete-language", isDestructive: true }
             ]} />
           </div>
         )
       },
     },
-  ], [t, router, page, data?.meta?.per_page])
+  ], [t, tCommon, router, page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />
@@ -134,7 +135,7 @@ export function LanguagesTable() {
           <DialogHeader>
             <DialogTitle className="text-xl font-black text-zinc-900 dark:text-zinc-100 flex items-center gap-2 mb-4">
               <Globe className="w-6 h-6 text-primary" />
-              Language Details
+              {tCommon("language_details", { fallback: "Language Details" })}
             </DialogTitle>
           </DialogHeader>
 
@@ -152,7 +153,7 @@ export function LanguagesTable() {
                       />
                     </div>
                     <div className="flex flex-col">
-                        <span className="text-sm font-bold text-zinc-500 uppercase tracking-wider mb-1">Code</span>
+                        <span className="text-sm font-bold text-zinc-500 uppercase tracking-wider mb-1">{tCommon("code", { fallback: "Code" })}</span>
                         <Badge variant="outline" className="font-mono text-lg text-zinc-700 dark:text-zinc-300 uppercase w-fit">
                             {selectedLanguage.short_name}
                         </Badge>
@@ -160,19 +161,19 @@ export function LanguagesTable() {
                 </div>
 
                 <div className="flex flex-col items-end">
-                    <span className="text-sm font-bold text-zinc-500 uppercase tracking-wider mb-1">ID</span>
+                    <span className="text-sm font-bold text-zinc-500 uppercase tracking-wider mb-1">{tCommon("id", { fallback: "ID" })}</span>
                     <span className="font-mono text-zinc-700 dark:text-zinc-300 text-lg font-black">#{selectedLanguage.id}</span>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
-                  { lang: "ar", label: "العربية", data: selectedLanguage.ar },
-                  { lang: "en", label: "English", data: selectedLanguage.en },
-                  { lang: "fa", label: "فارسی", data: selectedLanguage.fa },
-                  { lang: "ms", label: "Bahasa Melayu", data: selectedLanguage.ms },
-                  { lang: "tr", label: "Türkçe", data: selectedLanguage.tr },
-                  { lang: "iid", label: "Indonesia", data: selectedLanguage.iid },
+                  { lang: "ar", label: tCommon("arabic", { fallback: "العربية" }), data: selectedLanguage.ar },
+                  { lang: "en", label: tCommon("english", { fallback: "English" }), data: selectedLanguage.en },
+                  { lang: "fa", label: tCommon("farsi", { fallback: "فارسی" }), data: selectedLanguage.fa },
+                  { lang: "ms", label: tCommon("malay", { fallback: "Bahasa Melayu" }), data: selectedLanguage.ms },
+                  { lang: "tr", label: tCommon("turkish", { fallback: "Türkçe" }), data: selectedLanguage.tr },
+                  { lang: "iid", label: tCommon("indonesian", { fallback: "Indonesia" }), data: selectedLanguage.iid },
                 ].map((item) => (
                   <div key={item.lang} className="bg-zinc-50 dark:bg-zinc-900/50 rounded-xl border border-zinc-100 dark:border-zinc-800 overflow-hidden flex flex-col">
                     <div className="bg-zinc-100/50 dark:bg-zinc-800/50 border-b border-zinc-100 dark:border-zinc-800 p-3 flex items-center justify-between">
@@ -185,7 +186,7 @@ export function LanguagesTable() {
                     <div className="p-4 flex-1">
                       <span className="text-xs font-bold text-zinc-400 flex items-center gap-1.5 mb-1.5">
                         <Type className="w-3 h-3" />
-                        Translated Name
+                        {tCommon("translated_name", { fallback: "Translated Name" })}
                       </span>
                       <div className="text-sm font-bold text-zinc-900 dark:text-zinc-100">
                         {item.data?.name || <span className="text-zinc-400 font-normal">-</span>}

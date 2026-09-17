@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
@@ -86,7 +87,7 @@ export function CreateWhyUsModal() {
                             <div className="w-20 h-20 rounded-xl border border-dashed border-zinc-300 dark:border-zinc-700 flex items-center justify-center overflow-hidden relative hover:bg-zinc-50 dark:hover:bg-zinc-900/50 transition-colors flex-shrink-0">
                                 {iconPreview ? (
                                     // eslint-disable-next-line @next/next/no-img-element
-                                    <img src={iconPreview} alt="Icon" className="w-full h-full object-contain p-2" />
+                                    <Image width={400} height={400} src={iconPreview} alt="Icon" className="w-full h-full object-contain p-2" />
                                 ) : (
                                     <Upload className="h-6 w-6 text-zinc-400" />
                                 )}

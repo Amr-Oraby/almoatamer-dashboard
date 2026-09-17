@@ -40,7 +40,7 @@ export function RolesTable() {
     },
     {
       id: "name_ar",
-      header: () => <div className="text-center">الاسم (عربي)</div>,
+      header: () => <div className="text-center">{tCommon("name_ar", { fallback: "الاسم (عربي)" })}</div>,
       size: 200,
       cell: ({ row }) => (
         <div className="text-center font-bold text-zinc-900 dark:text-zinc-100">
@@ -50,7 +50,7 @@ export function RolesTable() {
     },
     {
       id: "name_en",
-      header: () => <div className="text-center">الاسم (إنجليزي)</div>,
+      header: () => <div className="text-center">{tCommon("name_en", { fallback: "الاسم (إنجليزي)" })}</div>,
       size: 200,
       cell: ({ row }) => (
         <div className="text-center font-bold text-zinc-900 dark:text-zinc-100">
@@ -60,7 +60,7 @@ export function RolesTable() {
     },
     {
       id: "permissions",
-      header: () => <div className="text-center">الصلاحيات</div>,
+      header: () => <div className="text-center">{tCommon("permissions", { fallback: "الصلاحيات" })}</div>,
       size: 150,
       cell: ({ row }) => {
         const count = row.original.permission?.length || 0;
@@ -69,7 +69,7 @@ export function RolesTable() {
             <span className="font-bold text-emerald-600 dark:text-emerald-400 text-lg">
               {count}
             </span>
-            <span className="text-[10px] text-zinc-500">صلاحية</span>
+            <span className="text-[10px] text-zinc-500">{tCommon("permission", { fallback: "صلاحية" })}</span>
           </div>
         )
       }
@@ -97,8 +97,8 @@ export function RolesTable() {
                onClose={() => setIsConfirmOpen(false)}
                onConfirm={handleConfirm}
                isLoading={isPending}
-               title="تأكيد العملية"
-               description="هل أنت متأكد أنك تريد تغيير حالة التفعيل لهذا الدور؟"
+               title={tCommon("confirm_action", { fallback: "تأكيد العملية" })}
+               description={tCommon("confirm_role_activation", { fallback: "هل أنت متأكد أنك تريد تغيير حالة التفعيل لهذا الدور؟" })}
                confirmButtonColor="bg-primary hover:bg-primary/90"
              />
           </div>
@@ -107,20 +107,20 @@ export function RolesTable() {
     },
     {
       id: "actions",
-      header: () => <div className="text-center">{t("actions")}</div>,
+      header: () => <div className="text-center">{tCommon("actions", { fallback: "Actions" })}</div>,
       size: 80,
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
-              { text: t("details"), href: `/roles/show/${row.original.id}` },
-              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
+              { text: tCommon("details", { fallback: "Details" }), href: `/roles/show/${row.original.id}` },
+              { text: tCommon("delete", { fallback: "Delete" }), onClick: () => setDeleteId(String(row.original.id)), isDestructive: true }
             ]} />
           </div>
         )
       },
     },
-  ], [t, page, data?.meta?.per_page])
+  ], [t, tCommon, page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />

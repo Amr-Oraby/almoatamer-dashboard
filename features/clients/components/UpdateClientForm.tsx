@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
@@ -114,7 +115,7 @@ export function UpdateClientForm({ clientId }: UpdateClientFormProps) {
                         <div className="flex justify-center mb-2">
                             <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white dark:border-zinc-950 shadow-md group cursor-pointer bg-zinc-100 dark:bg-zinc-800">
                                 {previewImage ? (
-                                    <img src={previewImage} alt="Profile" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                    <Image width={400} height={400} src={previewImage} alt="Profile" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                                 ) : (
                                     <div className="w-full h-full flex items-center justify-center">
                                         <span className="text-4xl text-zinc-400">👤</span>

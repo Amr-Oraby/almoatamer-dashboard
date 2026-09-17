@@ -64,7 +64,7 @@ export function UpdateCouponForm({ couponId }: UpdateCouponFormProps) {
 
         updateCoupon(formData, {
             onSuccess: () => {
-                router.push('/discounts/coupons');
+                router.push('/discount-coupons/show-all');
             }
         });
     };
@@ -153,7 +153,7 @@ export function UpdateCouponForm({ couponId }: UpdateCouponFormProps) {
                     <Button
                         type="button"
                         variant="outline"
-                        onClick={() => router.push('/discounts/coupons')}
+                        onClick={() => router.push('/discount-coupons/show-all')}
                         className="rounded-xl px-8"
                     >
                         {t("cancel")}

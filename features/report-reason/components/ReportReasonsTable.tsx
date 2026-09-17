@@ -30,6 +30,7 @@ export function ReportReasonsTable() {
   
   // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
   const t = useTranslations("Umrahs")
+  const tCommon = useTranslations("Common")
 
   const columns = useMemo<ColumnDef<ReportReasonItem>[]>(() => [
     {
@@ -43,7 +44,7 @@ export function ReportReasonsTable() {
     },
     {
       id: "name_ar",
-      header: () => <div className="text-center">السبب (عربي)</div>,
+      header: () => <div className="text-center">{tCommon("reason_ar", { fallback: "السبب (عربي)" })}</div>,
       size: 300,
       cell: ({ row }) => (
         <div className="text-center font-bold text-zinc-900 dark:text-zinc-100">
@@ -53,7 +54,7 @@ export function ReportReasonsTable() {
     },
     {
       id: "name_en",
-      header: () => <div className="text-center">السبب (إنجليزي)</div>,
+      header: () => <div className="text-center">{tCommon("reason_en", { fallback: "السبب (إنجليزي)" })}</div>,
       size: 300,
       cell: ({ row }) => (
         <div className="text-center font-bold text-zinc-900 dark:text-zinc-100">
@@ -63,21 +64,21 @@ export function ReportReasonsTable() {
     },
     {
       id: "actions",
-      header: () => <div className="text-center">{t("actions")}</div>,
+      header: () => <div className="text-center">{tCommon("actions", { fallback: "Actions" })}</div>,
       size: 80,
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
-              { text: t("details"), onClick: () => setSelectedReportReason(row.original), permission: "show-report-reason" },
-              { text: "تعديل", href: `/report-reason/update/${row.original.id}`, permission: "update-report-reason" },
-              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)), permission: "delete-report-reason" }
+              { text: tCommon("details", { fallback: "Details" }), onClick: () => setSelectedReportReason(row.original), permission: "show-report-reason" },
+              { text: tCommon("edit", { fallback: "Edit" }), href: `/report-reason/update/${row.original.id}`, permission: "update-report-reason" },
+              { text: tCommon("delete", { fallback: "Delete" }), onClick: () => setDeleteId(String(row.original.id)), permission: "delete-report-reason", isDestructive: true }
             ]} />
           </div>
         )
       },
     },
-  ], [t, router, page, data?.meta?.per_page])
+  ], [t, tCommon, router, page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />
@@ -96,7 +97,7 @@ export function ReportReasonsTable() {
           <DialogHeader>
             <DialogTitle className="text-xl font-black text-zinc-900 dark:text-zinc-100 flex items-center gap-2 mb-4">
               <MessageSquareWarning className="w-6 h-6 text-primary" />
-              Report Reason Details
+              {tCommon("report_reason_details", { fallback: "Report Reason Details" })}
             </DialogTitle>
           </DialogHeader>
 
@@ -104,8 +105,8 @@ export function ReportReasonsTable() {
             <div className="flex flex-col gap-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
-                  { lang: "ar", label: "العربية", data: selectedReportReason.ar },
-                  { lang: "en", label: "English", data: selectedReportReason.en },
+                  { lang: "ar", label: tCommon("arabic", { fallback: "العربية" }), data: selectedReportReason.ar },
+                  { lang: "en", label: tCommon("english", { fallback: "English" }), data: selectedReportReason.en },
                 ].map((item) => (
                   <div key={item.lang} className="bg-zinc-50 dark:bg-zinc-900/50 rounded-xl border border-zinc-100 dark:border-zinc-800 overflow-hidden flex flex-col">
                     <div className="bg-zinc-100/50 dark:bg-zinc-800/50 border-b border-zinc-100 dark:border-zinc-800 p-3 flex items-center justify-between">
@@ -118,7 +119,7 @@ export function ReportReasonsTable() {
                     <div className="p-4 flex-1">
                       <span className="text-xs font-bold text-zinc-400 flex items-center gap-1.5 mb-1.5">
                         <Type className="w-3 h-3" />
-                        Reason text
+                        {tCommon("reason_text", { fallback: "Reason text" })}
                       </span>
                       <div className="text-sm font-bold text-zinc-900 dark:text-zinc-100 line-clamp-4">
                         {item.data?.name || <span className="text-zinc-400 font-normal">-</span>}
@@ -132,7 +133,7 @@ export function ReportReasonsTable() {
                 <div className="flex flex-col gap-1.5">
                     <span className="text-xs font-bold text-zinc-400 flex items-center gap-1.5">
                         <Calendar className="w-3.5 h-3.5" />
-                        Created At
+                        {tCommon("created_at", { fallback: "Created At" })}
                     </span>
                     <span className="text-sm font-mono text-zinc-700 dark:text-zinc-300">
                         {selectedReportReason.created_at ? new Date(selectedReportReason.created_at).toLocaleString() : "-"}
@@ -141,7 +142,7 @@ export function ReportReasonsTable() {
                 <div className="flex flex-col gap-1.5">
                     <span className="text-xs font-bold text-zinc-400 flex items-center gap-1.5">
                         <Clock className="w-3.5 h-3.5" />
-                        Updated At
+                        {tCommon("updated_at", { fallback: "Updated At" })}
                     </span>
                     <span className="text-sm font-mono text-zinc-700 dark:text-zinc-300">
                         {selectedReportReason.updated_at ? new Date(selectedReportReason.updated_at).toLocaleString() : "-"}

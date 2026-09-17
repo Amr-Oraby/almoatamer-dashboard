@@ -31,7 +31,7 @@ export function ReferralLinksTable() {
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
-    toast.success("تم نسخ الرابط بنجاح")
+    toast.success(tCommon("copied_successfully", { fallback: "تم نسخ الرابط بنجاح" }))
   }
 
   const columns = useMemo<ColumnDef<ReferralLink>[]>(() => [
@@ -108,7 +108,7 @@ export function ReferralLinksTable() {
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 text-zinc-400 hover:text-blue-500 transition-colors rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 outline-none"
-            title="فتح الرابط"
+            title={tCommon("open_link", { fallback: "فتح الرابط" })}
           >
             <ExternalLink className="w-4 h-4" />
           </a>
@@ -117,21 +117,21 @@ export function ReferralLinksTable() {
     },
     {
       id: "actions",
-      header: () => <div className="text-center">{t("actions")}</div>,
+      header: () => <div className="text-center">{tCommon("actions", { fallback: "Actions" })}</div>,
       size: 100,
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
-              { text: t("details"), href: `/referral-links/show/${row.original.id}` },
-              { text: "تعديل", href: `/referral-links/update/${row.original.id}` },
-              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
+              { text: tCommon("details", { fallback: "Details" }), href: `/referral-links/show/${row.original.id}` },
+              { text: tCommon("edit", { fallback: "Edit" }), href: `/referral-links/update/${row.original.id}` },
+              { text: tCommon("delete", { fallback: "Delete" }), onClick: () => setDeleteId(String(row.original.id)), isDestructive: true }
             ]} />
           </div>
         )
       },
     },
-  ], [t, router, page, data?.meta?.per_page])
+  ], [t, tCommon, router, page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />

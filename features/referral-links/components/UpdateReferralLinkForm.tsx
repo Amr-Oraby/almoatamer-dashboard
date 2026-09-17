@@ -57,7 +57,7 @@ export function UpdateReferralLinkForm({ linkId }: UpdateReferralLinkFormProps) 
             };
 
             await updateReferralLink(payload);
-            router.push(`/${localeCode}/referral-links`);
+            router.push(`/${localeCode}/referral-links/show-all`);
         } catch (error) {
             console.error("Error updating referral link:", error);
         }

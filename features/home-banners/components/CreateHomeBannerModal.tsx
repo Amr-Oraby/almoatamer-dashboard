@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
@@ -99,7 +100,7 @@ export function CreateHomeBannerModal() {
                                     {previewImages.map((image, index) => (
                                         <div key={index} className="relative aspect-square rounded-lg overflow-hidden group border border-zinc-200 dark:border-zinc-800">
                                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                                            <img src={image.url} alt={`Preview ${index}`} className="w-full h-full object-cover" />
+                                            <Image width={400} height={400} src={image.url} alt={`Preview ${index}`} className="w-full h-full object-cover" />
                                             <button
                                                 type="button"
                                                 onClick={() => removeImage(index)}

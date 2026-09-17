@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Image as ImageIcon, UploadCloud } from "lucide-react";
 
 interface ImageChangerProps {
@@ -17,7 +18,7 @@ export function ImageChanger({ previewImage, onImageChange }: ImageChangerProps)
         <div className="relative w-full md:w-[400px] h-[220px] bg-zinc-50 dark:bg-zinc-900 rounded-2xl border-2 border-dashed border-zinc-300 dark:border-zinc-700 flex items-center justify-center overflow-hidden group cursor-pointer transition-all hover:border-blue-500 hover:bg-zinc-100 dark:hover:bg-zinc-800/50">
           {previewImage ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={previewImage} alt="Main Section" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <Image width={400} height={400} src={previewImage} alt="Main Section" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           ) : (
             <div className="flex flex-col items-center text-zinc-400">
               <ImageIcon className="w-10 h-10 mb-3 text-zinc-300 dark:text-zinc-600" />

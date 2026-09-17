@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
@@ -115,7 +116,7 @@ export function UpdateWhyUsModal({ isOpen, onClose, itemId }: UpdateWhyUsModalPr
                                     {iconPreview ? (
                                         <>
                                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                                            <img src={iconPreview} alt="Icon" className="w-full h-full object-contain p-2" />
+                                            <Image width={400} height={400} src={iconPreview} alt="Icon" className="w-full h-full object-contain p-2" />
                                             <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                                 <Upload className="w-4 h-4 text-white" />
                                             </div>

@@ -20,7 +20,7 @@ export function Sidebar() {
 
   const [isUiManagementOpen, setIsUiManagementOpen] = useState(false);
   const [isDiscountsOpen, setIsDiscountsOpen] = useState(false);
-  const [isPlacesOpen, setIsPlacesOpen] = useState(false);
+
   const [isRolesOpen, setIsRolesOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isPublicPagesOpen, setIsPublicPagesOpen] = useState(false);
@@ -34,9 +34,7 @@ export function Sidebar() {
     if (pathname.includes('/discounts')) {
       setIsDiscountsOpen(true);
     }
-    if (pathname.includes('/places')) {
-      setIsPlacesOpen(true);
-    }
+
     if (pathname.includes('/roles')) {
       setIsRolesOpen(true);
     }
@@ -67,30 +65,27 @@ export function Sidebar() {
   ];
 
   const discountsItems = [
-    { href: '/discounts/coupons', icon: Ticket, label: t('coupons_page') },
-    { href: '/discounts/coupon-codes', icon: Tag, label: t('coupon-codes_page') },
+    { href: '/discount-coupons/show-all', icon: Ticket, label: t('coupons_page') },
+    { href: '/discount-coupon-codes', icon: Tag, label: t('coupon-codes_page') },
   ];
 
   const additionalItems = [
     { href: '/clients/show-all', icon: Users, label: t('clients_page'), permission: "index-client" },
     { href: '/umrahs/show-all', icon: Plane, label: t('umrahs_page') },
-    { href: '/almoatamers/show-all', icon: UserCheck, label: t('almoatamers_page') },
+    { href: '/moatmers/show-all', icon: UserCheck, label: t('almoatamers_page') },
     { href: '/news', icon: Newspaper, label: t('news_page') },
-    { href: '/blogs', icon: BookOpen, label: t('blogs_page') },
+    { href: '/blogs/show-all', icon: BookOpen, label: t('blogs_page') },
   ];
 
   const bottomItems = [
-    { href: '/referral-links', icon: Share2, label: t('referral_links_page') },
+    { href: '/referral-links/show-all', icon: Share2, label: t('referral_links_page') },
     { href: '/transactions', icon: ArrowRightLeft, label: t('transactions_page') },
     { href: '/withdrawal-requests', icon: HandCoins, label: t('withdrawal_requests_page') },
     { href: '/wallets', icon: Wallet, label: t('wallet_page') },
     { href: '/report-reason', icon: Flag, label: t('report_reason_page') },
     { href: '/notifications', icon: Bell, label: t('notifications_page') },
-    { href: '/languages', icon: Languages, label: t('languages_page') },
-  ];
-
-  const placesItems = [
-    { href: '/places/countries', icon: Globe, label: t('countries_page') },
+    { href: '/countries/show-all', icon: Globe, label: t('countries_page') },
+    { href: '/languages/show-all', icon: Languages, label: t('languages_page') },
   ];
 
   const rolesItems = [
@@ -102,7 +97,7 @@ export function Sidebar() {
   const contactItems = [
     { href: '/contact/messages', icon: Mail, label: t('contact_messages_page') },
     { href: '/contact/admin-contacts', icon: Contact, label: t('admin_contacts_page') },
-    { href: '/contact/users-chats', icon: MessageCircle, label: t('users_chats') },
+    { href: '/users-chats/show-all', icon: MessageCircle, label: t('users_chats') },
     { href: '/contact/chats', icon: MessageSquare, label: t('chats_page', { fallback: "Chats" }) },
   ];
 
@@ -277,7 +272,7 @@ export function Sidebar() {
                     <li>{linkElement}</li>
                   </PermissionGuard>
                 );
-              } else if (item.href === '/almoatamers/show-all') {
+              } else if (item.href === '/moatmers/show-all') {
                 return (
                   <PermissionGuard permission="index-moatmer" type="element" key={item.href}>
                     <li>{linkElement}</li>
@@ -305,7 +300,7 @@ export function Sidebar() {
                 onOpenChange={setIsDiscountsOpen}
                 className="w-full"
               >
-                <CollapsibleTrigger className={`flex items-center justify-between w-full px-4 py-3 rounded-md transition-colors ${pathname.includes('/discounts')
+                <CollapsibleTrigger className={`flex items-center justify-between w-full px-4 py-3 rounded-md transition-colors ${pathname.includes('/discount-coupon')
                   ? 'text-primary font-bold bg-primary/5'
                   : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900'
                   }`}>
@@ -317,7 +312,7 @@ export function Sidebar() {
                 </CollapsibleTrigger>
                 <CollapsibleContent className="space-y-1 pt-1 pb-2">
                   {discountsItems.map((item) => {
-                    const isActive = pathname === item.href || (item.href !== '/discounts' && pathname.startsWith(item.href));
+                    const isActive = pathname === item.href || (item.href !== '/discount-coupon' && pathname.startsWith(item.href));
                     return (
                       <Link
                         key={item.href}
@@ -380,9 +375,17 @@ export function Sidebar() {
                 );
               }
 
-              if (item.href === '/languages') {
+              if (item.href === '/languages/show-all') {
                 return (
                   <PermissionGuard permission="index-language" type="element" key={item.href}>
+                    <li>{linkElement}</li>
+                  </PermissionGuard>
+                );
+              }
+
+              if (item.href === '/countries/show-all') {
+                return (
+                  <PermissionGuard permission="index-countries" type="element" key={item.href}>
                     <li>{linkElement}</li>
                   </PermissionGuard>
                 );
@@ -395,57 +398,7 @@ export function Sidebar() {
               );
             })}
 
-            {/* Places Dropdown */}
-            <li>
-              <Collapsible
-                open={isPlacesOpen}
-                onOpenChange={setIsPlacesOpen}
-                className="w-full"
-              >
-                <CollapsibleTrigger className={`flex items-center justify-between w-full px-4 py-3 rounded-md transition-colors ${pathname.includes('/places')
-                  ? 'text-primary font-bold bg-primary/5'
-                  : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900'
-                  }`}>
-                  <div className="flex items-center gap-3">
-                    <Map className="w-5 h-5" />
-                    <span>{t('places_menu')}</span>
-                  </div>
-                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isPlacesOpen ? 'rotate-180' : ''}`} />
-                </CollapsibleTrigger>
-                <CollapsibleContent className="space-y-1 pt-1 pb-2">
-                  {placesItems.map((item) => {
-                    const isActive = pathname === item.href || (item.href !== '/places' && pathname.startsWith(item.href));
-                    const linkElement = (
-                      <Link
-                        href={item.href}
-                        onClick={() => setIsOpen(false)}
-                        className={`flex items-center gap-3 px-4 py-2 ml-4 rounded-md transition-colors text-sm ${isActive
-                          ? 'bg-primary/10 text-primary font-medium'
-                          : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100'
-                          }`}
-                      >
-                        <item.icon className="w-4 h-4" />
-                        <span>{item.label}</span>
-                      </Link>
-                    );
 
-                    if (item.href === '/places/countries') {
-                      return (
-                        <PermissionGuard permission="index-countries" type="element" key={item.href}>
-                          {linkElement}
-                        </PermissionGuard>
-                      );
-                    }
-
-                    return (
-                      <div key={item.href}>
-                        {linkElement}
-                      </div>
-                    );
-                  })}
-                </CollapsibleContent>
-              </Collapsible>
-            </li>
 
             {/* Roles Dropdown */}
             <li>
@@ -571,7 +524,7 @@ export function Sidebar() {
                       );
                     }
 
-                    if (item.href === '/contact/users-chats') {
+                    if (item.href === '/users-chats/show-all') {
                       return (
                         <PermissionGuard permission="index-users-chats" type="element" key={item.href}>
                           {linkElement}

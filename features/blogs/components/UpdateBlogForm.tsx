@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -92,7 +93,7 @@ export function UpdateBlogForm({ blogId }: UpdateBlogFormProps) {
             Object.entries(values.ar).forEach(([key, value]) => formData.append(`ar[${key}]`, (value as string) || ""));
             Object.entries(values.en).forEach(([key, value]) => formData.append(`en[${key}]`, (value as string) || ""));
             await updateBlog(formData);
-            router.push("/blogs");
+            router.push("/blogs/show-all");
         } catch (error) {
             console.error(error);
         }
@@ -115,7 +116,7 @@ export function UpdateBlogForm({ blogId }: UpdateBlogFormProps) {
                     <Switch checked={isActive} onChange={() => setValue("is_active", !isActive)} />
                 </div>
                 <div className="flex gap-3">
-                    <Button type="button" variant="outline" className="rounded-xl" onClick={() => router.push("/blogs")}>
+                    <Button type="button" variant="outline" className="rounded-xl" onClick={() => router.push("/blogs/show-all")}>
                         {t("cancel", { fallback: "إلغاء" })}
                     </Button>
                     <Button type="submit" disabled={isPending} className="bg-primary hover:bg-primary/90 text-white rounded-xl px-8 shadow-md">
@@ -133,7 +134,7 @@ export function UpdateBlogForm({ blogId }: UpdateBlogFormProps) {
                             {previewImage ? (
                                 <div className="relative aspect-video">
                                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img src={previewImage.url} alt="Preview" className="w-full h-full object-cover" />
+                                    <Image width={400} height={400} src={previewImage.url} alt="Preview" className="w-full h-full object-cover" />
                                     <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                         <p className="text-white text-xs font-medium flex items-center gap-1"><Upload className="w-3 h-3" /> تغيير الصورة</p>
                                     </div>

@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image";
 import { useParams } from "next/navigation"
 import { useUsersChat } from "@/features/users-chats/hooks"
 import { Card, CardContent } from "@/components/ui/card"
@@ -41,7 +42,7 @@ export default function UserChatShowPage() {
           <CardContent className="p-4 flex items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center overflow-hidden shrink-0">
               {chat.sender.image ? (
-                <img src={chat.sender.image} alt={chat.sender.name} className="w-full h-full object-cover" />
+                <Image width={400} height={400} src={chat.sender.image} alt={chat.sender.name} className="w-full h-full object-cover" />
               ) : (
                 <User className="w-6 h-6 text-zinc-400" />
               )}
@@ -60,7 +61,7 @@ export default function UserChatShowPage() {
           <CardContent className="p-4 flex items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center overflow-hidden shrink-0">
               {chat.receiver.image ? (
-                <img src={chat.receiver.image} alt={chat.receiver.name} className="w-full h-full object-cover" />
+                <Image width={400} height={400} src={chat.receiver.image} alt={chat.receiver.name} className="w-full h-full object-cover" />
               ) : (
                 <User className="w-6 h-6 text-zinc-400" />
               )}

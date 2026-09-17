@@ -26,7 +26,8 @@ export function WhyUsTable() {
   const [updateId, setUpdateId] = useState<string | null>(null)
   const { mutate: deleteItem, isPending: isDeleting } = useDeleteWhyUs()
 
-  const t = useTranslations("Umrahs")
+  const t = useTranslations("WhyUs")
+  const tCommon = useTranslations("Common")
 
   const columns = useMemo<ColumnDef<WhyUsItem>[]>(() => [
     {
@@ -40,11 +41,11 @@ export function WhyUsTable() {
     },
     {
       id: "title",
-      header: () => <div className="text-center">العنوان</div>,
+      header: () => <div className="text-center">{t("title", { fallback: "العنوان" })}</div>,
       size: 250,
       cell: ({ row }) => {
         const item = row.original
-        const title = item.title || "بدون عنوان"
+        const title = item.title || t("no_title", { fallback: "بدون عنوان" })
         const icon = item.icon
 
         return (
@@ -65,31 +66,31 @@ export function WhyUsTable() {
     },
     {
       id: "description",
-      header: () => <div className="text-center">الوصف</div>,
+      header: () => <div className="text-center">{t("description", { fallback: "الوصف" })}</div>,
       size: 300,
       cell: ({ row }) => (
         <div className="text-center text-sm text-zinc-600 dark:text-zinc-400 truncate max-w-[300px]" title={row.original.description}>
-          {row.original.description || "بدون وصف"}
+          {row.original.description || t("no_description", { fallback: "بدون وصف" })}
         </div>
       )
     },
     {
       id: "actions",
-      header: () => <div className="text-center">{t("actions")}</div>,
+      header: () => <div className="text-center">{tCommon("actions", { fallback: "Actions" })}</div>,
       size: 130,
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
-              { text: t("details"), href: `/ui-management/why-us/show/${row.original.id}` },
-              { text: "تعديل", onClick: () => setUpdateId(String(row.original.id)) },
-              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)), isDestructive: true },
+              { text: tCommon("details", { fallback: "Details" }), href: `/ui-management/why-us/show/${row.original.id}` },
+              { text: tCommon("edit", { fallback: "Edit" }), onClick: () => setUpdateId(String(row.original.id)) },
+              { text: tCommon("delete", { fallback: "Delete" }), onClick: () => setDeleteId(String(row.original.id)), isDestructive: true },
             ]} />
           </div>
         )
       },
     },
-  ], [t, router, page, data?.meta?.per_page])
+  ], [t, tCommon, router, page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />

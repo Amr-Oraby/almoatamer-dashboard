@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image";
 import { useParams } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useMoatmr } from "@/features/moatmrs/hooks"
@@ -41,7 +42,7 @@ export default function MoatmrDetailsPage() {
           <div className="flex items-center gap-4">
             <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-primary/10 relative">
               {moatamer.image ? (
-                <img src={moatamer.image} alt={moatamer.name} className="h-full w-full object-cover" />
+                <Image width={400} height={400} src={moatamer.image} alt={moatamer.name} className="h-full w-full object-cover" />
               ) : (
                 <User className="h-8 w-8 text-primary" />
               )}
@@ -102,7 +103,7 @@ export default function MoatmrDetailsPage() {
                   <span className="flex items-center gap-2 font-medium">
                     {moatamer.country.name} 
                     {moatamer.country.flag && (
-                       <img src={moatamer.country.flag} alt={moatamer.country.name} className="w-5 h-4 rounded-sm object-cover" />
+                       <Image width={400} height={400} src={moatamer.country.flag} alt={moatamer.country.name} className="w-5 h-4 rounded-sm object-cover" />
                     )}
                   </span>
                 </div>

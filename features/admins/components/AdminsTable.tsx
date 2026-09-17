@@ -46,7 +46,7 @@ export function AdminsTable() {
     },
     {
       id: "admin",
-      header: () => <div className="text-right">المشرف</div>,
+      header: () => <div className="text-right">{tCommon("admin", { fallback: "المشرف" })}</div>,
       size: 300,
       cell: ({ row }) => {
         const admin = row.original
@@ -71,7 +71,7 @@ export function AdminsTable() {
     },
     {
       id: "phone",
-      header: () => <div className="text-center">رقم الهاتف</div>,
+      header: () => <div className="text-center">{tCommon("phone", { fallback: "رقم الهاتف" })}</div>,
       size: 150,
       cell: ({ row }) => (
         <div className="flex items-center justify-center gap-1 text-zinc-600 dark:text-zinc-400 font-mono" dir="ltr">
@@ -82,10 +82,10 @@ export function AdminsTable() {
     },
     {
       id: "role",
-      header: () => <div className="text-center">الدور (Role)</div>,
+      header: () => <div className="text-center">{tCommon("role", { fallback: "الدور (Role)" })}</div>,
       size: 150,
       cell: ({ row }) => {
-        const roleName = row.original.role?.ar?.name || "مدير النظام (Super Admin)"
+        const roleName = row.original.role?.ar?.name || tCommon("super_admin", { fallback: "مدير النظام (Super Admin)" })
         return (
           <div className="text-center">
             <Badge variant="outline" className="font-bold text-primary border-primary/20 bg-primary/5">
@@ -97,14 +97,14 @@ export function AdminsTable() {
     },
     {
       id: "is_active",
-      header: () => <div className="text-center">الحالة</div>,
+      header: () => <div className="text-center">{tCommon("status", { fallback: "الحالة" })}</div>,
       size: 100,
       cell: ({ row }) => {
         const isActive = row.original.is_active
         return (
           <div className="flex justify-center">
             <Badge variant={isActive ? "default" : "secondary"}>
-              {isActive ? "نشط" : "غير نشط"}
+              {isActive ? tCommon("active", { fallback: "نشط" }) : tCommon("inactive", { fallback: "غير نشط" })}
             </Badge>
           </div>
         )
@@ -112,21 +112,21 @@ export function AdminsTable() {
     },
     {
       id: "actions",
-      header: () => <div className="text-center">{t("actions")}</div>,
+      header: () => <div className="text-center">{tCommon("actions", { fallback: "Actions" })}</div>,
       size: 80,
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
-              { text: t("details"), href: `/roles/admins/show/${row.original.id}`, permission: "show-admin" },
-              { text: "تعديل", href: `/roles/admins/update/${row.original.id}`, permission: "update-admin" },
-              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)), permission: "delete-admin" }
+              { text: tCommon("details", { fallback: "Details" }), href: `/roles/admins/show/${row.original.id}`, permission: "show-admin" },
+              { text: tCommon("edit", { fallback: "Edit" }), href: `/roles/admins/update/${row.original.id}`, permission: "update-admin" },
+              { text: tCommon("delete", { fallback: "Delete" }), onClick: () => setDeleteId(String(row.original.id)), permission: "delete-admin", isDestructive: true }
             ]} />
           </div>
         )
       },
     },
-  ], [t, page, data?.meta?.per_page])
+  ], [t, tCommon, page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />

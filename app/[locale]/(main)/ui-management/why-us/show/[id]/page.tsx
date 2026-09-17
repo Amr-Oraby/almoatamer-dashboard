@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image";
 import { useParams } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useWhyUsItem } from "@/features/why-us/hooks"
@@ -47,7 +48,7 @@ export default function WhyUsShowPage() {
                     <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-primary/10 relative flex-shrink-0">
                         {item.icon ? (
                             // eslint-disable-next-line @next/next/no-img-element
-                            <img src={item.icon} alt={item.title} className="h-full w-full object-contain p-2" />
+                            <Image width={400} height={400} src={item.icon} alt={item.title} className="h-full w-full object-contain p-2" />
                         ) : (
                             <FileText className="h-8 w-8 text-primary" />
                         )}

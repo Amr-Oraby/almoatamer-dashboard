@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -53,7 +54,7 @@ export function CreateBlogForm() {
             Object.entries(data.ar).forEach(([key, value]) => formData.append(`ar[${key}]`, (value as string) || ""));
             Object.entries(data.en).forEach(([key, value]) => formData.append(`en[${key}]`, (value as string) || ""));
             await createBlog(formData);
-            router.push("/blogs");
+            router.push("/blogs/show-all");
         } catch (error) {
             console.error(error);
         }
@@ -68,7 +69,7 @@ export function CreateBlogForm() {
                     <Switch checked={isActive} onChange={() => setValue("is_active", !isActive)} />
                 </div>
                 <div className="flex gap-3">
-                    <Button type="button" variant="outline" className="rounded-xl" onClick={() => router.push("/blogs")}>
+                    <Button type="button" variant="outline" className="rounded-xl" onClick={() => router.push("/blogs/show-all")}>
                         {t("cancel", { fallback: "إلغاء" })}
                     </Button>
                     <Button type="submit" disabled={isPending} className="bg-primary hover:bg-primary/90 text-white rounded-xl px-8 shadow-md">
@@ -86,7 +87,7 @@ export function CreateBlogForm() {
                             {previewImage ? (
                                 <div className="relative aspect-video">
                                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img src={previewImage.url} alt="Preview" className="w-full h-full object-cover" />
+                                    <Image width={400} height={400} src={previewImage.url} alt="Preview" className="w-full h-full object-cover" />
                                     <button type="button" onClick={removeImage} className="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white p-1.5 rounded-full shadow-md transition-colors">
                                         <X className="w-3 h-3" />
                                     </button>

@@ -38,7 +38,7 @@ export function CreateCountryForm() {
             });
 
             await createCountry(formData);
-            router.push(`/${localeCode}/places/countries`);
+            router.push(`/${localeCode}/countries/show-all`);
         } catch (error) {
             console.error("Error creating country:", error);
         }

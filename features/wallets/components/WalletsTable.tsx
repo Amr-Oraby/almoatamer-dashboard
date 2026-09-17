@@ -28,8 +28,7 @@ export function WalletsTable() {
   const { data, isLoading } = useWallets(page, filters)
   const [chargeWalletUser, setChargeWalletUser] = useState<{ id: number, name: string } | null>(null)
   
-  // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
-  const t = useTranslations("Umrahs")
+  const t = useTranslations("Wallets")
   const tCommon = useTranslations("Common")
 
   const columns = useMemo<ColumnDef<WalletItem>[]>(() => [
@@ -44,7 +43,7 @@ export function WalletsTable() {
     },
     {
       id: "user",
-      header: () => <div className="text-center">المستخدم</div>,
+      header: () => <div className="text-center">{tCommon("user", { fallback: "المستخدم" })}</div>,
       size: 250,
       cell: ({ row }) => {
         const user = row.original.user
@@ -69,26 +68,24 @@ export function WalletsTable() {
     },
     {
       id: "amount",
-      header: () => <div className="text-center">الرصيد المتاح</div>,
+      header: () => <div className="text-center">{t("amount", { fallback: "الرصيد المتاح" })}</div>,
       size: 150,
       cell: ({ row }) => (
         <div className="text-center">
-          <span className="font-bold text-emerald-600 dark:text-emerald-400 text-lg">
-            {row.original.amount} ر.س
-          </span>
+            {row.original.amount} {tCommon("sar", { fallback: "ر.س" })}
         </div>
       )
     },
     {
       id: "pending_amount",
-      header: () => <div className="text-center">الرصيد المعلق</div>,
+      header: () => <div className="text-center">{t("pending_amount", { fallback: "الرصيد المعلق" })}</div>,
       size: 150,
       cell: ({ row }) => {
         const isNegative = row.original.pending_amount < 0
         return (
           <div className="text-center">
             <span className={`font-bold text-lg ${isNegative ? "text-red-500" : "text-amber-500"}`}>
-              {row.original.pending_amount} ر.س
+              {row.original.pending_amount} {tCommon("sar", { fallback: "ر.س" })}
             </span>
           </div>
         )
@@ -96,15 +93,15 @@ export function WalletsTable() {
     },
     {
       id: "actions",
-      header: () => <div className="text-center">{t("actions")}</div>,
+      header: () => <div className="text-center">{tCommon("actions", { fallback: "Actions" })}</div>,
       size: 80,
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
-              { text: t("details"), href: `/wallets/show/${row.original.id}`, permission: "show-wallet" },
+              { text: tCommon("details", { fallback: "Details" }), href: `/wallets/show/${row.original.id}`, permission: "show-wallet" },
               { 
-                text: "شحن المحفظة", 
+                text: t("charge_wallet", { fallback: "شحن المحفظة" }), 
                 onClick: () => {
                   const user = row.original.user;
                   if (user) {
@@ -120,7 +117,7 @@ export function WalletsTable() {
         )
       },
     },
-  ], [t, router, page, data?.meta?.per_page])
+  ], [t, tCommon, router, page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />

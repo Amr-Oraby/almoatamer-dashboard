@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -131,7 +132,7 @@ export function UpdateNewsForm({ newsId }: UpdateNewsFormProps) {
                             {previewImage ? (
                                 <div className="relative aspect-video">
                                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img src={previewImage.url} alt="Preview" className="w-full h-full object-cover" />
+                                    <Image width={400} height={400} src={previewImage.url} alt="Preview" className="w-full h-full object-cover" />
                                     <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                         <p className="text-white text-xs font-medium flex items-center gap-1"><Upload className="w-3 h-3" /> تغيير الصورة</p>
                                     </div>

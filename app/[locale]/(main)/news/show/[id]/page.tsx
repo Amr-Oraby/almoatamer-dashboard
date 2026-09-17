@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image";
 import { useParams } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useNewsItem } from "@/features/news/hooks"
@@ -45,11 +46,9 @@ export default function NewsDetailsPage() {
           {/* News Cover Image */}
           {newsItem.images?.image ? (
               <div className="w-full h-64 md:h-80 relative overflow-hidden bg-zinc-100 dark:bg-zinc-900 border-b border-zinc-100 dark:border-zinc-800">
-                  <img 
-                      src={newsItem.images.image} 
+                  <Image width={400} height={400} src={newsItem.images.image} 
                       alt={newsItem.alt || newsItem.title} 
-                      className="w-full h-full object-cover" 
-                  />
+                      className="w-full h-full object-cover" />
               </div>
           ) : (
               <div className="w-full h-40 bg-zinc-100 dark:bg-zinc-900 border-b border-zinc-100 dark:border-zinc-800 flex items-center justify-center">

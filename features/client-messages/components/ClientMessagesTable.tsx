@@ -23,6 +23,7 @@ export function ClientMessagesTable() {
   
   // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
   const t = useTranslations("Umrahs")
+  const tCommon = useTranslations("Common")
 
   const columns = useMemo<ColumnDef<ClientMessageItem>[]>(() => [
     {
@@ -36,7 +37,7 @@ export function ClientMessagesTable() {
     },
     {
       id: "sender",
-      header: () => <div className="text-right">المرسل (Sender)</div>,
+      header: () => <div className="text-right">{tCommon("sender", { fallback: "المرسل (Sender)" })}</div>,
       size: 250,
       cell: ({ row }) => {
         const msg = row.original
@@ -56,7 +57,7 @@ export function ClientMessagesTable() {
     },
     {
       id: "phone",
-      header: () => <div className="text-center">الهاتف (Phone)</div>,
+      header: () => <div className="text-center">{tCommon("phone", { fallback: "الهاتف (Phone)" })}</div>,
       size: 150,
       cell: ({ row }) => {
         const msg = row.original
@@ -72,7 +73,7 @@ export function ClientMessagesTable() {
     },
     {
       id: "message_text",
-      header: () => <div className="text-right">الرسالة (Message)</div>,
+      header: () => <div className="text-right">{tCommon("message", { fallback: "الرسالة (Message)" })}</div>,
       size: 300,
       cell: ({ row }) => {
         const text = row.original.message_text
@@ -85,7 +86,7 @@ export function ClientMessagesTable() {
     },
     {
       id: "created_at",
-      header: () => <div className="text-center">التاريخ (Date)</div>,
+      header: () => <div className="text-center">{tCommon("date", { fallback: "التاريخ (Date)" })}</div>,
       size: 150,
       cell: ({ row }) => (
         <div className="flex items-center justify-center gap-1 text-zinc-500 text-xs font-mono" dir="ltr">
@@ -96,17 +97,17 @@ export function ClientMessagesTable() {
     },
     {
       id: "actions",
-      header: () => <div className="text-center">{t("actions")}</div>,
+      header: () => <div className="text-center">{tCommon("actions", { fallback: "Actions" })}</div>,
       size: 80,
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
-            <TableActionMenu items={[{ text: t("details"), onClick: () => setSelectedMessage(row.original), permission: "show-client-messages" }]} />
+            <TableActionMenu items={[{ text: tCommon("details", { fallback: "Details" }), onClick: () => setSelectedMessage(row.original), permission: "show-client-messages" }]} />
           </div>
         )
       },
     },
-  ], [t, page, data?.meta?.per_page])
+  ], [t, tCommon, page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />
@@ -125,7 +126,7 @@ export function ClientMessagesTable() {
           <DialogHeader>
             <DialogTitle className="text-xl font-black text-zinc-900 dark:text-zinc-100 flex items-center gap-2 mb-4">
               <MessageSquare className="w-6 h-6 text-primary" />
-              تفاصيل الرسالة
+              {tCommon("message_details", { fallback: "تفاصيل الرسالة" })}
             </DialogTitle>
           </DialogHeader>
 
@@ -134,7 +135,7 @@ export function ClientMessagesTable() {
               
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-sm font-bold text-zinc-500 uppercase tracking-wider mb-1">اسم المرسل</h3>
+                  <h3 className="text-sm font-bold text-zinc-500 uppercase tracking-wider mb-1">{tCommon("sender_name", { fallback: "اسم المرسل" })}</h3>
                   <p className="text-lg font-black text-zinc-900 dark:text-zinc-100">
                     {selectedMessage.user_info?.name || selectedMessage.name}
                   </p>
@@ -149,7 +150,7 @@ export function ClientMessagesTable() {
                 <div className="flex flex-col gap-1.5 p-4 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-100 dark:border-zinc-800">
                   <span className="text-xs font-bold text-zinc-400 flex items-center gap-1.5">
                     <Mail className="w-3.5 h-3.5" />
-                    البريد الإلكتروني
+                    {tCommon("email", { fallback: "البريد الإلكتروني" })}
                   </span>
                   <span className="text-sm font-mono text-zinc-700 dark:text-zinc-300">
                     {selectedMessage.user_info?.email || selectedMessage.email}
@@ -159,7 +160,7 @@ export function ClientMessagesTable() {
                 <div className="flex flex-col gap-1.5 p-4 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-100 dark:border-zinc-800">
                   <span className="text-xs font-bold text-zinc-400 flex items-center gap-1.5">
                     <Phone className="w-3.5 h-3.5" />
-                    رقم الهاتف
+                    {tCommon("phone_number", { fallback: "رقم الهاتف" })}
                   </span>
                   <span className="text-sm font-mono text-zinc-700 dark:text-zinc-300" dir="ltr">
                     +{selectedMessage.user_info?.phone_code || selectedMessage.phone_code} {selectedMessage.user_info?.phone || selectedMessage.phone}
@@ -170,7 +171,7 @@ export function ClientMessagesTable() {
               <div className="flex flex-col gap-2 p-4 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-100 dark:border-zinc-800">
                   <span className="text-xs font-bold text-zinc-400 flex items-center gap-1.5">
                     <MessageSquare className="w-3.5 h-3.5" />
-                    محتوى الرسالة
+                    {tCommon("message_content", { fallback: "محتوى الرسالة" })}
                   </span>
                   <p className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed whitespace-pre-wrap">
                     {selectedMessage.message_text}

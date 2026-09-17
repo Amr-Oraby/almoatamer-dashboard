@@ -26,6 +26,7 @@ export function CountriesTable() {
   
   // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
   const t = useTranslations("Umrahs")
+  const tCommon = useTranslations("Common")
 
   const columns = useMemo<ColumnDef<CountryItem>[]>(() => [
     {
@@ -39,7 +40,7 @@ export function CountriesTable() {
     },
     {
       id: "flag",
-      header: () => <div className="text-center">العلم</div>,
+      header: () => <div className="text-center">{tCommon("flag", { fallback: "العلم" })}</div>,
       size: 100,
       cell: ({ row }) => {
         return (
@@ -59,7 +60,7 @@ export function CountriesTable() {
     },
     {
       id: "name_ar",
-      header: () => <div className="text-center">الاسم (عربي)</div>,
+      header: () => <div className="text-center">{tCommon("name_ar", { fallback: "الاسم (عربي)" })}</div>,
       size: 200,
       cell: ({ row }) => (
         <div className="text-center font-bold text-zinc-900 dark:text-zinc-100">
@@ -69,7 +70,7 @@ export function CountriesTable() {
     },
     {
       id: "name_en",
-      header: () => <div className="text-center">الاسم (إنجليزي)</div>,
+      header: () => <div className="text-center">{tCommon("name_en", { fallback: "الاسم (إنجليزي)" })}</div>,
       size: 200,
       cell: ({ row }) => (
         <div className="text-center font-bold text-zinc-900 dark:text-zinc-100">
@@ -79,7 +80,7 @@ export function CountriesTable() {
     },
     {
       id: "code",
-      header: () => <div className="text-center">كود الهاتف</div>,
+      header: () => <div className="text-center">{tCommon("phone_code", { fallback: "كود الهاتف" })}</div>,
       size: 120,
       cell: ({ row }) => (
         <div className="text-center">
@@ -91,21 +92,21 @@ export function CountriesTable() {
     },
     {
       id: "actions",
-      header: () => <div className="text-center">{t("actions")}</div>,
+      header: () => <div className="text-center">{tCommon("actions", { fallback: "Actions" })}</div>,
       size: 80,
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
-              { text: t("details"), href: `/places/countries/show/${row.original.id}`, permission: "show-countries" },
-              { text: "تعديل", href: `/places/countries/update/${row.original.id}`, permission: "update-countries" },
-              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)), permission: "delete-countries" }
+              { text: tCommon("details", { fallback: "Details" }), href: `/countries/show/${row.original.id}`, permission: "show-countries" },
+              { text: tCommon("edit", { fallback: "Edit" }), href: `/countries/update/${row.original.id}`, permission: "update-countries" },
+              { text: tCommon("delete", { fallback: "Delete" }), onClick: () => setDeleteId(String(row.original.id)), permission: "delete-countries", isDestructive: true }
             ]} />
           </div>
         )
       },
     },
-  ], [t, page, data?.meta?.per_page])
+  ], [t, tCommon, page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />

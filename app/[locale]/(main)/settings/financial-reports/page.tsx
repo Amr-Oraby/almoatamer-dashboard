@@ -1,10 +1,11 @@
 "use client"
 
 import { useTranslations } from "next-intl"
+import dynamic from "next/dynamic"
 import { useFinancialReports, useFinancialReportsFine } from "@/features/financial-reports/hooks"
 import { SummaryCards } from "@/features/financial-reports/components/SummaryCards"
-import { MonthlyFlowChart } from "@/features/financial-reports/components/MonthlyFlowChart"
-import { UmrahStatusChart } from "@/features/financial-reports/components/UmrahStatusChart"
+const MonthlyFlowChart = dynamic(() => import("@/features/financial-reports/components/MonthlyFlowChart").then(m => m.MonthlyFlowChart), { ssr: false, loading: () => <div className="h-[300px] w-full flex items-center justify-center bg-zinc-100/50 dark:bg-zinc-800/50 rounded-lg animate-pulse" /> })
+const UmrahStatusChart = dynamic(() => import("@/features/financial-reports/components/UmrahStatusChart").then(m => m.UmrahStatusChart), { ssr: false, loading: () => <div className="h-[300px] w-full flex items-center justify-center bg-zinc-100/50 dark:bg-zinc-800/50 rounded-lg animate-pulse" /> })
 import { FinancialDetails } from "@/features/financial-reports/components/FinancialDetails"
 import { FinancialWithdrawalRequestsTable } from "@/features/financial-reports/components/FinancialWithdrawalRequestsTable"
 import { Loader2 } from "lucide-react"

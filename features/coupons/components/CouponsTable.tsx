@@ -58,8 +58,8 @@ export function CouponsTable() {
       size: 150,
       cell: ({ row }) => {
         const { type, discount_amount } = row.original
-        const valueText = type === "percentage" ? `${discount_amount}%` : `${discount_amount} ر.س`
-        const typeText = type === "percentage" ? "نسبة مئوية" : "مبلغ ثابت"
+        const valueText = type === "percentage" ? `${discount_amount}%` : `${discount_amount} ${tCommon("sar", { fallback: "ر.س" })}`
+        const typeText = type === "percentage" ? tCommon("percentage", { fallback: "نسبة مئوية" }) : tCommon("fixed_amount", { fallback: "مبلغ ثابت" })
         return (
           <div className="flex flex-col items-center justify-center">
             <span className="font-bold text-emerald-600 dark:text-emerald-400 text-lg">{valueText}</span>
@@ -93,11 +93,11 @@ export function CouponsTable() {
       cell: ({ row }) => (
         <div className="flex flex-col items-center justify-center gap-1">
           <div className="flex items-center gap-2 text-xs">
-            <span className="text-zinc-500 w-10 text-right">من:</span>
+            <span className="text-zinc-500 w-10 text-right">{tCommon("from", { fallback: "من" })}:</span>
             <span className="font-medium text-zinc-900 dark:text-zinc-100" dir="ltr">{row.original.start_date}</span>
           </div>
           <div className="flex items-center gap-2 text-xs">
-            <span className="text-zinc-500 w-10 text-right">إلى:</span>
+            <span className="text-zinc-500 w-10 text-right">{tCommon("to", { fallback: "إلى" })}:</span>
             <span className="font-medium text-zinc-900 dark:text-zinc-100" dir="ltr">{row.original.expiry_date}</span>
           </div>
         </div>
@@ -105,7 +105,7 @@ export function CouponsTable() {
     },
     {
       id: "status",
-      header: () => <div className="text-center">الحالة</div>,
+      header: () => <div className="text-center">{tCommon("status", { fallback: "الحالة" })}</div>,
       size: 100,
       cell: ({ row }) => {
         const isActive = !!row.original.status
@@ -118,21 +118,21 @@ export function CouponsTable() {
     },
     {
       id: "actions",
-      header: () => <div className="text-center">{t("actions")}</div>,
+      header: () => <div className="text-center">{tCommon("actions", { fallback: "Actions" })}</div>,
       size: 80,
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
-              { text: t("details"), href: `/discounts/coupons/show/${row.original.id}` },
-              { text: "تعديل", href: `/discounts/coupons/update/${row.original.id}` },
-              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
+              { text: tCommon("details", { fallback: "Details" }), href: `/discount-coupons/show/${row.original.id}` },
+              { text: tCommon("edit", { fallback: "Edit" }), href: `/discount-coupons/update/${row.original.id}` },
+              { text: tCommon("delete", { fallback: "Delete" }), onClick: () => setDeleteId(String(row.original.id)), isDestructive: true }
             ]} />
           </div>
         )
       },
     },
-  ], [t, router, page, data?.meta?.per_page])
+  ], [t, tCommon, router, page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />

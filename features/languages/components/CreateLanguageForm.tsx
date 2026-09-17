@@ -35,7 +35,7 @@ export function CreateLanguageForm() {
             });
 
             await createLanguage(formData);
-            router.push(`/${localeCode}/languages`);
+            router.push(`/${localeCode}/languages/show-all`);
         } catch (error) {
             console.error("Error creating language:", error);
         }

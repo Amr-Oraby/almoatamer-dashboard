@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { Bell } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -54,7 +55,7 @@ export function NotificationsDropdown() {
                 {displayedNotifications.map((notif) => (
                    <div key={notif.id} className={`p-4 flex gap-3 transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-900/50 ${!notif.is_readed ? 'bg-blue-50/30 dark:bg-blue-900/10' : ''}`}>
                       <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0 overflow-hidden border border-primary/20">
-                          {notif.image ? <img src={notif.image} className="w-full h-full object-cover" alt="" /> : <Bell className="w-5 h-5 text-primary" />}
+                          {notif.image ? <Image width={400} height={400} src={notif.image} className="w-full h-full object-cover" alt="" /> : <Bell className="w-5 h-5 text-primary" />}
                       </div>
                       <div className="flex-1 min-w-0">
                          <p className="font-bold text-sm text-zinc-900 dark:text-zinc-100">{notif.title}</p>

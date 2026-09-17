@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image";
 import { useParams } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useThankingWord } from "@/features/thanking-words/hooks"
@@ -42,7 +43,7 @@ export default function ThankingWordDetailsPage() {
           <div className="flex items-center gap-4">
             <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-primary/10 relative">
               {word.image ? (
-                <img src={word.image} alt={word.name} className="h-full w-full object-cover" />
+                <Image width={400} height={400} src={word.image} alt={word.name} className="h-full w-full object-cover" />
               ) : (
                 <MessageSquare className="h-8 w-8 text-primary" />
               )}

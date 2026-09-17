@@ -64,7 +64,7 @@ export function UpdateLanguageForm({ languageId }: UpdateLanguageFormProps) {
             });
 
             await updateLanguage(formData);
-            router.push(`/${localeCode}/languages`);
+            router.push(`/${localeCode}/languages/show-all`);
         } catch (error) {
             console.error("Error updating language:", error);
         }

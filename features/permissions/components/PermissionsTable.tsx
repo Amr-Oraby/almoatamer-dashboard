@@ -24,6 +24,7 @@ export function PermissionsTable() {
   const { mutate: deletePermission, isPending: isDeleting } = useDeletePermission();
 
   const t = useTranslations("Permissions");
+  const tCommon = useTranslations("Common");
 
   const columns = useMemo<ColumnDef<PermissionItem>[]>(() => [
     {
@@ -67,7 +68,7 @@ export function PermissionsTable() {
     },
     {
       id: "actions",
-      header: "",
+      header: () => <div className="text-center">{tCommon("actions", { fallback: "Actions" })}</div>,
       size: 60,
       cell: ({ row }) => (
         <div className="flex justify-end">
@@ -87,7 +88,7 @@ export function PermissionsTable() {
         </div>
       )
     }
-  ], [t, page, data?.meta?.per_page]);
+  ], [t, tCommon, page, data?.meta?.per_page]);
 
   if (isLoading) {
     return <TableSkeleton />;

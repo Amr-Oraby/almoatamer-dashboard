@@ -47,7 +47,7 @@ export function BlogsTable() {
     {
       id: "title",
       header: () => <div className="text-center">{tCommon("title")}</div>,
-      size: 300,
+      size: 200,
       cell: ({ row }) => {
         const item = row.original
         const title = item.title || "بدون عنوان"
@@ -63,7 +63,7 @@ export function BlogsTable() {
               )}
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-zinc-900 dark:text-zinc-100">{title}</span>
+              <span className="font-bold text-zinc-900 dark:text-zinc-100 truncate max-w-[150px] block" title={title}>{title}</span>
             </div>
           </div>
         )
@@ -116,21 +116,21 @@ export function BlogsTable() {
     },
     {
       id: "actions",
-      header: () => <div className="text-center">{t("actions")}</div>,
+      header: () => <div className="text-center">{tCommon("actions", { fallback: "Actions" })}</div>,
       size: 100,
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
-              { text: t("details"), href: `/blogs/show/${row.original.id}`, permission: "show-blog" },
-              { text: "تعديل", href: `/blogs/update/${row.original.id}`, permission: "update-blog" },
-              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)), permission: "delete-blog" }
+              { text: tCommon("details", { fallback: "Details" }), href: `/blogs/show/${row.original.id}`, permission: "show-blog" },
+              { text: tCommon("edit", { fallback: "Edit" }), href: `/blogs/update/${row.original.id}`, permission: "update-blog" },
+              { text: tCommon("delete", { fallback: "Delete" }), onClick: () => setDeleteId(String(row.original.id)), permission: "delete-blog", isDestructive: true }
             ]} />
           </div>
         )
       },
     },
-  ], [t, router, page, data?.meta?.per_page])
+  ], [t, tCommon, router, page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />

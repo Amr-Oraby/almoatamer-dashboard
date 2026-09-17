@@ -6,6 +6,7 @@ import { DataTable } from "@/components/ui/data-table"
 import { TableSkeleton } from "@/components/ui/table-skeleton"
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { useSearchParams } from "next/navigation"
+import { useTranslations } from "next-intl"
 
 import { useWithdrawalRequests, useUpdateWithdrawalRequest } from "@/features/withdrawal-requests/hooks"
 import { WithdrawalRequestItem } from "@/features/withdrawal-requests/types"
@@ -20,6 +21,8 @@ export function WithdrawalRequestsTable() {
   const page = Number(searchParams.get("page")) || 1
   const { data, isLoading } = useWithdrawalRequests(page)
   const { mutate: updateStatus, isPending: isUpdating } = useUpdateWithdrawalRequest()
+  const t = useTranslations("WithdrawalRequests")
+  const tCommon = useTranslations("Common")
 
   const [confirmState, setConfirmState] = useState<{ isOpen: boolean; id: number | null; action: 'confirmed' | 'rejected' | null }>({ 
     isOpen: false, 
@@ -39,7 +42,7 @@ export function WithdrawalRequestsTable() {
     },
     {
       id: "user",
-      header: () => <div className="text-center">المستخدم</div>,
+      header: () => <div className="text-center">{tCommon("user", { fallback: "المستخدم" })}</div>,
       size: 250,
       cell: ({ row }) => {
         const user = row.original.user
@@ -64,19 +67,19 @@ export function WithdrawalRequestsTable() {
     },
     {
       id: "amount",
-      header: () => <div className="text-center">المبلغ المطلوب</div>,
+      header: () => <div className="text-center">{t("amount", { fallback: "المبلغ المطلوب" })}</div>,
       size: 150,
       cell: ({ row }) => (
         <div className="text-center">
           <span className="font-bold text-emerald-600 dark:text-emerald-400 text-lg">
-            {row.original.amount} ر.س
+            {row.original.amount} {tCommon("sar", { fallback: "ر.س" })}
           </span>
         </div>
       )
     },
     {
       id: "bank_info",
-      header: () => <div className="text-center">معلومات البنك</div>,
+      header: () => <div className="text-center">{t("bank_info", { fallback: "معلومات البنك" })}</div>,
       size: 200,
       cell: ({ row }) => (
         <div className="flex flex-col items-center justify-center">
@@ -87,7 +90,7 @@ export function WithdrawalRequestsTable() {
     },
     {
       id: "status",
-      header: () => <div className="text-center">الحالة</div>,
+      header: () => <div className="text-center">{t("status", { fallback: "الحالة" })}</div>,
       size: 120,
       cell: ({ row }) => {
         const status = row.original.status
@@ -96,13 +99,13 @@ export function WithdrawalRequestsTable() {
 
         if (status === "pending") {
           variant = "secondary"
-          label = "قيد الانتظار"
+          label = tCommon("pending", { fallback: "قيد الانتظار" })
         } else if (status === "accepted") {
           variant = "default"
-          label = "مقبول"
+          label = tCommon("accepted", { fallback: "مقبول" })
         } else if (status === "rejected") {
           variant = "destructive"
-          label = "مرفوض"
+          label = tCommon("rejected", { fallback: "مرفوض" })
         }
 
         return (
@@ -116,7 +119,7 @@ export function WithdrawalRequestsTable() {
     },
     {
       id: "date",
-      header: () => <div className="text-center">التاريخ</div>,
+      header: () => <div className="text-center">{tCommon("date", { fallback: "التاريخ" })}</div>,
       size: 150,
       cell: ({ row }) => (
         <div className="flex flex-col items-center justify-center">
@@ -125,7 +128,7 @@ export function WithdrawalRequestsTable() {
           </span>
           {row.original.acceptance_rejection_action && (
             <span className="text-[10px] text-zinc-400" dir="ltr">
-              الإجراء: {row.original.acceptance_rejection_action}
+              {t("action", { fallback: "الإجراء" })}: {row.original.acceptance_rejection_action}
             </span>
           )}
         </div>
@@ -133,7 +136,7 @@ export function WithdrawalRequestsTable() {
     },
     {
       id: "actions",
-      header: () => <div className="text-center">الإجراءات</div>,
+      header: () => <div className="text-center">{tCommon("actions", { fallback: "الإجراءات" })}</div>,
       size: 150,
       cell: ({ row }) => {
         if (row.original.status !== "pending") return null;
@@ -146,7 +149,7 @@ export function WithdrawalRequestsTable() {
               className="bg-emerald-600 hover:bg-emerald-700 h-8 text-xs text-white" 
               onClick={() => setConfirmState({ isOpen: true, id: row.original.id, action: "confirmed" })}
             >
-              قبول
+              {tCommon("accept", { fallback: "قبول" })}
             </Button>
             <Button 
               size="sm" 
@@ -154,13 +157,13 @@ export function WithdrawalRequestsTable() {
               className="h-8 text-xs text-white" 
               onClick={() => setConfirmState({ isOpen: true, id: row.original.id, action: "rejected" })}
             >
-              رفض
+              {tCommon("reject", { fallback: "رفض" })}
             </Button>
           </div>
         )
       }
     }
-  ], [page, data?.meta?.per_page])
+  ], [t, tCommon, page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />
@@ -188,10 +191,10 @@ export function WithdrawalRequestsTable() {
           }
         }}
         isLoading={isUpdating}
-        title={confirmState.action === "confirmed" ? "قبول طلب السحب" : "رفض طلب السحب"}
-        description={confirmState.action === "confirmed" ? "هل أنت متأكد من قبول طلب السحب هذا؟" : "هل أنت متأكد من رفض طلب السحب هذا؟"}
-        confirmText={confirmState.action === "confirmed" ? "نعم، أقبل" : "نعم، أرفض"}
-        cancelText="إلغاء"
+        title={confirmState.action === "confirmed" ? tCommon("accept_withdrawal", { fallback: "قبول طلب السحب" }) : tCommon("reject_withdrawal", { fallback: "رفض طلب السحب" })}
+        description={confirmState.action === "confirmed" ? tCommon("are_you_sure_accept_withdrawal", { fallback: "هل أنت متأكد من قبول طلب السحب هذا؟" }) : tCommon("are_you_sure_reject_withdrawal", { fallback: "هل أنت متأكد من رفض طلب السحب هذا؟" })}
+        confirmText={confirmState.action === "confirmed" ? tCommon("yes_accept", { fallback: "نعم، أقبل" }) : tCommon("yes_reject", { fallback: "نعم، أرفض" })}
+        cancelText={tCommon("cancel", { fallback: "إلغاء" })}
         confirmButtonColor={confirmState.action === "confirmed" ? "bg-emerald-600 hover:bg-emerald-700" : "bg-red-600 hover:bg-red-700"}
       />
     </div>

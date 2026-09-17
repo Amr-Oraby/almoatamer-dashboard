@@ -65,7 +65,7 @@ export function UpdateCountryForm({ countryId }: UpdateCountryFormProps) {
             });
 
             await updateCountry(formData);
-            router.push(`/${localeCode}/places/countries`);
+            router.push(`/${localeCode}/countries/show-all`);
         } catch (error) {
             console.error("Error updating country:", error);
         }

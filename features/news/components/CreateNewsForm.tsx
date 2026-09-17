@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -84,7 +85,7 @@ export function CreateNewsForm() {
                             {previewImage ? (
                                 <div className="relative aspect-video">
                                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img src={previewImage.url} alt="Preview" className="w-full h-full object-cover" />
+                                    <Image width={400} height={400} src={previewImage.url} alt="Preview" className="w-full h-full object-cover" />
                                     <button type="button" onClick={removeImage} className="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white p-1.5 rounded-full shadow-md transition-colors">
                                         <X className="w-3 h-3" />
                                     </button>

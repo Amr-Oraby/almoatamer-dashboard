@@ -21,6 +21,7 @@ export function AboutTable() {
   
   // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
   const t = useTranslations("Umrahs")
+  const tCommon = useTranslations("Common")
 
   const columns = useMemo<ColumnDef<AboutItem>[]>(() => [
     {
@@ -34,7 +35,7 @@ export function AboutTable() {
     },
     {
       id: "about_ar",
-      header: () => <div className="text-right">العنوان (عربي)</div>,
+      header: () => <div className="text-right">{tCommon("title_ar", { fallback: "العنوان (عربي)" })}</div>,
       size: 250,
       cell: ({ row }) => (
         <div className="flex items-start gap-2 w-[250px] md:w-[350px]">
@@ -53,7 +54,7 @@ export function AboutTable() {
     },
     {
       id: "about_en",
-      header: () => <div className="text-left" dir="ltr">Title (English)</div>,
+      header: () => <div className="text-left" dir="ltr">{tCommon("title_en", { fallback: "Title (English)" })}</div>,
       size: 250,
       cell: ({ row }) => (
         <div className="flex items-start gap-2 w-[250px] md:w-[350px]" dir="ltr">
@@ -72,14 +73,14 @@ export function AboutTable() {
     },
     {
       id: "is_active",
-      header: () => <div className="text-center">الحالة</div>,
+      header: () => <div className="text-center">{tCommon("status", { fallback: "الحالة" })}</div>,
       size: 100,
       cell: ({ row }) => {
         const isActive = row.original.is_active
         return (
           <div className="flex justify-center">
             <Badge variant={isActive ? "default" : "secondary"}>
-              {isActive ? "نشط" : "غير نشط"}
+              {isActive ? tCommon("active", { fallback: "نشط" }) : tCommon("inactive", { fallback: "غير نشط" })}
             </Badge>
           </div>
         )
@@ -87,17 +88,17 @@ export function AboutTable() {
     },
     {
       id: "actions",
-      header: () => <div className="text-center">{t("actions")}</div>,
+      header: () => <div className="text-center">{tCommon("actions", { fallback: "Actions" })}</div>,
       size: 80,
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
-            <TableActionMenu items={[{ text: t("details"), href: `/public-pages/about/show/${row.original.id}`, permission: "show-about" }]} />
+            <TableActionMenu items={[{ text: tCommon("details", { fallback: "Details" }), href: `/public-pages/about/show/${row.original.id}`, permission: "show-about" }]} />
           </div>
         )
       },
     },
-  ], [t, page, data?.meta?.per_page])
+  ], [t, tCommon, page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />

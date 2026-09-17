@@ -28,6 +28,7 @@ export function FaqTable() {
   
   // Using generic terms from "Umrahs" to prevent crashes and ensure Arabic text
   const t = useTranslations("Umrahs")
+  const tCommon = useTranslations("Common")
 
   const columns = useMemo<ColumnDef<FaqItem>[]>(() => [
     {
@@ -41,7 +42,7 @@ export function FaqTable() {
     },
     {
       id: "question_ar",
-      header: () => <div className="text-right">السؤال (عربي)</div>,
+      header: () => <div className="text-right">{tCommon("question_ar", { fallback: "السؤال (عربي)" })}</div>,
       size: 250,
       cell: ({ row }) => (
         <div className="flex items-start gap-2">
@@ -59,7 +60,7 @@ export function FaqTable() {
     },
     {
       id: "question_en",
-      header: () => <div className="text-left" dir="ltr">Question (English)</div>,
+      header: () => <div className="text-left" dir="ltr">{tCommon("question_en", { fallback: "Question (English)" })}</div>,
       size: 250,
       cell: ({ row }) => (
         <div className="flex items-start gap-2" dir="ltr">
@@ -77,21 +78,21 @@ export function FaqTable() {
     },
     {
       id: "actions",
-      header: () => <div className="text-center">{t("actions")}</div>,
+      header: () => <div className="text-center">{tCommon("actions", { fallback: "Actions" })}</div>,
       size: 80,
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
-              { text: t("details"), onClick: () => setSelectedFaq(row.original) },
-              { text: "تعديل", href: `/public-pages/faq/update/${row.original.id}` },
-              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
+              { text: tCommon("details", { fallback: "Details" }), onClick: () => setSelectedFaq(row.original) },
+              { text: tCommon("edit", { fallback: "Edit" }), href: `/public-pages/faq/update/${row.original.id}` },
+              { text: tCommon("delete", { fallback: "Delete" }), onClick: () => setDeleteId(String(row.original.id)), isDestructive: true }
             ]} />
           </div>
         )
       },
     },
-  ], [t, page, data?.meta?.per_page])
+  ], [t, tCommon, page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />
@@ -110,7 +111,7 @@ export function FaqTable() {
           <DialogHeader>
             <DialogTitle className="text-xl font-black text-zinc-900 dark:text-zinc-100 flex items-center gap-2 mb-4">
               <HelpCircle className="w-6 h-6 text-primary" />
-              FAQ Details
+              {tCommon("faq_details", { fallback: "FAQ Details" })}
             </DialogTitle>
           </DialogHeader>
 
@@ -136,7 +137,7 @@ export function FaqTable() {
                     <div>
                       <span className="text-xs font-bold text-zinc-400 flex items-center gap-1.5 mb-1.5">
                         <Type className="w-3 h-3" />
-                        Question
+                        {tCommon("question", { fallback: "Question" })}
                       </span>
                       <div className="text-sm font-bold text-zinc-900 dark:text-zinc-100 line-clamp-3">
                         {item.data?.question || <span className="text-zinc-400 font-normal">-</span>}
@@ -145,7 +146,7 @@ export function FaqTable() {
                     <div className="flex-1 flex flex-col">
                       <span className="text-xs font-bold text-zinc-400 flex items-center gap-1.5 mb-1.5">
                         <AlignLeft className="w-3 h-3" />
-                        Answer
+                        {tCommon("answer", { fallback: "Answer" })}
                       </span>
                       <div className="text-sm text-zinc-700 dark:text-zinc-300">
                         {item.data?.answer || <span className="text-zinc-400 font-normal">-</span>}

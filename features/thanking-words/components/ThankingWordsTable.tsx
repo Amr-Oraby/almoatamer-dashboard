@@ -40,6 +40,7 @@ export function ThankingWordsTable() {
   // Using "Umrahs" namespace for generic keys that we know exist, and hardcoding missing ones gracefully
   const tUmrahs = useTranslations("Umrahs")
   const t = useTranslations("ThankingWords")
+  const tCommon = useTranslations("Common")
 
   const columns = useMemo<ColumnDef<ThankingWord>[]>(() => [
     {
@@ -125,14 +126,14 @@ export function ThankingWordsTable() {
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
               { text: tUmrahs("details", { fallback: "Details" }), href: `/ui-management/thanking-word/show/${row.original.id}`, permission: "show-home-info" },
-              { text: "تعديل", onClick: () => setItemToUpdate(String(row.original.id)), permission: "update-home-info" },
+              { text: tCommon("edit", { fallback: "Edit" }), onClick: () => setItemToUpdate(String(row.original.id)), permission: "update-home-info" },
               { text: t("delete", { fallback: "Delete" }), onClick: () => setItemToDelete(row.original.id), isDestructive: true, permission: "delete-home-info" }
             ]} />
           </div>
         )
       },
     },
-  ], [t, tUmrahs, router, page, data?.meta?.per_page])
+  ], [t, tUmrahs, tCommon, router, page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />

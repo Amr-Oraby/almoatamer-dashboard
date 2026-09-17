@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image";
 import { useParams } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useTransaction } from "@/features/transactions/hooks"
@@ -21,7 +22,7 @@ const PersonCard = ({ person, title, notFoundText }: { person: any, title: strin
               <div className="flex items-center gap-4 mb-6">
                   <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden shrink-0">
                       {person.image ? (
-                          <img src={person.image} alt={person.name} className="w-full h-full object-cover" />
+                          <Image width={400} height={400} src={person.image} alt={person.name} className="w-full h-full object-cover" />
                       ) : (
                           <UserIcon className="w-8 h-8 text-primary" />
                       )}

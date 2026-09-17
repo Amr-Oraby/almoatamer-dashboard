@@ -33,7 +33,7 @@ export function CreateReferralLinkForm() {
             formData.append("identifier", data.identifier);
 
             await createReferralLink(formData);
-            router.push(`/${localeCode}/referral-links`);
+            router.push(`/${localeCode}/referral-links/show-all`);
         } catch (error) {
             console.error("Error creating referral link:", error);
         }

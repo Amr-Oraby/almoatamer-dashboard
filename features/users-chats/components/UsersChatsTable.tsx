@@ -96,7 +96,7 @@ export function UsersChatsTable() {
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
-            <TableActionMenu items={[{ text: t("details"), href: `/contact/users-chats/show/${row.original.id}`, permission: "show-users-chats" }]} />
+            <TableActionMenu items={[{ text: t("details"), href: `/users-chats/show/${row.original.id}`, permission: "show-users-chats" }]} />
           </div>
         )
       },

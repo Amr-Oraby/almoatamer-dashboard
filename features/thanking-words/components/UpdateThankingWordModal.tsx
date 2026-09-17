@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
@@ -147,7 +148,7 @@ export function UpdateThankingWordModal({ isOpen, onClose, wordId }: UpdateThank
                                     {previewImage ? (
                                         <div className="relative w-full aspect-[2/1] rounded-lg overflow-hidden">
                                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                                            <img src={previewImage} alt="Preview" className="w-full h-full object-cover" />
+                                            <Image width={400} height={400} src={previewImage} alt="Preview" className="w-full h-full object-cover" />
                                             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                                 <p className="text-white text-sm font-medium flex items-center gap-2">
                                                     <Upload className="w-4 h-4" /> Change Image

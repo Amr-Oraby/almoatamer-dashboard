@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image";
 import { useParams } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useAdmin } from "@/features/admins/hooks"
@@ -47,7 +48,7 @@ export default function AdminDetailsPage() {
             <div className="flex items-center gap-6">
               <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-primary/10 border-4 border-white dark:border-zinc-900 shadow-md shrink-0">
                  {admin.image ? (
-                   <img src={admin.image} alt={admin.name} className="w-full h-full object-cover" />
+                   <Image width={400} height={400} src={admin.image} alt={admin.name} className="w-full h-full object-cover" />
                  ) : (
                    <UserIcon className="h-10 w-10 text-primary" />
                  )}

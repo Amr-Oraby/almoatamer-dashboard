@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image";
 import { useParams } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useClient } from "@/features/clients/hooks"
@@ -41,7 +42,7 @@ export default function ClientDetailsPage() {
           <div className="flex items-center gap-4">
             <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-primary/10 relative">
               {client.image ? (
-                <img src={client.image} alt={client.name} className="h-full w-full object-cover" />
+                <Image width={400} height={400} src={client.image} alt={client.name} className="h-full w-full object-cover" />
               ) : (
                 <User className="h-8 w-8 text-primary" />
               )}
@@ -87,7 +88,7 @@ export default function ClientDetailsPage() {
                   <span className="flex items-center gap-2 font-medium">
                     {client.country.name} 
                     {client.country.flag && (
-                       <img src={client.country.flag} alt={client.country.name} className="w-5 h-4 rounded-sm object-cover" />
+                       <Image width={400} height={400} src={client.country.flag} alt={client.country.name} className="w-5 h-4 rounded-sm object-cover" />
                     )}
                   </span>
                 </div>

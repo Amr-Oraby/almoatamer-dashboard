@@ -55,7 +55,7 @@ export function SeoTable() {
     },
     {
       id: "title",
-      header: () => <div className="text-center">العنوان (Title)</div>,
+      header: () => <div className="text-center">{tCommon("title", { fallback: "العنوان (Title)" })}</div>,
       size: 400,
       cell: ({ row }) => (
         <div className="text-right font-bold text-zinc-900 dark:text-zinc-100">
@@ -65,7 +65,7 @@ export function SeoTable() {
     },
     {
       id: "seoable_type",
-      header: () => <div className="text-center">النوع (Type)</div>,
+      header: () => <div className="text-center">{tCommon("type", { fallback: "النوع (Type)" })}</div>,
       size: 150,
       cell: ({ row }) => (
         <div className="text-center">
@@ -77,7 +77,7 @@ export function SeoTable() {
     },
     {
       id: "is_active",
-      header: () => <div className="text-center">الحالة</div>,
+      header: () => <div className="text-center">{tCommon("status", { fallback: "الحالة" })}</div>,
       size: 100,
       cell: ({ row }) => {
         const isActive = !!row.original.is_active
@@ -90,21 +90,21 @@ export function SeoTable() {
     },
     {
       id: "actions",
-      header: () => <div className="text-center">{t("actions")}</div>,
+      header: () => <div className="text-center">{tCommon("actions", { fallback: "Actions" })}</div>,
       size: 80,
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
-              { text: t("details"), onClick: () => setSelectedSeo(row.original) },
-              { text: "تعديل", href: `/seo/update/${row.original.id}` },
-              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
+              { text: tCommon("details", { fallback: "Details" }), onClick: () => setSelectedSeo(row.original) },
+              { text: tCommon("edit", { fallback: "Edit" }), href: `/seo/update/${row.original.id}` },
+              { text: tCommon("delete", { fallback: "Delete" }), onClick: () => setDeleteId(String(row.original.id)), isDestructive: true }
             ]} />
           </div>
         )
       },
     },
-  ], [t, router, page, data?.meta?.per_page])
+  ], [t, tCommon, router, page, data?.meta?.per_page])
 
   if (isLoading) {
     return <TableSkeleton />
@@ -143,7 +143,7 @@ export function SeoTable() {
           <DialogHeader>
             <DialogTitle className="text-xl font-black text-zinc-900 dark:text-zinc-100 flex items-center gap-2 mb-4">
               <Search className="w-6 h-6 text-primary" />
-              SEO Details
+              {tCommon("seo_details", { fallback: "SEO Details" })}
             </DialogTitle>
           </DialogHeader>
 
@@ -152,13 +152,13 @@ export function SeoTable() {
               
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-sm font-bold text-zinc-500 uppercase tracking-wider mb-1">Title</h3>
+                  <h3 className="text-sm font-bold text-zinc-500 uppercase tracking-wider mb-1">{tCommon("title", { fallback: "Title" })}</h3>
                   <p className="text-lg font-black text-zinc-900 dark:text-zinc-100">{selectedSeo.title}</p>
                 </div>
                 {selectedSeo.is_active ? (
-                    <Badge className="bg-emerald-500/10 text-emerald-600 hover:bg-emerald-500/20 border-emerald-500/20">نشط</Badge>
+                    <Badge className="bg-emerald-500/10 text-emerald-600 hover:bg-emerald-500/20 border-emerald-500/20">{tCommon("active", { fallback: "نشط" })}</Badge>
                 ) : (
-                    <Badge className="bg-red-500/10 text-red-600 hover:bg-red-500/20 border-red-500/20">غير نشط</Badge>
+                    <Badge className="bg-red-500/10 text-red-600 hover:bg-red-500/20 border-red-500/20">{tCommon("inactive", { fallback: "غير نشط" })}</Badge>
                 )}
               </div>
 
@@ -166,7 +166,7 @@ export function SeoTable() {
                 <div className="flex flex-col gap-1.5 p-4 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-100 dark:border-zinc-800">
                   <span className="text-xs font-bold text-zinc-400 flex items-center gap-1.5">
                     <Tag className="w-3.5 h-3.5" />
-                    SEOable Type
+                    {tCommon("type", { fallback: "SEOable Type" })}
                   </span>
                   <span className="text-sm font-mono text-zinc-700 dark:text-zinc-300">{selectedSeo.seoable_type}</span>
                 </div>
@@ -174,7 +174,7 @@ export function SeoTable() {
                 <div className="flex flex-col gap-1.5 p-4 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-100 dark:border-zinc-800">
                   <span className="text-xs font-bold text-zinc-400 flex items-center gap-1.5">
                     <Hash className="w-3.5 h-3.5" />
-                    ID
+                    {tCommon("id", { fallback: "ID" })}
                   </span>
                   <span className="text-sm font-mono text-zinc-700 dark:text-zinc-300">{selectedSeo.id}</span>
                 </div>
@@ -209,8 +209,8 @@ export function SeoTable() {
           }
         }}
         isLoading={isToggling}
-        title="تأكيد العملية"
-        description="هل أنت متأكد أنك تريد تغيير حالة هذا العنصر؟"
+        title={tCommon("confirm_action", { fallback: "تأكيد العملية" })}
+        description={tCommon("confirm_status_change", { fallback: "هل أنت متأكد أنك تريد تغيير حالة هذا العنصر؟" })}
         confirmButtonColor="bg-primary hover:bg-primary/90"
       />
     </div>

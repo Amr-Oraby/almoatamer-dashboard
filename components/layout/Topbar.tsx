@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useTranslations, useLocale } from 'next-intl';
 import { Bell, Moon, Sun, User, Menu, ChevronDown, LogOut } from 'lucide-react';
 import { Link, usePathname, useRouter } from '@/i18n/routing';
@@ -64,7 +65,7 @@ export function Topbar() {
             <DropdownMenuTrigger className="flex items-center gap-3 outline-none group cursor-pointer">
               <div className="w-10 h-10 bg-zinc-200 dark:bg-zinc-800 rounded-full flex items-center justify-center overflow-hidden shrink-0">
                 {profile?.image ? (
-                  <img src={profile.image} alt={profile.name} className="w-full h-full object-cover" />
+                  <Image width={400} height={400} src={profile.image} alt={profile.name} className="w-full h-full object-cover" />
                 ) : (
                   <User className="w-6 h-6 text-zinc-500" />
                 )}

@@ -198,15 +198,15 @@ export function MoatmrsTable() {
     },
     {
       id: "actions",
-      header: () => <div className="text-center">{t("actions")}</div>,
+      header: () => <div className="text-center">{tCommon("actions", { fallback: "Actions" })}</div>,
       size: 100,
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-center">
             <TableActionMenu items={[
-              { text: t("details") || "التفاصيل", href: `/almoatamers/show/${row.original.id}`, permission: "show-moatmer" },
-              { text: tCommon("edit", { fallback: "تعديل" }), href: `/almoatamers/update/${row.original.id}`, permission: "update-moatmer" },
-              { text: "حذف", onClick: () => setDeleteId(String(row.original.id)), permission: "delete-moatmer" }
+              { text: tCommon("details", { fallback: "Details" }), href: `/moatmers/show/${row.original.id}`, permission: "show-moatmer" },
+              { text: tCommon("edit", { fallback: "Edit" }), href: `/moatmers/update/${row.original.id}`, permission: "update-moatmer" },
+              { text: tCommon("delete", { fallback: "Delete" }), onClick: () => setDeleteId(String(row.original.id)), permission: "delete-moatmer", isDestructive: true }
             ]} />
           </div>
         )

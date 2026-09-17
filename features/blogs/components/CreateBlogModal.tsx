@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -103,7 +104,7 @@ export function CreateBlogModal() {
                             {previewImage ? (
                                 <div className="flex flex-col items-center justify-center space-y-4">
                                     <div className="relative w-full max-w-xs aspect-video rounded-lg overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-sm">
-                                        <img src={previewImage.url} alt="Preview" className="w-full h-full object-cover" />
+                                        <Image width={400} height={400} src={previewImage.url} alt="Preview" className="w-full h-full object-cover" />
                                         <button
                                             type="button"
                                             onClick={removeImage}

@@ -26,6 +26,7 @@ export function NotificationsTable() {
   const { mutate: readNotification } = useReadNotification()
   const [deleteId, setDeleteId] = useState<string | null>(null)
   const t = useTranslations('Dashboard')
+  const tCommon = useTranslations('Common')
   
   const columns = useMemo<ColumnDef<NotificationItem>[]>(() => [
     {
@@ -39,25 +40,25 @@ export function NotificationsTable() {
     },
     {
       id: "status",
-      header: () => <div className="text-center">الحالة</div>,
+      header: () => <div className="text-center">{tCommon("status", { fallback: "الحالة" })}</div>,
       size: 100,
       cell: ({ row }) => (
         <div className="flex justify-center">
           {row.original.is_readed ? (
-            <Badge variant="outline" className="text-zinc-500">مقروء</Badge>
+            <Badge variant="outline" className="text-zinc-500">{tCommon("read", { fallback: "مقروء" })}</Badge>
           ) : (
-            <Badge variant="default" className="bg-blue-500 hover:bg-blue-600">غير مقروء</Badge>
+            <Badge variant="default" className="bg-blue-500 hover:bg-blue-600">{tCommon("unread", { fallback: "غير مقروء" })}</Badge>
           )}
         </div>
       )
     },
     {
       id: "sender",
-      header: () => <div className="text-center">المرسل</div>,
+      header: () => <div className="text-center">{tCommon("sender", { fallback: "المرسل" })}</div>,
       size: 200,
       cell: ({ row }) => {
         const sender = row.original.sender_data
-        if (!sender) return <div className="text-center font-bold text-zinc-900 dark:text-zinc-100">نظام الإدارة</div>
+        if (!sender) return <div className="text-center font-bold text-zinc-900 dark:text-zinc-100">{tCommon("system", { fallback: "نظام الإدارة" })}</div>
 
         return (
           <div className="flex items-center justify-start gap-3">
@@ -77,7 +78,7 @@ export function NotificationsTable() {
     },
     {
       id: "content",
-      header: () => <div className="text-center">الإشعار</div>,
+      header: () => <div className="text-center">{tCommon("notification", { fallback: "الإشعار" })}</div>,
       size: 350,
       cell: ({ row }) => (
         <div className="flex flex-col justify-center gap-1">
@@ -92,7 +93,7 @@ export function NotificationsTable() {
     },
     {
       id: "notify_type",
-      header: () => <div className="text-center">النوع</div>,
+      header: () => <div className="text-center">{tCommon("type", { fallback: "النوع" })}</div>,
       size: 150,
       cell: ({ row }) => (
         <div className="text-center text-xs font-medium text-zinc-600 dark:text-zinc-400">
@@ -104,7 +105,7 @@ export function NotificationsTable() {
     },
     {
       id: "dates",
-      header: () => <div className="text-center">الوقت</div>,
+      header: () => <div className="text-center">{tCommon("time", { fallback: "الوقت" })}</div>,
       size: 150,
       cell: ({ row }) => (
         <div className="flex flex-col items-center justify-center gap-1">
@@ -119,18 +120,18 @@ export function NotificationsTable() {
     },
     {
       id: "actions",
-      header: () => <div className="text-center">إجراءات</div>,
+      header: () => <div className="text-center">{tCommon("actions", { fallback: "إجراءات" })}</div>,
       size: 100,
       cell: ({ row }) => (
         <div className="flex items-center justify-center">
           <TableActionMenu items={[
             ...(row.original.is_readed ? [] : [{ text: t('mark_as_read'), onClick: () => readNotification(String(row.original.id)) }]),
-            { text: "حذف", onClick: () => setDeleteId(String(row.original.id)) }
+            { text: tCommon("delete", { fallback: "Delete" }), onClick: () => setDeleteId(String(row.original.id)), isDestructive: true }
           ]} />
         </div>
       )
     },
-  ], [page, data?.meta?.per_page, t, readNotification])
+  ], [page, data?.meta?.per_page, t, tCommon, readNotification])
 
   if (isLoading) {
     return <TableSkeleton />
