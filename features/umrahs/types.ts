@@ -29,7 +29,20 @@ export interface UmrahLanguage {
   flag: string | null;
   en: { name: string | null };
   ar: { name: string | null };
-  [key: string]: any;
+  fa: { name: string | null };
+  ms: { name: string | null };
+  tr: { name: string | null };
+  iid: { name: string | null };
+}
+
+export interface TwafData {
+  date: string | null;
+  twaf_num: number;
+}
+
+export interface QuestData {
+  date: string | null;
+  quest_num: number;
 }
 
 export interface UmrahCycleStep {
@@ -39,7 +52,7 @@ export interface UmrahCycleStep {
   media: string | null;
   title: string | null;
   is_done: boolean;
-  other_data: any;
+  other_data: TwafData[] | QuestData[] | null;
 }
 
 export interface UmrahMedia {
@@ -80,9 +93,9 @@ export interface Umrah {
   status: { id: number; name: string } | null;
   cycle: UmrahCycleStep[];
   media: UmrahMedia[];
-  compatible_moatmers: any[];
+  compatible_moatmers: UmrahMoatmer[];
   order_creation_date: string;
-  documented_media: any[];
+  documented_media: unknown[];
   instapay: string | null;
   created_at: string;
   updated_at: string;

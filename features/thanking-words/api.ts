@@ -31,8 +31,8 @@ export async function deleteThankingWord(id: number | string): Promise<{ status:
     });
 }
 
-export async function updateThankingWord(formData: FormData): Promise<any> {
-    return apiClient<any>(`/api/update-home-info`, {
+export async function updateThankingWord(formData: FormData): Promise<{status: string, message: string}> {
+    return apiClient<{status: string, message: string}>(`/api/update-home-info`, {
         method: "POST",
         body: formData,
     });

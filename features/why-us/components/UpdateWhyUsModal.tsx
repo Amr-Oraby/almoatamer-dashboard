@@ -31,7 +31,7 @@ export function UpdateWhyUsModal({ isOpen, onClose, itemId }: UpdateWhyUsModalPr
     const [iconPreview, setIconPreview] = useState<string | null>(null);
     const [activeTab, setActiveTab] = useState("ar");
 
-    const { mutateAsync: updateWhyUs, isPending } = useUpdateWhyUs(itemId || "");
+    const { mutate: updateWhyUs, isPending } = useUpdateWhyUs(itemId || "");
     const { data: itemData, isLoading } = useWhyUsItem(itemId || "");
 
     const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm<UpdateWhyUsFormValues>({
@@ -83,14 +83,12 @@ export function UpdateWhyUsModal({ isOpen, onClose, itemId }: UpdateWhyUsModalPr
         }
     };
 
-    const onSubmit = async (values: UpdateWhyUsFormValues) => {
-        if (!itemId) return;
-        try {
-            await updateWhyUs(values);
-            handleOpenChange(false);
-        } catch (error) {
-            console.error(error);
-        }
+    const onSubmit = (values: UpdateWhyUsFormValues) => {
+        updateWhyUs(values, {
+            onSuccess: () => {
+                handleOpenChange(false);
+            }
+        });
     };
 
     return (
@@ -115,7 +113,6 @@ export function UpdateWhyUsModal({ isOpen, onClose, itemId }: UpdateWhyUsModalPr
                                 <div className="w-20 h-20 rounded-xl border border-dashed border-zinc-300 dark:border-zinc-700 flex items-center justify-center overflow-hidden relative hover:bg-zinc-50 dark:hover:bg-zinc-900/50 transition-colors flex-shrink-0 group">
                                     {iconPreview ? (
                                         <>
-                                            {/* eslint-disable-next-line @next/next/no-img-element */}
                                             <Image width={400} height={400} src={iconPreview} alt="Icon" className="w-full h-full object-contain p-2" />
                                             <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                                 <Upload className="w-4 h-4 text-white" />
@@ -166,8 +163,8 @@ export function UpdateWhyUsModal({ isOpen, onClose, itemId }: UpdateWhyUsModalPr
                                             className="flex h-10 w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100"
                                             placeholder={`${t("title", { fallback: "العنوان" })} (${locale.label})`}
                                         />
-                                        {(errors as any)?.[locale.key]?.title && (
-                                            <p className="text-xs text-red-500">{(errors as any)[locale.key].title.message}</p>
+                                        {(errors as Record<string, { title?: { message?: string } }>)?.[locale.key]?.title && (
+                                            <p className="text-xs text-red-500">{(errors as Record<string, { title?: { message?: string } }>)[locale.key].title?.message}</p>
                                         )}
                                     </div>
                                     <div className="space-y-2">
@@ -181,8 +178,8 @@ export function UpdateWhyUsModal({ isOpen, onClose, itemId }: UpdateWhyUsModalPr
                                             className="flex w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100"
                                             placeholder={`${t("description", { fallback: "الوصف" })} (${locale.label})`}
                                         />
-                                        {(errors as any)?.[locale.key]?.description && (
-                                            <p className="text-xs text-red-500">{(errors as any)[locale.key].description.message}</p>
+                                        {(errors as Record<string, { description?: { message?: string } }>)?.[locale.key]?.description && (
+                                            <p className="text-xs text-red-500">{(errors as Record<string, { description?: { message?: string } }>)[locale.key].description?.message}</p>
                                         )}
                                     </div>
                                 </div>

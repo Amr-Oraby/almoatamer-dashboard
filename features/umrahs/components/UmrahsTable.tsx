@@ -1,15 +1,11 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useMemo } from "react"
 import { ColumnDef } from "@tanstack/react-table"
 import { DataTable } from "@/components/ui/data-table"
 import { TableSkeleton } from "@/components/ui/table-skeleton"
-import { cn } from "@/lib/utils"
-import { Switch } from "@/components/ui/switch"
 import { useTranslations } from "next-intl"
-import { useRouter } from "@/i18n/routing"
 import { TableActionMenu } from "@/components/ui/table-action-menu"
-import { ChevronDown } from "lucide-react"
 
 import { UrlPagination } from "@/components/ui/url-pagination"
 import { UrlFilter } from "@/components/ui/url-filter"
@@ -27,7 +23,6 @@ import Image from "next/image"
 
 export function UmrahsTable() {
   const searchParams = useSearchParams()
-  const router = useRouter()
   const page = Number(searchParams.get("page")) || 1
   const filters = {
     is_paid: searchParams.get("is_paid"),
@@ -44,8 +39,8 @@ export function UmrahsTable() {
   const { data: clientsData, isLoading: isLoadingClients } = useClientsWithoutPagination()
   const { data: moatmrsData, isLoading: isLoadingMoatmrs } = useMoatmrsWithoutPagination()
 
-  const clientOptions = clientsData?.data?.map((c: any) => ({ label: c.name, value: c.id.toString() })) || []
-  const providerOptions = moatmrsData?.data?.map((m: any) => ({ label: m.name, value: m.id.toString() })) || []
+  const clientOptions = clientsData?.data?.map((c: {id: number, name: string}) => ({ label: c.name, value: c.id.toString() })) || []
+  const providerOptions = moatmrsData?.data?.map((m: {id: number, name: string}) => ({ label: m.name, value: m.id.toString() })) || []
 
   const t = useTranslations("Umrahs")
   const tCommon = useTranslations("Common")
@@ -150,7 +145,7 @@ export function UmrahsTable() {
         )
       },
     },
-  ], [t])
+  ], [t, data?.meta?.per_page, page])
 
   if (isLoading) {
     return <TableSkeleton />

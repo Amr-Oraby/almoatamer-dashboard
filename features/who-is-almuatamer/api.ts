@@ -6,7 +6,7 @@ export const getWhoIsAlmuatamerInfo = () => {
 };
 
 export const updateWhoIsAlmuatamerInfo = (data: FormData) => {
-  return apiClient<any>("/api/update-umrah-home", {
+  return apiClient<{status: string, message: string}>("/api/update-umrah-home", {
     method: "POST",
     body: data,
   });

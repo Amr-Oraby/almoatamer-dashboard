@@ -20,8 +20,8 @@ export async function getWallet(id: string): Promise<SingleWalletResponse> {
     return apiClient<SingleWalletResponse>(`/api/wallet/${id}`);
 }
 
-export async function chargeWallet(data: FormData): Promise<any> {
-    return apiClient<any>('/api/charge-wallet', {
+export async function chargeWallet(data: FormData): Promise<{status: string, message: string}> {
+    return apiClient<{status: string, message: string}>('/api/charge-wallet', {
         method: 'POST',
         body: data,
     });

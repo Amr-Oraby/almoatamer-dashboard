@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getWhyUsItems, getWhyUsItem, createWhyUsItem, updateWhyUsItem, deleteWhyUsItem } from "./api";
+import { CreateWhyUsFormValues } from "./schemas";
 import { toast } from "sonner";
 
 export function useWhyUsItems(page: number = 1) {
@@ -20,8 +21,8 @@ export function useWhyUsItem(id: string) {
 export function useCreateWhyUs() {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (data: Record<string, any>) => createWhyUsItem(data),
-        onSuccess: (response: any) => {
+        mutationFn: (data: CreateWhyUsFormValues) => createWhyUsItem(data),
+        onSuccess: (response: {status: string, message: string}) => {
             if (response.status === "success") {
                 toast.success(response.message || "تم الإنشاء بنجاح");
                 queryClient.invalidateQueries({ queryKey: ["why-us-items"] });
@@ -29,7 +30,7 @@ export function useCreateWhyUs() {
                 toast.error(response.message || "حدث خطأ ما");
             }
         },
-        onError: (error: any) => {
+        onError: (error: Error) => {
             toast.error(error?.message || "حدث خطأ أثناء الإنشاء");
         },
     });
@@ -38,8 +39,8 @@ export function useCreateWhyUs() {
 export function useUpdateWhyUs(id: string) {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (data: Record<string, any>) => updateWhyUsItem(id, data),
-        onSuccess: (response: any) => {
+        mutationFn: (data: CreateWhyUsFormValues) => updateWhyUsItem(id, data),
+        onSuccess: (response: {status: string, message: string}) => {
             if (response.status === "success") {
                 toast.success(response.message || "تم التعديل بنجاح");
                 queryClient.invalidateQueries({ queryKey: ["why-us-items"] });
@@ -48,7 +49,7 @@ export function useUpdateWhyUs(id: string) {
                 toast.error(response.message || "حدث خطأ ما");
             }
         },
-        onError: (error: any) => {
+        onError: (error: Error) => {
             toast.error(error?.message || "حدث خطأ أثناء التعديل");
         },
     });
@@ -58,11 +59,11 @@ export function useDeleteWhyUs() {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: deleteWhyUsItem,
-        onSuccess: (data: any) => {
+        onSuccess: (data: {status: string, message: string, data: null}) => {
             toast.success(data?.message || "تم الحذف بنجاح");
             queryClient.invalidateQueries({ queryKey: ["why-us-items"] });
         },
-        onError: (error: any) => {
+        onError: (error: Error) => {
             toast.error(error?.message || "حدث خطأ أثناء الحذف");
         },
     });

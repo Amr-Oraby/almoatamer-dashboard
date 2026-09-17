@@ -1,5 +1,5 @@
 export interface WithdrawalsResponse {
-    data: any[];
+    data: unknown[];
     status: string;
     message: string;
 }

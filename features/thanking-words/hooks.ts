@@ -31,8 +31,8 @@ export function useCreateThankingWord() {
                 toast.error(response.message || "Something went wrong");
             }
         },
-        onError: (error: any) => {
-            toast.error(error?.response?.data?.message || error.message || "Something went wrong");
+        onError: (error: Error) => {
+            toast.error(error.message || "Something went wrong");
         },
     });
 }
@@ -50,8 +50,8 @@ export function useDeleteThankingWord() {
                 toast.error(response.message || "Something went wrong");
             }
         },
-        onError: (error: any) => {
-            toast.error(error?.response?.data?.message || error.message || "Something went wrong");
+        onError: (error: Error) => {
+            toast.error(error.message || "Something went wrong");
         },
     });
 }
@@ -61,7 +61,7 @@ export function useUpdateThankingWord(id: string) {
 
     return useMutation({
         mutationFn: updateThankingWord,
-        onSuccess: (response: any) => {
+        onSuccess: (response: {status: string, message: string}) => {
             if (response.status === "success") {
                 toast.success(response.message || "Updated successfully");
                 queryClient.invalidateQueries({ queryKey: ["thanking-words"] });
@@ -70,8 +70,8 @@ export function useUpdateThankingWord(id: string) {
                 toast.error(response.message || "Something went wrong");
             }
         },
-        onError: (error: any) => {
-            toast.error(error?.response?.data?.message || error.message || "Something went wrong");
+        onError: (error: Error) => {
+            toast.error(error.message || "Something went wrong");
         },
     });
 }

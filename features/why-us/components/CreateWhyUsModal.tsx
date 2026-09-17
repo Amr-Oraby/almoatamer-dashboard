@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,7 +26,7 @@ export function CreateWhyUsModal() {
     const [iconPreview, setIconPreview] = useState<string | null>(null);
     const [activeTab, setActiveTab] = useState("ar");
 
-    const { mutateAsync: createWhyUs, isPending } = useCreateWhyUs();
+    const { mutate: createWhyUs, isPending } = useCreateWhyUs();
 
     const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm<CreateWhyUsFormValues>({
         resolver: zodResolver(createWhyUsSchema),
@@ -57,13 +57,12 @@ export function CreateWhyUsModal() {
         }
     };
 
-    const onSubmit = async (values: CreateWhyUsFormValues) => {
-        try {
-            await createWhyUs(values);
-            handleOpenChange(false);
-        } catch (error) {
-            console.error(error);
-        }
+    const onSubmit = (values: CreateWhyUsFormValues) => {
+        createWhyUs(values, {
+            onSuccess: () => {
+                handleOpenChange(false);
+            }
+        });
     };
 
     return (
@@ -86,7 +85,7 @@ export function CreateWhyUsModal() {
                         <div className="flex items-center gap-4">
                             <div className="w-20 h-20 rounded-xl border border-dashed border-zinc-300 dark:border-zinc-700 flex items-center justify-center overflow-hidden relative hover:bg-zinc-50 dark:hover:bg-zinc-900/50 transition-colors flex-shrink-0">
                                 {iconPreview ? (
-                                    // eslint-disable-next-line @next/next/no-img-element
+
                                     <Image width={400} height={400} src={iconPreview} alt="Icon" className="w-full h-full object-contain p-2" />
                                 ) : (
                                     <Upload className="h-6 w-6 text-zinc-400" />
@@ -133,8 +132,8 @@ export function CreateWhyUsModal() {
                                         className="flex h-10 w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100"
                                         placeholder={`${t("title", { fallback: "العنوان" })} (${locale.label})`}
                                     />
-                                    {(errors as any)?.[locale.key]?.title && (
-                                        <p className="text-xs text-red-500">{(errors as any)[locale.key].title.message}</p>
+                                    {(errors as Record<string, { title?: { message?: string } }>)?.[locale.key]?.title && (
+                                        <p className="text-xs text-red-500">{(errors as Record<string, { title?: { message?: string } }>)[locale.key].title?.message}</p>
                                     )}
                                 </div>
                                 <div className="space-y-2">
@@ -148,8 +147,8 @@ export function CreateWhyUsModal() {
                                         className="flex w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100"
                                         placeholder={`${t("description", { fallback: "الوصف" })} (${locale.label})`}
                                     />
-                                    {(errors as any)?.[locale.key]?.description && (
-                                        <p className="text-xs text-red-500">{(errors as any)[locale.key].description.message}</p>
+                                    {(errors as Record<string, { description?: { message?: string } }>)?.[locale.key]?.description && (
+                                        <p className="text-xs text-red-500">{(errors as Record<string, { description?: { message?: string } }>)[locale.key].description?.message}</p>
                                     )}
                                 </div>
                             </div>

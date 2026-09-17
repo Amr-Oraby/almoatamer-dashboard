@@ -21,12 +21,12 @@ export function useChargeWallet() {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: chargeWallet,
-        onSuccess: (data: any) => {
+        onSuccess: (data: {status: string, message: string}) => {
             toast.success(data?.message || "تم شحن المحفظة بنجاح");
             queryClient.invalidateQueries({ queryKey: ["wallets"] });
             queryClient.invalidateQueries({ queryKey: ["wallet"] });
         },
-        onError: (error: any) => {
+        onError: (error: Error) => {
             toast.error(error?.message || "حدث خطأ أثناء شحن المحفظة");
         },
     });
