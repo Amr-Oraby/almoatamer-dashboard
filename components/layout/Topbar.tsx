@@ -48,7 +48,7 @@ export function Topbar() {
   const targetLocale = currentLocale === 'en' ? 'ar' : 'en';
 
   return (
-    <header className="h-20 bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between px-6 shrink-0">
+    <header className="h-20 bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between px-3 md:px-6 shrink-0 gap-2">
       <div className="flex items-center md:hidden">
         <Button variant="ghost" size="icon" aria-label="Menu" onClick={toggle}>
           <Menu className="w-6 h-6" />
@@ -59,10 +59,10 @@ export function Topbar() {
         {/* Empty space to push items to right */}
       </div>
 
-      <div className="flex items-center gap-6">
-        <div className="border-e border-zinc-200 dark:border-zinc-800 pe-6">
+      <div className="flex items-center gap-3 md:gap-6">
+        <div className="border-e border-zinc-200 dark:border-zinc-800 pe-3 md:pe-6">
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-3 outline-none group cursor-pointer">
+            <DropdownMenuTrigger className="flex items-center gap-2 md:gap-3 outline-none group cursor-pointer">
               <div className="w-10 h-10 bg-zinc-200 dark:bg-zinc-800 rounded-full flex items-center justify-center overflow-hidden shrink-0">
                 {profile?.image ? (
                   <Image width={400} height={400} src={profile.image} alt={profile.name} className="w-full h-full object-cover" />
@@ -70,17 +70,17 @@ export function Topbar() {
                   <User className="w-6 h-6 text-zinc-500" />
                 )}
               </div>
-              <div className="flex flex-col items-start text-start">
+              <div className="flex flex-col items-start text-start max-w-[120px] sm:max-w-[200px]">
                 {isLoading ? (
                   <div className="h-8 w-24 bg-zinc-200 dark:bg-zinc-800 animate-pulse rounded" />
                 ) : (
                   <>
-                    <span className="text-sm font-bold">{profile?.name || t('super_admin')}</span>
-                    <span className="text-xs text-zinc-500">{profile?.email || t('admin_email')}</span>
+                    <span className="text-sm font-bold truncate w-full">{profile?.name || t('super_admin')}</span>
+                    <span className="text-xs text-zinc-500 truncate w-full hidden md:block">{profile?.email || t('admin_email')}</span>
                   </>
                 )}
               </div>
-              <ChevronDown className="w-4 h-4 text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors ms-2" />
+              <ChevronDown className="w-4 h-4 text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors ms-1 md:ms-2 shrink-0" />
             </DropdownMenuTrigger>
             
             <DropdownMenuContent align="end" className="w-56 p-2 rounded-xl">
